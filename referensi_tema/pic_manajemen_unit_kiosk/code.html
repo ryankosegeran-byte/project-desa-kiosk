@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sistem Kiosk Desa - Status Kiosk</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#006494",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#cbe6ff",
+                        "on-primary-container": "#001e30",
+                        secondary: "#50606e",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#d3e5f5",
+                        "on-secondary-container": "#0c1d29",
+                        tertiary: "#64597b",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#ebe0ff",
+                        "on-tertiary-container": "#1f1635",
+                        error: "#ba1a1a",
+                        "on-error": "#ffffff",
+                        surface: "#f8f9ff",
+                        "on-surface": "#191c1e",
+                        "surface-variant": "#dee3eb",
+                        "on-surface-variant": "#42474e",
+                        outline: "#72777f",
+                        "outline-variant": "#c2c7cf",
+                        "inverse-surface": "#2e3133",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f2f4f7",
+                        "surface-container": "#ecedf1",
+                        "surface-container-high": "#e7e8eb",
+                        "surface-container-highest": "#e1e2e6"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Public Sans", "sans-serif"],
+                        "display": ["Public Sans", "sans-serif"],
+                        "body": ["Public Sans", "sans-serif"],
+                        "label": ["Public Sans", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .status-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- SideNavBar (Shared Component) -->
+<aside class="bg-surface-container-lowest dark:bg-inverse-surface h-screen w-64 fixed left-0 top-0 overflow-y-auto border-r border-outline-variant dark:border-on-surface-variant flex flex-col p-6 z-50">
+<div class="mb-8">
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim font-bold tracking-tight">Sistem Kiosk Desa</h1>
+<p class="text-sm text-on-surface-variant mt-1">Admin Wilayah</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container dark:hover:bg-on-surface-variant transition-colors duration-200 rounded-lg font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container dark:hover:bg-on-surface-variant transition-colors duration-200 rounded-lg font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">groups</span>
+                Warga Desa
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container dark:hover:bg-on-surface-variant transition-colors duration-200 rounded-lg font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">description</span>
+                Permohonan Surat
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-lg font-bold font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">screenshot_monitor</span>
+                Status Kiosk
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container dark:hover:bg-on-surface-variant transition-colors duration-200 rounded-lg font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Pengaturan
+            </a>
+</nav>
+<div class="mt-auto border-t border-outline-variant pt-6 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span>
+                Bantuan
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Keluar
+            </a>
+<div class="flex items-center gap-3 px-4 pt-4">
+<img alt="PIC Profile" class="w-10 h-10 rounded-full object-cover border-2 border-primary-container" data-alt="A professional portrait of a mid-career village administrator with a friendly and reliable expression. He is wearing a clean, modern Indonesian batik shirt, standing in a bright office environment. The lighting is natural and even, reflecting a clean and professional government service aesthetic. The background is softly blurred to keep focus on the subject." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWAN-qvFN1pf7Rk1t99p1lF5nmFmdaRSrmWFnG9usSfTQz9LQ-izITqPSOOvHVBLlSdkP-JY6Nb0wmLV-Ru116gaTO7GnUDEQ4oT3uYKxd91ktH9ATQvqTIy496DV8F9-ekfHHsE5YJlJsp0Ipg7zCKGcJ9H2Lvbf5JhjR9xultvRUzOv66LRcRYw9IQ-A-qYKj18S39240CBK2_wZPBE0FIfUPGJ2m8hG3EqC09PdQHNnZay-UadIC64JGNxqj28TPAs9g4NB-Cwk"/>
+<div class="overflow-hidden">
+<p class="text-sm font-bold truncate">Village PIC</p>
+<p class="text-xs text-on-surface-variant truncate">Admin Dusun</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface dark:bg-background border-b border-outline-variant dark:border-on-surface-variant flex justify-between items-center h-16 px-8 fixed top-0 right-0 w-[calc(100%-16rem)] z-40">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container border-none rounded-full pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary" placeholder="Cari unit kiosk..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full relative opacity-80 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full opacity-80 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">apps</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 mt-16 p-8 min-h-screen">
+<!-- Dashboard Summary Header -->
+<div class="mb-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-primary-container text-on-primary-container p-6 rounded-xl shadow-sm border border-primary/10 flex items-center justify-between">
+<div>
+<p class="text-sm font-medium opacity-80 uppercase tracking-wider">Total Kiosks</p>
+<h2 class="text-4xl font-bold mt-1">12</h2>
+</div>
+<div class="bg-on-primary-container/10 p-3 rounded-lg">
+<span class="material-symbols-outlined text-4xl">devices</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-on-surface-variant uppercase tracking-wider">Active Kiosks</p>
+<h2 class="text-4xl font-bold text-primary mt-1">10</h2>
+</div>
+<div class="bg-primary/5 p-3 rounded-lg">
+<span class="material-symbols-outlined text-4xl text-primary status-pulse">sensors</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-on-surface-variant uppercase tracking-wider">Needs Attention</p>
+<h2 class="text-4xl font-bold text-error mt-1">02</h2>
+</div>
+<div class="bg-error/5 p-3 rounded-lg">
+<span class="material-symbols-outlined text-4xl text-error">warning</span>
+</div>
+</div>
+</div>
+<!-- Kiosk Status Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+<!-- Kiosk Card 1: Online -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-md transition-shadow group">
+<div class="p-6">
+<div class="flex justify-between items-start mb-6">
+<div class="flex gap-4">
+<div class="w-14 h-14 bg-surface-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl">screenshot_monitor</span>
+</div>
+<div>
+<h3 class="text-xl font-bold text-on-surface">Kiosk Utama - Balai Desa</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="w-2.5 h-2.5 rounded-full bg-green-500 status-pulse"></span>
+<span class="text-sm font-medium text-green-600">Online</span>
+<span class="text-outline mx-1">•</span>
+<span class="text-xs text-on-surface-variant">Sync: 2 mins ago</span>
+</div>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-lg transition-colors" title="View Logs">
+<span class="material-symbols-outlined">history_edu</span>
+</button>
+<button class="p-2 text-primary hover:bg-primary-container rounded-lg transition-colors" title="Restart">
+<span class="material-symbols-outlined">restart_alt</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-sm mb-1">
+<span class="font-medium">Printer Ink</span>
+<span class="text-primary font-bold">85%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 85%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-1">
+<span class="font-medium">Paper Levels</span>
+<span class="text-primary font-bold">92%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 92%"></div>
+</div>
+</div>
+</div>
+<div class="flex flex-col justify-end">
+<div class="p-3 bg-surface-container rounded-lg">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">memory</span>
+<span class="text-xs font-semibold text-on-surface-variant uppercase">CPU Performance</span>
+</div>
+<div class="flex items-end gap-1 h-8">
+<div class="bg-primary/20 w-full h-[40%] rounded-sm"></div>
+<div class="bg-primary/20 w-full h-[30%] rounded-sm"></div>
+<div class="bg-primary/20 w-full h-[60%] rounded-sm"></div>
+<div class="bg-primary w-full h-[80%] rounded-sm"></div>
+<div class="bg-primary/20 w-full h-[45%] rounded-sm"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="px-6 py-4 bg-surface-container-low border-t border-outline-variant flex justify-between items-center">
+<div class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                        Lobi Depan, Balai Desa Jaya
+                    </div>
+<button class="text-sm font-bold text-primary hover:underline flex items-center gap-1">
+                        View Detailed Stats <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Kiosk Card 2: Attention Required -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-md transition-shadow">
+<div class="p-6">
+<div class="flex justify-between items-start mb-6">
+<div class="flex gap-4">
+<div class="w-14 h-14 bg-error/5 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-error text-3xl">screenshot_monitor</span>
+</div>
+<div>
+<h3 class="text-xl font-bold text-on-surface">Kiosk 2 - Dusun Krajan</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="w-2.5 h-2.5 rounded-full bg-error"></span>
+<span class="text-sm font-medium text-error">Warning</span>
+<span class="text-outline mx-1">•</span>
+<span class="text-xs text-on-surface-variant">Sync: 15 mins ago</span>
+</div>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-lg transition-colors">
+<span class="material-symbols-outlined">history_edu</span>
+</button>
+<button class="p-2 text-error bg-error/10 hover:bg-error/20 rounded-lg transition-colors">
+<span class="material-symbols-outlined">restart_alt</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-sm mb-1">
+<span class="font-medium">Printer Ink</span>
+<span class="text-error font-bold">12%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 12%"></div>
+</div>
+<p class="text-[10px] text-error mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">info</span> 
+                                    Replace cartridge soon
+                                </p>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-1">
+<span class="font-medium">Paper Levels</span>
+<span class="text-on-surface font-bold">45%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 45%"></div>
+</div>
+</div>
+</div>
+<div class="flex flex-col justify-end">
+<div class="p-3 bg-error/5 border border-error/10 rounded-lg">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-sm text-error">error</span>
+<span class="text-xs font-bold text-error uppercase">Alert</span>
+</div>
+<p class="text-xs text-on-surface-variant">Low Ink level detected. Printing may be interrupted.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="px-6 py-4 bg-surface-container-low border-t border-outline-variant flex justify-between items-center">
+<div class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                        Pos Kamling RT 04, Dusun Krajan
+                    </div>
+<button class="text-sm font-bold text-primary hover:underline flex items-center gap-1">
+                        Order Supplies <span class="material-symbols-outlined text-sm">shopping_cart</span>
+</button>
+</div>
+</div>
+<!-- Kiosk Card 3: Offline -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-md transition-shadow grayscale opacity-80">
+<div class="p-6">
+<div class="flex justify-between items-start mb-6">
+<div class="flex gap-4">
+<div class="w-14 h-14 bg-surface-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-outline text-3xl">screenshot_monitor</span>
+</div>
+<div>
+<h3 class="text-xl font-bold text-on-surface">Kiosk 3 - Balai Warga</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="w-2.5 h-2.5 rounded-full bg-outline"></span>
+<span class="text-sm font-medium text-outline">Offline</span>
+<span class="text-outline mx-1">•</span>
+<span class="text-xs text-on-surface-variant">Last seen: 4 hours ago</span>
+</div>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-lg transition-colors">
+<span class="material-symbols-outlined">history_edu</span>
+</button>
+<button class="p-2 text-primary hover:bg-primary-container rounded-lg transition-colors">
+<span class="material-symbols-outlined">restart_alt</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-sm mb-1">
+<span class="font-medium">Printer Ink</span>
+<span class="text-outline font-bold">--</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-outline/20 h-full rounded-full" style="width: 0%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-1">
+<span class="font-medium">Paper Levels</span>
+<span class="text-outline font-bold">--</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-outline/20 h-full rounded-full" style="width: 0%"></div>
+</div>
+</div>
+</div>
+<div class="flex flex-col justify-end">
+<div class="p-3 bg-surface-container rounded-lg">
+<p class="text-xs italic text-on-surface-variant">Connection lost. Remote monitoring unavailable.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="px-6 py-4 bg-surface-container-low border-t border-outline-variant flex justify-between items-center">
+<div class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                        Jalan Merpati No. 12
+                    </div>
+<button class="text-sm font-bold text-primary hover:underline flex items-center gap-1">
+                        Troubleshoot <span class="material-symbols-outlined text-sm">build</span>
+</button>
+</div>
+</div>
+<!-- Add New Kiosk Slot -->
+<div class="border-2 border-dashed border-outline-variant rounded-xl flex flex-col items-center justify-center p-8 bg-surface-container/20 hover:bg-surface-container/50 transition-all cursor-pointer group">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center group-hover:scale-110 transition-transform mb-4">
+<span class="material-symbols-outlined text-4xl text-outline group-hover:text-primary">add</span>
+</div>
+<h4 class="font-bold text-on-surface">Tambah Unit Kiosk</h4>
+<p class="text-sm text-on-surface-variant text-center mt-1">Daftarkan perangkat keras baru ke sistem pusat</p>
+</div>
+</div>
+<!-- Footer Info -->
+<footer class="mt-12 text-center">
+<p class="text-sm text-on-surface-variant">Sistem Kiosk Desa v2.4.0 — Terakhir diperbarui pada <span class="font-medium">Senin, 24 Mei 2024 14:30 WIB</span></p>
+</footer>
+</main>
+<script>
+        // Simple micro-interaction for restart buttons
+        document.querySelectorAll('button[title="Restart"]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const icon = this.querySelector('.material-symbols-outlined');
+                icon.style.transition = 'transform 0.5s ease-in-out';
+                icon.style.transform = 'rotate(360deg)';
+                
+                // Reset after animation
+                setTimeout(() => {
+                    icon.style.transition = 'none';
+                    icon.style.transform = 'rotate(0deg)';
+                    alert('Restart command sent to ' + this.closest('.bg-surface-container-lowest').querySelector('h3').innerText);
+                }, 500);
+            });
+        });
+
+        // Search bar interaction
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('ring-2', 'ring-primary');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('ring-2', 'ring-primary');
+        });
+    </script>
+</body></html>

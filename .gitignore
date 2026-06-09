@@ -1,0 +1,41 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Database files
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+
+# Environment
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Go
+bin/
+vendor/
+
+# Node
+node_modules/
+dist/
+.astro/
+
+# Data
+data/
+uploads/
+
+# PDF output
+*.pdf

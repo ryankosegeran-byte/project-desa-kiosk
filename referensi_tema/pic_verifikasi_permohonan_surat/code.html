@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Verifikasi Permohonan Surat - Sistem Kiosk Desa</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#006494",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#cae6ff",
+                        "on-primary-container": "#001e30",
+                        secondary: "#50606e",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#d3e5f5",
+                        "on-secondary-container": "#0c1d29",
+                        surface: "#f8f9ff",
+                        "on-surface": "#191c1e",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f2f4f7",
+                        "surface-container": "#eceef1",
+                        "surface-container-high": "#e7e8eb",
+                        "surface-container-highest": "#e1e2e5",
+                        "outline-variant": "#c2c7cf",
+                        "on-surface-variant": "#42474e",
+                        error: "#ba1a1a",
+                        success: "#1a8a3d"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        headline: ["Public Sans"],
+                        display: ["Public Sans"],
+                        body: ["Public Sans"],
+                        label: ["Public Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar (Shared Component) -->
+<aside class="h-screen w-64 fixed left-0 top-0 overflow-y-auto bg-surface-container-lowest border-r border-outline-variant flex flex-col p-6 z-50">
+<div class="mb-10">
+<h1 class="font-headline-md text-2xl text-primary font-bold tracking-tight">Sistem Kiosk Desa</h1>
+<p class="text-xs text-on-surface-variant font-medium mt-1">Admin Wilayah</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-lg">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-label-lg">Warga Desa</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-label-lg">Permohonan Surat</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="screenshot_monitor">screenshot_monitor</span>
+<span class="font-label-lg">Status Kiosk</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-lg">Pengaturan</span>
+</a>
+</nav>
+<div class="pt-6 border-t border-outline-variant space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-lg">Bantuan</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-error hover:bg-red-50 transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-lg">Keluar</span>
+</a>
+</div>
+</aside>
+<!-- TopNavBar (Shared Component) -->
+<header class="flex justify-between items-center h-16 px-8 sticky top-0 bg-surface border-b border-outline-variant w-[calc(100%-16rem)] ml-64 z-40">
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h2 class="text-xl font-semibold text-on-surface">Verifikasi Permohonan Surat</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<button class="p-2 hover:bg-surface-container rounded-full transition-all opacity-80 hover:opacity-100">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+</div>
+<div class="flex items-center gap-3 pl-4 border-l border-outline-variant">
+<div class="text-right">
+<p class="text-sm font-bold">Budi Santoso</p>
+<p class="text-xs text-on-surface-variant">Kepala Urusan Umum</p>
+</div>
+<img alt="PIC Avatar" class="w-10 h-10 rounded-full border border-outline-variant object-cover" data-alt="A professional headshot of a middle-aged Indonesian male administrator with a friendly expression. He is wearing a formal batik shirt in deep blue and gold patterns. The lighting is bright and professional, set against a clean, blurred office background that matches a modern government administrative building aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKr827ndFh8OGG0XQWWAF1OE0KcEK3cdzrQi1pqRsAWZ8T5fZwAT8qEHnkyMOdSvnSHG03D16IlUseXRHcIauBIRLy8rl6FFFJs44wtwLBa-QbS5KM28DJDjwnTm9ocMqDEB7onoU_8pQ4MFQ0Ir9jQMuBfXD1b7Lj560eH7H-UQd5EarqZ_FVrAAwcoR20ukPu30ako8XoOzBMv0GMX7S3VuCHQ9vGMZtynG0BzEAZP5K_CXS_j4RTohjZNnQFpuQlXocbQ5SGQow"/>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-64 p-8 min-h-[calc(100vh-4rem)]">
+<div class="max-w-6xl mx-auto space-y-8">
+<!-- Status Timeline -->
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant">
+<div class="flex items-center justify-between relative">
+<div class="absolute top-1/2 left-0 w-full h-0.5 bg-surface-container-highest -translate-y-1/2 z-0"></div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-sm" data-icon="check" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="mt-2 text-sm font-bold text-on-surface">Requested</span>
+<span class="text-xs text-on-surface-variant">12 Okt 2023, 09:45</span>
+</div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-primary-container text-primary flex items-center justify-center font-bold animate-pulse">
+<span class="material-symbols-outlined text-sm" data-icon="hourglass_empty">hourglass_empty</span>
+</div>
+<span class="mt-2 text-sm font-bold text-primary">Verified</span>
+<span class="text-xs text-on-surface-variant">Menunggu Review</span>
+</div>
+<div class="relative z-10 flex flex-col items-center opacity-40">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-sm" data-icon="print">print</span>
+</div>
+<span class="mt-2 text-sm font-medium">Printed</span>
+<span class="text-xs">-- : --</span>
+</div>
+</div>
+</div>
+<!-- Main Info Bento Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Citizen Profile Card -->
+<div class="lg:col-span-1 space-y-6">
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm overflow-hidden relative">
+<div class="absolute top-0 right-0 p-3">
+<span class="px-2 py-1 bg-success/10 text-success text-[10px] font-bold uppercase tracking-wider rounded">Verified KTP</span>
+</div>
+<div class="flex flex-col items-center text-center">
+<div class="relative mb-4">
+<img alt="Citizen Profile Picture" class="w-32 h-32 rounded-xl object-cover border-4 border-surface-container-high" data-alt="A portrait photo of an Indonesian young man for an identification document. He has a neutral expression, short black hair, and is wearing a plain white collared shirt. The background is a solid sky blue color typical of Indonesian official KTP photos. The lighting is flat and even to ensure all facial features are clearly visible." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJa5s9D_Wkh2OxgT1fthFHA2QxM7CQ7O7VKyrpAfjYQUt4Fe_rvXXzU28lnDanwTIaLmb9XwcdHL2gU37m_G-CgtXl2BKnhnyOGyX99MX92bvS0SlaAV71h8ed7Au0ss81781fT4_q4XwVfVeObgHfLCtfWP4WjnXhCkbYHTSa7mzKFnGrEQIJk9hPVKmddgwrJO9owwo7JohDIOjpA2u0V_oFVmgnaJ1FqXvDCjqGyHQ3NbzFMGy2xbFicDDgnh0Pq77islDuUxZ-"/>
+</div>
+<h3 class="text-xl font-bold text-on-surface">Ahmad Hidayat</h3>
+<p class="text-sm text-on-surface-variant mb-6">3204120908950001</p>
+<div class="w-full space-y-3 text-left">
+<div class="p-3 bg-surface rounded-lg">
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest">Alamat</p>
+<p class="text-sm">Jl. Melati No. 45, RT 02/05, Desa Sukamakmur</p>
+</div>
+<div class="p-3 bg-surface rounded-lg">
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest">Tempat/Tgl Lahir</p>
+<p class="text-sm">Bandung, 12 Agustus 1995</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Buttons Card -->
+<div class="bg-primary/5 p-6 rounded-xl border border-primary/20 flex flex-col gap-3">
+<button class="w-full py-4 bg-primary text-on-primary rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-primary/90 transition-all shadow-lg active:scale-95">
+<span class="material-symbols-outlined" data-icon="print">print</span>
+                            Approve &amp; Print
+                        </button>
+<button class="w-full py-3 bg-white text-error border border-error/20 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-error/5 transition-all active:scale-95" onclick="document.getElementById('reject-modal').classList.remove('hidden')">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+                            Reject with Reason
+                        </button>
+</div>
+</div>
+<!-- Request Details Card -->
+<div class="lg:col-span-2 space-y-6">
+<div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant shadow-sm">
+<div class="flex items-center justify-between mb-8 border-b border-outline-variant pb-4">
+<div>
+<h3 class="text-2xl font-bold text-primary">Surat Keterangan Usaha</h3>
+<p class="text-on-surface-variant">ID Permohonan: #REQ-20231012-042</p>
+</div>
+<div class="bg-primary-container text-on-primary-container px-4 py-2 rounded-full text-xs font-bold uppercase">
+                                Prioritas: Normal
+                            </div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+<div class="space-y-1">
+<label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Nama Usaha</label>
+<p class="text-lg font-medium border-b border-surface-container py-1">Warung Kelontong Berkah</p>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Jenis Usaha</label>
+<p class="text-lg font-medium border-b border-surface-container py-1">Perdagangan Sembako</p>
+</div>
+<div class="md:col-span-2 space-y-1">
+<label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Alamat Usaha</label>
+<p class="text-lg font-medium border-b border-surface-container py-1">Jl. Raya Desa No. 12, Sukamakmur</p>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Tujuan Pengajuan</label>
+<p class="text-lg font-medium border-b border-surface-container py-1">Persyaratan KUR Bank Mandiri</p>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Masa Berlaku</label>
+<p class="text-lg font-medium border-b border-surface-container py-1">6 (Enam) Bulan</p>
+</div>
+</div>
+<!-- Data Kiosk Scan -->
+<div class="mt-10 p-6 bg-surface-container-low rounded-xl border border-outline-variant border-dashed">
+<h4 class="font-bold text-sm mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="attachment">attachment</span>
+                                Dokumen Pendukung (Auto-scan Kiosk)
+                            </h4>
+<div class="grid grid-cols-2 gap-4">
+<div class="aspect-video bg-white rounded-lg border border-outline-variant overflow-hidden cursor-zoom-in group relative">
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-3xl" data-icon="zoom_in">zoom_in</span>
+</div>
+<img alt="KTP Scan" class="w-full h-full object-cover" data-alt="A clean, high-resolution scan of an Indonesian National Identity Card (KTP) placed on a scanner bed. The card's details are visible including holographic security elements. The lighting is very even and bright, highlighting the texture of the card material. The surrounding area is the dark bezel of a modern kiosk scanner unit." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxPys912SBnLmuoWHKsLovW3Li4SBSfLruWHR0_F_i2bk2KL_aCl2rXzIv2wJFyw6krn9ni7gy149xXPoagmUthB35uRQLKyK6J8bY3SdSDfpK6sw1O9xY3y3ieEflWSQIZNcnFiF0UxvGn0MgtqDreo9byzIVnw6Q2nw0_DytPlqIY0243w2FKojm-z3WTA5IbVEMdQPQlspG85YmoIM8z_ewjCBpjlf6hpZdeID09zyIDWL-_9Rj0J58TCepVkmsRQ6kneYAXe4Z"/>
+<div class="absolute bottom-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded">Scan_KTP_Ahmad.jpg</div>
+</div>
+<div class="aspect-video bg-white rounded-lg border border-outline-variant overflow-hidden cursor-zoom-in group relative">
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-3xl" data-icon="zoom_in">zoom_in</span>
+</div>
+<img alt="KK Scan" class="w-full h-full object-cover" data-alt="A macro photograph showing a portion of an Indonesian Kartu Keluarga document. The paper has a slight texture and official stamps and signatures are visible in the corner. The document is lit from the side to emphasize its official nature and authenticity. The aesthetic is clean and forensic, suggesting a secure verification process." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwIYIYiF0IWs2fPXPC4JCcCppn99ZumWO6wdogsGseMcN81tQuvT30V8_P4wvD_a9PZlk62bPTzVNzNNSMVPhenuwgH9iVX97vWqeBWNZYzlhkm6B8XF95YzfGzUUnR6vxwFwyRgJFdljuKYA_9YURNP_lfJx1uFBVPGsngV5YlwGNub0clvSmovlIguXemEUGMgPQS4ANjG48rWz4LVBiP5hUYiLM90PPjY62K6JVJ3iNd0kDv22_-umZSNT1nS7rWmRiuV_jsjLF"/>
+<div class="absolute bottom-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded">Scan_KK_Ahmad.jpg</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Internal Note Area -->
+<div class="bg-surface-container-highest p-4 rounded-xl">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="history">history</span>
+<span class="text-xs font-bold text-on-surface-variant uppercase">Catatan Verifikasi Internal</span>
+</div>
+<div class="space-y-3">
+<div class="bg-surface p-3 rounded-lg text-sm shadow-sm border border-outline-variant/50">
+<div class="flex justify-between items-center mb-1">
+<span class="font-bold">Sistem Auto-Check</span>
+<span class="text-[10px] text-on-surface-variant">09:46</span>
+</div>
+<p class="text-success flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                    Data NIK ditemukan &amp; aktif di database Dukcapil.
+                                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Reject Modal -->
+<div class="fixed inset-0 bg-on-surface/40 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4" id="reject-modal">
+<div class="bg-surface-container-lowest w-full max-w-md rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center">
+<h3 class="text-xl font-bold text-error flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="report">report</span>
+                    Reject Permohonan
+                </h3>
+<button class="p-2 hover:bg-surface-container rounded-full" onclick="document.getElementById('reject-modal').classList.add('hidden')">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<div class="p-6 space-y-4">
+<p class="text-sm text-on-surface-variant leading-relaxed">Pilih alasan penolakan. Warga akan menerima notifikasi ini melalui layar kiosk atau SMS.</p>
+<div class="space-y-2">
+<label class="flex items-center gap-3 p-3 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container transition-colors">
+<input class="w-4 h-4 text-primary focus:ring-primary" name="reason" type="radio"/>
+<span class="text-sm">Dokumen Scan tidak terbaca/kabur</span>
+</label>
+<label class="flex items-center gap-3 p-3 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container transition-colors">
+<input class="w-4 h-4 text-primary focus:ring-primary" name="reason" type="radio"/>
+<span class="text-sm">Data input tidak sesuai dengan KTP</span>
+</label>
+<label class="flex items-center gap-3 p-3 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container transition-colors">
+<input class="w-4 h-4 text-primary focus:ring-primary" name="reason" type="radio"/>
+<span class="text-sm">Bukan penduduk asli desa setempat</span>
+</label>
+<label class="flex items-center gap-3 p-3 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container transition-colors">
+<input class="w-4 h-4 text-primary focus:ring-primary" id="other-reason-radio" name="reason" type="radio"/>
+<span class="text-sm">Lainnya</span>
+</label>
+</div>
+<textarea class="w-full p-3 bg-surface border border-outline-variant rounded-lg text-sm focus:ring-2 focus:ring-primary focus:outline-none placeholder:text-on-surface-variant/50" placeholder="Tulis catatan tambahan di sini..." rows="3"></textarea>
+</div>
+<div class="p-6 bg-surface-container-low flex justify-end gap-3">
+<button class="px-6 py-2 text-sm font-bold text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors" onclick="document.getElementById('reject-modal').classList.add('hidden')">Batal</button>
+<button class="px-6 py-2 text-sm font-bold bg-error text-on-primary rounded-full hover:bg-error/90 transition-all shadow-md active:scale-95">Kirim Penolakan</button>
+</div>
+</div>
+</div>
+<script>
+        // Simple micro-interactions
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                // Prevent default if it's not a real action
+                if(this.getAttribute('type') !== 'submit') e.preventDefault();
+            });
+        });
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            let modal = document.getElementById('reject-modal');
+            if (event.target == modal) {
+                modal.classList.add('hidden');
+            }
+        }
+    </script>
+</body></html>

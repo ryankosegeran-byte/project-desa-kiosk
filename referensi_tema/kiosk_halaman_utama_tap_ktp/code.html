@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#00164e",
+                    "on-tertiary": "#ffffff",
+                    "surface-variant": "#e3e1e9",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "surface-container": "#eeedf4",
+                    "surface-dim": "#dad9e1",
+                    "background": "#faf8ff",
+                    "tertiary": "#00311f",
+                    "secondary-container": "#d0e1fb",
+                    "secondary": "#505f76",
+                    "secondary-fixed-dim": "#b7c8e1",
+                    "on-secondary-fixed": "#0b1c30",
+                    "primary-container": "#1e3a8a",
+                    "secondary-fixed": "#d3e4fe",
+                    "on-secondary": "#ffffff",
+                    "on-surface": "#1a1b21",
+                    "inverse-surface": "#2f3036",
+                    "primary-fixed": "#dce1ff",
+                    "outline-variant": "#c5c5d3",
+                    "outline": "#757682",
+                    "on-secondary-fixed-variant": "#38485d",
+                    "on-secondary-container": "#54647a",
+                    "surface": "#faf8ff",
+                    "surface-tint": "#4059aa",
+                    "on-tertiary-fixed": "#002113",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f1f0f7",
+                    "on-surface-variant": "#444651",
+                    "primary": "#00236f",
+                    "surface-container-highest": "#e3e1e9",
+                    "on-error-container": "#93000a",
+                    "on-primary-container": "#90a8ff",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed": "#6ffbbe",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "tertiary-container": "#004a31",
+                    "surface-container-high": "#e9e7ef",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed-variant": "#264191",
+                    "on-background": "#1a1b21",
+                    "primary-fixed-dim": "#b6c4ff",
+                    "surface-bright": "#faf8ff",
+                    "inverse-primary": "#b6c4ff",
+                    "surface-container-low": "#f4f3fa",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#27c38a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "kiosk-gutter": "24px",
+                    "admin-gutter": "16px",
+                    "touch-target-min": "48px",
+                    "container-padding-desktop": "32px",
+                    "container-padding-mobile": "16px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display-kiosk": ["Inter"],
+                    "kiosk-button": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-kiosk": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "kiosk-button": ["20px", {"lineHeight": "24px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .pulse-animation {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.05); }
+        }
+        .shimmer-bg {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface overflow-hidden h-screen flex flex-col">
+<!-- Status Bar -->
+<header class="flex justify-between items-center h-20 px-kiosk-gutter bg-surface-container-lowest border-b border-outline-variant shadow-sm z-50">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-2xl">account_balance</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md text-primary tracking-tight">Desa Mandiri Jaya</h1>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-on-tertiary-container animate-pulse"></span>
+<span class="font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider">Online</span>
+</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-display-kiosk text-display-kiosk text-on-surface tabular-nums" id="digital-clock">00:00:00</div>
+<div class="font-label-lg text-label-lg text-on-surface-variant" id="current-date">Senin, 1 Januari 2024</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow flex flex-col items-center justify-center relative p-kiosk-gutter">
+<!-- Background Subtle Pattern -->
+<div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, #00236f 1px, transparent 0); background-size: 40px 40px;"></div>
+<!-- Instruction Card -->
+<div class="w-full max-w-4xl bg-surface-container-low rounded-[2rem] p-12 shadow-sm border border-outline-variant text-center flex flex-col items-center gap-10">
+<div class="space-y-4">
+<h2 class="font-display-kiosk text-display-kiosk text-primary">Selamat Datang</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto">
+                    Silakan gunakan kartu identitas Anda untuk memulai layanan administrasi mandiri.
+                </p>
+</div>
+<!-- RFID Illustration Container -->
+<div class="relative w-72 h-72 flex items-center justify-center">
+<!-- Outer Pulse Rings -->
+<div class="absolute inset-0 bg-primary-container/20 rounded-full pulse-animation"></div>
+<div class="absolute inset-4 bg-primary-container/30 rounded-full pulse-animation" style="animation-delay: 0.5s;"></div>
+<!-- Icon Sphere -->
+<div class="relative w-48 h-48 bg-primary-container rounded-3xl shadow-lg flex items-center justify-center overflow-hidden border-4 border-white">
+<div class="absolute inset-0 shimmer-bg"></div>
+<span class="material-symbols-outlined text-[100px] text-on-primary-container" data-weight="fill">nfc</span>
+</div>
+<!-- Floating KTP Icon -->
+<div class="absolute -bottom-4 -right-4 w-28 h-20 bg-white shadow-xl rounded-xl border border-outline-variant flex items-center justify-center transform rotate-12 transition-transform hover:rotate-0">
+<span class="material-symbols-outlined text-4xl text-primary">credit_card</span>
+</div>
+</div>
+<div class="space-y-2">
+<span class="font-headline-md text-headline-md text-on-surface">Tempelkan KTP Anda pada alat pembaca</span>
+<p class="font-label-lg text-label-lg text-on-surface-variant">Pastikan chip KTP menghadap ke bawah</p>
+</div>
+</div>
+</main>
+<!-- Footer Action Area -->
+<footer class="h-32 bg-surface-container-highest px-kiosk-gutter flex items-center justify-center gap-6 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+<button class="group relative flex items-center gap-4 bg-on-tertiary-container text-on-tertiary font-kiosk-button text-kiosk-button px-10 py-6 rounded-2xl shadow-md transition-all active:scale-95 hover:brightness-110" onclick="simulateManualInput()">
+<span class="material-symbols-outlined text-3xl">keyboard</span>
+<span>Masukkan NIK Manual</span>
+<div class="absolute inset-0 rounded-2xl border-2 border-white/20 scale-105 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</button>
+<div class="h-12 w-[1px] bg-outline-variant mx-4"></div>
+<button class="flex items-center gap-3 text-on-surface-variant font-label-lg text-label-lg px-8 py-4 rounded-xl hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">help</span>
+<span>Butuh Bantuan?</span>
+</button>
+</footer>
+<!-- Manual Input Modal (Hidden by default) -->
+<div class="fixed inset-0 bg-inverse-surface/60 backdrop-blur-md z-[100] hidden flex items-center justify-center p-8" id="nik-modal">
+<div class="bg-surface w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
+<div class="p-8 border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md">Masukkan NIK</h3>
+<button class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-surface-variant" onclick="closeModal()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-8 space-y-8">
+<div class="bg-surface-container-low p-6 rounded-2xl border-2 border-primary">
+<div class="font-display-kiosk text-display-kiosk text-center tracking-[0.5em] text-primary min-h-[60px]" id="nik-display">
+                        _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+                    </div>
+</div>
+<!-- Custom Kiosk Numpad -->
+<div class="grid grid-cols-3 gap-4 max-w-sm mx-auto">
+<!-- JavaScript will populate numbers -->
+<script>
+                        const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 'C', 0, '⌫'];
+                        const modal = document.getElementById('nik-modal');
+                        const display = document.getElementById('nik-display');
+                        let currentNik = "";
+
+                        function simulateManualInput() {
+                            document.getElementById('nik-modal').classList.remove('hidden');
+                            document.getElementById('nik-modal').classList.add('flex');
+                        }
+
+                        function closeModal() {
+                            document.getElementById('nik-modal').classList.add('hidden');
+                            document.getElementById('nik-modal').classList.remove('flex');
+                            currentNik = "";
+                            updateDisplay();
+                        }
+
+                        function updateDisplay() {
+                            let text = currentNik.padEnd(16, "_");
+                            display.textContent = text.split("").join(" ");
+                        }
+
+                        function handleKey(val) {
+                            if (val === 'C') {
+                                currentNik = "";
+                            } else if (val === '⌫') {
+                                currentNik = currentNik.slice(0, -1);
+                            } else if (currentNik.length < 16) {
+                                currentNik += val;
+                            }
+                            updateDisplay();
+
+                            if (currentNik.length === 16) {
+                                // Simulate success
+                                display.classList.add('text-on-tertiary-container');
+                                setTimeout(() => {
+                                    alert("Mencari data NIK: " + currentNik);
+                                    closeModal();
+                                }, 500);
+                            } else {
+                                display.classList.remove('text-on-tertiary-container');
+                            }
+                        }
+                    </script>
+<button class="h-20 bg-surface-container-high rounded-xl text-2xl font-bold active:bg-primary active:text-on-primary" onclick="handleKey(1)">1</button>
+<button class="h-20 bg-surface-container-high rounded-xl text-2xl font-bold active:bg-primary active:text-on-primary" onclick="handleKey(2)">2</button>
+<button class="h-20 bg-surface-container-high rounded-xl text-2xl font-bold active:bg-primary active:text-on-primary" onclick="handleKey(3)">3</button>
+<button class="h-20 bg-surface-container-high rounded-xl text-2xl font-bold active:bg-primary active:text-on-primary" onclick="handleKey(4)">4</button>
+<button class="h-20 bg-surface-container-high rounded-xl text-2xl font-bold active:bg-primary active:text-on-primary" onclick="handleKey(5)">5</button>
+<button class="h-20 bg-surface-container-high rounded-xl text-2xl font-bold active:bg-primary active:text-on-primary" onclick="handleKey(6)">6</button>
+<button class="h-20 bg-surface-container-high rounded-xl text-2xl font-bold active:bg-primary active:text-on-primary" onclick="handleKey(7)">7</button>
+<button class="h-20 bg-surface-container-high rounded-xl text-2xl font-bold active:bg-primary active:text-on-primary" onclick="handleKey(8)">8</button>
+<button class="h-20 bg-surface-container-high rounded-xl text-2xl font-bold active:bg-primary active:text-on-primary" onclick="handleKey(9)">9</button>
+<button class="h-20 bg-error-container text-on-error-container rounded-xl text-xl font-bold active:scale-95" onclick="handleKey('C')">C</button>
+<button class="h-20 bg-surface-container-high rounded-xl text-2xl font-bold active:bg-primary active:text-on-primary" onclick="handleKey(0)">0</button>
+<button class="h-20 bg-surface-variant rounded-xl text-2xl font-bold active:scale-95" onclick="handleKey('⌫')">
+<span class="material-symbols-outlined">backspace</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+        // Digital Clock Logic
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('id-ID', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' }).replace(/\./g, ':');
+            document.getElementById('digital-clock').textContent = timeStr;
+            
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = now.toLocaleDateString('id-ID', options);
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Simulate RFID success (Atmospheric)
+        setTimeout(() => {
+            console.log("Kiosk system ready. Waiting for KTP tap...");
+        }, 1000);
+    </script>
+</body></html>

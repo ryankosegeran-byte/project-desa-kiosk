@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard Admin - Desa Sukamakmur</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#444651",
+                        "outline-variant": "#c5c5d3",
+                        "tertiary-fixed": "#6ffbbe",
+                        "secondary-container": "#d0e1fb",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e3e1e9",
+                        "surface-container-low": "#f4f3fa",
+                        "surface-container": "#eeedf4",
+                        "inverse-surface": "#2f3036",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1a1b21",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1a1b21",
+                        "on-tertiary-fixed": "#002113",
+                        "background": "#faf8ff",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-secondary-fixed": "#0b1c30",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "surface-bright": "#faf8ff",
+                        "on-primary-fixed": "#00164e",
+                        "outline": "#757682",
+                        "tertiary": "#00311f",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "primary": "#00236f",
+                        "on-tertiary-container": "#27c38a",
+                        "surface-container-highest": "#e3e1e9",
+                        "primary-container": "#1e3a8a",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "surface": "#faf8ff",
+                        "on-secondary-container": "#54647a",
+                        "surface-tint": "#4059aa",
+                        "on-primary-fixed-variant": "#264191",
+                        "inverse-primary": "#b6c4ff",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#dce1ff",
+                        "secondary-fixed": "#d3e4fe",
+                        "inverse-on-surface": "#f1f0f7",
+                        "on-primary-container": "#90a8ff",
+                        "tertiary-container": "#004a31",
+                        "surface-dim": "#dad9e1",
+                        "secondary": "#505f76",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e9e7ef",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "admin-gutter": "16px",
+                        "container-padding-desktop": "32px",
+                        "container-padding-mobile": "16px",
+                        "unit": "8px",
+                        "touch-target-min": "48px",
+                        "kiosk-gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-kiosk": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "kiosk-button": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-kiosk": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "kiosk-button": ["20px", {"lineHeight": "24px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar -->
+<aside class="bg-surface-container-lowest dark:bg-inverse-surface border-r border-outline-variant dark:border-on-surface-variant h-screen w-64 fixed left-0 top-0 overflow-y-auto z-50 transition-all flex flex-col p-admin-gutter">
+<div class="mb-8 px-2">
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim font-bold">Sistem Kiosk Desa</h1>
+<p class="font-label-lg text-label-lg text-on-surface-variant">Admin Wilayah</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 p-3 bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-lg font-bold transition-all scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-lg text-label-lg">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-on-surface-variant rounded-lg transition-all scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-label-lg text-label-lg">Warga Desa</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-on-surface-variant rounded-lg transition-all scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-label-lg text-label-lg">Permohonan Surat</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-on-surface-variant rounded-lg transition-all scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="screenshot_monitor">screenshot_monitor</span>
+<span class="font-label-lg text-label-lg">Status Kiosk</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-on-surface-variant rounded-lg transition-all scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-lg text-label-lg">Pengaturan</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant pt-4 space-y-2">
+<a class="flex items-center gap-3 p-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-on-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-lg text-label-lg">Bantuan</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-error hover:bg-error-container rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-lg text-label-lg">Keluar</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="ml-64 min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-background border-b border-outline-variant dark:border-on-surface-variant flex justify-between items-center h-16 px-container-padding-desktop sticky top-0 z-40">
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container rounded-full border-none focus:ring-2 focus:ring-primary w-64 text-body-md font-body-md" placeholder="Cari data warga atau surat..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-on-surface-variant hover:text-primary transition-opacity opacity-80 hover:opacity-100">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-opacity opacity-80 hover:opacity-100">
+<span class="material-symbols-outlined" data-icon="apps">apps</span>
+</button>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="font-label-lg text-label-lg text-on-surface leading-none">Admin Desa</p>
+<p class="text-xs text-on-surface-variant font-medium">Desa Sukamakmur</p>
+</div>
+<img alt="PIC Avatar" class="w-10 h-10 rounded-full border-2 border-primary-container object-cover" data-alt="A professional portrait of a Southeast Asian male village administrator in his 40s wearing a clean batik shirt. The background is a blurred modern office setting with soft, warm indoor lighting. The overall image has a professional, trustworthy, and institutional feel, consistent with a modern government dashboard aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzTmA47uLm2TCQTWfeD_WJrzTT96AAgLca-eMQbWrqNMD6k5_sgN_hGUcPT4Mi5xDKjrFNpBTfFjXnVVrVAExivbbruw4F9Xa1-RU-Kuh4i5zETBZkDdNxsmhIUcrX7_ijlOVR49Ytd1uko6eD22El792vYZi4sLnMFEG9gXYmqh7QiFNZRxAa-YxRs47HQGvH2NFfV5PEKgmZscNTZxpijqoSiGgF6yhAKgrcsw3hhiSzXI6myg-ITUdrF7gTxo_sEluZ0jjpWoHB"/>
+</div>
+</div>
+</header>
+<main class="p-container-padding-desktop space-y-8">
+<!-- Welcome Section -->
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary">Dashboard Utama</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Selamat datang kembali, Admin Desa Sukamakmur. Berikut ringkasan hari ini.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-6 py-3 bg-secondary-container text-on-secondary-container rounded-xl font-bold hover:brightness-95 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="print">print</span>
+                        Cetak Laporan
+                    </button>
+<button class="flex items-center gap-2 px-6 py-3 bg-primary text-on-primary rounded-xl font-bold hover:bg-primary-container active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="person_add">person_add</span>
+                        Tambah Warga
+                    </button>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-primary-fixed text-primary rounded-xl">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+</div>
+<span class="text-tertiary-container font-bold text-xs">+12 bln ini</span>
+</div>
+<h3 class="font-label-lg text-label-lg text-on-surface-variant">Total Warga</h3>
+<p class="text-3xl font-bold text-on-surface mt-1">4.285</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-secondary-fixed text-secondary rounded-xl">
+<span class="material-symbols-outlined" data-icon="mark_as_unread">mark_as_unread</span>
+</div>
+<span class="text-error font-bold text-xs">5 Perlu Respon</span>
+</div>
+<h3 class="font-label-lg text-label-lg text-on-surface-variant">Permohonan Hari Ini</h3>
+<p class="text-3xl font-bold text-on-surface mt-1">24</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-tertiary-fixed text-tertiary rounded-xl">
+<span class="material-symbols-outlined" data-icon="podium">podium</span>
+</div>
+<span class="flex items-center gap-1 text-tertiary font-bold text-xs">
+<span class="w-2 h-2 bg-tertiary-fixed-dim rounded-full animate-pulse"></span>
+                            3 Unit Aktif
+                        </span>
+</div>
+<h3 class="font-label-lg text-label-lg text-on-surface-variant">Kiosk Online Status</h3>
+<p class="text-3xl font-bold text-on-surface mt-1">100%</p>
+</div>
+</div>
+<!-- Main Interactive Area: Table and Kiosk Status -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Table Section -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-surface">Permohonan Surat Terbaru</h3>
+<a class="text-primary font-bold text-sm hover:underline" href="#">Lihat Semua</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low">
+<tr>
+<th class="px-6 py-4 font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider">Pemohon</th>
+<th class="px-6 py-4 font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider">Jenis Surat</th>
+<th class="px-6 py-4 font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider">Tanggal</th>
+<th class="px-6 py-4 font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider">Status</th>
+<th class="px-6 py-4 font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider">Aksi</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed text-primary flex items-center justify-center font-bold text-xs">BS</div>
+<span class="font-body-md text-body-md text-on-surface">Budi Santoso</span>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md text-body-md">SKU (Keterangan Usaha)</td>
+<td class="px-6 py-4 font-body-md text-body-md text-on-surface-variant">12 Okt 2023</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-bold">Pending</span>
+</td>
+<td class="px-6 py-4">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+<tr class="bg-surface-container-low/30 hover:bg-surface-container transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed text-tertiary flex items-center justify-center font-bold text-xs">SR</div>
+<span class="font-body-md text-body-md text-on-surface">Siti Rahma</span>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md text-body-md">Surat Domisili</td>
+<td class="px-6 py-4 font-body-md text-body-md text-on-surface-variant">11 Okt 2023</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-full text-xs font-bold">Selesai</span>
+</td>
+<td class="px-6 py-4">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-error-container text-error flex items-center justify-center font-bold text-xs">AH</div>
+<span class="font-body-md text-body-md text-on-surface">Agus Hidayat</span>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md text-body-md">Surat Kematian</td>
+<td class="px-6 py-4 font-body-md text-body-md text-on-surface-variant">10 Okt 2023</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-error-container text-on-error-container rounded-full text-xs font-bold">Ditolak</span>
+</td>
+<td class="px-6 py-4">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Kiosk Status Section -->
+<div class="space-y-6">
+<div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6">Status Kiosk Desa</h3>
+<div class="space-y-4">
+<!-- Kiosk Unit 1 -->
+<div class="p-4 bg-surface-container-low rounded-xl border border-outline-variant/50">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="font-bold text-on-surface">Kiosk Utama - Balai Desa</p>
+<p class="text-xs text-on-surface-variant">ID: KSK-001-SMK</p>
+</div>
+<span class="flex items-center gap-1 text-[10px] font-bold text-tertiary-container bg-tertiary-fixed px-2 py-0.5 rounded-full">
+                                        ONLINE
+                                    </span>
+</div>
+<div class="flex items-center gap-4 mt-4">
+<div class="flex-1">
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">Kertas Printer</p>
+<div class="w-full bg-outline-variant h-1.5 rounded-full mt-1">
+<div class="bg-primary w-[85%] h-full rounded-full"></div>
+</div>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">Sync</p>
+<p class="text-xs font-bold text-on-surface">2 menit lalu</p>
+</div>
+</div>
+</div>
+<!-- Kiosk Unit 2 -->
+<div class="p-4 bg-surface-container-low rounded-xl border border-outline-variant/50">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="font-bold text-on-surface">Kiosk 2 - Dusun Krajan</p>
+<p class="text-xs text-on-surface-variant">ID: KSK-002-SMK</p>
+</div>
+<span class="flex items-center gap-1 text-[10px] font-bold text-tertiary-container bg-tertiary-fixed px-2 py-0.5 rounded-full">
+                                        ONLINE
+                                    </span>
+</div>
+<div class="flex items-center gap-4 mt-4">
+<div class="flex-1">
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">Kertas Printer</p>
+<div class="w-full bg-outline-variant h-1.5 rounded-full mt-1">
+<div class="bg-error w-[15%] h-full rounded-full"></div>
+</div>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">Sync</p>
+<p class="text-xs font-bold text-on-surface">10 menit lalu</p>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-3 border-2 border-dashed border-outline-variant text-on-surface-variant rounded-xl font-bold hover:bg-surface-container transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+                            Tambah Unit Kiosk
+                        </button>
+</div>
+<!-- Village Context Card -->
+<div class="relative overflow-hidden rounded-2xl h-48 bg-primary-container p-6 flex flex-col justify-end">
+<img alt="Desa Sukamakmur Landscape" class="absolute inset-0 w-full h-full object-cover opacity-30" data-alt="A scenic, high-angle view of a lush green Indonesian village surrounded by rice terraces and tropical trees during a bright morning. The atmosphere is peaceful and serene, with a soft golden morning mist. The visual style is crisp and natural, reinforcing a sense of community and regional development." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBl4Fwtj6adCDcByfd4RkWnK3Emjxn_RCQBP-VfRyj5kDbsZi45iPgTfWQCl73cYwxiRFAcWH3rFSA5hKqjQoKtE2MwEYqYA2b8OYn7M8HqD6xhWsxHqWOuCi1bCK9224mAkdFbxRTZADgb7eWU34cR83lsIW6lz_h0pGHdzkRVdnSh1yXhF-M1aOulKKKLMJ7IFVinES04ZeZP6zSglEasNbFjUPI-_Fa3DbDmGMUQyrE9kuWNdfUe6Wm5JX095DYWkIzxTnAHOGBq"/>
+<div class="relative z-10">
+<h4 class="text-white font-bold text-xl">Desa Sukamakmur</h4>
+<p class="text-primary-fixed-dim text-sm">Wilayah Administrasi Kec. Makmur Jaya</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script>
+        // Simple micro-interaction for status pulsing
+        document.querySelectorAll('.animate-pulse').forEach(el => {
+            el.style.animationDuration = '2s';
+        });
+
+        // Search bar focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-105');
+            searchInput.parentElement.style.transition = 'transform 0.2s ease-out';
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-105');
+        });
+    </script>
+</body></html>

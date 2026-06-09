@@ -1,0 +1,138 @@
+---
+import "../styles/global.css";
+interface Props {
+	title: string;
+}
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{title} - Dashboard Kiosk Desa</title>
+	</head>
+	<body>
+		<div class="dashboard-wrapper">
+			<!-- Sidebar -->
+			<aside class="sidebar">
+				<div class="brand-section">
+					<div class="brand-logo">KD</div>
+					<div class="brand-title">
+						<h1>Kiosk Desa</h1>
+						<p id="village-name">Wilayah Kiosk</p>
+					</div>
+				</div>
+
+				<nav class="nav-menu">
+					<a href="/dashboard" class="nav-item" id="nav-home">
+						<span>🏠</span> Dashboard
+					</a>
+					<a href="/warga" class="nav-item" id="nav-warga">
+						<span>👥</span> Data Warga
+					</a>
+					<a href="/warga/register" class="nav-item" id="nav-register">
+						<span>➕</span> Registrasi Warga
+					</a>
+					<a href="/surat" class="nav-item" id="nav-surat">
+						<span>📄</span> Arsip Surat
+					</a>
+					<a href="/templates" class="nav-item" id="nav-templates">
+						<span>📋</span> Template Cetak
+					</a>
+					<a href="/kiosk-status" class="nav-item" id="nav-kiosks">
+						<span>📡</span> Status Kiosk
+					</a>
+
+					<!-- Admin Section (Hidden by default, shown for superadmin) -->
+					<div id="admin-menu" style="display: none;">
+						<div style="padding: 16px 16px 4px 16px; font-size: 11px; font-weight: bold; text-transform: uppercase; color: var(--text-muted); border-top: 1px solid var(--border-color); margin-top: 8px;">Admin Panel</div>
+						<a href="/admin/desa" class="nav-item" id="nav-admin-desa">
+							<span>🏘️</span> Kelola Desa
+						</a>
+						<a href="/admin/users" class="nav-item" id="nav-admin-users">
+							<span>👤</span> Kelola User
+						</a>
+						<a href="/admin/jenis-surat" class="nav-item" id="nav-admin-jenis-surat">
+							<span>📝</span> Jenis Surat
+						</a>
+						<a href="/admin/activity" class="nav-item" id="nav-admin-activity">
+							<span>📊</span> Monitoring PIC
+						</a>
+						<a href="/settings/ocr" class="nav-item" id="nav-settings-ocr">
+							<span>⚙️</span> Pengaturan OCR
+						</a>
+					</div>
+				</nav>
+
+				<div class="user-profile-section">
+					<div class="user-info">
+						<span class="user-name" id="user-display-name">Perangkat Desa</span>
+						<span class="user-role" id="user-display-role">Operator</span>
+					</div>
+					<button class="btn btn-secondary" style="margin-top: 10px;" id="logout-btn">Keluar</button>
+				</div>
+			</aside>
+
+			<!-- Main Panel Content -->
+			<main class="main-content">
+				<slot />
+			</main>
+		</div>
+
+		<script>
+			// Client-side authentication check
+			const token = localStorage.getItem("token");
+			const userStr = localStorage.getItem("user");
+
+			if (!token || !userStr) {
+				window.location.href = "/";
+			} else {
+				try {
+					const user = JSON.parse(userStr);
+					
+					// Populate user info
+					document.getElementById("user-display-name").textContent = user.nama;
+					document.getElementById("user-display-role").textContent = user.jabatan || user.role;
+					
+					// If user belongs to a desa, display it. Or show "Global Superadmin"
+					const villageLabel = document.getElementById("village-name");
+					if (user.desa_id) {
+						// Optionally we could fetch village details or show a placeholder name.
+						villageLabel.textContent = "Wilayah Kiosk";
+					} else {
+						villageLabel.textContent = "Superadmin Hub";
+					}
+
+					// Role-aware sidebar layout
+					if (user.role === "superadmin") {
+						const adminMenu = document.getElementById("admin-menu");
+						if (adminMenu) adminMenu.style.display = "block";
+					}
+
+					// Set active tab based on window location
+					const path = window.location.pathname;
+					const menuLinks = document.querySelectorAll(".nav-item");
+					menuLinks.forEach((link) => {
+						const href = link.getAttribute("href");
+						if (href === path || (path.startsWith(href) && href !== "/dashboard")) {
+							link.classList.add("active");
+						}
+					});
+				} catch (e) {
+					console.error("Failed to parse user details:", e);
+					localStorage.clear();
+					window.location.href = "/";
+				}
+			}
+
+			// Logout trigger
+			document.getElementById("logout-btn").addEventListener("click", () => {
+				localStorage.clear();
+				window.location.href = "/";
+			});
+		</script>
+	</body>
+</html>

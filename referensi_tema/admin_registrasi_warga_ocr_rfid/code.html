@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#00164e",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e3e1e9",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface-container": "#eeedf4",
+                        "surface-dim": "#dad9e1",
+                        "background": "#faf8ff",
+                        "tertiary": "#00311f",
+                        "secondary-container": "#d0e1fb",
+                        "secondary": "#505f76",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-secondary-fixed": "#0b1c30",
+                        "primary-container": "#1e3a8a",
+                        "secondary-fixed": "#d3e4fe",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#1a1b21",
+                        "inverse-surface": "#2f3036",
+                        "primary-fixed": "#dce1ff",
+                        "outline-variant": "#c5c5d3",
+                        "outline": "#757682",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-secondary-container": "#54647a",
+                        "surface": "#faf8ff",
+                        "surface-tint": "#4059aa",
+                        "on-tertiary-fixed": "#002113",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f1f0f7",
+                        "on-surface-variant": "#444651",
+                        "primary": "#00236f",
+                        "surface-container-highest": "#e3e1e9",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#90a8ff",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "tertiary-container": "#004a31",
+                        "surface-container-high": "#e9e7ef",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#264191",
+                        "on-background": "#1a1b21",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "surface-bright": "#faf8ff",
+                        "inverse-primary": "#b6c4ff",
+                        "surface-container-low": "#f4f3fa",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#27c38a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "kiosk-gutter": "24px",
+                        "admin-gutter": "16px",
+                        "touch-target-min": "48px",
+                        "container-padding-desktop": "32px",
+                        "container-padding-mobile": "16px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-kiosk": ["Inter"],
+                        "kiosk-button": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-kiosk": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "kiosk-button": ["20px", {"lineHeight": "24px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ocr-scanner-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: #27c38a;
+            top: 0;
+            left: 0;
+            animation: scan 2.5s infinite ease-in-out;
+            box-shadow: 0 0 8px #27c38a;
+            display: none;
+        }
+        @keyframes scan {
+            0%, 100% { top: 0; }
+            50% { top: 100%; }
+        }
+        .rfid-pulse {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: .5; transform: scale(1.1); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md">
+<!-- SideNavBar Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low border-r border-outline-variant flex flex-col p-admin-gutter z-50">
+<div class="mb-8">
+<h1 class="text-headline-md font-headline-md text-primary">Admin Desa</h1>
+<p class="text-label-lg font-label-lg text-on-surface-variant">Petugas Administrasi</p>
+</div>
+<nav class="flex-1 flex flex-col space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-lg text-label-lg">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container font-bold rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-label-lg text-label-lg">Warga</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-label-lg text-label-lg">Surat</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="location_city">location_city</span>
+<span class="font-label-lg text-label-lg">Desa</span>
+</a>
+<div class="mt-auto">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-lg text-label-lg">Pengaturan</span>
+</a>
+</div>
+</nav>
+</aside>
+<!-- TopAppBar Shell -->
+<header class="flex justify-between items-center h-16 px-admin-gutter ml-64 bg-surface border-b border-outline-variant fixed top-0 left-0 right-0 z-40">
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="absolute inset-y-0 left-3 flex items-center text-outline">
+<span class="material-symbols-outlined text-[20px]" data-icon="search">search</span>
+</span>
+<input class="bg-surface-container-low border-none rounded-full pl-10 pr-4 py-2 w-64 focus:ring-2 focus:ring-primary text-body-md" placeholder="Cari NIK atau Nama..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-surface-variant rounded-full transition-all">
+<span class="material-symbols-outlined text-primary" data-icon="sync">sync</span>
+</button>
+<button class="p-2 hover:bg-surface-variant rounded-full transition-all relative">
+<span class="material-symbols-outlined text-primary" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="flex items-center gap-2 border-l border-outline-variant pl-4 ml-2">
+<div class="text-right hidden lg:block">
+<p class="font-label-lg text-label-lg leading-none">Budi Santoso</p>
+<p class="text-[12px] text-on-surface-variant uppercase tracking-wider">Super Admin</p>
+</div>
+<img alt="Admin Avatar" class="w-10 h-10 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1Tu0ecb_GGZyl9QwT9NPWOuJMziI2Zg9pgCBAKI2ikR4lWw15ZTQIeqGugdulbcyNI0NYt7Thqb_VuVZq4HMl7CrYm_lx7_NMFRgK37MwMrOPDgybLt5ogtLS3rNroKuGqwTgSEBHsF8Oc3Ajx5aeYRBjwVDmEv-pMMrlvE_8AVrjYPH0cR53Mtvr57YP67WiCZKp7JxBafEDVJgJtMoDNGOSVZx4OLrovLZgCES0reecTaJB9NwWAgG1hW1AAyvPkrji7p0bYPZa"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-20 pb-12 px-admin-gutter min-h-screen">
+<div class="max-w-7xl mx-auto">
+<header class="mb-8">
+<h2 class="font-headline-lg text-headline-lg text-primary">Registrasi Warga Baru</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Gunakan OCR untuk memproses data KTP secara otomatis dan hubungkan ke Kartu RFID Desa.</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: OCR Scanning -->
+<div class="lg:col-span-5 space-y-6">
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm">
+<h3 class="font-label-lg text-label-lg text-primary uppercase tracking-widest mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="camera">camera</span>
+                            Pindai Dokumen KTP
+                        </h3>
+<div class="relative group border-2 border-dashed border-outline-variant rounded-xl aspect-[1.58/1] overflow-hidden bg-surface-container flex flex-col items-center justify-center cursor-pointer hover:border-primary transition-all" id="ktp-drop-zone">
+<div class="absolute inset-0 hidden" id="preview-container">
+<img class="w-full h-full object-cover" data-alt="A high-quality studio photograph of an Indonesian ID card or KTP being placed on a clean administrative desk surface. The scene is illuminated with professional three-point lighting, emphasizing the blue security patterns of the card. The surrounding environment is a modern government office with a minimalist aesthetic, dominated by soft grays and deep blues of the corporate identity. The mood is professional, secure, and technologically advanced." id="ktp-preview" src=""/>
+<div class="ocr-scanner-line" id="scan-line"></div>
+</div>
+<div class="flex flex-col items-center gap-2 text-on-surface-variant group-hover:text-primary transition-colors" id="upload-prompt">
+<span class="material-symbols-outlined text-[48px]" data-icon="upload_file">upload_file</span>
+<p class="font-label-lg">Klik atau seret foto KTP ke sini</p>
+<p class="text-[12px]">Format JPG, PNG (Maks 5MB)</p>
+</div>
+</div>
+<div class="mt-6 flex flex-col gap-3">
+<button class="w-full h-admin-gutter h-[48px] bg-primary text-on-primary font-bold rounded-lg flex items-center justify-center gap-2 hover:bg-primary-container active:scale-[0.98] transition-all shadow-sm" id="ocr-btn" onclick="startOCR()">
+<span class="material-symbols-outlined" data-icon="document_scanner">document_scanner</span>
+                                Proses OCR
+                            </button>
+<p class="text-[12px] text-center text-on-surface-variant italic">Teknologi OCR secara otomatis mengekstrak data teks dari gambar.</p>
+</div>
+</section>
+<section class="bg-primary-container/10 border border-primary/20 rounded-xl p-6">
+<div class="flex items-start gap-4">
+<div class="p-3 bg-primary text-on-primary rounded-full">
+<span class="material-symbols-outlined rfid-pulse" data-icon="contactless">contactless</span>
+</div>
+<div>
+<h4 class="font-label-lg text-label-lg text-primary">RFID Reader Terhubung</h4>
+<p class="text-body-md text-on-secondary-container mt-1">Status: <span class="font-bold text-on-tertiary-container">Menunggu Scan KTP...</span></p>
+<div class="mt-4 w-full bg-surface-variant h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-1/3 animate-pulse"></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Registration Form -->
+<div class="lg:col-span-7">
+<form class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-label-lg text-label-lg text-primary uppercase tracking-widest">Detail Informasi Warga</h3>
+<span class="px-3 py-1 bg-tertiary-container text-on-tertiary-container rounded-full text-[12px] font-bold">Autofill Aktif</span>
+</div>
+<div class="p-8 space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label-lg text-label-lg text-on-surface-variant">Nomor Induk Kependudukan (NIK)</label>
+<input class="w-full bg-surface border-outline-variant rounded-lg p-3 text-body-lg font-bold tracking-widest focus:border-primary focus:ring-1 focus:ring-primary transition-all" id="nik-input" placeholder="3201xxxxxxxxxxxx" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-lg text-label-lg text-on-surface-variant">Nama Lengkap</label>
+<input class="w-full bg-surface border-outline-variant rounded-lg p-3 text-body-md focus:border-primary transition-all" id="nama-input" placeholder="Nama sesuai KTP" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-lg text-label-lg text-on-surface-variant">Tempat Lahir</label>
+<input class="w-full bg-surface border-outline-variant rounded-lg p-3 text-body-md focus:border-primary transition-all" id="tempat-lahir" placeholder="Jakarta" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-lg text-label-lg text-on-surface-variant">Tanggal Lahir</label>
+<input class="w-full bg-surface border-outline-variant rounded-lg p-3 text-body-md focus:border-primary transition-all" id="tgl-lahir" type="date"/>
+</div>
+<div class="md:col-span-2 space-y-2">
+<label class="font-label-lg text-label-lg text-on-surface-variant">Alamat Lengkap</label>
+<textarea class="w-full bg-surface border-outline-variant rounded-lg p-3 text-body-md focus:border-primary transition-all" id="alamat-input" placeholder="Jl. Desa Mandiri No. 45, RT 02/RW 01..." rows="3"></textarea>
+</div>
+</div>
+<div class="pt-6 border-t border-outline-variant">
+<h4 class="font-label-lg text-label-lg text-primary uppercase tracking-widest mb-4">Integrasi RFID Desa</h4>
+<div class="flex items-center gap-4 bg-surface-container rounded-xl p-4 border border-outline-variant">
+<div class="w-12 h-12 flex items-center justify-center bg-white rounded-lg shadow-sm border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="nfc">nfc</span>
+</div>
+<div class="flex-1">
+<label class="block text-[12px] font-bold text-on-surface-variant uppercase">RFID Card UID</label>
+<input class="w-full bg-transparent border-none p-0 text-body-lg font-mono focus:ring-0 placeholder:text-outline italic" id="rfid-uid" placeholder="Dekatkan kartu ke pembaca..." readonly="" type="text"/>
+</div>
+<div class="hidden flex items-center gap-2 text-on-tertiary-container font-bold bg-tertiary-fixed-dim px-3 py-1 rounded-full" id="rfid-status">
+<span class="material-symbols-outlined text-[18px]" data-icon="check_circle" data-weight="fill">check_circle</span>
+<span class="text-[12px]">Linked</span>
+</div>
+</div>
+</div>
+</div>
+<div class="p-6 bg-surface-container-low border-t border-outline-variant flex justify-end gap-3">
+<button class="px-6 py-2 text-on-surface-variant font-bold hover:bg-surface-variant rounded-lg transition-all" type="button">Batal</button>
+<button class="px-8 py-2 bg-on-tertiary-container text-on-tertiary font-bold rounded-lg hover:opacity-90 active:scale-95 transition-all shadow-md flex items-center gap-2" type="submit">
+<span class="material-symbols-outlined" data-icon="save" data-weight="fill">save</span>
+                                Simpan Data Warga
+                            </button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</main>
+<!-- Success Modal (Hidden by Default) -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md hidden" id="success-modal">
+<div class="bg-surface rounded-2xl p-8 max-w-sm w-full shadow-2xl text-center">
+<div class="w-20 h-20 bg-tertiary-container text-on-tertiary-container rounded-full flex items-center justify-center mx-auto mb-6">
+<span class="material-symbols-outlined text-[48px]" data-icon="verified" data-weight="fill">verified</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">Registrasi Berhasil</h3>
+<p class="text-body-md text-on-surface-variant mb-8">Data warga telah tersimpan dan kartu RFID telah aktif untuk digunakan.</p>
+<button class="w-full py-4 bg-primary text-on-primary font-bold rounded-xl hover:bg-primary-container transition-all" onclick="closeModal()">Selesai</button>
+</div>
+</div>
+<script>
+        const dropZone = document.getElementById('ktp-drop-zone');
+        const previewImg = document.getElementById('ktp-preview');
+        const previewContainer = document.getElementById('preview-container');
+        const uploadPrompt = document.getElementById('upload-prompt');
+        const scanLine = document.getElementById('scan-line');
+        const ocrBtn = document.getElementById('ocr-btn');
+
+        // Form Inputs
+        const nikInput = document.getElementById('nik-input');
+        const namaInput = document.getElementById('nama-input');
+        const alamatInput = document.getElementById('alamat-input');
+        const tempatLahir = document.getElementById('tempat-lahir');
+        const rfidUid = document.getElementById('rfid-uid');
+        const rfidStatus = document.getElementById('rfid-status');
+
+        // Simulated Image Upload
+        dropZone.addEventListener('click', () => {
+            // Mocking a file upload with a placeholder KTP image
+            previewImg.src = 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=2670&auto=format&fit=crop';
+            uploadPrompt.classList.add('hidden');
+            previewContainer.classList.remove('hidden');
+        });
+
+        function startOCR() {
+            if (!previewImg.src) return;
+
+            ocrBtn.disabled = true;
+            ocrBtn.innerHTML = '<span class="material-symbols-outlined animate-spin" data-icon="progress_activity">progress_activity</span> Memproses...';
+            scanLine.style.display = 'block';
+
+            // Simulate Network/Processing Latency
+            setTimeout(() => {
+                scanLine.style.display = 'none';
+                ocrBtn.innerHTML = '<span class="material-symbols-outlined" data-icon="check">check</span> Selesai';
+                ocrBtn.classList.replace('bg-primary', 'bg-on-tertiary-container');
+                
+                // Simulate Data Extraction
+                nikInput.value = '3201241508920005';
+                namaInput.value = 'HENDRA KUSUMA';
+                alamatInput.value = 'Dusun Krajan RT 003 RW 001, Desa Mandiri, Kec. Berdaya, Jawa Barat';
+                tempatLahir.value = 'BANDUNG';
+                document.getElementById('tgl-lahir').value = '1992-08-15';
+
+                // Simulate Auto-linking RFID
+                setTimeout(() => {
+                    rfidUid.value = 'E2 80 11 05 A0 34 22';
+                    rfidUid.classList.remove('italic');
+                    rfidStatus.classList.remove('hidden');
+                }, 1500);
+
+            }, 3000);
+        }
+
+        const registrationForm = document.querySelector('form');
+        registrationForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('success-modal').classList.remove('hidden');
+        });
+
+        function closeModal() {
+            document.getElementById('success-modal').classList.add('hidden');
+            window.location.reload();
+        }
+    </script>
+</body></html>

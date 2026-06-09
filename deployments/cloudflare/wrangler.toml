@@ -1,0 +1,19 @@
+# deployments/cloudflare/wrangler.toml
+# Cloudflare Pages deployment configuration for Astro dashboard and Kiosk UI.
+
+name = "kiosk-desa-dashboard"
+compatibility_date = "2026-06-06"
+
+[site]
+bucket = "./web/dashboard/dist"
+entry-point = "workers-site"
+
+[[env.production.routes]]
+pattern = "dashboard.kioskdesa.id/*"
+zone_name = "kioskdesa.id"
+
+# Additional configurations for routing static SPA assets
+[pages_build_config]
+build_command = "npm run build"
+build_output_directory = "dist"
+directory = "../../web/dashboard"

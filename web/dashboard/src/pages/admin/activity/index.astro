@@ -1,0 +1,8 @@
+---
+import DashboardLayout from '../../../layouts/DashboardLayout.astro';
+import ActivityLogList from '../../../components/ActivityLogList';
+---
+
+<DashboardLayout title="Log Aktivitas Audit">
+	<ActivityLogList client:load />
+</DashboardLayout>

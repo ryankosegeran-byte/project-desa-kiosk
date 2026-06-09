@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DesaDigital Admin - Mail Template Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#505f76",
+                        "surface-variant": "#e3e1e9",
+                        "secondary-fixed": "#d3e4fe",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#dad9e1",
+                        "on-secondary-container": "#54647a",
+                        "on-tertiary-fixed": "#002113",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "surface-container-highest": "#e3e1e9",
+                        "on-surface-variant": "#444651",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "primary-container": "#1e3a8a",
+                        "outline": "#757682",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#faf8ff",
+                        "on-primary-fixed-variant": "#264191",
+                        "outline-variant": "#c5c5d3",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#0b1c30",
+                        "on-primary-fixed": "#00164e",
+                        "on-background": "#1a1b21",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#2f3036",
+                        "tertiary-fixed": "#6ffbbe",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#faf8ff",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "inverse-primary": "#b6c4ff",
+                        "surface-container-low": "#f4f3fa",
+                        "on-surface": "#1a1b21",
+                        "secondary-container": "#d0e1fb",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "primary-fixed": "#dce1ff",
+                        "on-tertiary-container": "#27c38a",
+                        "tertiary": "#00311f",
+                        "inverse-on-surface": "#f1f0f7",
+                        "background": "#faf8ff",
+                        "surface-container": "#eeedf4",
+                        "primary": "#00236f",
+                        "tertiary-container": "#004a31",
+                        "on-primary-container": "#90a8ff",
+                        "surface-container-high": "#e9e7ef",
+                        "surface-tint": "#4059aa"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-padding-mobile": "16px",
+                        "admin-gutter": "16px",
+                        "kiosk-gutter": "24px",
+                        "container-padding-desktop": "32px",
+                        "unit": "8px",
+                        "touch-target-min": "48px"
+                    },
+                    "fontFamily": {
+                        "label-lg": ["Inter"],
+                        "kiosk-button": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display-kiosk": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "kiosk-button": ["20px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "display-kiosk": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .code-editor {
+            font-family: 'Courier New', Courier, monospace;
+            background: #1e1e1e;
+            color: #d4d4d4;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden flex h-screen">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col h-full p-4 gap-2 bg-surface-container border-r border-outline-variant w-64 shrink-0">
+<div class="mb-8 px-2">
+<h1 class="font-headline-md text-headline-md font-black text-primary">DesaDigital</h1>
+<p class="font-label-lg text-label-lg text-secondary">Administrator Panel</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-all rounded-lg font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-all rounded-lg font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">groups</span> Resident Data
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-all rounded-lg font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">description</span> Service Requests
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-all rounded-lg font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">analytics</span> Reports
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span> Settings
+            </a>
+</nav>
+<div class="mt-auto pt-4 border-t border-outline-variant">
+<button class="flex items-center gap-3 px-4 py-3 w-full text-on-surface-variant hover:bg-surface-variant transition-all rounded-lg font-label-lg text-label-lg">
+<span class="material-symbols-outlined">logout</span> Logout
+            </button>
+</div>
+</aside>
+<div class="flex-1 flex flex-col min-w-0">
+<!-- TopAppBar -->
+<header class="h-touch-target-min flex justify-between items-center px-kiosk-gutter bg-surface border-b border-outline-variant z-50">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-primary">Mail Template Settings</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">wifi</span>
+<span class="material-symbols-outlined text-on-surface-variant">battery_full</span>
+<span class="material-symbols-outlined text-primary">account_circle</span>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<main class="flex-1 overflow-y-auto p-container-padding-desktop bg-surface-container-low scrollbar-hide">
+<!-- Breadcrumbs / Meta -->
+<div class="mb-6 flex justify-between items-end">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Village Communication</h2>
+<p class="text-on-surface-variant">Manage automated email triggers and document templates for residents.</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-secondary-container text-on-secondary-container rounded-lg font-label-lg text-label-lg hover:brightness-95 transition-all">
+                        Reset to Defaults
+                    </button>
+<button class="px-4 py-2 bg-primary text-on-primary rounded-lg font-label-lg text-label-lg hover:brightness-110 transition-all">
+                        Save All Changes
+                    </button>
+</div>
+</div>
+<!-- Bento Grid of Templates -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Template Cards (12 items) -->
+<script>
+                    const templates = [
+                        { id: 1, name: "Birth Certificate Approval", type: "Letter", icon: "child_care", desc: "Notification when birth record request is approved." },
+                        { id: 2, name: "Death Certificate Approval", type: "Letter", icon: "sentiment_very_dissatisfied", desc: "Notification for death administration completion." },
+                        { id: 3, name: "Residency Statement", type: "Letter", icon: "home", desc: "Standard proof of residence document generation." },
+                        { id: 4, name: "New Resident Welcome", type: "Onboarding", icon: "handshake", desc: "Email sent to newly registered village residents." },
+                        { id: 5, name: "Service Request Received", type: "Transaction", icon: "mark_email_unread", desc: "Automatic confirmation of request submission." },
+                        { id: 6, name: "Service Completion Notice", type: "Transaction", icon: "check_circle", desc: "Alert when a physical document is ready for pickup." },
+                        { id: 7, name: "Village Announcement", type: "Broadcast", icon: "campaign", desc: "General template for village-wide news or emergencies." },
+                        { id: 8, name: "Business Permit Notice", type: "Legal", icon: "store", desc: "Approval for local SME business permit applications." },
+                        { id: 9, name: "Community Meeting Alert", type: "Event", icon: "groups_2", desc: "Invitation to RT/RW level communal meetings." },
+                        { id: 10, name: "ID Card Expiry Reminder", type: "Reminder", icon: "id_card", desc: "30-day notice for KTP or local ID card renewal." },
+                        { id: 11, name: "Marriage Introduction", type: "Letter", icon: "favorite", desc: "Document required for marriage office administration." },
+                        { id: 12, name: "Tax Payment Receipt", type: "Finance", icon: "payments", desc: "Digital receipt for local PBB or village service fees." }
+                    ];
+
+                    document.write(templates.map(t => `
+                        <div class="bg-surface border border-outline-variant p-6 rounded-xl flex flex-col gap-4 hover:shadow-lg transition-all group cursor-pointer" onclick="openEditor('${t.name}')">
+                            <div class="flex justify-between items-start">
+                                <div class="p-3 bg-primary-container rounded-lg text-on-primary-container">
+                                    <span class="material-symbols-outlined">${t.icon}</span>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer" onclick="event.stopPropagation()">
+                                    <input type="checkbox" value="" class="sr-only peer" checked>
+                                    <div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                </label>
+                            </div>
+                            <div>
+                                <span class="text-secondary text-xs font-bold tracking-wider uppercase">${t.type}</span>
+                                <h3 class="font-headline-md text-body-lg font-bold text-on-surface mb-1">${t.name}</h3>
+                                <p class="text-on-surface-variant text-sm line-clamp-2">${t.desc}</p>
+                            </div>
+                            <div class="mt-auto pt-4 flex justify-between items-center border-t border-outline-variant border-dashed">
+                                <span class="text-xs text-on-surface-variant">Last updated: 2 days ago</span>
+                                <button class="text-primary font-label-lg text-label-lg flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                    Edit Template <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </button>
+                            </div>
+                        </div>
+                    `).join(''));
+                </script>
+</div>
+</main>
+</div>
+<!-- SIDE EDITOR PANEL (Hidden by default) -->
+<div class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] hidden flex justify-end" id="editor-overlay" onclick="closeEditor()">
+<div class="w-full max-w-5xl bg-surface h-full shadow-2xl flex flex-col animate-slide-in" onclick="event.stopPropagation()">
+<!-- Editor Header -->
+<div class="h-touch-target-min flex justify-between items-center px-8 border-b border-outline-variant">
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-surface-variant rounded-full transition-colors" onclick="closeEditor()">
+<span class="material-symbols-outlined">close</span>
+</button>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface leading-none" id="editor-title">Edit Template</h2>
+<span class="text-sm text-on-surface-variant">Template ID: TPL-0092-BCA</span>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-2 border border-outline text-on-surface rounded-lg font-label-lg text-label-lg hover:bg-surface-variant transition-all">Send Test Email</button>
+<button class="px-6 py-2 bg-primary text-on-primary rounded-lg font-label-lg text-label-lg hover:brightness-110 shadow-md">Apply Changes</button>
+</div>
+</div>
+<!-- Editor Body -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Left: Code Editor -->
+<div class="w-1/2 flex flex-col border-r border-outline-variant">
+<div class="bg-surface-container-highest px-4 py-2 flex justify-between items-center border-b border-outline-variant">
+<span class="text-xs font-bold text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">code</span> HTML EDITOR
+                        </span>
+<div class="flex gap-2">
+<button class="p-1 text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-sm">content_copy</span></button>
+<button class="p-1 text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-sm">undo</span></button>
+</div>
+</div>
+<div class="flex-1 relative overflow-hidden">
+<textarea class="absolute inset-0 w-full h-full p-6 code-editor text-sm resize-none focus:outline-none scrollbar-hide" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body style="font-family: Arial, sans-serif; line-height: 1.6;"&gt;
+  &lt;div style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee;"&gt;
+    &lt;header style="text-align: center; border-bottom: 2px solid #00236f;"&gt;
+      &lt;h1 style="color: #00236f;"&gt;DesaDigital Portal&lt;/h1&gt;
+    &lt;/header&gt;
+    
+    &lt;main style="padding: 20px 0;"&gt;
+      &lt;p&gt;Halo, &lt;strong&gt;{{.Warga.Nama}}&lt;/strong&gt;,&lt;/p&gt;
+      
+      &lt;p&gt;Kami ingin memberitahukan bahwa permintaan layanan &lt;strong&gt;{{.Request.Tipe}}&lt;/strong&gt; Anda dengan nomor registrasi &lt;strong&gt;{{.Request.ID}}&lt;/strong&gt; telah selesai diproses oleh admin desa.&lt;/p&gt;
+      
+      &lt;div style="background: #f4f3fa; padding: 15px; border-radius: 8px; margin: 20px 0;"&gt;
+        &lt;p style="margin: 0;"&gt;&lt;strong&gt;Status:&lt;/strong&gt; Disetujui / Selesai&lt;/p&gt;
+        &lt;p style="margin: 0;"&gt;&lt;strong&gt;Tanggal:&lt;/strong&gt; {{.Request.UpdateDate}}&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;p&gt;Silakan datang ke kantor desa pada jam operasional untuk pengambilan dokumen fisik dengan membawa berkas pendukung asli.&lt;/p&gt;
+      
+      &lt;a href="{{.Link.Dashboard}}" style="display: inline-block; padding: 12px 24px; background: #00236f; color: white; text-decoration: none; border-radius: 6px;"&gt;Lihat Detail di Dashboard&lt;/a&gt;
+    &lt;/main&gt;
+    
+    &lt;footer style="text-align: center; font-size: 12px; color: #757682; border-top: 1px solid #eee; padding-top: 20px;"&gt;
+      © 2024 Village Digital Services - {{.Desa.Nama}}
+    &lt;/footer&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+</div>
+<!-- Placeholder Helper -->
+<div class="p-4 bg-surface-container border-t border-outline-variant overflow-x-auto whitespace-nowrap scrollbar-hide">
+<span class="text-xs font-bold text-on-surface-variant block mb-2">AVAILABLE PLACEHOLDERS:</span>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-surface-variant hover:bg-outline-variant text-xs rounded transition-colors" onclick="copyToClipboard('{{.Warga.Nama}}')">{{.Warga.Nama}}</button>
+<button class="px-3 py-1 bg-surface-variant hover:bg-outline-variant text-xs rounded transition-colors" onclick="copyToClipboard('{{.Request.ID}}')">{{.Request.ID}}</button>
+<button class="px-3 py-1 bg-surface-variant hover:bg-outline-variant text-xs rounded transition-colors" onclick="copyToClipboard('{{.Desa.KepalaDesa}}')">{{.Desa.KepalaDesa}}</button>
+<button class="px-3 py-1 bg-surface-variant hover:bg-outline-variant text-xs rounded transition-colors" onclick="copyToClipboard('{{.App.BaseURL}}')">{{.App.BaseURL}}</button>
+</div>
+</div>
+</div>
+<!-- Right: Preview -->
+<div class="w-1/2 flex flex-col bg-surface-container-low">
+<div class="bg-surface-container-highest px-4 py-2 border-b border-outline-variant flex items-center justify-between">
+<span class="text-xs font-bold text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">visibility</span> LIVE PREVIEW
+                        </span>
+<div class="flex gap-1">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">devices</span>
+<span class="material-symbols-outlined text-sm text-on-surface-variant">phone_iphone</span>
+</div>
+</div>
+<div class="flex-1 p-8 overflow-y-auto flex justify-center items-start">
+<!-- Preview Card -->
+<div class="bg-white shadow-lg w-full max-w-[400px] border border-outline-variant p-6 rounded-lg min-h-[500px]">
+<div class="text-center border-b-2 border-[#00236f] pb-4 mb-4">
+<h1 class="text-2xl font-bold text-[#00236f]">DesaDigital Portal</h1>
+</div>
+<div class="text-sm text-on-surface leading-relaxed">
+<p>Halo, <strong>Andi Pratama</strong>,</p>
+<p class="mt-4">Kami ingin memberitahukan bahwa permintaan layanan <strong>Surat Pengantar Nikah</strong> Anda dengan nomor registrasi <strong>#REQ-2024-001</strong> telah selesai diproses oleh admin desa.</p>
+<div class="bg-[#f4f3fa] p-4 rounded-lg my-6 border-l-4 border-[#00236f]">
+<p class="m-0 text-xs"><strong>Status:</strong> Disetujui / Selesai</p>
+<p class="m-0 text-xs"><strong>Tanggal:</strong> 24 Oct 2024</p>
+</div>
+<p>Silakan datang ke kantor desa pada jam operasional untuk pengambilan dokumen fisik dengan membawa berkas pendukung asli.</p>
+<div class="text-center mt-8">
+<a class="inline-block px-6 py-3 bg-[#00236f] text-white no-underline rounded-md font-bold text-sm" href="#">Lihat Detail di Dashboard</a>
+</div>
+</div>
+<div class="mt-12 pt-4 border-t border-gray-100 text-[10px] text-center text-gray-400">
+                                © 2024 Village Digital Services - Desa Sukatani
+                            </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+        function openEditor(title) {
+            const overlay = document.getElementById('editor-overlay');
+            const titleEl = document.getElementById('editor-title');
+            titleEl.innerText = title;
+            overlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeEditor() {
+            const overlay = document.getElementById('editor-overlay');
+            overlay.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function copyToClipboard(text) {
+            // Simplified feedback for placeholder clicking
+            console.log("Placeholder copied: ", text);
+        }
+    </script>
+<style>
+        @keyframes slide-in {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        .animate-slide-in {
+            animation: slide-in 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</body></html>

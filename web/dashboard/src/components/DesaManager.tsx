@@ -1,0 +1,265 @@
+import React, { useEffect, useState } from "react";
+import { request } from "../lib/api";
+
+interface Desa {
+  id: string;
+  nama: string;
+  kode_desa: string;
+  kecamatan?: string;
+  kabupaten?: string;
+  provinsi?: string;
+  kepala_desa?: string;
+  nip_kepala_desa?: string;
+  alamat_kantor?: string;
+}
+
+export default function DesaManager() {
+  const [desas, setDesas] = useState<Desa[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  // Create modal state
+  const [showModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState({
+    nama: "",
+    kode_desa: "",
+    kecamatan: "",
+    kabupaten: "",
+    provinsi: "",
+    kepala_desa: "",
+    nip_kepala_desa: "",
+    alamat_kantor: "",
+  });
+  const [saveLoading, setSaveLoading] = useState(false);
+  const [saveError, setSaveError] = useState("");
+
+  useEffect(() => {
+    loadDesa();
+  }, []);
+
+  async function loadDesa() {
+    try {
+      const data = await request("/api/desa");
+      setDesas(data);
+    } catch (err: any) {
+      setError(err.message || "Gagal mengambil data desa.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSaveLoading(true);
+    setSaveError("");
+
+    try {
+      const created = await request("/api/desa", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      });
+
+      setDesas([...desas, created]);
+      setShowModal(false);
+      setFormData({
+        nama: "",
+        kode_desa: "",
+        kecamatan: "",
+        kabupaten: "",
+        provinsi: "",
+        kepala_desa: "",
+        nip_kepala_desa: "",
+        alamat_kantor: "",
+      });
+    } catch (err: any) {
+      setSaveError(err.message || "Gagal membuat profil desa.");
+    } finally {
+      setSaveLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "400px" }}>
+        <div className="spinner"></div>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "32px" }}>
+        <div>
+          <h1 style={{ fontSize: "28px", fontWeight: "700" }}>Kelola Desa</h1>
+          <p style={{ color: "var(--text-muted)", marginTop: "4px" }}>
+            Daftarkan dan perbarui wilayah desa pengguna kiosk pelayanan terdistribusi.
+          </p>
+        </div>
+        <button className="btn btn-primary" onClick={() => setShowModal(true)}>
+          ➕ Daftarkan Desa Baru
+        </button>
+      </div>
+
+      {error && (
+        <div className="glass-card" style={{ borderLeft: "4px solid var(--danger)", color: "var(--danger)", marginBottom: "24px" }}>
+          ⚠️ {error}
+        </div>
+      )}
+
+      {/* Villages Table */}
+      <div className="table-container">
+        <table className="premium-table">
+          <thead>
+            <tr>
+              <th>Kode Desa</th>
+              <th>Nama Desa</th>
+              <th>Kecamatan</th>
+              <th>Kabupaten</th>
+              <th>Kepala Desa</th>
+              <th>NIP Kepala Desa</th>
+            </tr>
+          </thead>
+          <tbody>
+            {desas.map((d) => (
+              <tr key={d.id}>
+                <td style={{ fontWeight: "600", fontFamily: "monospace" }}>{d.kode_desa}</td>
+                <td>{d.nama}</td>
+                <td>{d.kecamatan || "-"}</td>
+                <td>{d.kabupaten || "-"}</td>
+                <td>{d.kepala_desa || "-"}</td>
+                <td>{d.nip_kepala_desa || "-"}</td>
+              </tr>
+            ))}
+            {desas.length === 0 && (
+              <tr>
+                <td colSpan={6} style={{ textAlign: "center", color: "var(--text-muted)", padding: "24px" }}>
+                  Belum ada profil desa terdaftar
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Register Village Modal */}
+      {showModal && (
+        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.7)", backdropFilter: "blur(4px)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1000 }}>
+          <div className="glass-card" style={{ maxWidth: "600px", width: "95%", maxHeight: "90vh", overflowY: "auto", padding: "30px" }}>
+            <h3 style={{ fontSize: "20px", fontWeight: "700", marginBottom: "20px" }}>Daftarkan Desa Baru</h3>
+
+            {saveError && (
+              <div style={{ color: "var(--danger)", background: "hsla(355, 85%, 55%, 0.1)", padding: "10px", borderRadius: "var(--radius-sm)", marginBottom: "16px", fontSize: "13px" }}>
+                ⚠️ {saveError}
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                <div className="form-group">
+                  <label className="form-label">Nama Desa</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Contoh: Desa Cibunar"
+                    value={formData.nama}
+                    onChange={(e) => setFormData({ ...formData, nama: e.target.value })}
+                    required
+                    disabled={saveLoading}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Kode Desa</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Contoh: 32.05.11.2001"
+                    value={formData.kode_desa}
+                    onChange={(e) => setFormData({ ...formData, kode_desa: e.target.value })}
+                    required
+                    disabled={saveLoading}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Kecamatan</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={formData.kecamatan}
+                    onChange={(e) => setFormData({ ...formData, kecamatan: e.target.value })}
+                    disabled={saveLoading}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Kabupaten</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={formData.kabupaten}
+                    onChange={(e) => setFormData({ ...formData, kabupaten: e.target.value })}
+                    disabled={saveLoading}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Provinsi</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={formData.provinsi}
+                    onChange={(e) => setFormData({ ...formData, provinsi: e.target.value })}
+                    disabled={saveLoading}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Kepala Desa (Kades)</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={formData.kepala_desa}
+                    onChange={(e) => setFormData({ ...formData, kepala_desa: e.target.value })}
+                    disabled={saveLoading}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">NIP Kepala Desa</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={formData.nip_kepala_desa}
+                    onChange={(e) => setFormData({ ...formData, nip_kepala_desa: e.target.value })}
+                    disabled={saveLoading}
+                  />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Alamat Kantor Desa</label>
+                <textarea
+                  className="form-control"
+                  style={{ height: "80px", resize: "none" }}
+                  value={formData.alamat_kantor}
+                  onChange={(e) => setFormData({ ...formData, alamat_kantor: e.target.value })}
+                  disabled={saveLoading}
+                />
+              </div>
+
+              <div style={{ display: "flex", justifyContent: "flex-end", gap: "12px", marginTop: "24px" }}>
+                <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)} disabled={saveLoading}>
+                  Batal
+                </button>
+                <button type="submit" className="btn btn-primary" disabled={saveLoading}>
+                  {saveLoading ? "Menyimpan..." : "Daftarkan"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

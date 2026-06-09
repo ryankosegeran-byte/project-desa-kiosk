@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard Admin Desa - Sistem Kiosk Desa</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #faf8ff;
+        }
+        .chart-container {
+            position: relative;
+            height: 200px;
+            width: 100%;
+        }
+        .zebra-table tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#00164e",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e3e1e9",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface-container": "#eeedf4",
+                        "surface-dim": "#dad9e1",
+                        "background": "#faf8ff",
+                        "tertiary": "#00311f",
+                        "secondary-container": "#d0e1fb",
+                        "secondary": "#505f76",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-secondary-fixed": "#0b1c30",
+                        "primary-container": "#1e3a8a",
+                        "secondary-fixed": "#d3e4fe",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#1a1b21",
+                        "inverse-surface": "#2f3036",
+                        "primary-fixed": "#dce1ff",
+                        "outline-variant": "#c5c5d3",
+                        "outline": "#757682",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-secondary-container": "#54647a",
+                        "surface": "#faf8ff",
+                        "surface-tint": "#4059aa",
+                        "on-tertiary-fixed": "#002113",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f1f0f7",
+                        "on-surface-variant": "#444651",
+                        "primary": "#00236f",
+                        "surface-container-highest": "#e3e1e9",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#90a8ff",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "tertiary-container": "#004a31",
+                        "surface-container-high": "#e9e7ef",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#264191",
+                        "on-background": "#1a1b21",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "surface-bright": "#faf8ff",
+                        "inverse-primary": "#b6c4ff",
+                        "surface-container-low": "#f4f3fa",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#27c38a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "kiosk-gutter": "24px",
+                        "admin-gutter": "16px",
+                        "touch-target-min": "48px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-kiosk": ["Inter"],
+                        "kiosk-button": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-kiosk": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "kiosk-button": ["20px", {"lineHeight": "24px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-inverse-surface border-r border-outline-variant dark:border-outline flex flex-col p-admin-gutter z-50">
+<div class="mb-8 px-2">
+<h1 class="text-headline-md font-headline-md text-primary dark:text-primary-fixed">Admin Desa</h1>
+<p class="text-label-lg font-label-lg text-on-surface-variant">Petugas Administrasi</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container font-bold rounded-lg transition-all active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-lg text-label-lg">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-label-lg text-label-lg">Warga</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-label-lg text-label-lg">Surat</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="location_city">location_city</span>
+<span class="font-label-lg text-label-lg">Desa</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-lg text-label-lg">Pengaturan</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-outline-variant flex items-center gap-3 px-2">
+<img alt="Admin Avatar" class="w-10 h-10 rounded-full border border-outline-variant" data-alt="A professional headshot of a middle-aged Asian man in a clean white shirt, representing a village administrative official. He has a warm, confident expression. The background is a soft-focus office interior with natural lighting, maintaining a trustworthy and institutional corporate aesthetic consistent with government services." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVr__-uE_I_Gm3B3SEqg77Z2W5Nvdo7FnxqASFayUY2Yri4pzTzfgZW7qJXeuEQZFSs4iT-UaBXCqN27gktrbud57bXysYJ0AKrPOKiZ-kXXLzkF_BLjTmtDP4_ElmqC4rXBJR0GrTBYiulb66vuuh5f74xZD99aUd105oxIO-wgq7w7cie2iXLt7gLrKMpwJH8q2fJoAcx-jYhsFi0eTMy3JF3URJsfSK_MmafpAbqd6eBUV6mVqdxqtPzeWX1aBsTdxpaA37VqL9"/>
+<div>
+<p class="text-label-lg font-bold">Budi Santoso</p>
+<p class="text-[12px] text-on-surface-variant">ID: 109283</p>
+</div>
+</div>
+</aside>
+<!-- TopAppBar -->
+<header class="flex justify-between items-center h-16 px-admin-gutter ml-64 fixed top-0 left-0 right-0 bg-surface dark:bg-on-surface border-b border-outline-variant dark:border-outline z-40">
+<div class="flex items-center gap-4">
+<span class="text-headline-sm font-headline-md font-bold text-primary">Sistem Kiosk Desa</span>
+<div class="relative ml-4">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-surface-container-low border border-outline-variant rounded-full text-body-md focus:outline-none focus:ring-2 focus:ring-primary w-64" placeholder="Cari data warga..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="sync">sync</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all duration-200 relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="w-[1px] h-6 bg-outline-variant mx-2"></div>
+<img alt="User Profile" class="w-8 h-8 rounded-full cursor-pointer hover:opacity-80 transition-opacity" data-alt="Close up of a professional male avatar, head and shoulders, with a friendly and reliable demeanor for a government dashboard user interface. High quality studio lighting, soft gray background, modern and clean look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbfuwZaQj9LTcVYLmDGCMc7wTaT4O647QUQpeAY9PexKvhvyQEk3TgkIGpafHJljmgC76GU4TU76JjWeRTTz9h8ZBUge6yvtakpQCQT58APZqfI5jE_b6FaX1bi5SqN9E6dtQtIdcC4lq9fWDqyLXT7p3MIGS_vX-imn--tf1Fvas-wEDvn5TkSUR_2BoVOZQrnrEJR0B6YNTEfTYyT2NDm9fdTlAL7DiFGKaEDuW1QxtBKvknsVMPxmt86FdFolyP-RJdDgKx5Nc3"/>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-64 pt-20 p-admin-gutter min-h-screen">
+<!-- Dashboard Header -->
+<div class="mb-8">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Overview Layanan Mandiri</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Pantau kinerja kiosk dan statistik kependudukan secara real-time.</p>
+</div>
+<!-- Bento Grid Statistics -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+<!-- Stat Card: Total Warga -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-[0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary-fixed rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="groups">groups</span>
+</div>
+<span class="text-on-tertiary-container text-label-lg font-bold">+12 bln ini</span>
+</div>
+<h3 class="text-on-surface-variant font-label-lg">Total Warga</h3>
+<p class="text-headline-lg font-bold text-on-surface">1,429</p>
+</div>
+<!-- Stat Card: Surat Hari Ini -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-[0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-tertiary-fixed rounded-lg">
+<span class="material-symbols-outlined text-tertiary" data-icon="description">description</span>
+</div>
+<span class="text-on-tertiary-container text-label-lg font-bold">Selesai</span>
+</div>
+<h3 class="text-on-surface-variant font-label-lg">Surat Tercetak Hari Ini</h3>
+<p class="text-headline-lg font-bold text-on-surface">34</p>
+</div>
+<!-- Stat Card: Kiosk Status -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-[0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-on-tertiary-container/10 rounded-lg">
+<span class="material-symbols-outlined text-on-tertiary-container" data-icon="sensors">sensors</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 bg-on-tertiary-container rounded-full animate-pulse"></span>
+<span class="text-on-tertiary-container text-label-lg font-bold">Online</span>
+</div>
+</div>
+<h3 class="text-on-surface-variant font-label-lg">Kiosk Status</h3>
+<p class="text-headline-lg font-bold text-on-surface">Aktif</p>
+</div>
+<!-- Stat Card: Sync Status -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-[0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-secondary-fixed rounded-lg">
+<span class="material-symbols-outlined text-secondary" data-icon="cloud_sync">cloud_sync</span>
+</div>
+<span class="text-on-surface-variant text-[11px]">2 Menit Lalu</span>
+</div>
+<h3 class="text-on-surface-variant font-label-lg">Sync Status</h3>
+<p class="text-headline-lg font-bold text-on-surface">Sinkron</p>
+</div>
+</div>
+<!-- Main Dashboard Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Trend Chart Section -->
+<div class="lg:col-span-2 bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-[0_2px_4px_rgba(0,0,0,0.05)]">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-headline-md font-headline-md text-on-surface">Tren Pembuatan Surat</h3>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-surface-variant text-on-surface-variant rounded-lg text-label-lg">7 Hari</button>
+<button class="px-3 py-1 hover:bg-surface-variant transition-colors rounded-lg text-label-lg">30 Hari</button>
+</div>
+</div>
+<div class="chart-container flex items-end justify-between px-4 pb-2 border-l border-b border-outline-variant">
+<!-- Simple CSS Graphic Chart for Trend -->
+<div class="flex flex-col items-center gap-2 w-full">
+<div class="w-4 bg-primary-container/40 rounded-t h-16 relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-surface text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">12</div>
+</div>
+<span class="text-[10px] text-on-surface-variant">Sen</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full">
+<div class="w-4 bg-primary-container/60 rounded-t h-24 relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-surface text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">18</div>
+</div>
+<span class="text-[10px] text-on-surface-variant">Sel</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full">
+<div class="w-4 bg-primary-container/30 rounded-t h-12 relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-surface text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">9</div>
+</div>
+<span class="text-[10px] text-on-surface-variant">Rab</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full">
+<div class="w-4 bg-primary-container rounded-t h-40 relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-surface text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">34</div>
+</div>
+<span class="text-[10px] text-on-surface-variant">Kam</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full">
+<div class="w-4 bg-primary-container/70 rounded-t h-28 relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-surface text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">22</div>
+</div>
+<span class="text-[10px] text-on-surface-variant">Jum</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full">
+<div class="w-4 bg-primary-container/20 rounded-t h-8 relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-surface text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">5</div>
+</div>
+<span class="text-[10px] text-on-surface-variant">Sab</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full">
+<div class="w-4 bg-primary-container/20 rounded-t h-10 relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-surface text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">7</div>
+</div>
+<span class="text-[10px] text-on-surface-variant">Min</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-4 text-label-lg text-on-surface-variant">
+<div class="flex items-center gap-1.5"><span class="w-3 h-3 bg-primary-container rounded-sm"></span> Total Volume</div>
+<p class="ml-auto italic">Rata-rata: 15.2 surat/hari</p>
+</div>
+</div>
+<!-- Activity Log Card -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-[0_2px_4px_rgba(0,0,0,0.05)]">
+<h3 class="text-headline-md font-headline-md text-on-surface mb-6">Aktivitas Kiosk Terbaru</h3>
+<div class="space-y-4">
+<div class="flex items-start gap-3 pb-4 border-b border-outline-variant">
+<div class="mt-1 w-2 h-2 rounded-full bg-on-tertiary-container"></div>
+<div>
+<p class="text-label-lg font-bold">Surat Keterangan Usaha</p>
+<p class="text-[12px] text-on-surface-variant">Oleh: Ahmad Fauzi • 10:24 WIB</p>
+</div>
+</div>
+<div class="flex items-start gap-3 pb-4 border-b border-outline-variant">
+<div class="mt-1 w-2 h-2 rounded-full bg-on-tertiary-container"></div>
+<div>
+<p class="text-label-lg font-bold">Surat Keterangan Domisili</p>
+<p class="text-[12px] text-on-surface-variant">Oleh: Siti Aminah • 09:55 WIB</p>
+</div>
+</div>
+<div class="flex items-start gap-3 pb-4 border-b border-outline-variant">
+<div class="mt-1 w-2 h-2 rounded-full bg-error"></div>
+<div>
+<p class="text-label-lg font-bold">Gagal Verifikasi Wajah</p>
+<p class="text-[12px] text-on-surface-variant">NIK: 32750... • 09:12 WIB</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="mt-1 w-2 h-2 rounded-full bg-on-tertiary-container"></div>
+<div>
+<p class="text-label-lg font-bold">Update Data Alamat</p>
+<p class="text-[12px] text-on-surface-variant">Oleh: Bambang S. • 08:45 WIB</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-2 border border-primary text-primary font-label-lg rounded-lg hover:bg-primary-fixed transition-colors">Lihat Semua Aktivitas</button>
+</div>
+</div>
+<!-- Table Section -->
+<section class="mt-8 bg-surface-container-lowest rounded-xl border border-outline-variant shadow-[0_2px_4px_rgba(0,0,0,0.05)] overflow-hidden">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center">
+<h3 class="text-headline-md font-headline-md text-on-surface">Data Kiosk Aktif</h3>
+<button class="flex items-center gap-2 text-primary font-label-lg">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span> Filter Data
+                </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse zebra-table">
+<thead>
+<tr class="bg-surface-container text-on-surface-variant">
+<th class="px-6 py-4 font-label-lg">Nama Kiosk</th>
+<th class="px-6 py-4 font-label-lg">Lokasi</th>
+<th class="px-6 py-4 font-label-lg">Status</th>
+<th class="px-6 py-4 font-label-lg">Surat/Hari</th>
+<th class="px-6 py-4 font-label-lg">Terakhir Aktif</th>
+<th class="px-6 py-4 font-label-lg">Aksi</th>
+</tr>
+</thead>
+<tbody class="text-body-md">
+<tr>
+<td class="px-6 py-4 font-bold">Kiosk Utama 01</td>
+<td class="px-6 py-4">Lobby Kantor Desa</td>
+<td class="px-6 py-4">
+<span class="bg-on-tertiary-container/10 text-on-tertiary-container px-2 py-1 rounded-full text-[12px] font-bold">Online</span>
+</td>
+<td class="px-6 py-4 text-center">24</td>
+<td class="px-6 py-4">Sekarang</td>
+<td class="px-6 py-4">
+<button class="text-primary-container hover:underline">Detail</button>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4 font-bold">Kiosk Dusun Krajan</td>
+<td class="px-6 py-4">Balai Dusun 02</td>
+<td class="px-6 py-4">
+<span class="bg-on-tertiary-container/10 text-on-tertiary-container px-2 py-1 rounded-full text-[12px] font-bold">Online</span>
+</td>
+<td class="px-6 py-4 text-center">10</td>
+<td class="px-6 py-4">5 mnt lalu</td>
+<td class="px-6 py-4">
+<button class="text-primary-container hover:underline">Detail</button>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4 font-bold">Kiosk Dusun Selatan</td>
+<td class="px-6 py-4">Pos Ronda RW 04</td>
+<td class="px-6 py-4">
+<span class="bg-error-container text-on-error-container px-2 py-1 rounded-full text-[12px] font-bold">Offline</span>
+</td>
+<td class="px-6 py-4 text-center">0</td>
+<td class="px-6 py-4">2 jam lalu</td>
+<td class="px-6 py-4">
+<button class="text-primary-container hover:underline">Detail</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+<!-- Footer Simulation -->
+<footer class="ml-64 bg-surface-container-highest dark:bg-on-tertiary-fixed text-on-tertiary-container dark:text-tertiary-fixed h-16 flex justify-between items-center px-kiosk-gutter border-t border-outline-variant mt-8">
+<p class="font-kiosk-button text-[14px]">© 2024 Pemerintah Desa - Mandiri &amp; Berdaya</p>
+<div class="flex gap-4">
+<a class="font-kiosk-button text-[14px] hover:underline" href="#">Kembali</a>
+<a class="font-kiosk-button text-[14px] hover:underline" href="#">Batal</a>
+</div>
+</footer>
+<script>
+        // Micro-interactions and subtle effects
+        document.querySelectorAll('.active\\:scale-\\[0\\.98\\]').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.style.transform = 'scale(0.98)';
+            });
+            button.addEventListener('mouseup', () => {
+                button.style.transform = 'scale(1)';
+            });
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'scale(1)';
+            });
+        });
+
+        // Simulating search highlight
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('ring-2', 'ring-primary');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('ring-2', 'ring-primary');
+        });
+    </script>
+</body></html>
