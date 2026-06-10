@@ -32,6 +32,11 @@ export default function KioskStatus() {
   const [registerLoading, setRegisterLoading] = useState(false);
   const [registerError, setRegisterError] = useState("");
 
+  // Detail modal states
+  const [detailKiosk, setDetailKiosk] = useState<Kiosk | null>(null);
+  const [showApiKey, setShowApiKey] = useState(false);
+  const [copyFeedback, setCopyFeedback] = useState<string | null>(null);
+
   const user = getUser();
 
   useEffect(() => {
@@ -140,7 +145,11 @@ export default function KioskStatus() {
           </thead>
           <tbody>
             {kiosks.map((k) => (
-              <tr key={k.id}>
+              <tr
+                key={k.id}
+                onClick={() => { setDetailKiosk(k); setShowApiKey(false); }}
+                style={{ cursor: "pointer" }}
+              >
                 <td style={{ fontWeight: "600", fontFamily: "monospace" }}>{k.id.substring(0, 8)}...</td>
                 <td>{k.nama}</td>
                 <td style={{ fontFamily: "monospace" }}>{k.ip_address || "-"}</td>
@@ -242,6 +251,163 @@ export default function KioskStatus() {
                 </div>
               </form>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Detail Modal */}
+      {detailKiosk && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: "rgba(0,0,0,0.7)",
+            backdropFilter: "blur(4px)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 1000,
+          }}
+          onClick={() => setDetailKiosk(null)}
+        >
+          <div
+            className="glass-card"
+            style={{ maxWidth: "520px", width: "100%", padding: "30px" }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 style={{ fontSize: "20px", fontWeight: "700", marginBottom: "20px" }}>Detail Kiosk</h3>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+              {/* Nama Kiosk */}
+              <div>
+                <div style={{ fontSize: "11px", fontWeight: "600", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "4px" }}>
+                  Nama Kiosk
+                </div>
+                <div style={{ fontSize: "16px", fontWeight: "600" }}>{detailKiosk.nama}</div>
+              </div>
+
+              {/* Full ID Kiosk */}
+              <div>
+                <div style={{ fontSize: "11px", fontWeight: "600", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "4px" }}>
+                  ID Kiosk
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  <code style={{ fontSize: "14px", fontFamily: "monospace", wordBreak: "break-all" }}>{detailKiosk.id}</code>
+                  <button
+                    className="btn btn-secondary"
+                    style={{ padding: "4px 10px", fontSize: "12px" }}
+                    onClick={() => {
+                      navigator.clipboard.writeText(detailKiosk.id);
+                      setCopyFeedback("id");
+                      setTimeout(() => setCopyFeedback((prev) => (prev === "id" ? null : prev)), 1500);
+                    }}
+                  >
+                    {copyFeedback === "id" ? "Tersalin!" : "Salin"}
+                  </button>
+                </div>
+              </div>
+
+              {/* API Key — admin only */}
+              {user?.role === "superadmin" && (
+                <div>
+                  <div style={{ fontSize: "11px", fontWeight: "600", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "4px" }}>
+                    API Key
+                  </div>
+                  <div
+                    style={{
+                      background: "var(--bg-main)",
+                      padding: "12px 14px",
+                      borderRadius: "var(--radius-sm)",
+                      border: "1px solid var(--border-color)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: "10px",
+                    }}
+                  >
+                    <code
+                      style={{
+                        fontSize: "14px",
+                        fontFamily: "monospace",
+                        wordBreak: "break-all",
+                        color: showApiKey ? "var(--success)" : "inherit",
+                      }}
+                    >
+                      {showApiKey
+                        ? detailKiosk.api_key || "-"
+                        : detailKiosk.api_key
+                        ? detailKiosk.api_key.substring(0, 6) + "****...****" + detailKiosk.api_key.slice(-4)
+                        : "-"}
+                    </code>
+                    <div style={{ display: "flex", gap: "6px", flexShrink: 0 }}>
+                      <button
+                        className="btn btn-secondary"
+                        style={{ padding: "4px 10px", fontSize: "12px" }}
+                        onClick={() => setShowApiKey((prev) => !prev)}
+                        title={showApiKey ? "Sembunyikan" : "Tampilkan"}
+                      >
+                        {showApiKey ? "🙈" : "👁️"}
+                      </button>
+                      <button
+                        className="btn btn-secondary"
+                        style={{ padding: "4px 10px", fontSize: "12px" }}
+                        onClick={() => {
+                          if (detailKiosk.api_key) {
+                            navigator.clipboard.writeText(detailKiosk.api_key);
+                            setCopyFeedback("apiKey");
+                            setTimeout(() => setCopyFeedback((prev) => (prev === "apiKey" ? null : prev)), 1500);
+                          }
+                        }}
+                        disabled={!detailKiosk.api_key}
+                      >
+                        {copyFeedback === "apiKey" ? "Tersalin!" : "Salin"}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Status */}
+              <div>
+                <div style={{ fontSize: "11px", fontWeight: "600", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "4px" }}>
+                  Status
+                </div>
+                <div>{getStatusBadge(detailKiosk)}</div>
+              </div>
+
+              {/* Last Heartbeat */}
+              <div>
+                <div style={{ fontSize: "11px", fontWeight: "600", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "4px" }}>
+                  Heartbeat Terakhir
+                </div>
+                <div style={{ fontSize: "14px" }}>
+                  {detailKiosk.last_seen_at
+                    ? new Date(detailKiosk.last_seen_at).toLocaleString("id-ID", { dateStyle: "long", timeStyle: "medium" })
+                    : "-"}
+                </div>
+              </div>
+
+              {/* Last Sync */}
+              <div>
+                <div style={{ fontSize: "11px", fontWeight: "600", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "4px" }}>
+                  Sinkronisasi Terakhir
+                </div>
+                <div style={{ fontSize: "14px" }}>
+                  {detailKiosk.last_sync_at
+                    ? new Date(detailKiosk.last_sync_at).toLocaleString("id-ID", { dateStyle: "long", timeStyle: "medium" })
+                    : "-"}
+                </div>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "24px" }}>
+              <button className="btn btn-primary" onClick={() => setDetailKiosk(null)}>
+                Tutup
+              </button>
+            </div>
           </div>
         </div>
       )}

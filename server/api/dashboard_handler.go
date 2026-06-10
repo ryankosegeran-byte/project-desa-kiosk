@@ -23,7 +23,7 @@ func (s *Server) handleGetStats(w http.ResponseWriter, r *http.Request) {
 
 	// 1. Count Warga
 	var totalWarga int
-	wargaQuery := "SELECT COUNT(*) FROM warga WHERE ($1 = '' OR desa_id = $1)"
+	wargaQuery := "SELECT COUNT(*) FROM warga WHERE ($1 = '' OR desa_id = $1::uuid)"
 	err := s.db.QueryRowContext(ctx, wargaQuery, desaID).Scan(&totalWarga)
 	if err != nil {
 		sendError(w, http.StatusInternalServerError, "Gagal menghitung data warga: "+err.Error())
@@ -32,7 +32,7 @@ func (s *Server) handleGetStats(w http.ResponseWriter, r *http.Request) {
 
 	// 2. Count Surat
 	var totalSurat int
-	suratQuery := "SELECT COUNT(*) FROM surat WHERE ($1 = '' OR desa_id = $1)"
+	suratQuery := "SELECT COUNT(*) FROM surat WHERE ($1 = '' OR desa_id = $1::uuid)"
 	err = s.db.QueryRowContext(ctx, suratQuery, desaID).Scan(&totalSurat)
 	if err != nil {
 		sendError(w, http.StatusInternalServerError, "Gagal menghitung data surat: "+err.Error())
@@ -41,7 +41,7 @@ func (s *Server) handleGetStats(w http.ResponseWriter, r *http.Request) {
 
 	// 3. Count Kiosks
 	var totalKiosks int
-	kioskQuery := "SELECT COUNT(*) FROM kiosks WHERE ($1 = '' OR desa_id = $1)"
+	kioskQuery := "SELECT COUNT(*) FROM kiosks WHERE ($1 = '' OR desa_id = $1::uuid)"
 	err = s.db.QueryRowContext(ctx, kioskQuery, desaID).Scan(&totalKiosks)
 	if err != nil {
 		sendError(w, http.StatusInternalServerError, "Gagal menghitung data kiosks: "+err.Error())
@@ -65,9 +65,9 @@ func (s *Server) handleGetStats(w http.ResponseWriter, r *http.Request) {
 	}
 
 	sendJSON(w, http.StatusOK, map[string]interface{}{
-		"total_warga":       totalWarga,
-		"total_surat":       totalSurat,
-		"total_kiosks":      totalKiosks,
+		"total_warga":        totalWarga,
+		"total_surat":        totalSurat,
+		"total_kiosks":       totalKiosks,
 		"active_jenis_surat": activeTypes,
 	})
 }

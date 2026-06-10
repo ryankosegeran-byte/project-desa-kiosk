@@ -133,7 +133,7 @@ func (r *DesaRepository) ListKiosks(ctx context.Context, desaID string) ([]model
 	query := `
 		SELECT id, desa_id, nama, api_key, last_seen_at, last_sync_at, status, ip_address, created_at
 		FROM kiosks
-		WHERE ($1 = '' OR desa_id = $1)
+		WHERE ($1 = '' OR desa_id = $1::uuid)
 		ORDER BY created_at DESC
 	`
 	rows, err := r.db.QueryContext(ctx, query, desaID)

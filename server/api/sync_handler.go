@@ -100,6 +100,8 @@ func (s *Server) handleSyncPullWarga(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Update Kiosk sync timestamps
+	_ = s.desaRepo.UpdateKioskSyncTime(ctx, kiosk.ID)
 	// Update Kiosk heartbeat status
 	_ = s.desaRepo.UpdateKioskStatus(ctx, kiosk.ID, r.RemoteAddr)
 

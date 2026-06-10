@@ -170,7 +170,7 @@ func (r *UserRepository) ListActivityLogs(ctx context.Context, desaID string, li
 	query := `
 		SELECT id, user_id, desa_id, action, entity_type, entity_id, detail, ip_address, created_at
 		FROM user_activity_log
-		WHERE ($1 = '' OR desa_id = $1)
+		WHERE ($1 = '' OR desa_id = $1::uuid)
 		ORDER BY created_at DESC
 		LIMIT $2 OFFSET $3
 	`

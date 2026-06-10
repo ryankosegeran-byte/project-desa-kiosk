@@ -64,7 +64,7 @@ func (r *WargaRepository) Search(ctx context.Context, query string, desaID strin
 		       agama, status_kawin, pekerjaan, kewarganegaraan, desa_id,
 		       created_at, updated_at
 		FROM warga
-		WHERE (nama ILIKE $1 OR NIK LIKE $1) AND ($2 = '' OR desa_id = $2)
+		WHERE (nama ILIKE $1 OR NIK LIKE $1) AND ($2 = '' OR desa_id = $2::uuid)
 		LIMIT 50
 	`
 	searchTerm := "%" + query + "%"
@@ -93,7 +93,7 @@ func (r *WargaRepository) List(ctx context.Context, desaID string) ([]models.War
 		       agama, status_kawin, pekerjaan, kewarganegaraan, desa_id,
 		       created_at, updated_at
 		FROM warga
-		WHERE desa_id = $1
+		WHERE ($1 = '' OR desa_id = $1::uuid)
 		ORDER BY nama ASC
 	`
 	rows, err := r.db.QueryContext(ctx, query, desaID)
@@ -265,7 +265,7 @@ func (r *WargaRepository) ListUpdatedSince(ctx context.Context, desaID string, s
 		       agama, status_kawin, pekerjaan, kewarganegaraan, desa_id,
 		       created_at, updated_at
 		FROM warga
-		WHERE desa_id = $1 AND updated_at > $2
+		WHERE ($1 = '' OR desa_id = $1::uuid) AND updated_at > $2
 		ORDER BY updated_at ASC
 	`
 	rows, err := r.db.QueryContext(ctx, query, desaID, since)

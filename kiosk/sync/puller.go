@@ -132,6 +132,10 @@ func (p *Puller) PullConfig(ctx context.Context) error {
 		}
 	}
 
+	// 3. Save last sync time in SQLite config
+	syncedAtStr := time.Now().Format(time.RFC3339)
+	_ = p.configRepo.Set(ctx, "last_sync_at", syncedAtStr)
+
 	log.Info().Msg("Sync pull config selesai")
 	return nil
 }

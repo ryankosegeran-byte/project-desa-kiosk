@@ -31,7 +31,7 @@ func (r *SuratRepository) Create(ctx context.Context, s *models.Surat) error {
 		wargaID = s.WargaID
 	}
 	// We will handle kioskID mapping if synced from kiosk. For direct server creations it is null.
-	
+
 	now := time.Now()
 	s.CreatedAt = now
 	s.SyncedAt = &now
@@ -64,7 +64,7 @@ func (r *SuratRepository) List(ctx context.Context, desaID string, limit, offset
 		       js.kode as jenis_surat_kode, js.nama as jenis_surat_nama
 		FROM surat s
 		JOIN jenis_surat js ON s.jenis_surat_id = js.id
-		WHERE ($1 = '' OR s.desa_id = $1)
+		WHERE ($1 = '' OR s.desa_id = $1::uuid)
 		ORDER BY s.kiosk_created_at DESC
 		LIMIT $2 OFFSET $3
 	`

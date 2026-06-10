@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { request } from "../lib/api";
+import { request, getUser } from "../lib/api";
 
 interface Desa {
   id: string;
@@ -14,6 +14,7 @@ interface Desa {
 }
 
 export default function DesaManager() {
+  const user = getUser();
   const [desas, setDesas] = useState<Desa[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -32,6 +33,25 @@ export default function DesaManager() {
   });
   const [saveLoading, setSaveLoading] = useState(false);
   const [saveError, setSaveError] = useState("");
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  const handleCopyId = async (id: string) => {
+    try {
+      await navigator.clipboard.writeText(id);
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 1500);
+    } catch {
+      // fallback
+      const ta = document.createElement("textarea");
+      ta.value = id;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 1500);
+    }
+  };
 
   useEffect(() => {
     loadDesa();
@@ -111,6 +131,7 @@ export default function DesaManager() {
         <table className="premium-table">
           <thead>
             <tr>
+              {user?.role === "superadmin" && <th>ID Desa</th>}
               <th>Kode Desa</th>
               <th>Nama Desa</th>
               <th>Kecamatan</th>
@@ -122,6 +143,39 @@ export default function DesaManager() {
           <tbody>
             {desas.map((d) => (
               <tr key={d.id}>
+                {user?.role === "superadmin" && (
+                  <td style={{ fontFamily: "monospace", fontSize: "13px", whiteSpace: "nowrap" }}>
+                    <span style={{ color: "var(--text-muted)" }}>{d.id.slice(0, 8)}...</span>
+                    <button
+                      onClick={() => handleCopyId(d.id)}
+                      title={copiedId === d.id ? "Tersalin!" : "Salin UUID"}
+                      style={{
+                        background: "none",
+                        border: "none",
+                        cursor: "pointer",
+                        padding: "2px 6px",
+                        marginLeft: "4px",
+                        borderRadius: "4px",
+                        color: copiedId === d.id ? "var(--success, #10b981)" : "var(--text-muted)",
+                        fontSize: "14px",
+                        transition: "color 0.2s",
+                        verticalAlign: "middle",
+                      }}
+                    >
+                      {copiedId === d.id ? "✓" : "📋"}
+                    </button>
+                    {copiedId === d.id && (
+                      <span style={{
+                        fontSize: "11px",
+                        color: "var(--success, #10b981)",
+                        marginLeft: "4px",
+                        verticalAlign: "middle",
+                      }}>
+                        Tersalin!
+                      </span>
+                    )}
+                  </td>
+                )}
                 <td style={{ fontWeight: "600", fontFamily: "monospace" }}>{d.kode_desa}</td>
                 <td>{d.nama}</td>
                 <td>{d.kecamatan || "-"}</td>
@@ -132,7 +186,7 @@ export default function DesaManager() {
             ))}
             {desas.length === 0 && (
               <tr>
-                <td colSpan={6} style={{ textAlign: "center", color: "var(--text-muted)", padding: "24px" }}>
+                <td colSpan={user?.role === "superadmin" ? 7 : 6} style={{ textAlign: "center", color: "var(--text-muted)", padding: "24px" }}>
                   Belum ada profil desa terdaftar
                 </td>
               </tr>
