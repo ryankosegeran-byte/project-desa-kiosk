@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { request } from "../lib/api";
+import { request, getUser } from "../lib/api";
 
 interface KTPData {
   nik: string;
@@ -19,12 +19,32 @@ interface KTPData {
   confidence: number;
 }
 
+interface Desa {
+  id: string;
+  nama: string;
+  kode_desa: string;
+  kecamatan?: string;
+  kabupaten?: string;
+}
+
 export default function WargaRegister() {
+  const user = getUser();
   const [step, setStep] = useState(1);
   const [file, setFile] = useState<File | null>(null);
   const [previewURL, setPreviewURL] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  // Desa selection modal state
+  const [showDesaModal, setShowDesaModal] = useState(true);
+  const [desaList, setDesaList] = useState<Desa[]>([]);
+  const [desaLoading, setDesaLoading] = useState(true);
+  const [selectedDesaId, setSelectedDesaId] = useState("");
+  const [selectedDesaName, setSelectedDesaName] = useState("");
+
+  // Draft link state
+  const [draftLink, setDraftLink] = useState("");
+  const [copyFeedback, setCopyFeedback] = useState("");
 
   // Extracted verified warga fields
   const [wargaData, setWargaData] = useState<KTPData>({
@@ -50,6 +70,29 @@ export default function WargaRegister() {
   const keypressBuffer = useRef<string[]>([]);
   const lastKeyTime = useRef<number>(0);
 
+  // Fetch desa list on mount
+  useEffect(() => {
+    async function fetchDesa() {
+      try {
+        if (user?.role === "pic_desa") {
+          // PIC desa: auto-select their desa (no API call needed, /api/desa is superadmin only)
+          setSelectedDesaId(user?.desa_id || "");
+          setSelectedDesaName(user?.nama || "Desa PIC");
+          setShowDesaModal(false);
+        } else {
+          // Superadmin: fetch all desa list
+          const data = await request("/api/desa");
+          setDesaList(Array.isArray(data) ? data : []);
+        }
+      } catch (err: any) {
+        setError("Gagal memuat daftar desa: " + err.message);
+      } finally {
+        setDesaLoading(false);
+      }
+    }
+    fetchDesa();
+  }, []);
+
   // Keyboard wedge listener for linking RFID card
   useEffect(() => {
     if (step !== 3) return;
@@ -74,6 +117,23 @@ export default function WargaRegister() {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [step]);
+
+  const handleDesaSelect = (desaId: string) => {
+    const desa = desaList.find((d) => d.id === desaId);
+    if (desa) {
+      setSelectedDesaId(desa.id);
+      setSelectedDesaName(desa.nama);
+      setShowDesaModal(false);
+    }
+  };
+
+  const handleDesaModalClose = () => {
+    if (!selectedDesaId) {
+      window.location.href = "/warga";
+      return;
+    }
+    setShowDesaModal(false);
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -121,7 +181,6 @@ export default function WargaRegister() {
       setStep(2);
     } catch (err: any) {
       setError(err.message || "Gagal melakukan OCR. Silakan coba kembali atau isi data secara manual.");
-      // Fallback option: allow user to skip OCR on error and fill manually
     } finally {
       setLoading(false);
     }
@@ -132,8 +191,7 @@ export default function WargaRegister() {
     setError("");
 
     try {
-      // Create warga profile
-      const newWarga = await request("/api/warga", {
+      await request("/api/warga", {
         method: "POST",
         body: JSON.stringify({
           nik: wargaData.nik,
@@ -150,11 +208,11 @@ export default function WargaRegister() {
           status_kawin: wargaData.status_kawin,
           pekerjaan: wargaData.pekerjaan,
           kewarganegaraan: wargaData.kewarganegaraan,
+          desa_id: selectedDesaId,
           rfid_uid: rfidUID || undefined,
         }),
       });
 
-      // Redirect to list
       window.location.href = "/warga";
     } catch (err: any) {
       setError(err.message || "Gagal menyimpan data warga.");
@@ -162,12 +220,170 @@ export default function WargaRegister() {
     }
   };
 
+  const handleSaveDraft = async () => {
+    setLoading(true);
+    setError("");
+
+    try {
+      const result = await request("/api/warga/draft", {
+        method: "POST",
+        body: JSON.stringify({
+          desa_id: selectedDesaId,
+          nik: wargaData.nik || undefined,
+          nama: wargaData.nama || undefined,
+          foto_ktp_path: previewURL || undefined,
+        }),
+      });
+
+      const link = `${window.location.origin}${result.url}`;
+      setDraftLink(link);
+    } catch (err: any) {
+      setError(err.message || "Gagal menyimpan draft.");
+      setLoading(false);
+    }
+  };
+
+  const handleCopyLink = async () => {
+    if (!draftLink) return;
+    try {
+      await navigator.clipboard.writeText(draftLink);
+      setCopyFeedback("Link berhasil disalin!");
+      setTimeout(() => setCopyFeedback(""), 2500);
+    } catch {
+      setCopyFeedback("Gagal menyalin, silakan copy manual");
+    }
+  };
+
   return (
     <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+      {/* ====== MODAL PEMILIHAN DESA ====== */}
+      {showDesaModal && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: "rgba(0,0,0,0.7)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 9999,
+          }}
+        >
+          <div
+            className="glass-card"
+            style={{
+              maxWidth: "480px",
+              width: "90%",
+              padding: "32px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+            }}
+          >
+            <div style={{ textAlign: "center" }}>
+              <div style={{ fontSize: "40px", marginBottom: "8px" }}>🏘️</div>
+              <h2 style={{ fontSize: "20px", fontWeight: "700" }}>Pilih Desa</h2>
+              <p style={{ color: "var(--text-muted)", fontSize: "14px", marginTop: "4px" }}>
+                Tentukan desa tempat warga ini akan didaftarkan.
+              </p>
+            </div>
+
+            {desaLoading ? (
+              <div style={{ textAlign: "center", padding: "24px" }}>
+                <div className="spinner" style={{ margin: "0 auto 12px auto" }}></div>
+                <span style={{ color: "var(--text-muted)", fontSize: "14px" }}>Memuat daftar desa...</span>
+              </div>
+            ) : (
+              <>
+                <div className="form-group">
+                  <label className="form-label">Desa / Kelurahan</label>
+                  <select
+                    className="form-control"
+                    value={selectedDesaId}
+                    onChange={(e) => setSelectedDesaId(e.target.value)}
+                    style={{ fontSize: "15px", padding: "10px 12px" }}
+                  >
+                    <option value="">-- Pilih Desa --</option>
+                    {desaList.map((d) => (
+                      <option key={d.id} value={d.id}>
+                        {d.nama} ({d.kode_desa}){d.kecamatan ? ` - ${d.kecamatan}` : ""}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div style={{ display: "flex", gap: "12px" }}>
+                  <button
+                    className="btn btn-secondary"
+                    style={{ flex: 1 }}
+                    onClick={handleDesaModalClose}
+                  >
+                    Batal
+                  </button>
+                  <button
+                    className="btn btn-primary"
+                    style={{ flex: 1 }}
+                    disabled={!selectedDesaId}
+                    onClick={() => handleDesaSelect(selectedDesaId)}
+                  >
+                    Lanjutkan
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* ====== DRAFT LINK SUCCESS BANNER ====== */}
+      {draftLink && (
+        <div
+          className="glass-card"
+          style={{
+            borderLeft: "4px solid var(--success, #22c55e)",
+            marginBottom: "24px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px",
+          }}
+        >
+          <div style={{ fontWeight: "700", color: "var(--success, #22c55e)" }}>
+            ✅ Draft berhasil disimpan!
+          </div>
+          <p style={{ fontSize: "14px", color: "var(--text-muted)", margin: 0 }}>
+            Bagikan link berikut agar warga bisa melengkapi data nanti:
+          </p>
+          <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+            <input
+              type="text"
+              readOnly
+              value={draftLink}
+              className="form-control"
+              style={{ fontFamily: "monospace", fontSize: "13px", flex: 1 }}
+              onFocus={(e) => e.target.select()}
+            />
+            <button className="btn btn-primary" style={{ padding: "8px 16px", whiteSpace: "nowrap" }} onClick={handleCopyLink}>
+              {copyFeedback || "Salin Link"}
+            </button>
+          </div>
+          <a href="/warga" className="btn btn-secondary" style={{ textAlign: "center", textDecoration: "none" }}>
+            Kembali ke Daftar Warga
+          </a>
+        </div>
+      )}
+
       <div style={{ marginBottom: "32px" }}>
         <h1 style={{ fontSize: "28px", fontWeight: "700" }}>Registrasi Warga Baru</h1>
         <p style={{ color: "var(--text-muted)", marginTop: "4px" }}>
           Pendaftaran warga baru menggunakan teknologi kecerdasan buatan (AI OCR) untuk membaca foto KTP.
+          {selectedDesaName && (
+            <span style={{ display: "inline-block", marginLeft: "8px", padding: "2px 10px", background: "var(--primary)", borderRadius: "12px", fontSize: "12px", fontWeight: "600", color: "#000" }}>
+              🏘️ {selectedDesaName}
+            </span>
+          )}
         </p>
       </div>
 
@@ -215,7 +431,7 @@ export default function WargaRegister() {
             <input type="file" accept="image/*" onChange={handleFileChange} style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, opacity: 0, cursor: "pointer" }} />
           </div>
 
-          <div style={{ display: "flex", gap: "16px" }}>
+          <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", justifyContent: "center" }}>
             <button className="btn btn-secondary" onClick={() => setStep(2)}>
               Isi Manual Saja
             </button>
@@ -405,12 +621,20 @@ export default function WargaRegister() {
             )}
           </div>
 
-          <div style={{ display: "flex", justifyContent: "space-between", width: "100%", marginTop: "20px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", width: "100%", marginTop: "20px", flexWrap: "wrap", gap: "12px" }}>
             <button className="btn btn-secondary" onClick={() => setStep(2)}>
               Kembali
             </button>
-            <div style={{ display: "flex", gap: "12px" }}>
-              <button className="btn btn-secondary" onClick={handleSaveWarga}>
+            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+              <button
+                className="btn btn-secondary"
+                onClick={handleSaveDraft}
+                disabled={loading || !!draftLink}
+                style={{ borderColor: "var(--primary)", color: "var(--primary)" }}
+              >
+                {loading ? "Menyimpan Draft..." : "📎 Simpan Draft & Ambil Link"}
+              </button>
+              <button className="btn btn-secondary" onClick={handleSaveWarga} disabled={loading}>
                 Lewati & Simpan
               </button>
               <button className="btn btn-primary" onClick={handleSaveWarga} disabled={!rfidUID || loading}>

@@ -57,13 +57,27 @@ func main() {
 	jenisSuratRepo := db.NewJenisSuratRepository(database)
 	configRepo := db.NewConfigRepository(database)
 
+	// 2.5 Deteksi perubahan desa_id — auto-cleanup data lokal
+	ctxSeed := context.Background()
+	prevDesaID, _ := configRepo.Get(ctxSeed, "desa_id")
+	if prevDesaID != "" && prevDesaID != cfg.DesaID {
+		log.Warn().
+			Str("desa_lama", prevDesaID).
+			Str("desa_baru", cfg.DesaID).
+			Msg("Terdeteksi perubahan desa_id — menghapus semua data lokal...")
+
+		if err := database.ResetLocalData(ctxSeed); err != nil {
+			log.Fatal().Err(err).Msg("Gagal mereset data lokal")
+		}
+		log.Info().Msg("Data lokal berhasil dihapus. Sync akan dimulai dari nol.")
+	}
+
 	// 3. Seed Database with initial offline demo data if empty
 	if err := db.SeedLocalData(database, cfg.DesaID); err != nil {
 		log.Fatal().Err(err).Msg("Gagal melakukan seeding database lokal")
 	}
 
 	// 4. Save metadata settings to SQLite kiosk_config
-	ctxSeed := context.Background()
 	_ = configRepo.Set(ctxSeed, "desa_id", cfg.DesaID)
 	_ = configRepo.Set(ctxSeed, "kiosk_name", cfg.KioskName)
 	if cfg.ServerURL != "" {

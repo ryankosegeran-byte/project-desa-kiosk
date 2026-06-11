@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"os"
+	"strconv"
 )
 
 // Config holds the online server configuration.
@@ -23,6 +24,16 @@ type Config struct {
 
 	// File storage
 	UploadDir string // Directory for uploaded files (KTP photos, logos)
+
+	// OCR AI Providers
+	GeminiAPIKey   string // Google Gemini API key
+	GeminiModel    string // Gemini model name (default: gemini-1.5-flash)
+	MistralAPIKey  string // Mistral AI API key
+	MistralModel   string // Mistral model name (default: pixtral-12b)
+	GroqAPIKey     string // Groq Cloud API key
+	GroqModel      string // Groq model name (default: llama-3.2-11b-vision-preview)
+	OCRStrategy    string // failover | round_robin (default: failover)
+	OCRMockEnabled bool   // enable offline mock fallback (default: true)
 }
 
 // Load reads configuration from environment variables.
@@ -35,6 +46,14 @@ func Load() (*Config, error) {
 		RefreshTokenExpiry: getEnvInt("JWT_REFRESH_EXPIRY_HR", 168),
 		AllowedOrigins:     getEnv("CORS_ORIGINS", "http://localhost:4321"),
 		UploadDir:          getEnv("UPLOAD_DIR", "uploads"),
+		GeminiAPIKey:       getEnv("GEMINI_API_KEY", ""),
+		GeminiModel:        getEnv("GEMINI_MODEL", "gemini-1.5-flash"),
+		MistralAPIKey:      getEnv("MISTRAL_API_KEY", ""),
+		MistralModel:       getEnv("MISTRAL_MODEL", "pixtral-12b"),
+		GroqAPIKey:         getEnv("GROQ_API_KEY", ""),
+		GroqModel:          getEnv("GROQ_MODEL", "llama-3.2-11b-vision-preview"),
+		OCRStrategy:        getEnv("OCR_STRATEGY", "failover"),
+		OCRMockEnabled:     getEnvBool("OCR_MOCK_ENABLED", true),
 	}
 
 	if cfg.DatabaseURL == "" {
@@ -65,4 +84,16 @@ func getEnvInt(key string, fallback int) int {
 		return fallback
 	}
 	return result
+}
+
+func getEnvBool(key string, fallback bool) bool {
+	val := os.Getenv(key)
+	if val == "" {
+		return fallback
+	}
+	b, err := strconv.ParseBool(val)
+	if err != nil {
+		return fallback
+	}
+	return b
 }

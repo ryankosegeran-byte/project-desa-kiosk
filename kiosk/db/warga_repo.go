@@ -18,45 +18,29 @@ func NewWargaRepository(db *DB) *WargaRepository {
 	return &WargaRepository{db: db}
 }
 
+const wargaSelectCols = `id, nik, rfid_uid, nama, tempat_lahir, tanggal_lahir, jenis_kelamin,
+	alamat, rt, rw, kelurahan, kecamatan, kabupaten, provinsi,
+	agama, status_kawin, pekerjaan, kewarganegaraan, desa_id,
+	foto_ktp_path, status, draft_token,
+	created_at, updated_at, synced_at`
+
 // FindByRFID looks up a resident by their RFID UID (case-insensitive).
 func (r *WargaRepository) FindByRFID(ctx context.Context, rfidUID string) (*models.Warga, error) {
-	query := `
-		SELECT id, nik, rfid_uid, nama, tempat_lahir, tanggal_lahir, jenis_kelamin,
-		       alamat, rt, rw, kelurahan, kecamatan, kabupaten, provinsi,
-		       agama, status_kawin, pekerjaan, kewarganegaraan, desa_id,
-		       created_at, updated_at, synced_at
-		FROM warga
-		WHERE LOWER(rfid_uid) = LOWER(?)
-	`
+	query := `SELECT ` + wargaSelectCols + ` FROM warga WHERE LOWER(rfid_uid) = LOWER(?)`
 	row := r.db.QueryRowContext(ctx, query, rfidUID)
 	return r.scanRow(row)
 }
 
 // FindByNIK looks up a resident by their NIK.
 func (r *WargaRepository) FindByNIK(ctx context.Context, NIK string) (*models.Warga, error) {
-	query := `
-		SELECT id, nik, rfid_uid, nama, tempat_lahir, tanggal_lahir, jenis_kelamin,
-		       alamat, rt, rw, kelurahan, kecamatan, kabupaten, provinsi,
-		       agama, status_kawin, pekerjaan, kewarganegaraan, desa_id,
-		       created_at, updated_at, synced_at
-		FROM warga
-		WHERE NIK = ?
-	`
+	query := `SELECT ` + wargaSelectCols + ` FROM warga WHERE NIK = ?`
 	row := r.db.QueryRowContext(ctx, query, NIK)
 	return r.scanRow(row)
 }
 
 // Search searches for residents by name or NIK.
 func (r *WargaRepository) Search(ctx context.Context, query string) ([]models.Warga, error) {
-	sqlQuery := `
-		SELECT id, nik, rfid_uid, nama, tempat_lahir, tanggal_lahir, jenis_kelamin,
-		       alamat, rt, rw, kelurahan, kecamatan, kabupaten, provinsi,
-		       agama, status_kawin, pekerjaan, kewarganegaraan, desa_id,
-		       created_at, updated_at, synced_at
-		FROM warga
-		WHERE nama LIKE ? OR nik LIKE ?
-		LIMIT 20
-	`
+	sqlQuery := `SELECT ` + wargaSelectCols + ` FROM warga WHERE nama LIKE ? OR nik LIKE ? LIMIT 20`
 	searchTerm := "%" + query + "%"
 	rows, err := r.db.QueryContext(ctx, sqlQuery, searchTerm, searchTerm)
 	if err != nil {
@@ -87,8 +71,9 @@ func (r *WargaRepository) Upsert(ctx context.Context, w *models.Warga) error {
 			id, nik, rfid_uid, nama, tempat_lahir, tanggal_lahir, jenis_kelamin,
 			alamat, rt, rw, kelurahan, kecamatan, kabupaten, provinsi,
 			agama, status_kawin, pekerjaan, kewarganegaraan, desa_id,
+			foto_ktp_path, status, draft_token,
 			created_at, updated_at, synced_at
-		) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+		) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 		ON CONFLICT(id) DO UPDATE SET
 			nik = excluded.nik,
 			rfid_uid = excluded.rfid_uid,
@@ -108,28 +93,9 @@ func (r *WargaRepository) Upsert(ctx context.Context, w *models.Warga) error {
 			pekerjaan = excluded.pekerjaan,
 			kewarganegaraan = excluded.kewarganegaraan,
 			desa_id = excluded.desa_id,
-			created_at = excluded.created_at,
-			updated_at = excluded.updated_at,
-			synced_at = excluded.synced_at
-		ON CONFLICT(nik) DO UPDATE SET
-			id = excluded.id,
-			rfid_uid = excluded.rfid_uid,
-			nama = excluded.nama,
-			tempat_lahir = excluded.tempat_lahir,
-			tanggal_lahir = excluded.tanggal_lahir,
-			jenis_kelamin = excluded.jenis_kelamin,
-			alamat = excluded.alamat,
-			rt = excluded.rt,
-			rw = excluded.rw,
-			kelurahan = excluded.kelurahan,
-			kecamatan = excluded.kecamatan,
-			kabupaten = excluded.kabupaten,
-			provinsi = excluded.provinsi,
-			agama = excluded.agama,
-			status_kawin = excluded.status_kawin,
-			pekerjaan = excluded.pekerjaan,
-			kewarganegaraan = excluded.kewarganegaraan,
-			desa_id = excluded.desa_id,
+			foto_ktp_path = excluded.foto_ktp_path,
+			status = excluded.status,
+			draft_token = excluded.draft_token,
 			created_at = excluded.created_at,
 			updated_at = excluded.updated_at,
 			synced_at = excluded.synced_at
@@ -148,10 +114,26 @@ func (r *WargaRepository) Upsert(ctx context.Context, w *models.Warga) error {
 		syncedAt = now
 	}
 
+	var fotoKTP interface{}
+	if w.FotoKTPPath != "" {
+		fotoKTP = w.FotoKTPPath
+	}
+
+	var status interface{}
+	if w.Status != "" {
+		status = w.Status
+	}
+
+	var draftToken interface{}
+	if w.DraftToken != "" {
+		draftToken = w.DraftToken
+	}
+
 	_, err := r.db.ExecContext(ctx, query,
 		w.ID, w.NIK, rfid, w.Nama, w.TempatLahir, w.TanggalLahir, w.JenisKelamin,
 		w.Alamat, w.RT, w.RW, w.Kelurahan, w.Kecamatan, w.Kabupaten, w.Provinsi,
 		w.Agama, w.StatusKawin, w.Pekerjaan, w.Kewarganegaraan, w.DesaID,
+		fotoKTP, status, draftToken,
 		w.CreatedAt, w.UpdatedAt, syncedAt,
 	)
 	if err != nil {
@@ -164,7 +146,7 @@ func (r *WargaRepository) Upsert(ctx context.Context, w *models.Warga) error {
 // Helpers for scanning row
 func (r *WargaRepository) scanRow(row *sql.Row) (*models.Warga, error) {
 	var w models.Warga
-	var rfid sql.NullString
+	var rfid, fotoKTP, draftToken sql.NullString
 	var createdAt, updatedAt time.Time
 	var syncedAt sql.NullTime
 
@@ -172,6 +154,7 @@ func (r *WargaRepository) scanRow(row *sql.Row) (*models.Warga, error) {
 		&w.ID, &w.NIK, &rfid, &w.Nama, &w.TempatLahir, &w.TanggalLahir, &w.JenisKelamin,
 		&w.Alamat, &w.RT, &w.RW, &w.Kelurahan, &w.Kecamatan, &w.Kabupaten, &w.Provinsi,
 		&w.Agama, &w.StatusKawin, &w.Pekerjaan, &w.Kewarganegaraan, &w.DesaID,
+		&fotoKTP, &w.Status, &draftToken,
 		&createdAt, &updatedAt, &syncedAt,
 	)
 
@@ -183,6 +166,8 @@ func (r *WargaRepository) scanRow(row *sql.Row) (*models.Warga, error) {
 	}
 
 	w.RFIDUID = rfid.String
+	w.FotoKTPPath = fotoKTP.String
+	w.DraftToken = draftToken.String
 	w.CreatedAt = createdAt
 	w.UpdatedAt = updatedAt
 	if syncedAt.Valid {
@@ -194,7 +179,7 @@ func (r *WargaRepository) scanRow(row *sql.Row) (*models.Warga, error) {
 
 func (r *WargaRepository) scanRows(rows *sql.Rows) (*models.Warga, error) {
 	var w models.Warga
-	var rfid sql.NullString
+	var rfid, fotoKTP, draftToken sql.NullString
 	var createdAt, updatedAt time.Time
 	var syncedAt sql.NullTime
 
@@ -202,6 +187,7 @@ func (r *WargaRepository) scanRows(rows *sql.Rows) (*models.Warga, error) {
 		&w.ID, &w.NIK, &rfid, &w.Nama, &w.TempatLahir, &w.TanggalLahir, &w.JenisKelamin,
 		&w.Alamat, &w.RT, &w.RW, &w.Kelurahan, &w.Kecamatan, &w.Kabupaten, &w.Provinsi,
 		&w.Agama, &w.StatusKawin, &w.Pekerjaan, &w.Kewarganegaraan, &w.DesaID,
+		&fotoKTP, &w.Status, &draftToken,
 		&createdAt, &updatedAt, &syncedAt,
 	)
 
@@ -210,6 +196,8 @@ func (r *WargaRepository) scanRows(rows *sql.Rows) (*models.Warga, error) {
 	}
 
 	w.RFIDUID = rfid.String
+	w.FotoKTPPath = fotoKTP.String
+	w.DraftToken = draftToken.String
 	w.CreatedAt = createdAt
 	w.UpdatedAt = updatedAt
 	if syncedAt.Valid {

@@ -12,8 +12,8 @@ import (
 	"github.com/project-desa-kiosk/internal/models"
 	"github.com/project-desa-kiosk/server/config"
 	"github.com/project-desa-kiosk/server/db"
-	"github.com/project-desa-kiosk/server/ocr"
 	serverMiddleware "github.com/project-desa-kiosk/server/middleware"
+	"github.com/project-desa-kiosk/server/ocr"
 )
 
 // Server represents the online hub API server.
@@ -94,10 +94,17 @@ func (s *Server) Handler() http.Handler {
 			r.Post("/", s.handleCreateWarga)
 			r.Put("/{id}", s.handleUpdateWarga)
 			r.Put("/{id}/rfid", s.handleLinkRFID)
+
+			// Draft endpoints
+			r.Post("/draft", s.handleCreateDraft)
+			r.Get("/draft/{token}", s.handleGetDraft)
+			r.Put("/draft/{token}/complete", s.handleCompleteDraft)
 		})
 
 		// OCR triggers
 		r.Post("/api/ocr/ktp", s.handleOCRExtract)
+		r.Get("/api/ocr/status", s.handleOCRStatus)
+		r.Post("/api/ocr/test", s.handleOCRTest)
 
 		// Synced letters logs
 		r.Route("/api/surat", func(r chi.Router) {

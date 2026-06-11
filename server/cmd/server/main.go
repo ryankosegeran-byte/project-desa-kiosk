@@ -61,18 +61,17 @@ func main() {
 	refreshExpiry := time.Duration(cfg.RefreshTokenExpiry) * time.Hour
 	jwtManager := auth.NewJWTManager(cfg.JWTSecret, accessExpiry, refreshExpiry)
 
-	// 5. Initialize AI OCR Service
-	var ocrProviders []ocr.OCRProvider
-	if key := os.Getenv("GEMINI_API_KEY"); key != "" {
-		ocrProviders = append(ocrProviders, ocr.NewGeminiProvider(key, os.Getenv("GEMINI_MODEL")))
+	// 5. Initialize AI OCR Service — all providers are always registered;
+	//    unconfigured providers (empty API key) are skipped during failover.
+	ocrProviders := []ocr.OCRProvider{
+		ocr.NewGeminiProvider(cfg.GeminiAPIKey, cfg.GeminiModel),
+		ocr.NewMistralProvider(cfg.MistralAPIKey, cfg.MistralModel),
+		ocr.NewGroqProvider(cfg.GroqAPIKey, cfg.GroqModel),
 	}
-	if key := os.Getenv("MISTRAL_API_KEY"); key != "" {
-		ocrProviders = append(ocrProviders, ocr.NewMistralProvider(key, os.Getenv("MISTRAL_MODEL")))
+	if cfg.OCRMockEnabled {
+		ocrProviders = append(ocrProviders, &ocr.MockProvider{})
 	}
-	if key := os.Getenv("GROQ_API_KEY"); key != "" {
-		ocrProviders = append(ocrProviders, ocr.NewGroqProvider(key, os.Getenv("GROQ_MODEL")))
-	}
-	ocrService := ocr.NewService(ocrProviders, "failover")
+	ocrService := ocr.NewService(ocrProviders, cfg.OCRStrategy)
 
 	// 6. Initialize API server
 	apiServer := api.NewServer(

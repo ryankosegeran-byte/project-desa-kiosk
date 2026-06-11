@@ -6,13 +6,13 @@ Offline-first distributed system untuk pelayanan administrasi desa. Warga datang
 
 ```
 Cloud (Online)                      Kiosk (Per Desa)
-┌──────────────────┐               ┌──────────────────┐
-│ Cloudflare Pages │               │ Go Local API     │
-│ (Dashboard)      │               │ SQLite           │
+┌──────────────────┐                ┌──────────────────┐
+│ Cloudflare Pages │                │ Go Local API     │
+│ (Dashboard)      │                │ SQLite           │
 │                  │◄─── sync ────►│ RFID Reader      │
-│ Go + Chi Backend │               │ Chrome Kiosk     │
-│ PostgreSQL       │               │ Printer A4       │
-└──────────────────┘               └──────────────────┘
+│ Go + Chi Backend │                │ Chrome Kiosk     │
+│ PostgreSQL       │                │ Printer A4       │
+└──────────────────┘                └──────────────────┘
 ```
 
 ## Tech Stack

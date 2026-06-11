@@ -26,5 +26,7 @@ type KTPData struct {
 // OCRProvider represents an interface for AI OCR services.
 type OCRProvider interface {
 	Name() string
+	Model() string
+	IsConfigured() bool
 	ExtractKTP(ctx context.Context, imageData []byte) (*KTPData, error)
 }

@@ -22,7 +22,9 @@ func NewMistralProvider(apiKey, modelName string) *MistralProvider {
 	return &MistralProvider{APIKey: apiKey, ModelName: modelName}
 }
 
-func (p *MistralProvider) Name() string { return "mistral" }
+func (p *MistralProvider) Name() string       { return "mistral" }
+func (p *MistralProvider) Model() string      { return p.ModelName }
+func (p *MistralProvider) IsConfigured() bool { return p.APIKey != "" }
 
 // API Request/Response Types
 type mistralImageURL struct {

@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/url"
 	"time"
 
 	"github.com/rs/zerolog/log"
@@ -39,14 +40,15 @@ func NewPuller(
 
 // PullWarga fetches new/updated residents from the server hub.
 func (p *Puller) PullWarga(ctx context.Context) error {
-	// 1. Get last sync timestamp
-	lastSyncStr, err := p.configRepo.Get(ctx, "last_sync_at")
+	// 1. Get last sync timestamp (separate key per entity type)
+	lastSyncStr, err := p.configRepo.Get(ctx, "last_sync_at_warga")
 	if err != nil {
 		lastSyncStr = ""
 	}
 
-	url := fmt.Sprintf("%s/api/sync/pull/warga?last_sync=%s", p.cfg.ServerURL, lastSyncStr)
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	// URL-encode the last_sync parameter to handle + in timezone offsets
+	syncURL := fmt.Sprintf("%s/api/sync/pull/warga?last_sync=%s", p.cfg.ServerURL, url.QueryEscape(lastSyncStr))
+	req, err := http.NewRequestWithContext(ctx, "GET", syncURL, nil)
 	if err != nil {
 		return fmt.Errorf("failed to create pull warga request: %w", err)
 	}
@@ -80,9 +82,9 @@ func (p *Puller) PullWarga(ctx context.Context) error {
 		}
 	}
 
-	// 3. Save last sync time in SQLite config
+	// 3. Save last sync time for warga
 	syncedAtStr := response.SyncedAt.Format(time.RFC3339)
-	_ = p.configRepo.Set(ctx, "last_sync_at", syncedAtStr)
+	_ = p.configRepo.Set(ctx, "last_sync_at_warga", syncedAtStr)
 
 	log.Info().Msg("Sync pull warga selesai")
 	return nil
@@ -132,9 +134,9 @@ func (p *Puller) PullConfig(ctx context.Context) error {
 		}
 	}
 
-	// 3. Save last sync time in SQLite config
+	// 3. Save last sync time for config
 	syncedAtStr := time.Now().Format(time.RFC3339)
-	_ = p.configRepo.Set(ctx, "last_sync_at", syncedAtStr)
+	_ = p.configRepo.Set(ctx, "last_sync_at_config", syncedAtStr)
 
 	log.Info().Msg("Sync pull config selesai")
 	return nil

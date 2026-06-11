@@ -22,7 +22,9 @@ func NewGroqProvider(apiKey, modelName string) *GroqProvider {
 	return &GroqProvider{APIKey: apiKey, ModelName: modelName}
 }
 
-func (p *GroqProvider) Name() string { return "groq" }
+func (p *GroqProvider) Name() string       { return "groq" }
+func (p *GroqProvider) Model() string      { return p.ModelName }
+func (p *GroqProvider) IsConfigured() bool { return p.APIKey != "" }
 
 // API Request/Response Types
 type groqImageURL struct {

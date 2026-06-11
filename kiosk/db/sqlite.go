@@ -1,11 +1,13 @@
 package db
 
 import (
+	"context"
 	"database/sql"
 	"embed"
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 
 	_ "modernc.org/sqlite"
 
@@ -78,9 +80,37 @@ func (db *DB) runMigrations() error {
 
 		_, err = db.Exec(string(content))
 		if err != nil {
+			// SQLite doesn't support IF NOT EXISTS for ALTER TABLE ADD COLUMN.
+			// Skip "duplicate column" errors so re-running migrations is safe.
+			if isDuplicateColumnErr(err) {
+				log.Warn().Str("file", file.Name()).Msg("Migrasi dilewati: kolom sudah ada")
+				continue
+			}
 			return fmt.Errorf("gagal eksekusi migrasi %s: %w", file.Name(), err)
 		}
 	}
 
+	return nil
+}
+
+// isDuplicateColumnErr checks if the error is a SQLite "duplicate column name" error.
+func isDuplicateColumnErr(err error) bool {
+	return err != nil && strings.Contains(err.Error(), "duplicate column name")
+}
+
+// ResetLocalData menghapus seluruh data lokal dan mereset timestamp sync.
+// Dipanggil ketika desa_id berubah agar kiosk mulai dari nol untuk desa baru.
+func (db *DB) ResetLocalData(ctx context.Context) error {
+	tables := []string{"warga", "jenis_surat", "surat_template", "surat", "sync_queue", "activity_log"}
+	for _, t := range tables {
+		if _, err := db.ExecContext(ctx, "DELETE FROM "+t); err != nil {
+			return fmt.Errorf("gagal hapus tabel %s: %w", t, err)
+		}
+	}
+	// Hapus timestamp sync dari kiosk_config
+	syncKeys := []string{"last_sync_at_warga", "last_sync_at_config"}
+	for _, key := range syncKeys {
+		db.ExecContext(ctx, "DELETE FROM kiosk_config WHERE key = ?", key)
+	}
 	return nil
 }

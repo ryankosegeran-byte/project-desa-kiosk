@@ -1,6 +1,20 @@
 import React, { useEffect, useState, useRef } from "react";
 import { request } from "../lib/api";
-import type { Warga } from "../../../kiosk/lib/types";
+
+interface Warga {
+  id: string;
+  nik: string;
+  nama: string;
+  tempat_lahir?: string;
+  tanggal_lahir?: string;
+  jenis_kelamin?: string;
+  alamat?: string;
+  rt?: string;
+  rw?: string;
+  rfid_uid?: string;
+  status?: string;
+  draft_token?: string;
+}
 
 export default function WargaList() {
   const [warga, setWarga] = useState<Warga[]>([]);
@@ -82,8 +96,8 @@ export default function WargaList() {
   };
 
   const filteredWarga = warga.filter((w) =>
-    w.nama.toLowerCase().includes(search.toLowerCase()) ||
-    w.nik.includes(search)
+    (w.nama || "").toLowerCase().includes(search.toLowerCase()) ||
+    (w.nik || "").includes(search)
   );
 
   if (loading) {
@@ -136,18 +150,19 @@ export default function WargaList() {
               <th>Jenis Kelamin</th>
               <th>Alamat Lengkap</th>
               <th>Kartu RFID / KTP</th>
+              <th>Status</th>
               <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
             {filteredWarga.map((w) => (
-              <tr key={w.id}>
-                <td style={{ fontWeight: "600" }}>{w.nik}</td>
-                <td>{w.nama}</td>
+              <tr key={w.id} style={w.status === "draft" ? { opacity: 0.75 } : {}}>
+                <td style={{ fontWeight: "600" }}>{w.nik || <em style={{ color: "var(--text-muted)" }}>belum diisi</em>}</td>
+                <td>{w.nama || <em style={{ color: "var(--text-muted)" }}>belum diisi</em>}</td>
                 <td>{w.tempat_lahir}, {w.tanggal_lahir}</td>
-                <td>{w.jenis_kelamin === "L" ? "Laki-laki" : "Perempuan"}</td>
+                <td>{w.jenis_kelamin === "L" ? "Laki-laki" : w.jenis_kelamin === "P" ? "Perempuan" : "-"}</td>
                 <td style={{ maxWidth: "250px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                  {w.alamat} RT {w.rt} / RW {w.rw}
+                  {w.alamat} {w.rt ? `RT ${w.rt}` : ""} {w.rw ? `/ RW ${w.rw}` : ""}
                 </td>
                 <td>
                   {w.rfid_uid ? (
@@ -157,15 +172,28 @@ export default function WargaList() {
                   )}
                 </td>
                 <td>
-                  <button className="btn btn-secondary" style={{ padding: "6px 12px", fontSize: "13px" }} onClick={() => setLinkingWarga(w)}>
-                    💳 Tautkan Kartu
-                  </button>
+                  {w.status === "draft" ? (
+                    <span style={{ display: "inline-block", padding: "3px 10px", background: "rgba(251,191,36,0.15)", color: "#fbbf24", borderRadius: "12px", fontSize: "12px", fontWeight: "600" }}>Draft</span>
+                  ) : (
+                    <span style={{ display: "inline-block", padding: "3px 10px", background: "rgba(34,197,94,0.15)", color: "#22c55e", borderRadius: "12px", fontSize: "12px", fontWeight: "600" }}>Lengkap</span>
+                  )}
+                </td>
+                <td>
+                  {w.status === "draft" && w.draft_token ? (
+                    <a href={`/warga/draft?token=${w.draft_token}`} className="btn btn-primary" style={{ padding: "6px 12px", fontSize: "13px", textDecoration: "none" }}>
+                      ✏️ Lanjutkan
+                    </a>
+                  ) : (
+                    <button className="btn btn-secondary" style={{ padding: "6px 12px", fontSize: "13px" }} onClick={() => setLinkingWarga(w)}>
+                      💳 Tautkan Kartu
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}
             {filteredWarga.length === 0 && (
               <tr>
-                <td colSpan={7} style={{ textAlign: "center", color: "var(--text-muted)", padding: "24px" }}>
+                <td colSpan={8} style={{ textAlign: "center", color: "var(--text-muted)", padding: "24px" }}>
                   Warga tidak ditemukan
                 </td>
               </tr>

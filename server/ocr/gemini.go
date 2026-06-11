@@ -22,7 +22,9 @@ func NewGeminiProvider(apiKey, modelName string) *GeminiProvider {
 	return &GeminiProvider{APIKey: apiKey, ModelName: modelName}
 }
 
-func (p *GeminiProvider) Name() string { return "gemini" }
+func (p *GeminiProvider) Name() string       { return "gemini" }
+func (p *GeminiProvider) Model() string      { return p.ModelName }
+func (p *GeminiProvider) IsConfigured() bool { return p.APIKey != "" }
 
 // API Request/Response Types
 type geminiInlineData struct {
