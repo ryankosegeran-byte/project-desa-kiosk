@@ -3,6 +3,7 @@ package db
 import (
 	"context"
 	"encoding/json"
+	"os"
 	"time"
 
 	"github.com/google/uuid"
@@ -116,7 +117,7 @@ func SeedLocalData(db *DB, desaID string) error {
 				Kode:      "SK_USAHA",
 				Nama:      "Surat Keterangan Usaha",
 				Deskripsi: "Surat keterangan kepemilikan usaha warga",
-				Schema:    `{"fields":[{"key":"nama_usaha","label":"Nama Usaha","type":"text","required":true},{"key":"jenis_usaha","label":"Jenis Usaha","type":"text","required":true},{"key":"alamat_usaha","label":"Alamat Usaha","type":"textarea","required":true}]}`,
+				Schema:    `{"fields":[{"key":"jenis_usaha","label":"Jenis Usaha","type":"select_or_input","required":true,"options":["Perdagangan","Jasa","Pertanian","Peternakan","Perikanan","Industri Kecil","Kerajinan","Bengkel","Warung / Toko","Rumah Makan"],"placeholder":"Pilih atau ketik jenis usaha"},{"key":"merk_usaha","label":"Merk / Nama Usaha","type":"text","required":true,"placeholder":"Contoh: Toko Maju Jaya"},{"key":"tahun_mulai_usaha","label":"Usaha Dimulai Sejak Tahun","type":"number","required":true,"placeholder":"Contoh: 2020"},{"key":"alamat_usaha","label":"Alamat Tempat Usaha","type":"address","required":true,"placeholder":"Klik peta atau ketik alamat"},{"key":"batas_utara","label":"Batas Utara","type":"text","required":false,"placeholder":"Berbatasan dengan..."},{"key":"batas_selatan","label":"Batas Selatan","type":"text","required":false,"placeholder":"Berbatasan dengan..."},{"key":"batas_timur","label":"Batas Timur","type":"text","required":false,"placeholder":"Berbatasan dengan..."},{"key":"batas_barat","label":"Batas Barat","type":"text","required":false,"placeholder":"Berbatasan dengan..."},{"key":"sifat_tempat_usaha","label":"Sifat Tempat Usaha","type":"select","required":true,"options":["Permanen","Sementara","Pinjam"]},{"key":"tahun_kewajiban","label":"Tahun Pelunasan Kewajiban (PBB dll)","type":"number","required":true,"placeholder":"Otomatis tahun berjalan"}]}`,
 			},
 			{
 				Kode:      "SK_KELAHIRAN",
@@ -193,11 +194,7 @@ func SeedLocalData(db *DB, desaID string) error {
 
 			// Add a simple default template for each jenis_surat
 			tID := uuid.New().String()
-			tpl := &models.SuratTemplate{
-				ID:           tID,
-				JenisSuratID: jsID,
-				DesaID:       desaID,
-				TemplateHTML: `<html>
+			templateHTML := `<html>
 <head>
     <style>
         body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
@@ -251,9 +248,23 @@ func SeedLocalData(db *DB, desaID string) error {
         <p>NIP. 19750812 200312 1 002</p>
     </div>
 </body>
-</html>`,
-				Version:   1,
-				UpdatedAt: time.Now(),
+</html>`
+
+			if js.Kode == "SK_USAHA" {
+				if content, err := os.ReadFile("kiosk/templates/sku.html"); err == nil {
+					templateHTML = string(content)
+				} else if content, err := os.ReadFile("templates/sku.html"); err == nil {
+					templateHTML = string(content)
+				}
+			}
+
+			tpl := &models.SuratTemplate{
+				ID:           tID,
+				JenisSuratID: jsID,
+				DesaID:       desaID,
+				TemplateHTML: templateHTML,
+				Version:      1,
+				UpdatedAt:    time.Now(),
 			}
 
 			if err := jsRepo.UpsertTemplate(ctx, tpl); err != nil {
@@ -263,6 +274,26 @@ func SeedLocalData(db *DB, desaID string) error {
 
 		log.Info().Msg("Seeding jenis_surat selesai.")
 	}
+
+	// 3. Seed nomor_surat_batch for each jenis_surat
+	nomorRepo := NewNomorSuratRepository(db)
+	jsRepo2 := NewJenisSuratRepository(db)
+	allJS, _ := jsRepo2.ListAktif(ctx)
+	for _, js := range allJS {
+		_ = nomorRepo.UpdateBatch(ctx, models.NomorSuratBatch{
+			JenisSuratID:  js.ID,
+			NomorTerakhir: 0,
+			BatasAtas:     100,
+			FormatNomor:   "{nomor}/{kode_surat}/{kode_desa}/{bulan_romawi}/{tahun}",
+		})
+	}
+	log.Info().Msg("Seeding nomor_surat_batch selesai.")
+
+	// 4. Seed default desa config
+	configRepo := NewConfigRepository(db)
+	_ = configRepo.Set(ctx, "desa_kepala_desa", "ALFRIDA, A.Md.Kes")
+	_ = configRepo.Set(ctx, "desa_nip", "196902061993032004")
+	_ = configRepo.Set(ctx, "kode_desa", "08.10")
 
 	return nil
 }

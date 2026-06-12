@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -179,6 +180,26 @@ func (s *Server) handlePrintSurat(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// [Offline-First] Generate and assign Nomor Surat
+	nomorInt, err := s.nomorSuratRepo.GetNextNumber(ctx, surat.JenisSuratID)
+	if err != nil {
+		sendError(w, http.StatusPreconditionFailed, err.Error())
+		return
+	}
+
+	// Format nomor surat menggunakan pattern dari config
+	kodeDesa, _ := s.configRepo.Get(ctx, "kode_desa")
+	nomorStr, err := s.nomorSuratRepo.FormatNomorSurat(ctx, surat.JenisSuratID, nomorInt, surat.JenisSuratKode, kodeDesa)
+	if err != nil {
+		nomorStr = fmt.Sprintf("%d", nomorInt) // fallback ke plain number
+	}
+
+	if err := s.suratRepo.UpdateNomorSurat(ctx, id, nomorStr); err != nil {
+		sendError(w, http.StatusInternalServerError, "Gagal update nomor surat: "+err.Error())
+		return
+	}
+	surat.NomorSurat = nomorStr
+
 	// 2. Fetch HTML template for this jenis_surat
 	tplObj, err := s.jenisSuratRepo.GetTemplate(ctx, surat.JenisSuratID, s.cfg.DesaID)
 	if err != nil {
@@ -218,7 +239,11 @@ func (s *Server) handlePrintSurat(w http.ResponseWriter, r *http.Request) {
 	dateToday := print.FormatIndonesianDate(time.Now())
 
 	// 6. Generate PDF via chromedp
-	pdfPath, err := s.pdfGen.GeneratePDF(ctx, tplObj.TemplateHTML, warga, dataSurat, dateToday)
+	// Ambil info desa untuk template
+	desaKepalaDesa, _ := s.configRepo.Get(ctx, "desa_kepala_desa")
+	desaNIP, _ := s.configRepo.Get(ctx, "desa_nip")
+
+	pdfPath, err := s.pdfGen.GeneratePDF(ctx, tplObj.TemplateHTML, warga, dataSurat, dateToday, surat.NomorSurat, desaKepalaDesa, desaNIP)
 	if err != nil {
 		sendError(w, http.StatusInternalServerError, "Gagal generate PDF: "+err.Error())
 		return
@@ -265,4 +290,22 @@ func (s *Server) handleGetTemplate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	sendJSON(w, http.StatusOK, template)
+}
+
+// handleNomorSuratStatus returns all batch statuses.
+func (s *Server) handleNomorSuratStatus(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	batches, err := s.nomorSuratRepo.ListAllBatches(ctx)
+	if err != nil {
+		sendError(w, http.StatusInternalServerError, "Gagal mengambil status nomor surat: "+err.Error())
+		return
+	}
+
+	if len(batches) == 0 {
+		sendJSON(w, http.StatusOK, []interface{}{})
+		return
+	}
+
+	sendJSON(w, http.StatusOK, batches)
 }

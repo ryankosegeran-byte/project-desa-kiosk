@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: 'Times New Roman', serif; margin: 40px 50px; line-height: 1.6; font-size: 12pt; color: #000; }
+    .header { text-align: center; border-bottom: 3px double #000; padding-bottom: 12px; margin-bottom: 20px; }
+    .header h2 { margin: 0; font-size: 14pt; text-transform: uppercase; letter-spacing: 1px; }
+    .header h3 { margin: 4px 0; font-size: 12pt; text-transform: uppercase; }
+    .title { text-align: center; font-weight: bold; text-decoration: underline; text-transform: uppercase; font-size: 14pt; margin: 24px 0 4px; }
+    .nomor { text-align: center; margin-bottom: 20px; font-size: 12pt; }
+    .content { margin-bottom: 20px; text-align: justify; }
+    .data-table { margin: 16px 0 16px 20px; border-collapse: collapse; }
+    .data-table td { padding: 2px 8px 2px 0; vertical-align: top; }
+    .data-table td:first-child { width: 180px; }
+    .usaha-table { margin: 12px 0 12px 20px; border-collapse: collapse; }
+    .usaha-table td { padding: 3px 8px 3px 0; vertical-align: top; }
+    .batas-table { margin: 4px 0 4px 40px; border-collapse: collapse; }
+    .batas-table td { padding: 1px 8px; }
+    .footer { float: right; text-align: center; margin-top: 40px; width: 280px; }
+    .footer .name { margin-top: 70px; text-decoration: underline; font-weight: bold; }
+    .footer .nip { font-size: 10pt; }
+    p { margin: 6px 0; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h2>HUKUM TUA {{.Warga.Kelurahan}}</h2>
+    <h3>KECAMATAN {{.Warga.Kecamatan}}</h3>
+    <h3>KABUPATEN {{.Warga.Kabupaten}}</h3>
+  </div>
+
+  <div class="title">SURAT KETERANGAN USAHA</div>
+  <div class="nomor">Nomor: {{.NomorSurat}}</div>
+
+  <div class="content">
+    <p>Yang bertanda tangan dibawah ini HUKUM TUA Desa {{.Warga.Kelurahan}} Kecamatan {{.Warga.Kecamatan}} Kabupaten {{.Warga.Kabupaten}}, menerangkan bahwa :</p>
+
+    <table class="data-table">
+      <tr><td>Nama Lengkap</td><td>: <strong>{{.Warga.Nama}}</strong></td></tr>
+      <tr><td>NIK</td><td>: {{.Warga.NIK}}</td></tr>
+      <tr><td>Tempat/Tanggal Lahir</td><td>: {{.Warga.TempatLahir}}, {{.Warga.TanggalLahir}}</td></tr>
+      <tr><td>Jenis Kelamin</td><td>: {{if eq .Warga.JenisKelamin "L"}}Laki-laki{{else}}Perempuan{{end}}</td></tr>
+      <tr><td>Agama</td><td>: {{.Warga.Agama}}</td></tr>
+      <tr><td>Status</td><td>: {{.Warga.StatusKawin}}</td></tr>
+      <tr><td>Alamat</td><td>: {{.Warga.Alamat}}, Desa {{.Warga.Kelurahan}} Kecamatan {{.Warga.Kecamatan}}</td></tr>
+    </table>
+
+    <p>Bahwa yang bersangkutan adalah masyarakat Desa {{.Warga.Kelurahan}} Kecamatan {{.Warga.Kecamatan}},</p>
+
+    <p>Bahwa yang bersangkutan tidak pernah tersangkut suatu urusan perkara di desa,</p>
+
+    <p>Bahwa yang bersangkutan telah melunasi semua kewajibannya sebagai warga masyarakat Desa {{.Warga.Kelurahan}} seperti: PBB, uang sampah, dan lain sebagainya untuk tahun {{index .DataSurat "tahun_kewajiban"}},</p>
+
+    <p>Bahwa usaha yang bersangkutan dimulai sejak Tahun {{index .DataSurat "tahun_mulai_usaha"}}</p>
+
+    <p>Bahwa yang bersangkutan <strong>"mempunyai usaha"</strong> :</p>
+
+    <table class="usaha-table">
+      <tr><td>1. Jenis Usaha</td><td>: {{index .DataSurat "jenis_usaha"}}</td></tr>
+      <tr><td>2. Merk/Nama Usaha</td><td>: " {{index .DataSurat "merk_usaha"}} "</td></tr>
+      <tr><td>3. Alamat tempat usaha</td><td>: {{index .DataSurat "alamat_usaha"}}</td></tr>
+      <tr>
+        <td>4. Batas-batas Tempat Usaha</td>
+        <td>
+          <table class="batas-table">
+            <tr><td>Utara</td><td>: {{index .DataSurat "batas_utara"}}</td></tr>
+            <tr><td>Selatan</td><td>: {{index .DataSurat "batas_selatan"}}</td></tr>
+            <tr><td>Timur</td><td>: {{index .DataSurat "batas_timur"}}</td></tr>
+            <tr><td>Barat</td><td>: {{index .DataSurat "batas_barat"}}</td></tr>
+          </table>
+        </td>
+      </tr>
+      <tr><td>5. Sifat Tempat Usaha</td><td>: {{index .DataSurat "sifat_tempat_usaha"}}</td></tr>
+    </table>
+
+    <p>Demikian Surat Keterangan Mempunyai Usaha ini dibuat dengan benar dan dipergunakan sebagaimana mestinya.</p>
+  </div>
+
+  <div class="footer">
+    {{.Warga.Kelurahan}}, {{.DateToday}}
+    <br>Pj. HUKUM TUA
+    <div class="name">{{.DesaKepalaDesa}}</div>
+    <div class="nip">{{.DesaNIP}}</div>
+  </div>
+</body>
+</html>

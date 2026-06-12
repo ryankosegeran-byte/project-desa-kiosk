@@ -260,14 +260,13 @@ func (r *WargaRepository) LinkRFID(ctx context.Context, id string, rfidUID strin
 
 func (r *WargaRepository) scanRow(row *sql.Row) (*models.Warga, error) {
 	var w models.Warga
-	var rfid, fotoKTP, draftToken sql.NullString
-	var tglLahir string
+	var nik, rfid, nama, tempatLahir, tglLahir, jenisKelamin, alamat, rt, rw, kelurahan, kecamatan, kabupaten, provinsi, agama, statusKawin, pekerjaan, kewarganegaraan, fotoKTP, status, draftToken sql.NullString
 
 	err := row.Scan(
-		&w.ID, &w.NIK, &rfid, &w.Nama, &w.TempatLahir, &tglLahir, &w.JenisKelamin,
-		&w.Alamat, &w.RT, &w.RW, &w.Kelurahan, &w.Kecamatan, &w.Kabupaten, &w.Provinsi,
-		&w.Agama, &w.StatusKawin, &w.Pekerjaan, &w.Kewarganegaraan, &w.DesaID,
-		&fotoKTP, &w.Status, &draftToken,
+		&w.ID, &nik, &rfid, &nama, &tempatLahir, &tglLahir, &jenisKelamin,
+		&alamat, &rt, &rw, &kelurahan, &kecamatan, &kabupaten, &provinsi,
+		&agama, &statusKawin, &pekerjaan, &kewarganegaraan, &w.DesaID,
+		&fotoKTP, &status, &draftToken,
 		&w.CreatedAt, &w.UpdatedAt,
 	)
 	if err != nil {
@@ -277,15 +276,33 @@ func (r *WargaRepository) scanRow(row *sql.Row) (*models.Warga, error) {
 		return nil, fmt.Errorf("gagal scan warga row server: %w", err)
 	}
 
+	w.NIK = nik.String
 	w.RFIDUID = rfid.String
+	w.Nama = nama.String
+	w.TempatLahir = tempatLahir.String
+	w.JenisKelamin = jenisKelamin.String
+	w.Alamat = alamat.String
+	w.RT = rt.String
+	w.RW = rw.String
+	w.Kelurahan = kelurahan.String
+	w.Kecamatan = kecamatan.String
+	w.Kabupaten = kabupaten.String
+	w.Provinsi = provinsi.String
+	w.Agama = agama.String
+	w.StatusKawin = statusKawin.String
+	w.Pekerjaan = pekerjaan.String
+	w.Kewarganegaraan = kewarganegaraan.String
 	w.FotoKTPPath = fotoKTP.String
+	w.Status = status.String
 	w.DraftToken = draftToken.String
+
 	// Parse date layout: format date string from postgres
-	if len(tglLahir) >= 10 {
-		if parsedTime, err := time.Parse("2006-01-02", tglLahir[:10]); err == nil {
+	dateStr := tglLahir.String
+	if len(dateStr) >= 10 {
+		if parsedTime, err := time.Parse("2006-01-02", dateStr[:10]); err == nil {
 			w.TanggalLahir = parsedTime.Format("2006-01-02")
 		} else {
-			w.TanggalLahir = tglLahir
+			w.TanggalLahir = dateStr
 		}
 	}
 
@@ -294,28 +311,45 @@ func (r *WargaRepository) scanRow(row *sql.Row) (*models.Warga, error) {
 
 func (r *WargaRepository) scanRows(rows *sql.Rows) (*models.Warga, error) {
 	var w models.Warga
-	var rfid, fotoKTP, draftToken sql.NullString
-	var tglLahir string
+	var nik, rfid, nama, tempatLahir, tglLahir, jenisKelamin, alamat, rt, rw, kelurahan, kecamatan, kabupaten, provinsi, agama, statusKawin, pekerjaan, kewarganegaraan, fotoKTP, status, draftToken sql.NullString
 
 	err := rows.Scan(
-		&w.ID, &w.NIK, &rfid, &w.Nama, &w.TempatLahir, &tglLahir, &w.JenisKelamin,
-		&w.Alamat, &w.RT, &w.RW, &w.Kelurahan, &w.Kecamatan, &w.Kabupaten, &w.Provinsi,
-		&w.Agama, &w.StatusKawin, &w.Pekerjaan, &w.Kewarganegaraan, &w.DesaID,
-		&fotoKTP, &w.Status, &draftToken,
+		&w.ID, &nik, &rfid, &nama, &tempatLahir, &tglLahir, &jenisKelamin,
+		&alamat, &rt, &rw, &kelurahan, &kecamatan, &kabupaten, &provinsi,
+		&agama, &statusKawin, &pekerjaan, &kewarganegaraan, &w.DesaID,
+		&fotoKTP, &status, &draftToken,
 		&w.CreatedAt, &w.UpdatedAt,
 	)
 	if err != nil {
 		return nil, fmt.Errorf("gagal scan warga rows server: %w", err)
 	}
 
+	w.NIK = nik.String
 	w.RFIDUID = rfid.String
+	w.Nama = nama.String
+	w.TempatLahir = tempatLahir.String
+	w.JenisKelamin = jenisKelamin.String
+	w.Alamat = alamat.String
+	w.RT = rt.String
+	w.RW = rw.String
+	w.Kelurahan = kelurahan.String
+	w.Kecamatan = kecamatan.String
+	w.Kabupaten = kabupaten.String
+	w.Provinsi = provinsi.String
+	w.Agama = agama.String
+	w.StatusKawin = statusKawin.String
+	w.Pekerjaan = pekerjaan.String
+	w.Kewarganegaraan = kewarganegaraan.String
 	w.FotoKTPPath = fotoKTP.String
+	w.Status = status.String
 	w.DraftToken = draftToken.String
-	if len(tglLahir) >= 10 {
-		if parsedTime, err := time.Parse("2006-01-02", tglLahir[:10]); err == nil {
+
+	dateStr := tglLahir.String
+	if len(dateStr) >= 10 {
+		if parsedTime, err := time.Parse("2006-01-02", dateStr[:10]); err == nil {
 			w.TanggalLahir = parsedTime.Format("2006-01-02")
 		} else {
-			w.TanggalLahir = tglLahir
+			w.TanggalLahir = dateStr
 		}
 	}
 

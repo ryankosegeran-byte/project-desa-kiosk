@@ -146,15 +146,15 @@ func (r *WargaRepository) Upsert(ctx context.Context, w *models.Warga) error {
 // Helpers for scanning row
 func (r *WargaRepository) scanRow(row *sql.Row) (*models.Warga, error) {
 	var w models.Warga
-	var rfid, fotoKTP, draftToken sql.NullString
+	var nik, rfid, nama, tempatLahir, tanggalLahir, jenisKelamin, alamat, rt, rw, kelurahan, kecamatan, kabupaten, provinsi, agama, statusKawin, pekerjaan, kewarganegaraan, fotoKTP, status, draftToken sql.NullString
 	var createdAt, updatedAt time.Time
 	var syncedAt sql.NullTime
 
 	err := row.Scan(
-		&w.ID, &w.NIK, &rfid, &w.Nama, &w.TempatLahir, &w.TanggalLahir, &w.JenisKelamin,
-		&w.Alamat, &w.RT, &w.RW, &w.Kelurahan, &w.Kecamatan, &w.Kabupaten, &w.Provinsi,
-		&w.Agama, &w.StatusKawin, &w.Pekerjaan, &w.Kewarganegaraan, &w.DesaID,
-		&fotoKTP, &w.Status, &draftToken,
+		&w.ID, &nik, &rfid, &nama, &tempatLahir, &tanggalLahir, &jenisKelamin,
+		&alamat, &rt, &rw, &kelurahan, &kecamatan, &kabupaten, &provinsi,
+		&agama, &statusKawin, &pekerjaan, &kewarganegaraan, &w.DesaID,
+		&fotoKTP, &status, &draftToken,
 		&createdAt, &updatedAt, &syncedAt,
 	)
 
@@ -165,8 +165,25 @@ func (r *WargaRepository) scanRow(row *sql.Row) (*models.Warga, error) {
 		return nil, fmt.Errorf("gagal scan warga: %w", err)
 	}
 
+	w.NIK = nik.String
 	w.RFIDUID = rfid.String
+	w.Nama = nama.String
+	w.TempatLahir = tempatLahir.String
+	w.TanggalLahir = tanggalLahir.String
+	w.JenisKelamin = jenisKelamin.String
+	w.Alamat = alamat.String
+	w.RT = rt.String
+	w.RW = rw.String
+	w.Kelurahan = kelurahan.String
+	w.Kecamatan = kecamatan.String
+	w.Kabupaten = kabupaten.String
+	w.Provinsi = provinsi.String
+	w.Agama = agama.String
+	w.StatusKawin = statusKawin.String
+	w.Pekerjaan = pekerjaan.String
+	w.Kewarganegaraan = kewarganegaraan.String
 	w.FotoKTPPath = fotoKTP.String
+	w.Status = status.String
 	w.DraftToken = draftToken.String
 	w.CreatedAt = createdAt
 	w.UpdatedAt = updatedAt
@@ -179,15 +196,15 @@ func (r *WargaRepository) scanRow(row *sql.Row) (*models.Warga, error) {
 
 func (r *WargaRepository) scanRows(rows *sql.Rows) (*models.Warga, error) {
 	var w models.Warga
-	var rfid, fotoKTP, draftToken sql.NullString
+	var nik, rfid, nama, tempatLahir, tanggalLahir, jenisKelamin, alamat, rt, rw, kelurahan, kecamatan, kabupaten, provinsi, agama, statusKawin, pekerjaan, kewarganegaraan, fotoKTP, status, draftToken sql.NullString
 	var createdAt, updatedAt time.Time
 	var syncedAt sql.NullTime
 
 	err := rows.Scan(
-		&w.ID, &w.NIK, &rfid, &w.Nama, &w.TempatLahir, &w.TanggalLahir, &w.JenisKelamin,
-		&w.Alamat, &w.RT, &w.RW, &w.Kelurahan, &w.Kecamatan, &w.Kabupaten, &w.Provinsi,
-		&w.Agama, &w.StatusKawin, &w.Pekerjaan, &w.Kewarganegaraan, &w.DesaID,
-		&fotoKTP, &w.Status, &draftToken,
+		&w.ID, &nik, &rfid, &nama, &tempatLahir, &tanggalLahir, &jenisKelamin,
+		&alamat, &rt, &rw, &kelurahan, &kecamatan, &kabupaten, &provinsi,
+		&agama, &statusKawin, &pekerjaan, &kewarganegaraan, &w.DesaID,
+		&fotoKTP, &status, &draftToken,
 		&createdAt, &updatedAt, &syncedAt,
 	)
 
@@ -195,8 +212,25 @@ func (r *WargaRepository) scanRows(rows *sql.Rows) (*models.Warga, error) {
 		return nil, fmt.Errorf("gagal scan warga row: %w", err)
 	}
 
+	w.NIK = nik.String
 	w.RFIDUID = rfid.String
+	w.Nama = nama.String
+	w.TempatLahir = tempatLahir.String
+	w.TanggalLahir = tanggalLahir.String
+	w.JenisKelamin = jenisKelamin.String
+	w.Alamat = alamat.String
+	w.RT = rt.String
+	w.RW = rw.String
+	w.Kelurahan = kelurahan.String
+	w.Kecamatan = kecamatan.String
+	w.Kabupaten = kabupaten.String
+	w.Provinsi = provinsi.String
+	w.Agama = agama.String
+	w.StatusKawin = statusKawin.String
+	w.Pekerjaan = pekerjaan.String
+	w.Kewarganegaraan = kewarganegaraan.String
 	w.FotoKTPPath = fotoKTP.String
+	w.Status = status.String
 	w.DraftToken = draftToken.String
 	w.CreatedAt = createdAt
 	w.UpdatedAt = updatedAt

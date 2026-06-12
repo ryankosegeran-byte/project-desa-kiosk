@@ -1,0 +1,16 @@
+---
+source_file: ".agents/skills/vercel-react-best-practices/rules/bundle-defer-third-party.md"
+type: "document"
+community: "Module Group 49"
+tags:
+  - graphify/document
+  - graphify/EXTRACTED
+  - community/Module_Group_49
+---
+
+# Defer Non-Critical Third-Party Libraries
+
+## Connections
+- [[Doc bundle-defer-third-party]] - `contains` [EXTRACTED]
+
+#graphify/document #graphify/EXTRACTED #community/Module_Group_49

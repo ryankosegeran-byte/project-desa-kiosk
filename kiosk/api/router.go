@@ -24,6 +24,7 @@ type Server struct {
 	suratRepo      *db.SuratRepository
 	jenisSuratRepo *db.JenisSuratRepository
 	configRepo     *db.ConfigRepository
+	nomorSuratRepo *db.NomorSuratRepository // Add this
 	rfidBroker     *rfid.Broker
 	pdfGen         *print.PDFGenerator
 	printer        *print.Printer
@@ -36,6 +37,7 @@ func NewServer(
 	suratRepo *db.SuratRepository,
 	jenisSuratRepo *db.JenisSuratRepository,
 	configRepo *db.ConfigRepository,
+	nomorSuratRepo *db.NomorSuratRepository, // Add this
 	rfidBroker *rfid.Broker,
 	pdfGen *print.PDFGenerator,
 	printer *print.Printer,
@@ -46,6 +48,7 @@ func NewServer(
 		suratRepo:      suratRepo,
 		jenisSuratRepo: jenisSuratRepo,
 		configRepo:     configRepo,
+		nomorSuratRepo: nomorSuratRepo, // Add this
 		rfidBroker:     rfidBroker,
 		pdfGen:         pdfGen,
 		printer:        printer,
@@ -95,6 +98,9 @@ func (s *Server) Handler() http.Handler {
 
 		// Template Routes
 		r.Get("/template/{jenis_surat_id}", s.handleGetTemplate)
+
+		// Nomor Surat Routes
+		r.Get("/nomor-surat/status", s.handleNomorSuratStatus)
 	})
 
 	// Serve Static Files for Kiosk UI
@@ -176,7 +182,7 @@ func sendError(w http.ResponseWriter, status int, msg string) {
 // handleStatus returns the current status of the kiosk.
 func (s *Server) handleStatus(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	
+
 	// Get last sync time from SQLite
 	lastSync, err := s.configRepo.Get(ctx, "last_sync_at")
 	if err != nil {
@@ -184,11 +190,11 @@ func (s *Server) handleStatus(w http.ResponseWriter, r *http.Request) {
 	}
 
 	sendJSON(w, http.StatusOK, map[string]interface{}{
-		"status":      "online", // Kiosk backend is running. Online status to server is computed in UI
-		"desa_id":     s.cfg.DesaID,
-		"kiosk_name":  s.cfg.KioskName,
-		"last_sync":   lastSync,
-		"version":     "0.1.0",
-		"time":        time.Now().Format(time.RFC3339),
+		"status":     "online", // Kiosk backend is running. Online status to server is computed in UI
+		"desa_id":    s.cfg.DesaID,
+		"kiosk_name": s.cfg.KioskName,
+		"last_sync":  lastSync,
+		"version":    "0.1.0",
+		"time":       time.Now().Format(time.RFC3339),
 	})
 }

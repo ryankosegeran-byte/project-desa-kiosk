@@ -82,6 +82,7 @@ func (s *Server) Handler() http.Handler {
 		r.Post("/api/sync/push", s.handleSyncPush)
 		r.Get("/api/sync/pull/warga", s.handleSyncPullWarga)
 		r.Get("/api/sync/pull/config", s.handleSyncPullConfig)
+		r.Get("/api/sync/pull/nomor-surat", s.handleSyncPullNomorSurat)
 	})
 
 	// Dashboard User endpoints (Authenticated via JWT)
@@ -123,6 +124,12 @@ func (s *Server) Handler() http.Handler {
 		r.Post("/api/kiosks", s.handleRegisterKiosk)
 		r.Get("/api/dashboard/stats", s.handleGetStats)
 		r.Get("/api/activity-log/desa/my", s.handleListMyActivityLogs)
+
+		// Nomor Surat Config
+		r.Route("/api/nomor-surat", func(r chi.Router) {
+			r.Get("/", s.handleListNomorSuratConfig)
+			r.Put("/{jenis_surat_id}", s.handleUpdateNomorSuratConfig)
+		})
 
 		// Superadmin actions
 		r.Group(func(r chi.Router) {

@@ -56,6 +56,7 @@ func main() {
 	suratRepo := db.NewSuratRepository(database)
 	jenisSuratRepo := db.NewJenisSuratRepository(database)
 	configRepo := db.NewConfigRepository(database)
+	nomorSuratRepo := db.NewNomorSuratRepository(database)
 
 	// 2.5 Deteksi perubahan desa_id — auto-cleanup data lokal
 	ctxSeed := context.Background()
@@ -96,12 +97,12 @@ func main() {
 	syncRepo := db.NewSyncRepository(database)
 	detector := sync.NewDetector(cfg.ServerURL)
 	pusher := sync.NewPusher(cfg, syncRepo, suratRepo, configRepo)
-	puller := sync.NewPuller(cfg, wargaRepo, jenisSuratRepo, configRepo)
+	puller := sync.NewPuller(cfg, wargaRepo, jenisSuratRepo, configRepo, nomorSuratRepo)
 	syncEngine := sync.NewEngine(cfg, detector, pusher, puller)
 	syncEngine.Start(ctx)
 
 	// 9. Initialize API server
-	apiServer := api.NewServer(cfg, wargaRepo, suratRepo, jenisSuratRepo, configRepo, rfidBroker, pdfGen, printer)
+	apiServer := api.NewServer(cfg, wargaRepo, suratRepo, jenisSuratRepo, configRepo, nomorSuratRepo, rfidBroker, pdfGen, printer)
 
 	srv := &http.Server{
 		Addr:         cfg.ListenAddr,

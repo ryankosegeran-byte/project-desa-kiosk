@@ -54,6 +54,13 @@ func (r *SuratRepository) Create(ctx context.Context, s *models.Surat) error {
 	return nil
 }
 
+// UpdateNomorSurat updates the surat number for a given ID.
+func (r *SuratRepository) UpdateNomorSurat(ctx context.Context, id string, nomorSurat string) error {
+	query := `UPDATE surat SET nomor_surat = ? WHERE id = ?`
+	_, err := r.db.ExecContext(ctx, query, nomorSurat, id)
+	return err
+}
+
 // FindByID retrieves a surat by its ID.
 func (r *SuratRepository) FindByID(ctx context.Context, id string) (*models.Surat, error) {
 	query := `

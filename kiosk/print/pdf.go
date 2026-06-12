@@ -46,7 +46,7 @@ func FormatIndonesianDate(t time.Time) string {
 }
 
 // GeneratePDF generates a PDF file from HTML template and data using chromedp
-func (g *PDFGenerator) GeneratePDF(ctx context.Context, templateHTML string, warga *models.Warga, dataSurat map[string]interface{}, dateToday string) (string, error) {
+func (g *PDFGenerator) GeneratePDF(ctx context.Context, templateHTML string, warga *models.Warga, dataSurat map[string]interface{}, dateToday string, nomorSurat string, desaKepalaDesa string, desaNIP string) (string, error) {
 	// 1. Parse and execute template
 	tmpl, err := template.New("surat").Parse(templateHTML)
 	if err != nil {
@@ -55,9 +55,12 @@ func (g *PDFGenerator) GeneratePDF(ctx context.Context, templateHTML string, war
 
 	var buf bytes.Buffer
 	tmplData := map[string]interface{}{
-		"Warga":     warga,
-		"DataSurat": dataSurat,
-		"DateToday": dateToday,
+		"Warga":          warga,
+		"DataSurat":      dataSurat,
+		"DateToday":      dateToday,
+		"NomorSurat":     nomorSurat,
+		"DesaKepalaDesa": desaKepalaDesa,
+		"DesaNIP":        desaNIP,
 	}
 
 	if err := tmpl.Execute(&buf, tmplData); err != nil {

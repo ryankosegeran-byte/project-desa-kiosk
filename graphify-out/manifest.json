@@ -1,0 +1,1402 @@
+{
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\diagnose\\scripts\\hitl-loop.template.sh": {
+    "mtime": 1781025133.5889912,
+    "ast_hash": "27d758d3557409fbb17bc3cced9367cf",
+    "semantic_hash": "27d758d3557409fbb17bc3cced9367cf"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\pdf\\scripts\\check_bounding_boxes.py": {
+    "mtime": 1781025155.3714013,
+    "ast_hash": "9ab55fc4cd2082641fdebda3866371ac",
+    "semantic_hash": "9ab55fc4cd2082641fdebda3866371ac"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\pdf\\scripts\\check_fillable_fields.py": {
+    "mtime": 1781025155.3724062,
+    "ast_hash": "28e26c214bee178c166cbfcc1cae017a",
+    "semantic_hash": "28e26c214bee178c166cbfcc1cae017a"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\pdf\\scripts\\convert_pdf_to_images.py": {
+    "mtime": 1781025155.3744037,
+    "ast_hash": "3291b3cb048d3cbb081aeea0a4f82e70",
+    "semantic_hash": "3291b3cb048d3cbb081aeea0a4f82e70"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\pdf\\scripts\\create_validation_image.py": {
+    "mtime": 1781025155.3754003,
+    "ast_hash": "7c0fae6c2839e189e7f47b9e266d305e",
+    "semantic_hash": "7c0fae6c2839e189e7f47b9e266d305e"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\pdf\\scripts\\extract_form_field_info.py": {
+    "mtime": 1781025155.3864596,
+    "ast_hash": "285308f8690e16404562d2fdea8cf5e9",
+    "semantic_hash": "285308f8690e16404562d2fdea8cf5e9"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\pdf\\scripts\\extract_form_structure.py": {
+    "mtime": 1781025155.3994477,
+    "ast_hash": "5b1297993e80415376ee17a72ba5c573",
+    "semantic_hash": "5b1297993e80415376ee17a72ba5c573"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\pdf\\scripts\\fill_fillable_fields.py": {
+    "mtime": 1781025155.403456,
+    "ast_hash": "88e38e501f0b4ed7b8476883aaf28879",
+    "semantic_hash": "88e38e501f0b4ed7b8476883aaf28879"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\pdf\\scripts\\fill_pdf_form_with_annotations.py": {
+    "mtime": 1781025155.4054556,
+    "ast_hash": "55e4b1777a927ecf556a554e6ed1d69c",
+    "semantic_hash": "55e4b1777a927ecf556a554e6ed1d69c"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\metadata.json": {
+    "mtime": 1781025085.1551402,
+    "ast_hash": "5cd9ae4fc688353236c3b92e8f06dfcc",
+    "semantic_hash": "5cd9ae4fc688353236c3b92e8f06dfcc"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\webapp-testing\\examples\\console_logging.py": {
+    "mtime": 1781025110.868587,
+    "ast_hash": "7166d10f96ff246e0529038e6885d0ff",
+    "semantic_hash": "7166d10f96ff246e0529038e6885d0ff"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\webapp-testing\\examples\\element_discovery.py": {
+    "mtime": 1781025110.868587,
+    "ast_hash": "5282fba5ef350f26c2145e5cfaa76fc9",
+    "semantic_hash": "5282fba5ef350f26c2145e5cfaa76fc9"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\webapp-testing\\examples\\static_html_automation.py": {
+    "mtime": 1781025110.869585,
+    "ast_hash": "ed829df858c7c0adf2b6b35e33643215",
+    "semantic_hash": "ed829df858c7c0adf2b6b35e33643215"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\webapp-testing\\scripts\\with_server.py": {
+    "mtime": 1781025110.8715873,
+    "ast_hash": "01c7c8d2b96019e3f88f18bb945d2abe",
+    "semantic_hash": "01c7c8d2b96019e3f88f18bb945d2abe"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.graphify_detect.json": {
+    "mtime": 1781264502.515344,
+    "ast_hash": "cea2cde1f886988bdd841b9abbced68f",
+    "semantic_hash": "cea2cde1f886988bdd841b9abbced68f"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\deployments\\serv00\\deploy.sh": {
+    "mtime": 1780711776.3618107,
+    "ast_hash": "b3304bbd3c3beec1cd2fc0d45358f9e1",
+    "semantic_hash": "b3304bbd3c3beec1cd2fc0d45358f9e1"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\internal\\auth\\jwt.go": {
+    "mtime": 1780708340.4358208,
+    "ast_hash": "85186fe3109f91dcf1ccf8241bd64acd",
+    "semantic_hash": "85186fe3109f91dcf1ccf8241bd64acd"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\internal\\models\\desa.go": {
+    "mtime": 1780708279.7709675,
+    "ast_hash": "4586b634bbaf233bf5d4f79c8856117e",
+    "semantic_hash": "4586b634bbaf233bf5d4f79c8856117e"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\internal\\models\\jenis_surat.go": {
+    "mtime": 1780708307.048467,
+    "ast_hash": "1181ebd85ac6ecd9ac7c63f79376cf7d",
+    "semantic_hash": "1181ebd85ac6ecd9ac7c63f79376cf7d"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\internal\\models\\surat.go": {
+    "mtime": 1781166573.6172123,
+    "ast_hash": "190ab4da019e60fe27fd85d99dbb1bed",
+    "semantic_hash": "190ab4da019e60fe27fd85d99dbb1bed"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\internal\\models\\sync.go": {
+    "mtime": 1780708338.2124286,
+    "ast_hash": "6d3f4d4667ee638287121bff2a6061e4",
+    "semantic_hash": "6d3f4d4667ee638287121bff2a6061e4"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\internal\\models\\user.go": {
+    "mtime": 1780708322.3179183,
+    "ast_hash": "2727addc0fbf459c818beac60c2bec96",
+    "semantic_hash": "2727addc0fbf459c818beac60c2bec96"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\internal\\models\\warga.go": {
+    "mtime": 1781159160.4606915,
+    "ast_hash": "a2314238404cc1b49eb504feac4b1a84",
+    "semantic_hash": "a2314238404cc1b49eb504feac4b1a84"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\api\\api_test.go": {
+    "mtime": 1781164860.45628,
+    "ast_hash": "5fc980d87c4ad9ad67987f141aba5fe5",
+    "semantic_hash": "5fc980d87c4ad9ad67987f141aba5fe5"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\api\\router.go": {
+    "mtime": 1781166686.860367,
+    "ast_hash": "5ef487ef754192e43dd0c7cb2d5f9845",
+    "semantic_hash": "5ef487ef754192e43dd0c7cb2d5f9845"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\api\\surat.go": {
+    "mtime": 1781166680.1637535,
+    "ast_hash": "acdb7941c664176e496a64dde0425337",
+    "semantic_hash": "acdb7941c664176e496a64dde0425337"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\api\\warga.go": {
+    "mtime": 1780708776.9138227,
+    "ast_hash": "cf82f769286bd5e0c8f0f555dea467c0",
+    "semantic_hash": "cf82f769286bd5e0c8f0f555dea467c0"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\cmd\\kiosk\\main.go": {
+    "mtime": 1781166792.6080613,
+    "ast_hash": "052e7704d6782db615e4220b51256e68",
+    "semantic_hash": "052e7704d6782db615e4220b51256e68"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\config\\config.go": {
+    "mtime": 1780709534.072839,
+    "ast_hash": "92a1ecdad0e72fe4033036d6732ea27b",
+    "semantic_hash": "92a1ecdad0e72fe4033036d6732ea27b"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\db\\config_repo.go": {
+    "mtime": 1780708761.3980565,
+    "ast_hash": "84dff1c2326a9fdd58df940990a31696",
+    "semantic_hash": "84dff1c2326a9fdd58df940990a31696"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\db\\db_test.go": {
+    "mtime": 1780708984.3835125,
+    "ast_hash": "71281528149f3f99b782df5112ebe760",
+    "semantic_hash": "71281528149f3f99b782df5112ebe760"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\db\\jenis_surat_repo.go": {
+    "mtime": 1780708756.8665404,
+    "ast_hash": "8bdec5031156628fd900395b19acdbee",
+    "semantic_hash": "8bdec5031156628fd900395b19acdbee"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\db\\migrations\\001_init.sql": {
+    "mtime": 1780708718.8759952,
+    "ast_hash": "e8060997ff1d58d8a80dc8d7b4d95b5c",
+    "semantic_hash": "e8060997ff1d58d8a80dc8d7b4d95b5c"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\db\\migrations\\002_add_warga_sync_columns.sql": {
+    "mtime": 1781056068.3365676,
+    "ast_hash": "46f0508ebdfef44f2a7ebed47a4ebaaa",
+    "semantic_hash": "46f0508ebdfef44f2a7ebed47a4ebaaa"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\db\\migrations\\003_nomor_surat_batch.sql": {
+    "mtime": 1781166568.0392075,
+    "ast_hash": "eebd77f863f8da8f6d22ccd94cd9220f",
+    "semantic_hash": "eebd77f863f8da8f6d22ccd94cd9220f"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\db\\nomor_surat_repo.go": {
+    "mtime": 1781166580.5670023,
+    "ast_hash": "3562befeb26badcdd14c96734833a05b",
+    "semantic_hash": "3562befeb26badcdd14c96734833a05b"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\db\\seeder.go": {
+    "mtime": 1781166640.2089133,
+    "ast_hash": "04b84296061c644f525dd5bf7065f4a9",
+    "semantic_hash": "04b84296061c644f525dd5bf7065f4a9"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\db\\sqlite.go": {
+    "mtime": 1781057576.543301,
+    "ast_hash": "54e0eaa0672abf9aa2162660079393c2",
+    "semantic_hash": "54e0eaa0672abf9aa2162660079393c2"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\db\\surat_repo.go": {
+    "mtime": 1781163386.8639681,
+    "ast_hash": "bad2c854820de28cdf9ecfcfa2249197",
+    "semantic_hash": "bad2c854820de28cdf9ecfcfa2249197"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\db\\sync_repo.go": {
+    "mtime": 1780710415.2121763,
+    "ast_hash": "78b14684055a62225126259abd587bb3",
+    "semantic_hash": "78b14684055a62225126259abd587bb3"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\db\\warga_repo.go": {
+    "mtime": 1781164868.79234,
+    "ast_hash": "30462eaefbd1fa40f903bda48aa4a8c5",
+    "semantic_hash": "30462eaefbd1fa40f903bda48aa4a8c5"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\print\\pdf.go": {
+    "mtime": 1781166647.408215,
+    "ast_hash": "467dc505bd4f07f5e42e96414e58b5ce",
+    "semantic_hash": "467dc505bd4f07f5e42e96414e58b5ce"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\print\\print_test.go": {
+    "mtime": 1781166657.1561728,
+    "ast_hash": "113043986161cd02d25e7ad79a9f0e14",
+    "semantic_hash": "113043986161cd02d25e7ad79a9f0e14"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\print\\printer.go": {
+    "mtime": 1780709617.9740825,
+    "ast_hash": "ae82f598a14c1b1ca5624cbacb842ae3",
+    "semantic_hash": "ae82f598a14c1b1ca5624cbacb842ae3"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\rfid\\broker.go": {
+    "mtime": 1780709159.5640173,
+    "ast_hash": "8d12cdb9e3c58c4266c618a4d6896037",
+    "semantic_hash": "8d12cdb9e3c58c4266c618a4d6896037"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\rfid\\listener.go": {
+    "mtime": 1780709164.1065123,
+    "ast_hash": "083ae566d660e47e3e6a9d5895109ba0",
+    "semantic_hash": "083ae566d660e47e3e6a9d5895109ba0"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\sync\\detector.go": {
+    "mtime": 1780710420.5115392,
+    "ast_hash": "1cf89e67567ffa3af1c9aafef865c7a2",
+    "semantic_hash": "1cf89e67567ffa3af1c9aafef865c7a2"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\sync\\engine.go": {
+    "mtime": 1781166802.0806336,
+    "ast_hash": "b0e58ed38de1f69cf8e77df36845d80e",
+    "semantic_hash": "b0e58ed38de1f69cf8e77df36845d80e"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\sync\\puller.go": {
+    "mtime": 1781166781.0973215,
+    "ast_hash": "0acc740f1865a65125c00fff09f3d385",
+    "semantic_hash": "0acc740f1865a65125c00fff09f3d385"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\sync\\pusher.go": {
+    "mtime": 1780710490.0825706,
+    "ast_hash": "e43e6cbc40bab527b92d90efdfc55e77",
+    "semantic_hash": "e43e6cbc40bab527b92d90efdfc55e77"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\scripts\\build.ps1": {
+    "mtime": 1780711765.831859,
+    "ast_hash": "0daf17692db24f037aae57234dc399b6",
+    "semantic_hash": "0daf17692db24f037aae57234dc399b6"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\scripts\\mock-rfid.ps1": {
+    "mtime": 1780709427.2606838,
+    "ast_hash": "4ed2081034a24c994bb00d7fe566cf99",
+    "semantic_hash": "4ed2081034a24c994bb00d7fe566cf99"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\scripts\\read_docx.ps1": {
+    "mtime": 1781165292.129296,
+    "ast_hash": "4fd138609500e0557e20afbc90b3e8d5",
+    "semantic_hash": "4fd138609500e0557e20afbc90b3e8d5"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\scripts\\setup-kiosk.ps1": {
+    "mtime": 1780711771.8921976,
+    "ast_hash": "dfacf590a4987dced37dcef441fb8e46",
+    "semantic_hash": "dfacf590a4987dced37dcef441fb8e46"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\api\\auth_handler.go": {
+    "mtime": 1780710392.0635583,
+    "ast_hash": "921282ab46c1e102449f8a34536eda75",
+    "semantic_hash": "921282ab46c1e102449f8a34536eda75"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\api\\dashboard_handler.go": {
+    "mtime": 1781047881.0753777,
+    "ast_hash": "5bd015e11a746f27628da07a7f50c6b8",
+    "semantic_hash": "5bd015e11a746f27628da07a7f50c6b8"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\api\\desa_handler.go": {
+    "mtime": 1780710275.8548863,
+    "ast_hash": "f4eb358d6b68555fb0deaa41a0329c4f",
+    "semantic_hash": "f4eb358d6b68555fb0deaa41a0329c4f"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\api\\helpers.go": {
+    "mtime": 1780710237.7352853,
+    "ast_hash": "8825bb18dd349968039cf197e2419149",
+    "semantic_hash": "8825bb18dd349968039cf197e2419149"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\api\\jenis_surat_handler.go": {
+    "mtime": 1780710271.0936785,
+    "ast_hash": "75617b48c4e4d5511db06fd3b2ffd2e1",
+    "semantic_hash": "75617b48c4e4d5511db06fd3b2ffd2e1"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\api\\nomor_surat_handler.go": {
+    "mtime": 1781167142.4950576,
+    "ast_hash": "92d6953ac54ff121544216d490e4e006",
+    "semantic_hash": "92d6953ac54ff121544216d490e4e006"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\api\\ocr_handler.go": {
+    "mtime": 1781159165.2385962,
+    "ast_hash": "b601f47f711d9433a50032c091a5e970",
+    "semantic_hash": "b601f47f711d9433a50032c091a5e970"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\api\\ocr_status_handler.go": {
+    "mtime": 1781051874.889999,
+    "ast_hash": "fb4dba67533c220af7feccffed0581a0",
+    "semantic_hash": "fb4dba67533c220af7feccffed0581a0"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\api\\router.go": {
+    "mtime": 1781166851.3178892,
+    "ast_hash": "176914d003b6a012f37807af58f69ba2",
+    "semantic_hash": "176914d003b6a012f37807af58f69ba2"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\api\\surat_handler.go": {
+    "mtime": 1780710265.9553967,
+    "ast_hash": "e6ad00bb083de926f61b8f3d7eaf1603",
+    "semantic_hash": "e6ad00bb083de926f61b8f3d7eaf1603"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\api\\sync_handler.go": {
+    "mtime": 1781050596.2714193,
+    "ast_hash": "53723be4740e8b15d8fa2712d08c7469",
+    "semantic_hash": "53723be4740e8b15d8fa2712d08c7469"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\api\\template_handler.go": {
+    "mtime": 1780710280.316604,
+    "ast_hash": "50d10bc207b5b99e6d09d81fc37bee98",
+    "semantic_hash": "50d10bc207b5b99e6d09d81fc37bee98"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\api\\user_handler.go": {
+    "mtime": 1780710285.5440843,
+    "ast_hash": "d19f5c27d41572de9ab2385c0035b60a",
+    "semantic_hash": "d19f5c27d41572de9ab2385c0035b60a"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\api\\warga_handler.go": {
+    "mtime": 1781053636.9757378,
+    "ast_hash": "917f5fa4e7b79eca7a75cd2b2aceee6b",
+    "semantic_hash": "917f5fa4e7b79eca7a75cd2b2aceee6b"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\cmd\\server\\main.go": {
+    "mtime": 1781052339.049379,
+    "ast_hash": "c51c6f3b8516e02008cc21e7985bff82",
+    "semantic_hash": "c51c6f3b8516e02008cc21e7985bff82"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\config\\config.go": {
+    "mtime": 1781052333.1144288,
+    "ast_hash": "f5f7bcec552b4343f6197c0007fc29ef",
+    "semantic_hash": "f5f7bcec552b4343f6197c0007fc29ef"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\db\\desa_repo.go": {
+    "mtime": 1781048028.9141002,
+    "ast_hash": "13ad5826cf0622b99e6616c852c2fff3",
+    "semantic_hash": "13ad5826cf0622b99e6616c852c2fff3"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\db\\jenis_surat_repo.go": {
+    "mtime": 1780709839.287604,
+    "ast_hash": "1b44d0b877a33b885579abe0e5371f2b",
+    "semantic_hash": "1b44d0b877a33b885579abe0e5371f2b"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\db\\migrations\\001_init.sql": {
+    "mtime": 1780709798.3029873,
+    "ast_hash": "cc9476b54691e845a4ee4bb7bf6e5658",
+    "semantic_hash": "cc9476b54691e845a4ee4bb7bf6e5658"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\db\\migrations\\002_warga_draft.sql": {
+    "mtime": 1781052957.614313,
+    "ast_hash": "5e6549973d05f81f2a3d121f366d1434",
+    "semantic_hash": "5e6549973d05f81f2a3d121f366d1434"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\db\\migrations\\003_nomor_surat_config.sql": {
+    "mtime": 1781166817.8356683,
+    "ast_hash": "eb320b090b356ea50753fe7e9de9ac20",
+    "semantic_hash": "eb320b090b356ea50753fe7e9de9ac20"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\db\\postgres.go": {
+    "mtime": 1780709802.7823997,
+    "ast_hash": "e16f26f56104f7a9195f55d510a9d9b0",
+    "semantic_hash": "e16f26f56104f7a9195f55d510a9d9b0"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\db\\seeder.go": {
+    "mtime": 1780710334.803498,
+    "ast_hash": "7bb573e752230725720c4ff63c129a56",
+    "semantic_hash": "7bb573e752230725720c4ff63c129a56"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\db\\surat_repo.go": {
+    "mtime": 1781048029.1803806,
+    "ast_hash": "5d6e9f2336213960333d455e60abec74",
+    "semantic_hash": "5d6e9f2336213960333d455e60abec74"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\db\\template_repo.go": {
+    "mtime": 1780709843.7854986,
+    "ast_hash": "03a44b5f4f92517dd2cda753b6e62b43",
+    "semantic_hash": "03a44b5f4f92517dd2cda753b6e62b43"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\db\\user_repo.go": {
+    "mtime": 1781047969.9018066,
+    "ast_hash": "96610c7e77f7ba7feb2a2b4092f5ca9c",
+    "semantic_hash": "96610c7e77f7ba7feb2a2b4092f5ca9c"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\db\\warga_repo.go": {
+    "mtime": 1781164876.4668465,
+    "ast_hash": "79dbb4ff4b73fc11c5db7c71d216e6c9",
+    "semantic_hash": "79dbb4ff4b73fc11c5db7c71d216e6c9"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\middleware\\auth.go": {
+    "mtime": 1780709860.1602054,
+    "ast_hash": "bc09f9f148e915dacef31e23b18f4e84",
+    "semantic_hash": "bc09f9f148e915dacef31e23b18f4e84"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\middleware\\cors.go": {
+    "mtime": 1780710223.5677488,
+    "ast_hash": "b05e4cd4654142bc3642b44d1cc73e35",
+    "semantic_hash": "b05e4cd4654142bc3642b44d1cc73e35"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\ocr\\gemini.go": {
+    "mtime": 1781051829.297793,
+    "ast_hash": "f41eda133a3acdff7a480899df49e3a4",
+    "semantic_hash": "f41eda133a3acdff7a480899df49e3a4"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\ocr\\groq.go": {
+    "mtime": 1781051846.531404,
+    "ast_hash": "889c813e7c381179df73682cec985ad9",
+    "semantic_hash": "889c813e7c381179df73682cec985ad9"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\ocr\\mistral.go": {
+    "mtime": 1781051835.608775,
+    "ast_hash": "8497bfd6c4081f0b1933d8f58b4c2650",
+    "semantic_hash": "8497bfd6c4081f0b1933d8f58b4c2650"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\ocr\\provider.go": {
+    "mtime": 1781051829.0331917,
+    "ast_hash": "94ce42ca5f3625a8f57f6b38c1d36e0d",
+    "semantic_hash": "94ce42ca5f3625a8f57f6b38c1d36e0d"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\server\\ocr\\service.go": {
+    "mtime": 1781051863.861508,
+    "ast_hash": "ac5a6cb78517f470ec1541aa50dd2ef9",
+    "semantic_hash": "ac5a6cb78517f470ec1541aa50dd2ef9"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\skills-lock.json": {
+    "mtime": 1781025160.4378667,
+    "ast_hash": "07ec696fa3bf96ef1723d42028bc2789",
+    "semantic_hash": "07ec696fa3bf96ef1723d42028bc2789"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\astro.config.mjs": {
+    "mtime": 1781053599.794743,
+    "ast_hash": "849660db590f1eefc5e9126507235044",
+    "semantic_hash": "849660db590f1eefc5e9126507235044"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\package.json": {
+    "mtime": 1781053472.747979,
+    "ast_hash": "2943401a7f9babe89a44ab37855c7a0d",
+    "semantic_hash": "2943401a7f9babe89a44ab37855c7a0d"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\components\\ActivityLogList.tsx": {
+    "mtime": 1780711678.4420152,
+    "ast_hash": "3bdc134e82952b9afda8bf4cd385751f",
+    "semantic_hash": "3bdc134e82952b9afda8bf4cd385751f"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\components\\DashboardOverview.tsx": {
+    "mtime": 1780711557.0037086,
+    "ast_hash": "6e615805c6a89fbc41e8ed765e7ef4da",
+    "semantic_hash": "6e615805c6a89fbc41e8ed765e7ef4da"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\components\\DesaManager.tsx": {
+    "mtime": 1781050188.2426136,
+    "ast_hash": "0e83d452c86a6fa5189dcf61aa8be83a",
+    "semantic_hash": "0e83d452c86a6fa5189dcf61aa8be83a"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\components\\JenisSuratManager.tsx": {
+    "mtime": 1780711673.194981,
+    "ast_hash": "1a27c4e3f68b8440f5bb3abdeedece2a",
+    "semantic_hash": "1a27c4e3f68b8440f5bb3abdeedece2a"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\components\\KioskStatus.tsx": {
+    "mtime": 1781050188.0167215,
+    "ast_hash": "7efcffc826a229169aa3e1e9f1bc529f",
+    "semantic_hash": "7efcffc826a229169aa3e1e9f1bc529f"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\components\\LoginForm.tsx": {
+    "mtime": 1780711551.6445498,
+    "ast_hash": "ae1e5373d77af6694d4279ab88bd4f6a",
+    "semantic_hash": "ae1e5373d77af6694d4279ab88bd4f6a"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\components\\OCRProviderConfig.tsx": {
+    "mtime": 1781051965.785576,
+    "ast_hash": "86c5d410606f0bf9260fc615f42494dd",
+    "semantic_hash": "86c5d410606f0bf9260fc615f42494dd"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\components\\SuratTable.tsx": {
+    "mtime": 1780711622.9055521,
+    "ast_hash": "9d9f7bca6747b50b08a126bf8876279e",
+    "semantic_hash": "9d9f7bca6747b50b08a126bf8876279e"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\components\\TemplatesList.tsx": {
+    "mtime": 1780711635.7052283,
+    "ast_hash": "be21bb15ddc18ff573e7bfd8fe974670",
+    "semantic_hash": "be21bb15ddc18ff573e7bfd8fe974670"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\components\\UserManager.tsx": {
+    "mtime": 1780711663.796594,
+    "ast_hash": "54dcbb8ecb068b60493643e999f448d5",
+    "semantic_hash": "54dcbb8ecb068b60493643e999f448d5"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\components\\WargaDraftComplete.tsx": {
+    "mtime": 1781053624.2285433,
+    "ast_hash": "ff59f25ab7f85ce10b4528563499d53b",
+    "semantic_hash": "ff59f25ab7f85ce10b4528563499d53b"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\components\\WargaList.tsx": {
+    "mtime": 1781053645.3498023,
+    "ast_hash": "1a2b13cc1b58aa27bea35d593de3ee9d",
+    "semantic_hash": "1a2b13cc1b58aa27bea35d593de3ee9d"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\components\\WargaRegister.tsx": {
+    "mtime": 1781053290.607955,
+    "ast_hash": "b2d59ae1cf8f5de6d6aa0e3fb620a14f",
+    "semantic_hash": "b2d59ae1cf8f5de6d6aa0e3fb620a14f"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\components\\Welcome.astro": {
+    "mtime": 1780508098.0,
+    "ast_hash": "7274ef144fc0554f96f977626b0b96d4",
+    "semantic_hash": "7274ef144fc0554f96f977626b0b96d4"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\layouts\\DashboardLayout.astro": {
+    "mtime": 1780711542.050238,
+    "ast_hash": "349ce6e396c261228cb7ac2dd23e6e90",
+    "semantic_hash": "349ce6e396c261228cb7ac2dd23e6e90"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\layouts\\Layout.astro": {
+    "mtime": 1780508098.0,
+    "ast_hash": "544bdd418e59cd25c463e2b7a5056343",
+    "semantic_hash": "544bdd418e59cd25c463e2b7a5056343"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\lib\\api.ts": {
+    "mtime": 1780711748.4991405,
+    "ast_hash": "6906facd53eed322354090f33a1b4b0b",
+    "semantic_hash": "6906facd53eed322354090f33a1b4b0b"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\pages\\admin\\activity\\index.astro": {
+    "mtime": 1780711722.7322936,
+    "ast_hash": "63ee4e2723113827239a03880f678d41",
+    "semantic_hash": "63ee4e2723113827239a03880f678d41"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\pages\\admin\\desa\\index.astro": {
+    "mtime": 1780711712.8191714,
+    "ast_hash": "6011a80d7cb8abad64aab7f962bc0497",
+    "semantic_hash": "6011a80d7cb8abad64aab7f962bc0497"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\pages\\admin\\jenis-surat\\index.astro": {
+    "mtime": 1780711719.586694,
+    "ast_hash": "b6609e7989fefd61729470cd81b14e06",
+    "semantic_hash": "b6609e7989fefd61729470cd81b14e06"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\pages\\admin\\users\\index.astro": {
+    "mtime": 1780711716.270727,
+    "ast_hash": "770bb5256a649b825f95f1d45b8a59a0",
+    "semantic_hash": "770bb5256a649b825f95f1d45b8a59a0"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\pages\\dashboard.astro": {
+    "mtime": 1780711692.22118,
+    "ast_hash": "8ac05498d825191b87ee6ea349c8aaa6",
+    "semantic_hash": "8ac05498d825191b87ee6ea349c8aaa6"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\pages\\index.astro": {
+    "mtime": 1780711688.481033,
+    "ast_hash": "3d0ae70a5ba95ec113eb95ede3c5ccfe",
+    "semantic_hash": "3d0ae70a5ba95ec113eb95ede3c5ccfe"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\pages\\kiosk-status\\index.astro": {
+    "mtime": 1780711709.2565372,
+    "ast_hash": "e30efacb1460b57c3ea6ae9c8bf9ba94",
+    "semantic_hash": "e30efacb1460b57c3ea6ae9c8bf9ba94"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\pages\\settings\\ocr.astro": {
+    "mtime": 1780711726.585625,
+    "ast_hash": "a952c7451dda09e4f3969a4f87e852bc",
+    "semantic_hash": "a952c7451dda09e4f3969a4f87e852bc"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\pages\\surat\\index.astro": {
+    "mtime": 1780711702.4133203,
+    "ast_hash": "55448c28ba8b2a0bfc63cd2bbb3c718e",
+    "semantic_hash": "55448c28ba8b2a0bfc63cd2bbb3c718e"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\pages\\templates\\index.astro": {
+    "mtime": 1780711705.9012413,
+    "ast_hash": "78cfdcd5705dc8e4521626dd097abafd",
+    "semantic_hash": "78cfdcd5705dc8e4521626dd097abafd"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\pages\\warga\\draft.astro": {
+    "mtime": 1781053702.704363,
+    "ast_hash": "12a0bb5f2e45d07459c678d410286568",
+    "semantic_hash": "12a0bb5f2e45d07459c678d410286568"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\pages\\warga\\index.astro": {
+    "mtime": 1780711696.0807116,
+    "ast_hash": "fd504ef13406862b27786df8db5b7bda",
+    "semantic_hash": "fd504ef13406862b27786df8db5b7bda"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\pages\\warga\\register.astro": {
+    "mtime": 1780711699.2809174,
+    "ast_hash": "7a974c0042c25932fff02e551c79775b",
+    "semantic_hash": "7a974c0042c25932fff02e551c79775b"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\tsconfig.json": {
+    "mtime": 1780711511.3319547,
+    "ast_hash": "435fd597d730817e9056f006911084dd",
+    "semantic_hash": "435fd597d730817e9056f006911084dd"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\eslint.config.js": {
+    "mtime": 1778567066.4945092,
+    "ast_hash": "0355276bc79439afe3c53e3a2470ca1e",
+    "semantic_hash": "0355276bc79439afe3c53e3a2470ca1e"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\package.json": {
+    "mtime": 1781166720.0409596,
+    "ast_hash": "e485f6ceb9aa04fe9fab4e748443af97",
+    "semantic_hash": "e485f6ceb9aa04fe9fab4e748443af97"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\src\\App.tsx": {
+    "mtime": 1780709489.0078926,
+    "ast_hash": "dec6e8e132201903144790c0a6558adb",
+    "semantic_hash": "dec6e8e132201903144790c0a6558adb"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\src\\components\\AddressPickerModal.tsx": {
+    "mtime": 1781166734.829717,
+    "ast_hash": "d76abb59941269b49c739c25342f1e3e",
+    "semantic_hash": "d76abb59941269b49c739c25342f1e3e"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\src\\components\\FullKeyboard.tsx": {
+    "mtime": 1781166722.8052864,
+    "ast_hash": "77606df8a1e9f555d6604b63214eb1b0",
+    "semantic_hash": "77606df8a1e9f555d6604b63214eb1b0"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\src\\components\\NIKInput.tsx": {
+    "mtime": 1780709432.3656764,
+    "ast_hash": "043c3dcb0406a1834c91fd3881631d19",
+    "semantic_hash": "043c3dcb0406a1834c91fd3881631d19"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\src\\components\\RFIDStatus.tsx": {
+    "mtime": 1780709425.595577,
+    "ast_hash": "9a8d393a4dbf93ccf7163e322dae6f01",
+    "semantic_hash": "9a8d393a4dbf93ccf7163e322dae6f01"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\src\\components\\SelectOrInputModal.tsx": {
+    "mtime": 1781166727.8516529,
+    "ast_hash": "fc4ce6f858723258828a512503ce04d8",
+    "semantic_hash": "fc4ce6f858723258828a512503ce04d8"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\src\\components\\StatusBar.tsx": {
+    "mtime": 1780709420.8968613,
+    "ast_hash": "4fb5f5d7c3311d9e406eb050fd079c44",
+    "semantic_hash": "4fb5f5d7c3311d9e406eb050fd079c44"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\src\\components\\SuratForm.tsx": {
+    "mtime": 1781166748.040531,
+    "ast_hash": "a0df78c537154db773a01b3399658b05",
+    "semantic_hash": "a0df78c537154db773a01b3399658b05"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\src\\components\\VirtualKeyboard.tsx": {
+    "mtime": 1780709405.3079286,
+    "ast_hash": "e63412117cd75400b570e0efd64011a4",
+    "semantic_hash": "e63412117cd75400b570e0efd64011a4"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\src\\hooks\\useOnlineStatus.ts": {
+    "mtime": 1780709399.6684475,
+    "ast_hash": "960ae091bb088f916eda93dceb92f2c4",
+    "semantic_hash": "960ae091bb088f916eda93dceb92f2c4"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\src\\hooks\\useRFID.ts": {
+    "mtime": 1780709385.8674395,
+    "ast_hash": "8b28799116ee6284d53363a2318f76f6",
+    "semantic_hash": "8b28799116ee6284d53363a2318f76f6"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\src\\hooks\\useSurat.ts": {
+    "mtime": 1780709395.7532732,
+    "ast_hash": "229efab9676197810bef2737e47435c9",
+    "semantic_hash": "229efab9676197810bef2737e47435c9"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\src\\hooks\\useWarga.ts": {
+    "mtime": 1780709390.9736016,
+    "ast_hash": "1051cf99ab13202afcdd00c6f59d0cb4",
+    "semantic_hash": "1051cf99ab13202afcdd00c6f59d0cb4"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\src\\main.tsx": {
+    "mtime": 1778567067.073181,
+    "ast_hash": "787e5a07efeb2bf6209d5937195f2f68",
+    "semantic_hash": "787e5a07efeb2bf6209d5937195f2f68"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\src\\pages\\FormSuratPage.tsx": {
+    "mtime": 1780709499.5996773,
+    "ast_hash": "f9ede49f871d6f7078db20c8b653695e",
+    "semantic_hash": "f9ede49f871d6f7078db20c8b653695e"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\src\\pages\\HomePage.tsx": {
+    "mtime": 1780709505.1256735,
+    "ast_hash": "6baaaf070d1ee2cfeb8997f111e7d3c8",
+    "semantic_hash": "6baaaf070d1ee2cfeb8997f111e7d3c8"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\src\\pages\\PreviewPage.tsx": {
+    "mtime": 1780709515.4125152,
+    "ast_hash": "a59339da34b46888b8a9f792b1a56ecf",
+    "semantic_hash": "a59339da34b46888b8a9f792b1a56ecf"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\src\\pages\\SelectSuratPage.tsx": {
+    "mtime": 1780709520.1390824,
+    "ast_hash": "391b6a061ee9d8badd50be66d2fe0bb0",
+    "semantic_hash": "391b6a061ee9d8badd50be66d2fe0bb0"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\src\\pages\\SuccessPage.tsx": {
+    "mtime": 1780709464.7081976,
+    "ast_hash": "75ea14944da6cc227a8c1559239101a0",
+    "semantic_hash": "75ea14944da6cc227a8c1559239101a0"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\tsconfig.app.json": {
+    "mtime": 1778567066.6090453,
+    "ast_hash": "136630b5accce1ca50663df229534a26",
+    "semantic_hash": "136630b5accce1ca50663df229534a26"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\tsconfig.json": {
+    "mtime": 1778567066.6227875,
+    "ast_hash": "a3d39fa780ebff65444de257f291ce6c",
+    "semantic_hash": "a3d39fa780ebff65444de257f291ce6c"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\tsconfig.node.json": {
+    "mtime": 1778567066.6390245,
+    "ast_hash": "70bdd0a673bcfc0e828080b306e7c680",
+    "semantic_hash": "70bdd0a673bcfc0e828080b306e7c680"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\vite.config.ts": {
+    "mtime": 1780709711.7261899,
+    "ast_hash": "677e7ea13b10e4c4cbb641648f558763",
+    "semantic_hash": "677e7ea13b10e4c4cbb641648f558763"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\diagnose\\SKILL.md": {
+    "mtime": 1781025133.5869894,
+    "ast_hash": "4bcd9cce196b0aa15fd65efe621f9466",
+    "semantic_hash": "4bcd9cce196b0aa15fd65efe621f9466"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\frontend-design\\LICENSE.txt": {
+    "mtime": 1781025055.7505126,
+    "ast_hash": "29256199be2a609aac596980ffc11996",
+    "semantic_hash": "29256199be2a609aac596980ffc11996"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\frontend-design\\SKILL.md": {
+    "mtime": 1781025055.7515156,
+    "ast_hash": "400c8b8231420f30b48aed0a6f37df9f",
+    "semantic_hash": "400c8b8231420f30b48aed0a6f37df9f"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\graphify\\SKILL.md": {
+    "mtime": 1781264130.1692593,
+    "ast_hash": "97e1ddc1ebe2229f88caf4f846c70256",
+    "semantic_hash": "97e1ddc1ebe2229f88caf4f846c70256"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\improve-codebase-architecture\\DEEPENING.md": {
+    "mtime": 1781025121.2950122,
+    "ast_hash": "83611866654c9324426ee35d6fb4295e",
+    "semantic_hash": "83611866654c9324426ee35d6fb4295e"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\improve-codebase-architecture\\HTML-REPORT.md": {
+    "mtime": 1781025121.2970128,
+    "ast_hash": "6be2b9d4c2c63e5c1671ab0b059ee9a1",
+    "semantic_hash": "6be2b9d4c2c63e5c1671ab0b059ee9a1"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\improve-codebase-architecture\\INTERFACE-DESIGN.md": {
+    "mtime": 1781025121.2980192,
+    "ast_hash": "495dddf4d7f1fed0240811bc71c1d9ea",
+    "semantic_hash": "495dddf4d7f1fed0240811bc71c1d9ea"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\improve-codebase-architecture\\LANGUAGE.md": {
+    "mtime": 1781025121.299013,
+    "ast_hash": "ba0099d6b60d658b2aff0bba0b41dd3c",
+    "semantic_hash": "ba0099d6b60d658b2aff0bba0b41dd3c"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\improve-codebase-architecture\\SKILL.md": {
+    "mtime": 1781025121.3000126,
+    "ast_hash": "b75525c48539b4aa9dd4ee0cbd287d28",
+    "semantic_hash": "b75525c48539b4aa9dd4ee0cbd287d28"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\kiosk-developer\\SKILL.md": {
+    "mtime": 1780709718.1377385,
+    "ast_hash": "ac050d6601c757eed8a8c6370252c8aa",
+    "semantic_hash": "ac050d6601c757eed8a8c6370252c8aa"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\pdf\\LICENSE.txt": {
+    "mtime": 1781025155.3644128,
+    "ast_hash": "03077c38ac09b5515927eb4d5cf12484",
+    "semantic_hash": "03077c38ac09b5515927eb4d5cf12484"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\pdf\\SKILL.md": {
+    "mtime": 1781025155.3664064,
+    "ast_hash": "8609b5c38f8cc19061b2a459080b5b43",
+    "semantic_hash": "8609b5c38f8cc19061b2a459080b5b43"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\pdf\\forms.md": {
+    "mtime": 1781025155.3684056,
+    "ast_hash": "6e2413286cceefab10fab9cd1cb59c97",
+    "semantic_hash": "6e2413286cceefab10fab9cd1cb59c97"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\pdf\\reference.md": {
+    "mtime": 1781025155.369403,
+    "ast_hash": "e648d10ba8cb9629ed12312b6da4279e",
+    "semantic_hash": "e648d10ba8cb9629ed12312b6da4279e"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\tdd\\SKILL.md": {
+    "mtime": 1781025095.113969,
+    "ast_hash": "06c57edca8db6db8f64c203c60a22de8",
+    "semantic_hash": "06c57edca8db6db8f64c203c60a22de8"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\tdd\\deep-modules.md": {
+    "mtime": 1781025095.114965,
+    "ast_hash": "b5ab090a761366ce3c2c02117b776445",
+    "semantic_hash": "b5ab090a761366ce3c2c02117b776445"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\tdd\\interface-design.md": {
+    "mtime": 1781025095.115975,
+    "ast_hash": "bcd6f09692098ec7a748a7d98e99d3ea",
+    "semantic_hash": "bcd6f09692098ec7a748a7d98e99d3ea"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\tdd\\mocking.md": {
+    "mtime": 1781025095.115975,
+    "ast_hash": "d5bba1ea1f387c4809b7dc7c4e75c862",
+    "semantic_hash": "d5bba1ea1f387c4809b7dc7c4e75c862"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\tdd\\refactoring.md": {
+    "mtime": 1781025095.117964,
+    "ast_hash": "e8a3e0973fa19f267a836fa6edc195ad",
+    "semantic_hash": "e8a3e0973fa19f267a836fa6edc195ad"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\tdd\\tests.md": {
+    "mtime": 1781025095.1189847,
+    "ast_hash": "2927904135046181aae6793038e5f6c7",
+    "semantic_hash": "2927904135046181aae6793038e5f6c7"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\AGENTS.md": {
+    "mtime": 1781025085.1398656,
+    "ast_hash": "fc8f9b0218d2173112a8418bf9d8abe7",
+    "semantic_hash": "fc8f9b0218d2173112a8418bf9d8abe7"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\README.md": {
+    "mtime": 1781025085.1575258,
+    "ast_hash": "abb5236c535db0bf7ce6f38c8998bc47",
+    "semantic_hash": "abb5236c535db0bf7ce6f38c8998bc47"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\SKILL.md": {
+    "mtime": 1781025085.1379597,
+    "ast_hash": "995a667ef0b53598f56ff897d9e4b334",
+    "semantic_hash": "995a667ef0b53598f56ff897d9e4b334"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\_sections.md": {
+    "mtime": 1781025085.154587,
+    "ast_hash": "b8c110b45145ded6919562772afe067c",
+    "semantic_hash": "b8c110b45145ded6919562772afe067c"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\_template.md": {
+    "mtime": 1781025085.1448069,
+    "ast_hash": "a0d76a2f87f3f80e9a8f3a2a1054aaaf",
+    "semantic_hash": "a0d76a2f87f3f80e9a8f3a2a1054aaaf"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\advanced-effect-event-deps.md": {
+    "mtime": 1781025085.1481788,
+    "ast_hash": "3a0e314bb9576bab61f68d5de5afaf3e",
+    "semantic_hash": "3a0e314bb9576bab61f68d5de5afaf3e"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\advanced-event-handler-refs.md": {
+    "mtime": 1781025085.1468089,
+    "ast_hash": "f2a0d125f3773bfda91e187fa5bed48a",
+    "semantic_hash": "f2a0d125f3773bfda91e187fa5bed48a"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\advanced-init-once.md": {
+    "mtime": 1781025085.1502535,
+    "ast_hash": "0100519098b834e69a3515657a39bdc9",
+    "semantic_hash": "0100519098b834e69a3515657a39bdc9"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\advanced-use-latest.md": {
+    "mtime": 1781025085.1565135,
+    "ast_hash": "60309961293388c9b9e9fd4e0db344e3",
+    "semantic_hash": "60309961293388c9b9e9fd4e0db344e3"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\async-api-routes.md": {
+    "mtime": 1781025085.1514473,
+    "ast_hash": "344fa543b37e303660404e1ef3a4638b",
+    "semantic_hash": "344fa543b37e303660404e1ef3a4638b"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\async-cheap-condition-before-await.md": {
+    "mtime": 1781025085.160134,
+    "ast_hash": "96352f626f328e15a6213d485e29e36f",
+    "semantic_hash": "96352f626f328e15a6213d485e29e36f"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\async-defer-await.md": {
+    "mtime": 1781025085.164016,
+    "ast_hash": "235a6b5760c2e4843d778167e462cb0e",
+    "semantic_hash": "235a6b5760c2e4843d778167e462cb0e"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\async-dependencies.md": {
+    "mtime": 1781025085.162101,
+    "ast_hash": "9c5622d97b20b9e0cb79455b4322061a",
+    "semantic_hash": "9c5622d97b20b9e0cb79455b4322061a"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\async-parallel.md": {
+    "mtime": 1781025085.1662414,
+    "ast_hash": "a0e06a8e9985cdff4ece0312d8ee35db",
+    "semantic_hash": "a0e06a8e9985cdff4ece0312d8ee35db"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\async-suspense-boundaries.md": {
+    "mtime": 1781025085.1735983,
+    "ast_hash": "dbb2fc80721ca1ce32426f43219d314f",
+    "semantic_hash": "dbb2fc80721ca1ce32426f43219d314f"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\bundle-analyzable-paths.md": {
+    "mtime": 1781025085.1651063,
+    "ast_hash": "8cfe6e284cafd2be33f09c6a1abc78fd",
+    "semantic_hash": "8cfe6e284cafd2be33f09c6a1abc78fd"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\bundle-barrel-imports.md": {
+    "mtime": 1781025085.1673956,
+    "ast_hash": "fcba301df7f11c6847dca5962ac78828",
+    "semantic_hash": "fcba301df7f11c6847dca5962ac78828"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\bundle-conditional.md": {
+    "mtime": 1781025085.1715968,
+    "ast_hash": "585be2b6fc418c766e5b91cc2141d334",
+    "semantic_hash": "585be2b6fc418c766e5b91cc2141d334"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\bundle-defer-third-party.md": {
+    "mtime": 1781025085.168581,
+    "ast_hash": "6d4d1d4fac411f724071428dd0bc93ba",
+    "semantic_hash": "6d4d1d4fac411f724071428dd0bc93ba"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\bundle-dynamic-imports.md": {
+    "mtime": 1781025085.1795976,
+    "ast_hash": "72d89583306887810f67e9f7860f06af",
+    "semantic_hash": "72d89583306887810f67e9f7860f06af"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\bundle-preload.md": {
+    "mtime": 1781025085.1805913,
+    "ast_hash": "924ec7e7502ca042070326d38e88f8cd",
+    "semantic_hash": "924ec7e7502ca042070326d38e88f8cd"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\client-event-listeners.md": {
+    "mtime": 1781025085.1825938,
+    "ast_hash": "71062add972f9735348b7ae77e778eb8",
+    "semantic_hash": "71062add972f9735348b7ae77e778eb8"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\client-localstorage-schema.md": {
+    "mtime": 1781025085.1865947,
+    "ast_hash": "982a459b07cbec2f8386e526b924c339",
+    "semantic_hash": "982a459b07cbec2f8386e526b924c339"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\client-passive-event-listeners.md": {
+    "mtime": 1781025085.1845925,
+    "ast_hash": "3853533fd5f49fa2fc98296f9c34d84f",
+    "semantic_hash": "3853533fd5f49fa2fc98296f9c34d84f"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\client-swr-dedup.md": {
+    "mtime": 1781025085.1855931,
+    "ast_hash": "e565fcba7836d339ca4707aad6fdaa4a",
+    "semantic_hash": "e565fcba7836d339ca4707aad6fdaa4a"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\js-batch-dom-css.md": {
+    "mtime": 1781025085.1875958,
+    "ast_hash": "869dbc06a931ccfb899b739316c348af",
+    "semantic_hash": "869dbc06a931ccfb899b739316c348af"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\js-cache-function-results.md": {
+    "mtime": 1781025085.188594,
+    "ast_hash": "5d641ce87ef753d59e3205244e2851a1",
+    "semantic_hash": "5d641ce87ef753d59e3205244e2851a1"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\js-cache-property-access.md": {
+    "mtime": 1781025085.190595,
+    "ast_hash": "5b4ae3cd853b92222a8fd8c8d8202426",
+    "semantic_hash": "5b4ae3cd853b92222a8fd8c8d8202426"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\js-cache-storage.md": {
+    "mtime": 1781025085.1915922,
+    "ast_hash": "828f260566ff92df56089321fa41c116",
+    "semantic_hash": "828f260566ff92df56089321fa41c116"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\js-combine-iterations.md": {
+    "mtime": 1781025085.1975987,
+    "ast_hash": "4f241532133637fee75304d40f016713",
+    "semantic_hash": "4f241532133637fee75304d40f016713"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\js-early-exit.md": {
+    "mtime": 1781025085.194591,
+    "ast_hash": "d300cb3e57255029e446bdfa49dc4074",
+    "semantic_hash": "d300cb3e57255029e446bdfa49dc4074"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\js-flatmap-filter.md": {
+    "mtime": 1781025085.1966057,
+    "ast_hash": "161d9d8b444e5ec9cb58bffb0e1b76cd",
+    "semantic_hash": "161d9d8b444e5ec9cb58bffb0e1b76cd"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\js-hoist-regexp.md": {
+    "mtime": 1781025085.2016127,
+    "ast_hash": "ced4609a5916db47bbaccfcc3f2dcdbb",
+    "semantic_hash": "ced4609a5916db47bbaccfcc3f2dcdbb"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\js-index-maps.md": {
+    "mtime": 1781025085.2046075,
+    "ast_hash": "db5bcfde02e1ce9f41d6ed1f5aafc8c5",
+    "semantic_hash": "db5bcfde02e1ce9f41d6ed1f5aafc8c5"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\js-length-check-first.md": {
+    "mtime": 1781025085.207611,
+    "ast_hash": "2ba208759dd91578f1085c28e6a92ce9",
+    "semantic_hash": "2ba208759dd91578f1085c28e6a92ce9"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\js-min-max-loop.md": {
+    "mtime": 1781025085.2111206,
+    "ast_hash": "82f654d27529dd80be7ae33d45dcdf8c",
+    "semantic_hash": "82f654d27529dd80be7ae33d45dcdf8c"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\js-request-idle-callback.md": {
+    "mtime": 1781025085.2181804,
+    "ast_hash": "91d7e7fca676efb7cecb4ccff1eaec01",
+    "semantic_hash": "91d7e7fca676efb7cecb4ccff1eaec01"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\js-set-map-lookups.md": {
+    "mtime": 1781025085.2056105,
+    "ast_hash": "59a278e21ecd322bff566ba4ad7f5a30",
+    "semantic_hash": "59a278e21ecd322bff566ba4ad7f5a30"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\js-tosorted-immutable.md": {
+    "mtime": 1781025085.2126622,
+    "ast_hash": "fd0804905877b6b7b1858e5df1b5f3c4",
+    "semantic_hash": "fd0804905877b6b7b1858e5df1b5f3c4"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rendering-activity.md": {
+    "mtime": 1781025085.2192044,
+    "ast_hash": "b66bde1377564aa196ba15fc94215cd3",
+    "semantic_hash": "b66bde1377564aa196ba15fc94215cd3"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rendering-animate-svg-wrapper.md": {
+    "mtime": 1781025085.2211998,
+    "ast_hash": "7301cbe48bf0e1c44934847861384d03",
+    "semantic_hash": "7301cbe48bf0e1c44934847861384d03"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rendering-conditional-render.md": {
+    "mtime": 1781025085.2233748,
+    "ast_hash": "7aa6112d7544d55147e183b84add9c31",
+    "semantic_hash": "7aa6112d7544d55147e183b84add9c31"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rendering-content-visibility.md": {
+    "mtime": 1781025085.2318583,
+    "ast_hash": "a4ec0125d3a9d79ac2ab5f7a7b5b4d7d",
+    "semantic_hash": "a4ec0125d3a9d79ac2ab5f7a7b5b4d7d"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rendering-hoist-jsx.md": {
+    "mtime": 1781025085.227837,
+    "ast_hash": "00519c11155c5c2a6f493d7980211a71",
+    "semantic_hash": "00519c11155c5c2a6f493d7980211a71"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rendering-hydration-no-flicker.md": {
+    "mtime": 1781025085.2328515,
+    "ast_hash": "a33ebc96d26525f94c460342d913e47a",
+    "semantic_hash": "a33ebc96d26525f94c460342d913e47a"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rendering-hydration-suppress-warning.md": {
+    "mtime": 1781025085.2251945,
+    "ast_hash": "23bc895f5697c19a59712bf19474ec12",
+    "semantic_hash": "23bc895f5697c19a59712bf19474ec12"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rendering-resource-hints.md": {
+    "mtime": 1781025085.2368515,
+    "ast_hash": "a612b2d1d86d1b8205b92ff7dfd81eb8",
+    "semantic_hash": "a612b2d1d86d1b8205b92ff7dfd81eb8"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rendering-script-defer-async.md": {
+    "mtime": 1781025085.2308526,
+    "ast_hash": "d62596aed565dd3ad7bddd38bc8f7798",
+    "semantic_hash": "d62596aed565dd3ad7bddd38bc8f7798"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rendering-svg-precision.md": {
+    "mtime": 1781025085.22885,
+    "ast_hash": "1b880754ee449c52ccc725481f8b2e90",
+    "semantic_hash": "1b880754ee449c52ccc725481f8b2e90"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rendering-usetransition-loading.md": {
+    "mtime": 1781025085.23386,
+    "ast_hash": "3cea04ec76a76183cebc6571ac6365a2",
+    "semantic_hash": "3cea04ec76a76183cebc6571ac6365a2"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rerender-defer-reads.md": {
+    "mtime": 1781025085.2408497,
+    "ast_hash": "2b754062eb7b203632859f6515ed3561",
+    "semantic_hash": "2b754062eb7b203632859f6515ed3561"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rerender-dependencies.md": {
+    "mtime": 1781025085.2388506,
+    "ast_hash": "ad0e42cd0616237f62f8a5abbc2138bc",
+    "semantic_hash": "ad0e42cd0616237f62f8a5abbc2138bc"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rerender-derived-state-no-effect.md": {
+    "mtime": 1781025085.2418554,
+    "ast_hash": "c83ba3c8ea58015fd30072790a4959c4",
+    "semantic_hash": "c83ba3c8ea58015fd30072790a4959c4"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rerender-derived-state.md": {
+    "mtime": 1781025085.24786,
+    "ast_hash": "fadd31941e355786cb0cc7bba3c672fd",
+    "semantic_hash": "fadd31941e355786cb0cc7bba3c672fd"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rerender-functional-setstate.md": {
+    "mtime": 1781025085.249472,
+    "ast_hash": "188c0b949d23c11885914c573f4a770a",
+    "semantic_hash": "188c0b949d23c11885914c573f4a770a"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rerender-lazy-state-init.md": {
+    "mtime": 1781025085.2484553,
+    "ast_hash": "6f9fc3d826cea2ca484912256149b077",
+    "semantic_hash": "6f9fc3d826cea2ca484912256149b077"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rerender-memo-with-default-value.md": {
+    "mtime": 1781025085.2448502,
+    "ast_hash": "9bfa45660e0a4d4f180e1d12d9ed44ea",
+    "semantic_hash": "9bfa45660e0a4d4f180e1d12d9ed44ea"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rerender-memo.md": {
+    "mtime": 1781025085.245857,
+    "ast_hash": "f0decabf1e4cf032c36f0977c81167b7",
+    "semantic_hash": "f0decabf1e4cf032c36f0977c81167b7"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rerender-move-effect-to-event.md": {
+    "mtime": 1781025085.254648,
+    "ast_hash": "599463fe624afd8822ba2bfa7c0138d5",
+    "semantic_hash": "599463fe624afd8822ba2bfa7c0138d5"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rerender-no-inline-components.md": {
+    "mtime": 1781025085.2536333,
+    "ast_hash": "713855e0060cfe2ce549d08ea77e1af6",
+    "semantic_hash": "713855e0060cfe2ce549d08ea77e1af6"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rerender-simple-expression-in-memo.md": {
+    "mtime": 1781025085.255654,
+    "ast_hash": "42c37552160cff86a0fcbd93a27aa74e",
+    "semantic_hash": "42c37552160cff86a0fcbd93a27aa74e"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rerender-split-combined-hooks.md": {
+    "mtime": 1781025085.2576504,
+    "ast_hash": "b7485878ff82ce8468078a31fc1b7f19",
+    "semantic_hash": "b7485878ff82ce8468078a31fc1b7f19"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rerender-transitions.md": {
+    "mtime": 1781025085.2641287,
+    "ast_hash": "3f275bbfb966fcb39c554ad959fdf016",
+    "semantic_hash": "3f275bbfb966fcb39c554ad959fdf016"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rerender-use-deferred-value.md": {
+    "mtime": 1781025085.2606523,
+    "ast_hash": "913dc783397142c25ec997b5dc11245b",
+    "semantic_hash": "913dc783397142c25ec997b5dc11245b"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\rerender-use-ref-transient-values.md": {
+    "mtime": 1781025085.2621095,
+    "ast_hash": "24d2e82617e2da4207afaf049e1314f3",
+    "semantic_hash": "24d2e82617e2da4207afaf049e1314f3"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\server-after-nonblocking.md": {
+    "mtime": 1781025085.2631295,
+    "ast_hash": "c88a79384f87826bf1b20aa3637093a5",
+    "semantic_hash": "c88a79384f87826bf1b20aa3637093a5"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\server-auth-actions.md": {
+    "mtime": 1781025085.26713,
+    "ast_hash": "d8691820d666e5dd9094ccc6996398e3",
+    "semantic_hash": "d8691820d666e5dd9094ccc6996398e3"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\server-cache-lru.md": {
+    "mtime": 1781025085.2661345,
+    "ast_hash": "723195ea460bfbc4d43b4eb0c47b246b",
+    "semantic_hash": "723195ea460bfbc4d43b4eb0c47b246b"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\server-cache-react.md": {
+    "mtime": 1781025085.2681348,
+    "ast_hash": "bc168ee66c4378854c7aa23cb9ca1369",
+    "semantic_hash": "bc168ee66c4378854c7aa23cb9ca1369"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\server-dedup-props.md": {
+    "mtime": 1781025085.2691302,
+    "ast_hash": "86bf6f2d562ca98bca778a5b9d2f0251",
+    "semantic_hash": "86bf6f2d562ca98bca778a5b9d2f0251"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\server-hoist-static-io.md": {
+    "mtime": 1781025085.2711303,
+    "ast_hash": "05789c4ba35f68cc0ed6deba3078f7ab",
+    "semantic_hash": "05789c4ba35f68cc0ed6deba3078f7ab"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\server-no-shared-module-state.md": {
+    "mtime": 1781025085.2721324,
+    "ast_hash": "7733faf82c146008e8f1c65660bac4bb",
+    "semantic_hash": "7733faf82c146008e8f1c65660bac4bb"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\server-parallel-fetching.md": {
+    "mtime": 1781025085.273131,
+    "ast_hash": "1a36cf0b49a1a498fc1150afbf7a42c2",
+    "semantic_hash": "1a36cf0b49a1a498fc1150afbf7a42c2"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\server-parallel-nested-fetching.md": {
+    "mtime": 1781025085.2746184,
+    "ast_hash": "eaa7835a15d41842406acc34002f0d6c",
+    "semantic_hash": "eaa7835a15d41842406acc34002f0d6c"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\vercel-react-best-practices\\rules\\server-serialization.md": {
+    "mtime": 1781025085.277122,
+    "ast_hash": "e6d34426614852685f43609dd9e3b250",
+    "semantic_hash": "e6d34426614852685f43609dd9e3b250"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\web-design-guidelines\\SKILL.md": {
+    "mtime": 1781025071.5071237,
+    "ast_hash": "98087aedd18375666dbb093c859b2949",
+    "semantic_hash": "98087aedd18375666dbb093c859b2949"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\webapp-testing\\LICENSE.txt": {
+    "mtime": 1781025110.8665855,
+    "ast_hash": "b895df9142976f87a996eaf2e50fcfc0",
+    "semantic_hash": "b895df9142976f87a996eaf2e50fcfc0"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.agents\\skills\\webapp-testing\\SKILL.md": {
+    "mtime": 1781025110.8675907,
+    "ast_hash": "3becd8cd21604694b63809e483bc31a7",
+    "semantic_hash": "3becd8cd21604694b63809e483bc31a7"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\.cursor\\skills\\kiosk-developer\\SKILL.md": {
+    "mtime": 1780709723.259197,
+    "ast_hash": "ac050d6601c757eed8a8c6370252c8aa",
+    "semantic_hash": "ac050d6601c757eed8a8c6370252c8aa"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\README.md": {
+    "mtime": 1781158069.7604623,
+    "ast_hash": "7ffcb358d73bbf90f75c6df79db21b7b",
+    "semantic_hash": "7ffcb358d73bbf90f75c6df79db21b7b"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\docs\\catatan-konfigurasi-kiosk.md": {
+    "mtime": 1781049778.6750069,
+    "ast_hash": "c9bdee066aee099104c6949153706d20",
+    "semantic_hash": "c9bdee066aee099104c6949153706d20"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\kiosk\\templates\\sku.html": {
+    "mtime": 1781166695.4921584,
+    "ast_hash": "32039b0ad5c89e87aa74d8bf96c58e51",
+    "semantic_hash": "32039b0ad5c89e87aa74d8bf96c58e51"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\referensi_tema\\admin_dashboard_overview\\code.html": {
+    "mtime": 1780677964.0,
+    "ast_hash": "313cd86929fdb34215994a2ab279bd3e",
+    "semantic_hash": "313cd86929fdb34215994a2ab279bd3e"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\referensi_tema\\admin_pengaturan_template_surat\\code.html": {
+    "mtime": 1780677964.0,
+    "ast_hash": "e5036f8e6e495ee918f4b32a4d76797d",
+    "semantic_hash": "e5036f8e6e495ee918f4b32a4d76797d"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\referensi_tema\\admin_registrasi_warga_ocr_rfid\\code.html": {
+    "mtime": 1780677964.0,
+    "ast_hash": "d71da8825af66ab631753581db56d13c",
+    "semantic_hash": "d71da8825af66ab631753581db56d13c"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\referensi_tema\\kiosk_form_surat_dinamis\\code.html": {
+    "mtime": 1780677964.0,
+    "ast_hash": "a939e81e4c8692100a4aaa73c916955c",
+    "semantic_hash": "a939e81e4c8692100a4aaa73c916955c"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\referensi_tema\\kiosk_halaman_utama_tap_ktp\\code.html": {
+    "mtime": 1780677964.0,
+    "ast_hash": "9526741d8df6bf5d98c5b0ed3fc94e03",
+    "semantic_hash": "9526741d8df6bf5d98c5b0ed3fc94e03"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\referensi_tema\\kiosk_pilih_jenis_surat\\code.html": {
+    "mtime": 1780677964.0,
+    "ast_hash": "6fe9a6ecddea0ca2316f7218b73f01fd",
+    "semantic_hash": "6fe9a6ecddea0ca2316f7218b73f01fd"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\referensi_tema\\pic_dashboard_desa_sukamakmur\\code.html": {
+    "mtime": 1780677964.0,
+    "ast_hash": "9903de15e34baf68f187db1679d5f3a8",
+    "semantic_hash": "9903de15e34baf68f187db1679d5f3a8"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\referensi_tema\\pic_manajemen_unit_kiosk\\code.html": {
+    "mtime": 1780677964.0,
+    "ast_hash": "d28881426cebf8b5d343e2af0e3f06f8",
+    "semantic_hash": "d28881426cebf8b5d343e2af0e3f06f8"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\referensi_tema\\pic_verifikasi_permohonan_surat\\code.html": {
+    "mtime": 1780677964.0,
+    "ast_hash": "117a1183270b7e15c81114e19b10baff",
+    "semantic_hash": "117a1183270b7e15c81114e19b10baff"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\referensi_tema\\sistem_kiosk_desa\\DESIGN.md": {
+    "mtime": 1780677964.0,
+    "ast_hash": "fb9c05e6b4a6f9d24467a98fb4751844",
+    "semantic_hash": "fb9c05e6b4a6f9d24467a98fb4751844"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\user.md": {
+    "mtime": 1781047493.1617165,
+    "ast_hash": "2426cd4de3d84d6246f376ddb6c95d0a",
+    "semantic_hash": "2426cd4de3d84d6246f376ddb6c95d0a"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\README.md": {
+    "mtime": 1780711426.3843923,
+    "ast_hash": "de76967202948d4f70d11f4b3d9e7674",
+    "semantic_hash": "de76967202948d4f70d11f4b3d9e7674"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\README.md": {
+    "mtime": 1778567066.6776285,
+    "ast_hash": "f6e3faf55d738cf2affe1b44195f27cf",
+    "semantic_hash": "f6e3faf55d738cf2affe1b44195f27cf"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\index.html": {
+    "mtime": 1780709357.8285432,
+    "ast_hash": "3d43417e10c2856bb7787ac1cae715a0",
+    "semantic_hash": "3d43417e10c2856bb7787ac1cae715a0"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\referensi_tema\\admin_dashboard_overview\\screen.png": {
+    "mtime": 1780677964.0,
+    "ast_hash": "63242ec3ca82228bfdf0678ac0df45d3",
+    "semantic_hash": "63242ec3ca82228bfdf0678ac0df45d3"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\referensi_tema\\admin_pengaturan_template_surat\\screen.png": {
+    "mtime": 1780677964.0,
+    "ast_hash": "28476245a2c5f8482d54652f96e13aa3",
+    "semantic_hash": "28476245a2c5f8482d54652f96e13aa3"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\referensi_tema\\admin_registrasi_warga_ocr_rfid\\screen.png": {
+    "mtime": 1780677964.0,
+    "ast_hash": "e6acd7fa9d90a0021f61722cbb6af90b",
+    "semantic_hash": "e6acd7fa9d90a0021f61722cbb6af90b"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\referensi_tema\\kiosk_form_surat_dinamis\\screen.png": {
+    "mtime": 1780677964.0,
+    "ast_hash": "de676f23fb9ff0b2b316197cb74cf01d",
+    "semantic_hash": "de676f23fb9ff0b2b316197cb74cf01d"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\referensi_tema\\kiosk_halaman_utama_tap_ktp\\screen.png": {
+    "mtime": 1780677964.0,
+    "ast_hash": "045c0fd236edb836a9ac1e39577b6c3e",
+    "semantic_hash": "045c0fd236edb836a9ac1e39577b6c3e"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\referensi_tema\\kiosk_pilih_jenis_surat\\screen.png": {
+    "mtime": 1780677964.0,
+    "ast_hash": "904a539736efb251a8505dfd74385fb1",
+    "semantic_hash": "904a539736efb251a8505dfd74385fb1"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\referensi_tema\\pic_dashboard_desa_sukamakmur\\screen.png": {
+    "mtime": 1780677964.0,
+    "ast_hash": "4bc92595511abe90265a6faf51b3a39c",
+    "semantic_hash": "4bc92595511abe90265a6faf51b3a39c"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\referensi_tema\\pic_manajemen_unit_kiosk\\screen.png": {
+    "mtime": 1780677964.0,
+    "ast_hash": "67cbed3169be8e3b55959680d249be19",
+    "semantic_hash": "67cbed3169be8e3b55959680d249be19"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\referensi_tema\\pic_verifikasi_permohonan_surat\\screen.png": {
+    "mtime": 1780677964.0,
+    "ast_hash": "6d8cdb6069c5ba8219dc1c78bc10a0ed",
+    "semantic_hash": "6d8cdb6069c5ba8219dc1c78bc10a0ed"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\public\\favicon.svg": {
+    "mtime": 1780508098.0,
+    "ast_hash": "8c13f40658976ea1dfb8ba37a8be0e8d",
+    "semantic_hash": "8c13f40658976ea1dfb8ba37a8be0e8d"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\assets\\astro.svg": {
+    "mtime": 1780508098.0,
+    "ast_hash": "d26c3520f1f016bad745392df8b5fae5",
+    "semantic_hash": "d26c3520f1f016bad745392df8b5fae5"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\dashboard\\src\\assets\\background.svg": {
+    "mtime": 1780508098.0,
+    "ast_hash": "c2eaad48507ad1ea41f586bd5c21858a",
+    "semantic_hash": "c2eaad48507ad1ea41f586bd5c21858a"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\public\\favicon.svg": {
+    "mtime": 1778567066.8084095,
+    "ast_hash": "7e840862161341271697daa99a40d76b",
+    "semantic_hash": "7e840862161341271697daa99a40d76b"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\public\\icons.svg": {
+    "mtime": 1778567066.871578,
+    "ast_hash": "3b4fcfcf393eca4d264dca4a4663bc37",
+    "semantic_hash": "3b4fcfcf393eca4d264dca4a4663bc37"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\src\\assets\\hero.png": {
+    "mtime": 1778567066.7309046,
+    "ast_hash": "aead493361b27e7510691c5d7072dfc1",
+    "semantic_hash": "aead493361b27e7510691c5d7072dfc1"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\src\\assets\\react.svg": {
+    "mtime": 1778567066.933429,
+    "ast_hash": "f0402b67b6ce880f65666bb49e841696",
+    "semantic_hash": "f0402b67b6ce880f65666bb49e841696"
+  },
+  "D:\\PROJECT\\MYPROJECT\\project-desa-kiosk\\web\\kiosk-ui\\src\\assets\\vite.svg": {
+    "mtime": 1778567066.98794,
+    "ast_hash": "9960a24288958394ac50e57ff638b036",
+    "semantic_hash": "9960a24288958394ac50e57ff638b036"
+  }
+}

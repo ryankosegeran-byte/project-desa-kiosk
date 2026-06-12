@@ -28,6 +28,7 @@ func setupTestServer(t *testing.T) (*Server, func()) {
 	suratRepo := db.NewSuratRepository(database)
 	jenisSuratRepo := db.NewJenisSuratRepository(database)
 	configRepo := db.NewConfigRepository(database)
+	nomorSuratRepo := db.NewNomorSuratRepository(database)
 
 	desaID := "desa-test-uuid"
 	// 3. Seed data
@@ -46,7 +47,7 @@ func setupTestServer(t *testing.T) (*Server, func()) {
 	pdfGen := print.NewPDFGenerator("data/printed_test")
 	printer := print.NewPrinter("")
 
-	server := NewServer(cfg, wargaRepo, suratRepo, jenisSuratRepo, configRepo, rfidBroker, pdfGen, printer)
+	server := NewServer(cfg, wargaRepo, suratRepo, jenisSuratRepo, configRepo, nomorSuratRepo, rfidBroker, pdfGen, printer)
 
 	cleanup := func() {
 		database.Close()

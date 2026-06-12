@@ -79,4 +79,9 @@ func (e *Engine) runSync(ctx context.Context) {
 	if err := e.puller.PullConfig(ctx); err != nil {
 		log.Error().Err(err).Msg("Sync pull konfigurasi surat gagal")
 	}
+
+	// 5. Pull nomor surat range
+	if err := e.puller.PullNomorSurat(ctx); err != nil {
+		log.Warn().Err(err).Msg("Gagal pull nomor surat batch (non-fatal)")
+	}
 }

@@ -25,6 +25,15 @@ type Surat struct {
 	SyncedAt       *time.Time      `json:"synced_at,omitempty"`
 }
 
+// NomorSuratBatch represents a batch of assigned surat numbers.
+type NomorSuratBatch struct {
+	JenisSuratID  string    `json:"jenis_surat_id"`
+	NomorTerakhir int       `json:"nomor_terakhir"`
+	BatasAtas     int       `json:"batas_atas"`
+	FormatNomor   string    `json:"format_nomor"`
+	UpdatedAt     time.Time `json:"updated_at"`
+}
+
 // SuratStatus constants.
 const (
 	SuratStatusDraft   = "DRAFT"

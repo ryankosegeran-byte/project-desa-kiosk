@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import type { FieldDef } from '../hooks/useSurat';
 import { Plus, Trash2, Calendar, FileText } from 'lucide-react';
+import { SelectOrInputModal } from './SelectOrInputModal';
+import { AddressPickerModal } from './AddressPickerModal';
 
 interface SuratFormProps {
   fields: FieldDef[];
@@ -22,6 +24,12 @@ export const SuratForm: React.FC<SuratFormProps> = ({
   warga,
 }) => {
   const [formData, setFormData] = useState<any>({});
+  const [selectOrInputModal, setSelectOrInputModal] = useState<{ isOpen: boolean; fieldKey: string; title: string; options: string[] }>({
+    isOpen: false, fieldKey: '', title: '', options: []
+  });
+  const [addressModal, setAddressModal] = useState<{ isOpen: boolean; fieldKey: string }>({
+    isOpen: false, fieldKey: ''
+  });
 
   // Initialize form state
   useEffect(() => {
@@ -33,6 +41,10 @@ export const SuratForm: React.FC<SuratFormProps> = ({
         initialData[f.key] = false;
       } else {
         initialData[f.key] = '';
+        // Auto-fill tahun kewajiban dengan tahun berjalan
+        if (f.key === 'tahun_kewajiban') {
+          initialData[f.key] = new Date().getFullYear().toString();
+        }
       }
     });
     setFormData(initialData);
@@ -171,6 +183,46 @@ export const SuratForm: React.FC<SuratFormProps> = ({
             <span style={{ color: 'var(--text-muted)' }}>{field.placeholder || "Ya, setuju."}</span>
           </label>
         );
+      case 'select_or_input':
+        return (
+          <button
+            type="button"
+            className="form-control"
+            style={{
+              textAlign: 'left',
+              cursor: 'pointer',
+              color: value ? 'var(--text-main)' : 'var(--text-muted)',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+            onClick={() => setSelectOrInputModal({
+              isOpen: true,
+              fieldKey: field.key,
+              title: field.label,
+              options: field.options || [],
+            })}
+          >
+            <span>{value || field.placeholder || `Pilih ${field.label}`}</span>
+            <span style={{ fontSize: '12px', opacity: 0.6 }}>▼</span>
+          </button>
+        );
+      case 'address':
+        return (
+          <button
+            type="button"
+            className="form-control"
+            style={{
+              textAlign: 'left',
+              cursor: 'pointer',
+              color: value ? 'var(--text-main)' : 'var(--text-muted)',
+              minHeight: '52px',
+            }}
+            onClick={() => setAddressModal({ isOpen: true, fieldKey: field.key })}
+          >
+            {value || field.placeholder || 'Klik untuk pilih alamat'}
+          </button>
+        );
       default:
         return null;
     }
@@ -285,6 +337,24 @@ export const SuratForm: React.FC<SuratFormProps> = ({
           Lanjutkan ke Pratinjau
         </button>
       </div>
+
+      {/* Modal: Select or Input */}
+      <SelectOrInputModal
+        isOpen={selectOrInputModal.isOpen}
+        title={selectOrInputModal.title}
+        options={selectOrInputModal.options}
+        currentValue={formData[selectOrInputModal.fieldKey] || ''}
+        onSelect={(val) => handleFieldChange(selectOrInputModal.fieldKey, val)}
+        onClose={() => setSelectOrInputModal(prev => ({ ...prev, isOpen: false }))}
+      />
+
+      {/* Modal: Address Picker */}
+      <AddressPickerModal
+        isOpen={addressModal.isOpen}
+        currentValue={formData[addressModal.fieldKey] || ''}
+        onSelect={(val) => handleFieldChange(addressModal.fieldKey, val)}
+        onClose={() => setAddressModal(prev => ({ ...prev, isOpen: false }))}
+      />
     </form>
   );
 };

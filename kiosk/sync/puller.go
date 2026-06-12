@@ -20,6 +20,7 @@ type Puller struct {
 	wargaRepo      *db.WargaRepository
 	jenisSuratRepo *db.JenisSuratRepository
 	configRepo     *db.ConfigRepository
+	nomorSuratRepo *db.NomorSuratRepository
 	client         *http.Client
 }
 
@@ -28,12 +29,14 @@ func NewPuller(
 	wargaRepo *db.WargaRepository,
 	jenisSuratRepo *db.JenisSuratRepository,
 	configRepo *db.ConfigRepository,
+	nomorSuratRepo *db.NomorSuratRepository,
 ) *Puller {
 	return &Puller{
 		cfg:            cfg,
 		wargaRepo:      wargaRepo,
 		jenisSuratRepo: jenisSuratRepo,
 		configRepo:     configRepo,
+		nomorSuratRepo: nomorSuratRepo,
 		client:         &http.Client{Timeout: 15 * time.Second},
 	}
 }
@@ -139,5 +142,47 @@ func (p *Puller) PullConfig(ctx context.Context) error {
 	_ = p.configRepo.Set(ctx, "last_sync_at_config", syncedAtStr)
 
 	log.Info().Msg("Sync pull config selesai")
+	return nil
+}
+
+// PullNomorSurat fetches nomor surat batch config from server.
+func (p *Puller) PullNomorSurat(ctx context.Context) error {
+	syncURL := fmt.Sprintf("%s/api/sync/pull/nomor-surat", p.cfg.ServerURL)
+	req, err := http.NewRequestWithContext(ctx, "GET", syncURL, nil)
+	if err != nil {
+		return fmt.Errorf("failed to create pull nomor-surat request: %w", err)
+	}
+	req.Header.Set("X-API-Key", p.cfg.APIKey)
+
+	resp, err := p.client.Do(req)
+	if err != nil {
+		return fmt.Errorf("pull nomor-surat request failed: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("server returned status code: %d", resp.StatusCode)
+	}
+
+	var batches []models.NomorSuratBatch
+	if err := json.NewDecoder(resp.Body).Decode(&batches); err != nil {
+		return fmt.Errorf("failed to parse nomor-surat response: %w", err)
+	}
+
+	for _, batch := range batches {
+		// Cek apakah batch lokal sudah ada, jika sudah, jangan turunkan nomor_terakhir
+		existing, err := p.nomorSuratRepo.GetBatch(ctx, batch.JenisSuratID)
+		if err == nil && existing != nil {
+			// Preserve local nomor_terakhir jika lebih besar (sudah terpakai)
+			if existing.NomorTerakhir > batch.NomorTerakhir {
+				batch.NomorTerakhir = existing.NomorTerakhir
+			}
+		}
+		if err := p.nomorSuratRepo.UpdateBatch(ctx, batch); err != nil {
+			log.Error().Err(err).Str("jenis_surat_id", batch.JenisSuratID).Msg("Gagal update batch nomor surat")
+		}
+	}
+
+	log.Info().Int("count", len(batches)).Msg("Sync pull nomor surat selesai")
 	return nil
 }
