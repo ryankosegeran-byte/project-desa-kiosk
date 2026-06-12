@@ -1,14 +1,17 @@
 ---
-source_file: "web/dashboard/src/lib/api.ts"
+source_file: "kiosk/api/router.go"
 type: "code"
-community: "Module Group 146"
-location: "L3"
+community: "Community 2"
+location: "L183"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Module_Group_146
+  - community/Community_2
 ---
 
-# request
+# Request
 
-#graphify/code #graphify/EXTRACTED #community/Module_Group_146
+## Connections
+- [[.handleStatus()]] - `references` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/Community_2

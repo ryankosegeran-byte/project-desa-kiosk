@@ -1,16 +1,16 @@
 ---
 source_file: ".agents/skills/improve-codebase-architecture/DEEPENING.md"
 type: "document"
-community: "Architecture Deepening"
+community: "Community 44"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Architecture_Deepening
+  - community/Community_44
 ---
 
-# Deepening
+# DEEPENING.md
 
 ## Connections
-- [[Doc DEEPENING]] - `contains` [EXTRACTED]
+- [[improve-codebase-architecture]] - `imports_from` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Architecture_Deepening
+#graphify/document #graphify/EXTRACTED #community/Community_44

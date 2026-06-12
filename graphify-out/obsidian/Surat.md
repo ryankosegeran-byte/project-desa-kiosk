@@ -1,14 +1,22 @@
 ---
-source_file: "web/kiosk-ui/src/hooks/useSurat.ts"
+source_file: "kiosk/db/surat_repo.go"
 type: "code"
-community: "Module Group 141"
-location: "L25"
+community: "Community 15"
+location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Module_Group_141
+  - community/Community_15
 ---
 
 # Surat
 
-#graphify/code #graphify/EXTRACTED #community/Module_Group_141
+## Connections
+- [[.Create()]] - `references` [EXTRACTED]
+- [[.FindByID()_1]] - `references` [EXTRACTED]
+- [[.ListToday()]] - `references` [EXTRACTED]
+- [[.ListUnsynced()]] - `references` [EXTRACTED]
+- [[.scanRow()]] - `references` [EXTRACTED]
+- [[.scanRows()]] - `references` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/Community_15

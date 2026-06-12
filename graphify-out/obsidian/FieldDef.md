@@ -1,14 +1,17 @@
 ---
-source_file: "web/kiosk-ui/src/hooks/useSurat.ts"
+source_file: "internal/models/jenis_surat.go"
 type: "code"
-community: "Module Group 139"
-location: "L3"
+community: "Community 31"
+location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Module_Group_139
+  - community/Community_31
 ---
 
 # FieldDef
 
-#graphify/code #graphify/EXTRACTED #community/Module_Group_139
+## Connections
+- [[FieldsSchema]] - `references` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/Community_31

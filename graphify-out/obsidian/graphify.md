@@ -1,16 +1,16 @@
 ---
-source_file: ".agents/skills/graphify/SKILL.md"
-type: "document"
-community: "Skill & Agent Configuration"
+source_file: ""
+type: "code"
+community: "Community 84"
 tags:
-  - graphify/document
+  - graphify/code
   - graphify/EXTRACTED
-  - community/Skill__Agent_Configuration
+  - community/Community_84
 ---
 
-# /graphify
+# graphify
 
 ## Connections
-- [[Doc SKILL]] - `contains` [EXTRACTED]
+- [[SKILL_2]] - `imports_from` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Skill__Agent_Configuration
+#graphify/code #graphify/EXTRACTED #community/Community_84

@@ -1,14 +1,17 @@
 ---
-source_file: "web/kiosk-ui/src/hooks/useWarga.ts"
+source_file: "internal/models/sync.go"
 type: "code"
-community: "Module Group 144"
-location: "L3"
+community: "Community 17"
+location: "L32"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Module_Group_144
+  - community/Community_17
 ---
 
 # Warga
 
-#graphify/code #graphify/EXTRACTED #community/Module_Group_144
+## Connections
+- [[SyncPullWargaResponse]] - `references` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/Community_17

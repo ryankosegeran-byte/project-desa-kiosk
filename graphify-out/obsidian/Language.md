@@ -1,16 +1,16 @@
 ---
 source_file: ".agents/skills/improve-codebase-architecture/LANGUAGE.md"
 type: "document"
-community: "Domain Language"
+community: "Community 44"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Domain_Language
+  - community/Community_44
 ---
 
-# Language
+# LANGUAGE.md
 
 ## Connections
-- [[Doc LANGUAGE]] - `contains` [EXTRACTED]
+- [[improve-codebase-architecture]] - `imports_from` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Domain_Language
+#graphify/document #graphify/EXTRACTED #community/Community_44
