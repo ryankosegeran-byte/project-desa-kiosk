@@ -1,16 +1,16 @@
 ---
 type: community
-members: 3
+cohesion: 1.00
+members: 1
 ---
 
 # Community 71
 
-**Members:** 3 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[README_3]] - document - web/kiosk-ui/README.md
-- [[index.html]] - image - web/kiosk-ui/index.html
-- [[kiosk-ui]] - code
+- [[surat.go]] - code - kiosk/api/surat.go
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,12 +1,12 @@
 ---
 source_file: "server/api/user_handler.go"
 type: "code"
-community: "Community 1"
+community: "API Helpers & Utilities"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_1
+  - community/API_Helpers__Utilities
 ---
 
 # Server
@@ -19,4 +19,4 @@ tags:
 - [[.handleResetPassword()]] - `method` [EXTRACTED]
 - [[.handleUpdateUser()]] - `method` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_1
+#graphify/code #graphify/EXTRACTED #community/API_Helpers__Utilities

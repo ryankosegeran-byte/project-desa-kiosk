@@ -1,12 +1,12 @@
 ---
 source_file: "kiosk/print/pdf.go"
 type: "code"
-community: "Community 7"
+community: "Surat Request Handlers"
 location: "L30"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_7
+  - community/Surat_Request_Handlers
 ---
 
 # Time
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[FormatIndonesianDate()]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_7
+#graphify/code #graphify/EXTRACTED #community/Surat_Request_Handlers

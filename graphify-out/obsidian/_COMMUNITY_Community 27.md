@@ -1,25 +1,27 @@
 ---
 type: community
+cohesion: 0.29
 members: 12
 ---
 
 # Community 27
 
+**Cohesion:** 0.29 - loosely connected
 **Members:** 12 nodes
 
 ## Members
-- [[.FindByID()]] - code - kiosk/db/jenis_surat_repo.go
-- [[.GetTemplate()]] - code - kiosk/db/jenis_surat_repo.go
-- [[.ListAktif()]] - code - kiosk/db/jenis_surat_repo.go
-- [[.Upsert()]] - code - kiosk/db/jenis_surat_repo.go
-- [[.UpsertTemplate()]] - code - kiosk/db/jenis_surat_repo.go
-- [[Context_1]] - code - kiosk/db/jenis_surat_repo.go
-- [[DB_2]] - code - kiosk/db/jenis_surat_repo.go
-- [[JenisSurat_2]] - code - kiosk/db/jenis_surat_repo.go
-- [[JenisSuratRepository_1]] - code - kiosk/db/jenis_surat_repo.go
-- [[NewJenisSuratRepository()]] - code - kiosk/db/jenis_surat_repo.go
-- [[SuratTemplate_2]] - code - kiosk/db/jenis_surat_repo.go
-- [[jenis_surat_repo.go]] - code - kiosk/db/jenis_surat_repo.go
+- [[.PullConfig()]] - code - kiosk/sync/puller.go
+- [[.PullNomorSurat()]] - code - kiosk/sync/puller.go
+- [[.PullWarga()]] - code - kiosk/sync/puller.go
+- [[Client_1]] - code - kiosk/sync/puller.go
+- [[Config_3]] - code - kiosk/sync/puller.go
+- [[ConfigRepository_2]] - code - kiosk/sync/puller.go
+- [[Context_11]] - code - kiosk/sync/puller.go
+- [[JenisSuratRepository_2]] - code - kiosk/sync/puller.go
+- [[NewPuller()]] - code - kiosk/sync/puller.go
+- [[NomorSuratRepository_2]] - code - kiosk/sync/puller.go
+- [[Puller_1]] - code - kiosk/sync/puller.go
+- [[WargaRepository_2]] - code - kiosk/sync/puller.go
 
 ## Live Query (requires Dataview plugin)
 
@@ -27,3 +29,9 @@ members: 12
 TABLE source_file, type FROM #community/Community_27
 SORT file.name ASC
 ```
+
+## Connections to other communities
+- 1 edge to [[_COMMUNITY_Kiosk API Tests]]
+
+## Top bridge nodes
+- [[NewPuller()]] - degree 7, connects to 1 community

@@ -1,25 +1,27 @@
 ---
 type: community
+cohesion: 0.21
 members: 12
 ---
 
 # Community 25
 
+**Cohesion:** 0.21 - loosely connected
 **Members:** 12 nodes
 
 ## Members
-- [[......componentsActivityLogList]] - code - web/dashboard/src/components/ActivityLogList
-- [[......componentsDesaManager]] - code - web/dashboard/src/components/DesaManager
-- [[....componentsWargaDraftComplete]] - code - web/dashboard/src/components/WargaDraftComplete
-- [[..componentsDashboardOverview]] - code - web/dashboard/src/components/DashboardOverview
-- [[..componentsLoginForm]] - code - web/dashboard/src/components/LoginForm
-- [[..stylesglobal.css]] - code - web/dashboard/src/styles/global.css
-- [[DashboardLayout.astro]] - code - web/dashboard/src/layouts/DashboardLayout.astro
-- [[dashboard.astro]] - code - web/dashboard/src/pages/dashboard.astro
-- [[draft.astro]] - code - web/dashboard/src/pages/warga/draft.astro
-- [[index.astro]] - code - web/dashboard/src/pages/admin/activity/index.astro
-- [[index.astro_1]] - code - web/dashboard/src/pages/admin/desa/index.astro
-- [[index.astro_4]] - code - web/dashboard/src/pages/index.astro
+- [[....componentsSuratTable]] - code - web/dashboard/src/components/SuratTable
+- [[LoginForm()]] - code - web/dashboard/src/components/LoginForm.tsx
+- [[LoginForm.tsx]] - code - web/dashboard/src/components/LoginForm.tsx
+- [[Surat_3]] - code - web/dashboard/src/components/SuratTable.tsx
+- [[SuratTable()]] - code - web/dashboard/src/components/SuratTable.tsx
+- [[SuratTable.tsx]] - code - web/dashboard/src/components/SuratTable.tsx
+- [[WargaDraftComplete()]] - code - web/dashboard/src/components/WargaDraftComplete.tsx
+- [[WargaDraftComplete.tsx]] - code - web/dashboard/src/components/WargaDraftComplete.tsx
+- [[WargaFormData]] - code - web/dashboard/src/components/WargaDraftComplete.tsx
+- [[api.ts]] - code - web/dashboard/src/lib/api.ts
+- [[index.astro_6]] - code - web/dashboard/src/pages/surat/index.astro
+- [[request()]] - code - web/dashboard/src/lib/api.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -29,19 +31,18 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 3 edges to [[_COMMUNITY_Community 29]]
-- 2 edges to [[_COMMUNITY_Community 26]]
-- 1 edge to [[_COMMUNITY_Community 40]]
-- 1 edge to [[_COMMUNITY_Community 41]]
-- 1 edge to [[_COMMUNITY_Community 33]]
-- 1 edge to [[_COMMUNITY_Community 34]]
-- 1 edge to [[_COMMUNITY_Community 42]]
-- 1 edge to [[_COMMUNITY_Community 46]]
-- 1 edge to [[_COMMUNITY_Community 43]]
+- 7 edges to [[_COMMUNITY_Community 28]]
+- 2 edges to [[_COMMUNITY_Community 39]]
+- 2 edges to [[_COMMUNITY_Community 40]]
+- 2 edges to [[_COMMUNITY_Community 33]]
+- 2 edges to [[_COMMUNITY_Community 34]]
+- 2 edges to [[_COMMUNITY_Community 41]]
+- 2 edges to [[_COMMUNITY_Community 24]]
+- 2 edges to [[_COMMUNITY_Community 45]]
+- 2 edges to [[_COMMUNITY_Community 42]]
 
 ## Top bridge nodes
-- [[DashboardLayout.astro]] - degree 13, connects to 8 communities
-- [[index.astro]] - degree 3, connects to 1 community
-- [[index.astro_1]] - degree 3, connects to 1 community
-- [[dashboard.astro]] - degree 3, connects to 1 community
-- [[draft.astro]] - degree 3, connects to 1 community
+- [[api.ts]] - degree 15, connects to 8 communities
+- [[request()]] - degree 14, connects to 8 communities
+- [[WargaDraftComplete.tsx]] - degree 5, connects to 1 community
+- [[index.astro_6]] - degree 3, connects to 1 community

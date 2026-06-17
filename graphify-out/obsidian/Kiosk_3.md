@@ -1,12 +1,12 @@
 ---
 source_file: "web/dashboard/src/components/KioskStatus.tsx"
 type: "code"
-community: "Community 41"
+community: "Community 40"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_41
+  - community/Community_40
 ---
 
 # Kiosk
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[KioskStatus.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_41
+#graphify/code #graphify/EXTRACTED #community/Community_40

@@ -1,12 +1,12 @@
 ---
 source_file: "server/ocr/gemini.go"
 type: "code"
-community: "Community 5"
+community: "OCR: Google Gemini"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_5
+  - community/OCR_Google_Gemini
 ---
 
 # NewGeminiProvider()
@@ -16,4 +16,4 @@ tags:
 - [[gemini.go]] - `contains` [EXTRACTED]
 - [[main()_3]] - `calls` [INFERRED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_5
+#graphify/code #graphify/EXTRACTED #community/OCR_Google_Gemini

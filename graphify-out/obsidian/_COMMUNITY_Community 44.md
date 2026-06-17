@@ -1,19 +1,20 @@
 ---
 type: community
-members: 6
+cohesion: 0.60
+members: 5
 ---
 
 # Community 44
 
-**Members:** 6 nodes
+**Cohesion:** 0.60 - moderately connected
+**Members:** 5 nodes
 
 ## Members
-- [[DEEPENING]] - document - .agents/skills/improve-codebase-architecture/DEEPENING.md
-- [[HTML-REPORT]] - document - .agents/skills/improve-codebase-architecture/HTML-REPORT.md
-- [[INTERFACE-DESIGN]] - document - .agents/skills/improve-codebase-architecture/INTERFACE-DESIGN.md
-- [[LANGUAGE]] - document - .agents/skills/improve-codebase-architecture/LANGUAGE.md
-- [[SKILL_3]] - document - .agents/skills/improve-codebase-architecture/SKILL.md
-- [[improve-codebase-architecture]] - code
+- [[.handleOCRExtract()]] - code - server/api/ocr_handler.go
+- [[.handleOCRTest()]] - code - server/api/ocr_handler.go
+- [[Request_9]] - code - server/api/ocr_handler.go
+- [[ResponseWriter_9]] - code - server/api/ocr_handler.go
+- [[Server_9]] - code - server/api/ocr_handler.go
 
 ## Live Query (requires Dataview plugin)
 
@@ -21,3 +22,9 @@ members: 6
 TABLE source_file, type FROM #community/Community_44
 SORT file.name ASC
 ```
+
+## Connections to other communities
+- 1 edge to [[_COMMUNITY_API Helpers & Utilities]]
+
+## Top bridge nodes
+- [[.handleOCRExtract()]] - degree 4, connects to 1 community

@@ -1,12 +1,12 @@
 ---
 source_file: "kiosk/sync/puller.go"
 type: "code"
-community: "Community 28"
+community: "Community 27"
 location: "L45"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_28
+  - community/Community_27
 ---
 
 # Context
@@ -16,4 +16,4 @@ tags:
 - [[.PullNomorSurat()]] - `references` [EXTRACTED]
 - [[.PullWarga()]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_28
+#graphify/code #graphify/EXTRACTED #community/Community_27

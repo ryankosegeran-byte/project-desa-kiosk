@@ -1,12 +1,12 @@
 ---
 source_file: "kiosk/db/seeder.go"
 type: "code"
-community: "Community 4"
+community: "Kiosk API Tests"
 location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_4
+  - community/Kiosk_API_Tests
 ---
 
 # DB
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[SeedLocalData()]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_4
+#graphify/code #graphify/EXTRACTED #community/Kiosk_API_Tests

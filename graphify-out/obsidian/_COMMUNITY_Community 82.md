@@ -1,15 +1,16 @@
 ---
 type: community
-members: 2
+cohesion: 1.00
+members: 1
 ---
 
 # Community 82
 
-**Members:** 2 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[catatan-konfigurasi-kiosk]] - document - docs/catatan-konfigurasi-kiosk.md
-- [[docs]] - code
+- [[vite.config.ts]] - code - web/kiosk-ui/vite.config.ts
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,12 +1,12 @@
 ---
 source_file: "kiosk/db/nomor_surat_repo.go"
 type: "code"
-community: "Community 4"
+community: "Kiosk API Tests"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_4
+  - community/Kiosk_API_Tests
 ---
 
 # nomor_surat_repo.go
@@ -16,4 +16,4 @@ tags:
 - [[NomorSuratRepository_1]] - `contains` [EXTRACTED]
 - [[toRomanMonth()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_4
+#graphify/code #graphify/EXTRACTED #community/Kiosk_API_Tests

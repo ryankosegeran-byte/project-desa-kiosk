@@ -1,12 +1,12 @@
 ---
 source_file: "server/db/template_repo.go"
 type: "code"
-community: "Community 24"
+community: "Community 23"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_24
+  - community/Community_23
 ---
 
 # template_repo.go
@@ -15,4 +15,4 @@ tags:
 - [[NewTemplateRepository()]] - `contains` [EXTRACTED]
 - [[TemplateRepository_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_24
+#graphify/code #graphify/EXTRACTED #community/Community_23

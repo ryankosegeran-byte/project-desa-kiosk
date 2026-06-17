@@ -1,18 +1,18 @@
 ---
-source_file: "server/api/router.go"
+source_file: "kiosk/sync/pusher.go"
 type: "code"
-community: "Community 2"
+community: "Community 32"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_2
+  - community/Community_32
 ---
 
 # Config
 
 ## Connections
-- [[NewServer()_1]] - `references` [EXTRACTED]
-- [[Server_11]] - `references` [EXTRACTED]
+- [[NewPusher()]] - `references` [EXTRACTED]
+- [[Pusher_1]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_2
+#graphify/code #graphify/EXTRACTED #community/Community_32

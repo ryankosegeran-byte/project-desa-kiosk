@@ -1,12 +1,12 @@
 ---
 source_file: "web/kiosk-ui/tsconfig.app.json"
 type: "code"
-community: "Community 12"
+community: "Dashboard TSConfig"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_12
+  - community/Dashboard_TSConfig
 ---
 
 # verbatimModuleSyntax
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[compilerOptions_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_12
+#graphify/code #graphify/EXTRACTED #community/Dashboard_TSConfig

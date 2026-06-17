@@ -1,12 +1,12 @@
 ---
 source_file: "server/db/desa_repo.go"
 type: "code"
-community: "Community 8"
+community: "Desa Repository"
 location: "L187"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_8
+  - community/Desa_Repository
 ---
 
 # Row
@@ -15,4 +15,4 @@ tags:
 - [[.scanKioskRow()]] - `references` [EXTRACTED]
 - [[.scanRow()_2]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_8
+#graphify/code #graphify/EXTRACTED #community/Desa_Repository

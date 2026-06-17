@@ -1,19 +1,14 @@
 ---
-source_file: "internal/models/warga.go"
+source_file: "kiosk/api/warga.go"
 type: "code"
-community: "Community 66"
+community: "Community 76"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_66
+  - community/Community_76
 ---
 
 # warga.go
 
-## Connections
-- [[KTPData]] - `contains` [EXTRACTED]
-- [[Time_5]] - `references` [EXTRACTED]
-- [[warga.go]] - `contains` [EXTRACTED]
-
-#graphify/code #graphify/EXTRACTED #community/Community_66
+#graphify/code #graphify/EXTRACTED #community/Community_76

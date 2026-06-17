@@ -1,18 +1,18 @@
 ---
 source_file: "kiosk/sync/detector.go"
 type: "code"
-community: "Community 4"
+community: "Kiosk API Tests"
 location: "L18"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Community_4
+  - community/Kiosk_API_Tests
 ---
 
 # NewDetector()
 
 ## Connections
-- [[detector.go]] - `references` [EXTRACTED]
+- [[Detector]] - `references` [EXTRACTED]
 - [[main()_2]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Community_4
+#graphify/code #graphify/INFERRED #community/Kiosk_API_Tests

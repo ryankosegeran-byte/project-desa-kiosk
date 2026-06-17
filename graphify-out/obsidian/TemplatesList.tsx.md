@@ -12,7 +12,7 @@ tags:
 # TemplatesList.tsx
 
 ## Connections
-- [[Desa_5]] - `contains` [EXTRACTED]
+- [[Desa_6]] - `contains` [EXTRACTED]
 - [[JenisSurat_5]] - `contains` [EXTRACTED]
 - [[Template]] - `contains` [EXTRACTED]
 - [[TemplatesList()]] - `contains` [EXTRACTED]

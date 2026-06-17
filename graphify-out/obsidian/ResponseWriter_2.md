@@ -1,12 +1,12 @@
 ---
 source_file: "kiosk/api/warga.go"
 type: "code"
-community: "Community 39"
+community: "Community 38"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_39
+  - community/Community_38
 ---
 
 # ResponseWriter
@@ -16,4 +16,4 @@ tags:
 - [[.handleGetWargaByRFID()]] - `references` [EXTRACTED]
 - [[.handleSearchWarga()]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_39
+#graphify/code #graphify/EXTRACTED #community/Community_38

@@ -1,12 +1,12 @@
 ---
 source_file: "server/api/ocr_status_handler.go"
 type: "code"
-community: "Community 50"
+community: "Community 48"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_50
+  - community/Community_48
 ---
 
 # Request
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[.handleOCRStatus()]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_50
+#graphify/code #graphify/EXTRACTED #community/Community_48

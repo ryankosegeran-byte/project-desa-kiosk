@@ -12,11 +12,11 @@ tags:
 # NewPusher()
 
 ## Connections
-- [[Config_3]] - `references` [EXTRACTED]
+- [[Config_4]] - `references` [EXTRACTED]
 - [[ConfigRepository_3]] - `references` [EXTRACTED]
+- [[Pusher_1]] - `references` [EXTRACTED]
 - [[SuratRepository_2]] - `references` [EXTRACTED]
 - [[SyncRepository_1]] - `references` [EXTRACTED]
 - [[main()_2]] - `calls` [INFERRED]
-- [[pusher.go]] - `references` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_32

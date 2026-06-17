@@ -1,12 +1,12 @@
 ---
 source_file: "internal/models/sync.go"
 type: "code"
-community: "Community 17"
+community: "Internal Models"
 location: "L20"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_17
+  - community/Internal_Models
 ---
 
 # RawMessage
@@ -15,4 +15,4 @@ tags:
 - [[SyncPushItem_1]] - `references` [EXTRACTED]
 - [[SyncQueueItem]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_17
+#graphify/code #graphify/EXTRACTED #community/Internal_Models

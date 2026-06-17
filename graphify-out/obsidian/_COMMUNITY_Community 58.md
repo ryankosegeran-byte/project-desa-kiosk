@@ -1,17 +1,18 @@
 ---
 type: community
-members: 4
+cohesion: 0.67
+members: 3
 ---
 
 # Community 58
 
-**Members:** 4 nodes
+**Cohesion:** 0.67 - moderately connected
+**Members:** 3 nodes
 
 ## Members
-- [[Extract form structure from a non-fillable PDF.  This script analyzes the PDF]] - rationale - .agents/skills/pdf/scripts/extract_form_structure.py
-- [[extract_form_structure()]] - code - .agents/skills/pdf/scripts/extract_form_structure.py
-- [[extract_form_structure.py]] - code - .agents/skills/pdf/scripts/extract_form_structure.py
-- [[main()]] - code - .agents/skills/pdf/scripts/extract_form_structure.py
+- [[KTPData_4]] - code - server/ocr/provider.go
+- [[OCRProvider_1]] - code - server/ocr/provider.go
+- [[provider.go]] - code - server/ocr/provider.go
 
 ## Live Query (requires Dataview plugin)
 

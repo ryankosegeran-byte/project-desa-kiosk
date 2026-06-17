@@ -1,12 +1,12 @@
 ---
 source_file: "server/db/warga_repo.go"
 type: "code"
-community: "Community 9"
+community: "Warga Repository"
 location: "L29"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_9
+  - community/Warga_Repository
 ---
 
 # Context
@@ -24,4 +24,4 @@ tags:
 - [[.Update()_2]] - `references` [EXTRACTED]
 - [[.UpdateToComplete()]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_9
+#graphify/code #graphify/EXTRACTED #community/Warga_Repository

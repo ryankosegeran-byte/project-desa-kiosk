@@ -1,17 +1,18 @@
 ---
 type: community
-members: 4
+cohesion: 1.00
+members: 3
 ---
 
 # Community 56
 
-**Members:** 4 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 3 nodes
 
 ## Members
-- [[AGENTS]] - document - .agents/skills/vercel-react-best-practices/AGENTS.md
-- [[README]] - document - .agents/skills/vercel-react-best-practices/README.md
-- [[SKILL_7]] - document - .agents/skills/vercel-react-best-practices/SKILL.md
-- [[vercel-react-best-practices]] - code
+- [[KTPData]] - code - internal/models/warga.go
+- [[Time_5]] - code - internal/models/warga.go
+- [[Warga_1]] - code - internal/models/warga.go
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,27 +1,29 @@
 ---
 type: community
+cohesion: 0.29
 members: 14
 ---
 
 # Community 21
 
+**Cohesion:** 0.29 - loosely connected
 **Members:** 14 nodes
 
 ## Members
-- [[.Create()_3]] - code - server/db/surat_repo.go
-- [[.FindByID()_4]] - code - server/db/surat_repo.go
-- [[.List()_2]] - code - server/db/surat_repo.go
-- [[.Upsert()_2]] - code - server/db/surat_repo.go
-- [[.scanRow()_4]] - code - server/db/surat_repo.go
-- [[.scanRows()_4]] - code - server/db/surat_repo.go
-- [[Context_15]] - code - server/db/surat_repo.go
-- [[DB_14]] - code - server/db/surat_repo.go
-- [[NewSuratRepository()_1]] - code - server/db/surat_repo.go
-- [[Row_4]] - code - server/db/surat_repo.go
-- [[Rows_4]] - code - server/db/surat_repo.go
-- [[Surat_1]] - code - server/db/surat_repo.go
-- [[SuratRepository_4]] - code - server/db/surat_repo.go
-- [[surat_repo.go_1]] - code - server/db/surat_repo.go
+- [[.FindByNIK()]] - code - kiosk/db/warga_repo.go
+- [[.FindByRFID()]] - code - kiosk/db/warga_repo.go
+- [[.Search()]] - code - kiosk/db/warga_repo.go
+- [[.Upsert()_1]] - code - kiosk/db/warga_repo.go
+- [[.scanRow()_1]] - code - kiosk/db/warga_repo.go
+- [[.scanRows()_1]] - code - kiosk/db/warga_repo.go
+- [[Context_6]] - code - kiosk/db/warga_repo.go
+- [[DB_8]] - code - kiosk/db/warga_repo.go
+- [[NewWargaRepository()]] - code - kiosk/db/warga_repo.go
+- [[Row_1]] - code - kiosk/db/warga_repo.go
+- [[Rows_1]] - code - kiosk/db/warga_repo.go
+- [[Warga_2]] - code - kiosk/db/warga_repo.go
+- [[WargaRepository_1]] - code - kiosk/db/warga_repo.go
+- [[warga_repo.go]] - code - kiosk/db/warga_repo.go
 
 ## Live Query (requires Dataview plugin)
 

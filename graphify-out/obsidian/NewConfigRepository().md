@@ -1,12 +1,12 @@
 ---
 source_file: "kiosk/db/config_repo.go"
 type: "code"
-community: "Community 4"
+community: "Kiosk API Tests"
 location: "L14"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Community_4
+  - community/Kiosk_API_Tests
 ---
 
 # NewConfigRepository()
@@ -19,4 +19,4 @@ tags:
 - [[main()_2]] - `calls` [INFERRED]
 - [[setupTestServer()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Community_4
+#graphify/code #graphify/INFERRED #community/Kiosk_API_Tests

@@ -1,12 +1,12 @@
 ---
 source_file: "server/ocr/groq.go"
 type: "code"
-community: "Community 18"
+community: "OCR: Groq"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_18
+  - community/OCR_Groq
 ---
 
 # NewGroqProvider()
@@ -16,4 +16,4 @@ tags:
 - [[groq.go]] - `contains` [EXTRACTED]
 - [[main()_3]] - `calls` [INFERRED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_18
+#graphify/code #graphify/EXTRACTED #community/OCR_Groq

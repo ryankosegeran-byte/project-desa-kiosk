@@ -1,15 +1,16 @@
 ---
 type: community
-members: 2
+cohesion: 1.00
+members: 1
 ---
 
 # Community 88
 
-**Members:** 2 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[DESIGN]] - document - referensi_tema/sistem_kiosk_desa/DESIGN.md
-- [[sistem_kiosk_desa]] - code
+- [[setup-kiosk.ps1]] - code - scripts/setup-kiosk.ps1
 
 ## Live Query (requires Dataview plugin)
 

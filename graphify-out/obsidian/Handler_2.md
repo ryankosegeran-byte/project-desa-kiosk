@@ -1,12 +1,12 @@
 ---
 source_file: "server/middleware/auth.go"
 type: "code"
-community: "Community 2"
+community: "Sync Handlers"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_2
+  - community/Sync_Handlers
 ---
 
 # Handler
@@ -16,4 +16,4 @@ tags:
 - [[KioskKeyMiddleware()]] - `references` [EXTRACTED]
 - [[RoleMiddleware()]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_2
+#graphify/code #graphify/EXTRACTED #community/Sync_Handlers

@@ -1,10 +1,12 @@
 ---
 type: community
+cohesion: 0.25
 members: 8
 ---
 
 # Community 33
 
+**Cohesion:** 0.25 - loosely connected
 **Members:** 8 nodes
 
 ## Members
@@ -25,8 +27,8 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 2 edges to [[_COMMUNITY_Community 26]]
-- 1 edge to [[_COMMUNITY_Community 25]]
+- 2 edges to [[_COMMUNITY_Community 25]]
+- 1 edge to [[_COMMUNITY_Community 24]]
 
 ## Top bridge nodes
 - [[OCRProviderConfig.tsx]] - degree 8, connects to 1 community

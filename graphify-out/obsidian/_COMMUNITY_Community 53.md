@@ -1,17 +1,19 @@
 ---
 type: community
+cohesion: 0.67
 members: 4
 ---
 
 # Community 53
 
+**Cohesion:** 0.67 - moderately connected
 **Members:** 4 nodes
 
 ## Members
-- [[capture()]] - code - .agents/skills/diagnose/scripts/hitl-loop.template.sh
-- [[hitl-loop.template.sh]] - code - .agents/skills/diagnose/scripts/hitl-loop.template.sh
-- [[hitl-loop.template.sh script]] - code - .agents/skills/diagnose/scripts/hitl-loop.template.sh
-- [[step()]] - code - .agents/skills/diagnose/scripts/hitl-loop.template.sh
+- [[Extract form structure from a non-fillable PDF.  This script analyzes the PDF]] - rationale - .agents/skills/pdf/scripts/extract_form_structure.py
+- [[extract_form_structure()]] - code - .agents/skills/pdf/scripts/extract_form_structure.py
+- [[extract_form_structure.py]] - code - .agents/skills/pdf/scripts/extract_form_structure.py
+- [[main()]] - code - .agents/skills/pdf/scripts/extract_form_structure.py
 
 ## Live Query (requires Dataview plugin)
 

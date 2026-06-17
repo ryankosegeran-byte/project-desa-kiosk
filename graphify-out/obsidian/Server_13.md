@@ -1,12 +1,12 @@
 ---
 source_file: "server/api/sync_handler.go"
 type: "code"
-community: "Community 20"
+community: "Sync Handlers"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_20
+  - community/Sync_Handlers
 ---
 
 # Server
@@ -16,4 +16,4 @@ tags:
 - [[.handleSyncPullWarga()]] - `method` [EXTRACTED]
 - [[.handleSyncPush()]] - `method` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_20
+#graphify/code #graphify/EXTRACTED #community/Sync_Handlers

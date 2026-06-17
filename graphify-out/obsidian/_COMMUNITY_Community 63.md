@@ -1,16 +1,17 @@
 ---
 type: community
-members: 3
+cohesion: 1.00
+members: 2
 ---
 
 # Community 63
 
-**Members:** 3 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 2 nodes
 
 ## Members
-- [[NomorSuratConfig]] - code - server/api/nomor_surat_handler.go
-- [[Time_7]] - code - server/api/nomor_surat_handler.go
-- [[nomor_surat_handler.go]] - code - server/api/nomor_surat_handler.go
+- [[convert()]] - code - .agents/skills/pdf/scripts/convert_pdf_to_images.py
+- [[convert_pdf_to_images.py]] - code - .agents/skills/pdf/scripts/convert_pdf_to_images.py
 
 ## Live Query (requires Dataview plugin)
 

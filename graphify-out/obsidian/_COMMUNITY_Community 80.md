@@ -1,15 +1,16 @@
 ---
 type: community
-members: 2
+cohesion: 1.00
+members: 1
 ---
 
 # Community 80
 
-**Members:** 2 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[README_2]] - document - web/dashboard/README.md
-- [[dashboard]] - code
+- [[static_html_automation.py]] - code - .agents/skills/webapp-testing/examples/static_html_automation.py
 
 ## Live Query (requires Dataview plugin)
 

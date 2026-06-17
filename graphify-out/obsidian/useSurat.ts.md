@@ -1,12 +1,12 @@
 ---
 source_file: "web/kiosk-ui/src/hooks/useSurat.ts"
 type: "code"
-community: "Community 3"
+community: "Kiosk UI Components"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_3
+  - community/Kiosk_UI_Components
 ---
 
 # useSurat.ts
@@ -18,8 +18,8 @@ tags:
 - [[JenisSurat_6]] - `contains` [EXTRACTED]
 - [[PreviewPage.tsx]] - `imports_from` [EXTRACTED]
 - [[SelectSuratPage.tsx]] - `imports_from` [EXTRACTED]
-- [[Surat_3]] - `contains` [EXTRACTED]
+- [[Surat_4]] - `contains` [EXTRACTED]
 - [[SuratForm.tsx]] - `imports_from` [EXTRACTED]
 - [[useSurat()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_3
+#graphify/code #graphify/EXTRACTED #community/Kiosk_UI_Components

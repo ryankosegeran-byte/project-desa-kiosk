@@ -1,16 +1,16 @@
 ---
 type: community
-members: 3
+cohesion: 1.00
+members: 1
 ---
 
 # Community 74
 
-**Members:** 3 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[code.html_6]] - image - referensi_tema/pic_dashboard_desa_sukamakmur/code.html
-- [[pic_dashboard_desa_sukamakmur]] - code
-- [[screen.png_6]] - image - referensi_tema/pic_dashboard_desa_sukamakmur/screen.png
+- [[template_handler.go]] - code - server/api/template_handler.go
 
 ## Live Query (requires Dataview plugin)
 

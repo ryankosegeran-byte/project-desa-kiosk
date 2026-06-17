@@ -1,12 +1,12 @@
 ---
 source_file: "web/kiosk-ui/src/App.tsx"
 type: "code"
-community: "Community 3"
+community: "Kiosk UI Components"
 location: "L148"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_3
+  - community/Kiosk_UI_Components
 ---
 
 # App()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[App.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_3
+#graphify/code #graphify/EXTRACTED #community/Kiosk_UI_Components

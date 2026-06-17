@@ -1,12 +1,12 @@
 ---
 source_file: "web/kiosk-ui/package.json"
 type: "code"
-community: "Community 6"
+community: "Kiosk UI Dependencies"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_6
+  - community/Kiosk_UI_Dependencies
 ---
 
 # dependencies
@@ -20,4 +20,4 @@ tags:
 - [[react-dom_1]] - `contains` [EXTRACTED]
 - [[react-router-dom]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_6
+#graphify/code #graphify/EXTRACTED #community/Kiosk_UI_Dependencies

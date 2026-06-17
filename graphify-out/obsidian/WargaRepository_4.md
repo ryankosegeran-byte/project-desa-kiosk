@@ -1,12 +1,12 @@
 ---
 source_file: "server/db/warga_repo.go"
 type: "code"
-community: "Community 9"
+community: "Warga Repository"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_9
+  - community/Warga_Repository
 ---
 
 # WargaRepository
@@ -29,4 +29,4 @@ tags:
 - [[NewWargaRepository()_1]] - `references` [EXTRACTED]
 - [[warga_repo.go_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_9
+#graphify/code #graphify/EXTRACTED #community/Warga_Repository

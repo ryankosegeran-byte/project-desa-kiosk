@@ -1,20 +1,21 @@
 ---
 type: community
-members: 7
+cohesion: 0.60
+members: 6
 ---
 
 # Community 38
 
-**Members:** 7 nodes
+**Cohesion:** 0.60 - moderately connected
+**Members:** 6 nodes
 
 ## Members
-- [[SKILL_6]] - document - .agents/skills/tdd/SKILL.md
-- [[deep-modules]] - document - .agents/skills/tdd/deep-modules.md
-- [[interface-design]] - document - .agents/skills/tdd/interface-design.md
-- [[mocking]] - document - .agents/skills/tdd/mocking.md
-- [[refactoring]] - document - .agents/skills/tdd/refactoring.md
-- [[tdd]] - code
-- [[tests]] - document - .agents/skills/tdd/tests.md
+- [[.handleGetWargaByNIK()]] - code - kiosk/api/warga.go
+- [[.handleGetWargaByRFID()]] - code - kiosk/api/warga.go
+- [[.handleSearchWarga()]] - code - kiosk/api/warga.go
+- [[Request_2]] - code - kiosk/api/warga.go
+- [[ResponseWriter_2]] - code - kiosk/api/warga.go
+- [[Server_3]] - code - kiosk/api/warga.go
 
 ## Live Query (requires Dataview plugin)
 

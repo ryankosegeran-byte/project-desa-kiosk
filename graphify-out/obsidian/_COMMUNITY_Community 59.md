@@ -1,17 +1,18 @@
 ---
 type: community
-members: 4
+cohesion: 1.00
+members: 3
 ---
 
 # Community 59
 
-**Members:** 4 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 3 nodes
 
 ## Members
-- [[Wait for server to be ready by polling the port.]] - rationale - .agents/skills/webapp-testing/scripts/with_server.py
-- [[is_server_ready()]] - code - .agents/skills/webapp-testing/scripts/with_server.py
-- [[main()_1]] - code - .agents/skills/webapp-testing/scripts/with_server.py
-- [[with_server.py]] - code - .agents/skills/webapp-testing/scripts/with_server.py
+- [[RectAndField]] - code - .agents/skills/pdf/scripts/check_bounding_boxes.py
+- [[check_bounding_boxes.py]] - code - .agents/skills/pdf/scripts/check_bounding_boxes.py
+- [[get_bounding_box_messages()]] - code - .agents/skills/pdf/scripts/check_bounding_boxes.py
 
 ## Live Query (requires Dataview plugin)
 

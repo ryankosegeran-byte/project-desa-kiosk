@@ -1,12 +1,12 @@
 ---
 source_file: "kiosk/cmd/kiosk/main.go"
 type: "code"
-community: "Community 4"
+community: "Kiosk API Tests"
 location: "L23"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Community_4
+  - community/Kiosk_API_Tests
 ---
 
 # main()
@@ -25,4 +25,4 @@ tags:
 - [[SeedLocalData()]] - `calls` [INFERRED]
 - [[main.go]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Community_4
+#graphify/code #graphify/INFERRED #community/Kiosk_API_Tests

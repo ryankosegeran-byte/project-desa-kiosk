@@ -1,12 +1,12 @@
 ---
 source_file: "kiosk/rfid/listener.go"
 type: "code"
-community: "Community 2"
+community: "Server Router & Middleware"
 location: "L18"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Community_2
+  - community/Server_Router__Middleware
 ---
 
 # HandlerFunc
@@ -23,4 +23,4 @@ tags:
 - [[ServeEvents()]] - `references` [EXTRACTED]
 - [[setupStaticFileServer()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Community_2
+#graphify/code #graphify/INFERRED #community/Server_Router__Middleware

@@ -1,17 +1,17 @@
 ---
 source_file: "internal/models/warga.go"
 type: "code"
-community: "Community 66"
+community: "Community 56"
 location: "L36"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_66
+  - community/Community_56
 ---
 
 # KTPData
 
 ## Connections
-- [[warga.go]] - `contains` [EXTRACTED]
+- [[Warga_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_66
+#graphify/code #graphify/EXTRACTED #community/Community_56

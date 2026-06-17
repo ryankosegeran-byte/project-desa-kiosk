@@ -1,16 +1,16 @@
 ---
 type: community
-members: 3
+cohesion: 1.00
+members: 1
 ---
 
 # Community 76
 
-**Members:** 3 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[code.html_8]] - image - referensi_tema/pic_verifikasi_permohonan_surat/code.html
-- [[pic_verifikasi_permohonan_surat]] - code
-- [[screen.png_8]] - image - referensi_tema/pic_verifikasi_permohonan_surat/screen.png
+- [[warga.go]] - code - kiosk/api/warga.go
 
 ## Live Query (requires Dataview plugin)
 

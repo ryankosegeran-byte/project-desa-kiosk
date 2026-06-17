@@ -1,12 +1,12 @@
 ---
 source_file: "kiosk/print/pdf.go"
 type: "code"
-community: "Community 7"
+community: "Surat Request Handlers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_7
+  - community/Surat_Request_Handlers
 ---
 
 # pdf.go
@@ -17,4 +17,4 @@ tags:
 - [[PDFGenerator_1]] - `contains` [EXTRACTED]
 - [[uuidString()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_7
+#graphify/code #graphify/EXTRACTED #community/Surat_Request_Handlers

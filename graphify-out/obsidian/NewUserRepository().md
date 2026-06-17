@@ -1,12 +1,12 @@
 ---
 source_file: "server/db/user_repo.go"
 type: "code"
-community: "Community 11"
+community: "JWT Authentication"
 location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_11
+  - community/JWT_Authentication
 ---
 
 # NewUserRepository()
@@ -18,4 +18,4 @@ tags:
 - [[main()_3]] - `calls` [INFERRED]
 - [[user_repo.go]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_11
+#graphify/code #graphify/EXTRACTED #community/JWT_Authentication

@@ -1,18 +1,20 @@
 ---
 type: community
+cohesion: 0.70
 members: 5
 ---
 
 # Community 47
 
+**Cohesion:** 0.70 - tightly connected
 **Members:** 5 nodes
 
 ## Members
-- [[Load()_1]] - code - server/config/config.go
-- [[config.go_1]] - code - server/config/config.go
-- [[getEnv()_1]] - code - server/config/config.go
-- [[getEnvBool()]] - code - server/config/config.go
-- [[getEnvInt()_1]] - code - server/config/config.go
+- [[CreateSuratRequest]] - code - internal/models/surat.go
+- [[NomorSuratBatch]] - code - internal/models/surat.go
+- [[RawMessage_1]] - code - internal/models/surat.go
+- [[Surat]] - code - internal/models/surat.go
+- [[Time_2]] - code - internal/models/surat.go
 
 ## Live Query (requires Dataview plugin)
 

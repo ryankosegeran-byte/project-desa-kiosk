@@ -1,17 +1,17 @@
 ---
 source_file: "server/ocr/service.go"
 type: "code"
-community: "Community 16"
+community: "OCR Provider Interface"
 location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_16
+  - community/OCR_Provider_Interface
 ---
 
 # RWMutex
 
 ## Connections
-- [[service.go]] - `references` [EXTRACTED]
+- [[Service_1]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_16
+#graphify/code #graphify/EXTRACTED #community/OCR_Provider_Interface

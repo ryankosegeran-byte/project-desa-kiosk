@@ -1,12 +1,12 @@
 ---
 source_file: "kiosk/api/api_test.go"
 type: "code"
-community: "Community 4"
+community: "Kiosk API Tests"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_4
+  - community/Kiosk_API_Tests
 ---
 
 # Server
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[setupTestServer()]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_4
+#graphify/code #graphify/EXTRACTED #community/Kiosk_API_Tests

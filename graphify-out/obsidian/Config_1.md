@@ -1,18 +1,20 @@
 ---
-source_file: "kiosk/sync/engine.go"
+source_file: "kiosk/config/config.go"
 type: "code"
-community: "Community 5"
-location: "L14"
+community: "Community 52"
+location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_5
+  - community/Community_52
 ---
 
 # Config
 
 ## Connections
-- [[NewEngine()]] - `references` [EXTRACTED]
-- [[engine.go]] - `references` [EXTRACTED]
+- [[Config_1]] - `contains` [EXTRACTED]
+- [[Load()]] - `references` [EXTRACTED]
+- [[getEnv()]] - `contains` [EXTRACTED]
+- [[getEnvInt()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_5
+#graphify/code #graphify/EXTRACTED #community/Community_52

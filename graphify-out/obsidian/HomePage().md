@@ -1,12 +1,12 @@
 ---
 source_file: "web/kiosk-ui/src/pages/HomePage.tsx"
 type: "code"
-community: "Community 3"
+community: "Kiosk UI Components"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_3
+  - community/Kiosk_UI_Components
 ---
 
 # HomePage()
@@ -17,4 +17,4 @@ tags:
 - [[useRFID()]] - `calls` [EXTRACTED]
 - [[useWarga()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_3
+#graphify/code #graphify/EXTRACTED #community/Kiosk_UI_Components

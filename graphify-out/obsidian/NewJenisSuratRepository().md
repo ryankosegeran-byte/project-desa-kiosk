@@ -1,12 +1,12 @@
 ---
 source_file: "kiosk/db/jenis_surat_repo.go"
 type: "code"
-community: "Community 27"
+community: "Community 26"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_27
+  - community/Community_26
 ---
 
 # NewJenisSuratRepository()
@@ -16,4 +16,4 @@ tags:
 - [[JenisSuratRepository_1]] - `references` [EXTRACTED]
 - [[jenis_surat_repo.go]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_27
+#graphify/code #graphify/EXTRACTED #community/Community_26

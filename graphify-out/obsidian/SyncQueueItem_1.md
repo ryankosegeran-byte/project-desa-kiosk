@@ -1,12 +1,12 @@
 ---
 source_file: "kiosk/db/sync_repo.go"
 type: "code"
-community: "Community 30"
+community: "Community 29"
 location: "L22"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_30
+  - community/Community_29
 ---
 
 # SyncQueueItem
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[.ListPendingSync()]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_30
+#graphify/code #graphify/EXTRACTED #community/Community_29

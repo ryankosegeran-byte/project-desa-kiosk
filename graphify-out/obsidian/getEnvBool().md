@@ -1,18 +1,18 @@
 ---
 source_file: "server/config/config.go"
 type: "code"
-community: "Community 47"
+community: "Community 46"
 location: "L89"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_47
+  - community/Community_46
 ---
 
 # getEnvBool()
 
 ## Connections
+- [[Config_6]] - `contains` [EXTRACTED]
 - [[Load()_1]] - `calls` [EXTRACTED]
-- [[config.go_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_47
+#graphify/code #graphify/EXTRACTED #community/Community_46

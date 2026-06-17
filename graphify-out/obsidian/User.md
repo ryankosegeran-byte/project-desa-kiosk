@@ -1,23 +1,22 @@
 ---
-source_file: "server/db/user_repo.go"
+source_file: "internal/models/user.go"
 type: "code"
-community: "Community 11"
-location: "L21"
+community: "Community 43"
+location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_11
+  - community/Community_43
 ---
 
 # User
 
 ## Connections
-- [[.Create()_4]] - `references` [EXTRACTED]
-- [[.FindByID()_5]] - `references` [EXTRACTED]
-- [[.FindByUsername()]] - `references` [EXTRACTED]
-- [[.List()_3]] - `references` [EXTRACTED]
-- [[.Update()_1]] - `references` [EXTRACTED]
-- [[.scanRow()_6]] - `references` [EXTRACTED]
-- [[.scanRows()_6]] - `references` [EXTRACTED]
+- [[CreateUserRequest]] - `contains` [EXTRACTED]
+- [[LoginRequest]] - `contains` [EXTRACTED]
+- [[LoginResponse]] - `contains` [EXTRACTED]
+- [[Time_4]] - `references` [EXTRACTED]
+- [[User]] - `contains` [EXTRACTED]
+- [[UserActivityLog]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_11
+#graphify/code #graphify/EXTRACTED #community/Community_43

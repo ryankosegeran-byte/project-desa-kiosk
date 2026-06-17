@@ -1,16 +1,16 @@
 ---
 type: community
-members: 3
+cohesion: 1.00
+members: 1
 ---
 
 # Community 73
 
-**Members:** 3 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[KTPData_4]] - code - server/ocr/provider.go
-- [[OCRProvider_1]] - code - server/ocr/provider.go
-- [[provider.go]] - code - server/ocr/provider.go
+- [[sync_handler.go]] - code - server/api/sync_handler.go
 
 ## Live Query (requires Dataview plugin)
 

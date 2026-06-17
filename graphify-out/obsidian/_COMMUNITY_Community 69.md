@@ -1,16 +1,16 @@
 ---
 type: community
-members: 3
+cohesion: 1.00
+members: 1
 ---
 
 # Community 69
 
-**Members:** 3 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[code.html_4]] - image - referensi_tema/kiosk_halaman_utama_tap_ktp/code.html
-- [[kiosk_halaman_utama_tap_ktp]] - code
-- [[screen.png_4]] - image - referensi_tema/kiosk_halaman_utama_tap_ktp/screen.png
+- [[ocr_handler.go]] - code - server/api/ocr_handler.go
 
 ## Live Query (requires Dataview plugin)
 

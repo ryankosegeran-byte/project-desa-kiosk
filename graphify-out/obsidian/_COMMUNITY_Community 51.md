@@ -1,17 +1,19 @@
 ---
 type: community
+cohesion: 0.83
 members: 4
 ---
 
 # Community 51
 
+**Cohesion:** 0.83 - tightly connected
 **Members:** 4 nodes
 
 ## Members
-- [[assets_1]] - code
-- [[hero.png]] - image - web/kiosk-ui/src/assets/hero.png
-- [[react.svg]] - image - web/kiosk-ui/src/assets/react.svg
-- [[vite.svg]] - image - web/kiosk-ui/src/assets/vite.svg
+- [[.runMigrations()_1]] - code - server/db/postgres.go
+- [[DB_12]] - code - server/db/postgres.go
+- [[Open()_1]] - code - server/db/postgres.go
+- [[postgres.go]] - code - server/db/postgres.go
 
 ## Live Query (requires Dataview plugin)
 

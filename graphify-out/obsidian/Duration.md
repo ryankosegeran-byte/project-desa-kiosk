@@ -1,12 +1,12 @@
 ---
 source_file: "internal/auth/jwt.go"
 type: "code"
-community: "Community 5"
+community: "JWT Authentication"
 location: "L28"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_5
+  - community/JWT_Authentication
 ---
 
 # Duration
@@ -17,4 +17,4 @@ tags:
 - [[NewJWTManager()]] - `references` [EXTRACTED]
 - [[main()_3]] - `calls` [INFERRED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_5
+#graphify/code #graphify/EXTRACTED #community/JWT_Authentication

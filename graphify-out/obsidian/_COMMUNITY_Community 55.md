@@ -1,17 +1,18 @@
 ---
 type: community
-members: 4
+cohesion: 0.67
+members: 3
 ---
 
 # Community 55
 
-**Members:** 4 nodes
+**Cohesion:** 0.67 - moderately connected
+**Members:** 3 nodes
 
 ## Members
-- [[Load()]] - code - kiosk/config/config.go
-- [[config.go]] - code - kiosk/config/config.go
-- [[getEnv()]] - code - kiosk/config/config.go
-- [[getEnvInt()]] - code - kiosk/config/config.go
+- [[NomorSuratConfig]] - code - server/api/nomor_surat_handler.go
+- [[Time_7]] - code - server/api/nomor_surat_handler.go
+- [[nomor_surat_handler.go]] - code - server/api/nomor_surat_handler.go
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,12 +1,12 @@
 ---
 source_file: "server/db/jenis_surat_repo.go"
 type: "code"
-community: "Community 14"
+community: "JenisSurat Repository"
 location: "L147"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_14
+  - community/JenisSurat_Repository
 ---
 
 # Row
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[.scanRow()_3]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_14
+#graphify/code #graphify/EXTRACTED #community/JenisSurat_Repository

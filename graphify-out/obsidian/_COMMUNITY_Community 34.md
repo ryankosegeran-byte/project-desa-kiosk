@@ -1,15 +1,17 @@
 ---
 type: community
+cohesion: 0.29
 members: 7
 ---
 
 # Community 34
 
+**Cohesion:** 0.29 - loosely connected
 **Members:** 7 nodes
 
 ## Members
 - [[....componentsTemplatesList]] - code - web/dashboard/src/components/TemplatesList
-- [[Desa_5]] - code - web/dashboard/src/components/TemplatesList.tsx
+- [[Desa_6]] - code - web/dashboard/src/components/TemplatesList.tsx
 - [[JenisSurat_5]] - code - web/dashboard/src/components/TemplatesList.tsx
 - [[Template]] - code - web/dashboard/src/components/TemplatesList.tsx
 - [[TemplatesList()]] - code - web/dashboard/src/components/TemplatesList.tsx
@@ -24,9 +26,9 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 2 edges to [[_COMMUNITY_Community 26]]
-- 2 edges to [[_COMMUNITY_Community 29]]
-- 1 edge to [[_COMMUNITY_Community 25]]
+- 2 edges to [[_COMMUNITY_Community 25]]
+- 2 edges to [[_COMMUNITY_Community 28]]
+- 1 edge to [[_COMMUNITY_Community 24]]
 
 ## Top bridge nodes
 - [[TemplatesList.tsx]] - degree 8, connects to 2 communities

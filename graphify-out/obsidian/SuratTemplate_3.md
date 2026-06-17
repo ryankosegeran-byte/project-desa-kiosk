@@ -1,12 +1,12 @@
 ---
 source_file: "server/db/template_repo.go"
 type: "code"
-community: "Community 24"
+community: "Community 23"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_24
+  - community/Community_23
 ---
 
 # SuratTemplate
@@ -18,4 +18,4 @@ tags:
 - [[.scanRow()_5]] - `references` [EXTRACTED]
 - [[.scanRows()_5]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_24
+#graphify/code #graphify/EXTRACTED #community/Community_23

@@ -1,12 +1,12 @@
 ---
 source_file: "kiosk/db/warga_repo.go"
 type: "code"
-community: "Community 22"
+community: "Community 21"
 location: "L28"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_22
+  - community/Community_21
 ---
 
 # Context
@@ -17,4 +17,4 @@ tags:
 - [[.Search()]] - `references` [EXTRACTED]
 - [[.Upsert()_1]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_22
+#graphify/code #graphify/EXTRACTED #community/Community_21

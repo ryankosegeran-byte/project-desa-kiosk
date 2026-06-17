@@ -1,12 +1,12 @@
 ---
 source_file: "web/dashboard/src/components/WargaDraftComplete.tsx"
 type: "code"
-community: "Community 26"
+community: "Community 25"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_26
+  - community/Community_25
 ---
 
 # WargaDraftComplete.tsx
@@ -18,4 +18,4 @@ tags:
 - [[draft.astro]] - `imports_from` [EXTRACTED]
 - [[request()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_26
+#graphify/code #graphify/EXTRACTED #community/Community_25

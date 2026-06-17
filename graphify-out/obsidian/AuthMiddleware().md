@@ -1,12 +1,12 @@
 ---
 source_file: "server/middleware/auth.go"
 type: "code"
-community: "Community 2"
+community: "Sync Handlers"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_2
+  - community/Sync_Handlers
 ---
 
 # AuthMiddleware()
@@ -19,4 +19,4 @@ tags:
 - [[JWTManager_2]] - `references` [EXTRACTED]
 - [[auth.go]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_2
+#graphify/code #graphify/EXTRACTED #community/Sync_Handlers

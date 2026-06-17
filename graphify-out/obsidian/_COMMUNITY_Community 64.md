@@ -1,16 +1,17 @@
 ---
 type: community
-members: 3
+cohesion: 1.00
+members: 2
 ---
 
 # Community 64
 
-**Members:** 3 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 2 nodes
 
 ## Members
-- [[assets]] - code
-- [[astro.svg]] - image - web/dashboard/src/assets/astro.svg
-- [[background.svg]] - image - web/dashboard/src/assets/background.svg
+- [[create_validation_image()]] - code - .agents/skills/pdf/scripts/create_validation_image.py
+- [[create_validation_image.py]] - code - .agents/skills/pdf/scripts/create_validation_image.py
 
 ## Live Query (requires Dataview plugin)
 

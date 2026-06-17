@@ -1,12 +1,12 @@
 ---
 source_file: "internal/auth/jwt.go"
 type: "code"
-community: "Community 5"
+community: "Sync Handlers"
 location: "L101"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_5
+  - community/Sync_Handlers
 ---
 
 # HasRole()
@@ -16,4 +16,4 @@ tags:
 - [[RoleMiddleware()]] - `calls` [INFERRED]
 - [[jwt.go]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_5
+#graphify/code #graphify/EXTRACTED #community/Sync_Handlers

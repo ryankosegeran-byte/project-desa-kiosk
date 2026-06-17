@@ -1,27 +1,29 @@
 ---
 type: community
+cohesion: 0.27
 members: 14
 ---
 
 # Community 20
 
+**Cohesion:** 0.27 - loosely connected
 **Members:** 14 nodes
 
 ## Members
-- [[.handleListNomorSuratConfig()]] - code - server/api/nomor_surat_handler.go
-- [[.handleSyncPullConfig()]] - code - server/api/sync_handler.go
-- [[.handleSyncPullNomorSurat()]] - code - server/api/nomor_surat_handler.go
-- [[.handleSyncPullWarga()]] - code - server/api/sync_handler.go
-- [[.handleSyncPush()]] - code - server/api/sync_handler.go
-- [[.handleUpdateNomorSuratConfig()]] - code - server/api/nomor_surat_handler.go
-- [[GetKiosk()]] - code - server/middleware/auth.go
-- [[Kiosk_2]] - code - server/middleware/auth.go
-- [[Request_8]] - code - server/api/nomor_surat_handler.go
-- [[Request_12]] - code - server/api/sync_handler.go
-- [[ResponseWriter_8]] - code - server/api/nomor_surat_handler.go
-- [[ResponseWriter_12]] - code - server/api/sync_handler.go
-- [[Server_8]] - code - server/api/nomor_surat_handler.go
-- [[Server_13]] - code - server/api/sync_handler.go
+- [[.Create()_3]] - code - server/db/surat_repo.go
+- [[.FindByID()_4]] - code - server/db/surat_repo.go
+- [[.List()_2]] - code - server/db/surat_repo.go
+- [[.Upsert()_2]] - code - server/db/surat_repo.go
+- [[.scanRow()_4]] - code - server/db/surat_repo.go
+- [[.scanRows()_4]] - code - server/db/surat_repo.go
+- [[Context_15]] - code - server/db/surat_repo.go
+- [[DB_14]] - code - server/db/surat_repo.go
+- [[NewSuratRepository()_1]] - code - server/db/surat_repo.go
+- [[Row_4]] - code - server/db/surat_repo.go
+- [[Rows_4]] - code - server/db/surat_repo.go
+- [[Surat_2]] - code - server/db/surat_repo.go
+- [[SuratRepository_4]] - code - server/db/surat_repo.go
+- [[surat_repo.go_1]] - code - server/db/surat_repo.go
 
 ## Live Query (requires Dataview plugin)
 
@@ -29,13 +31,3 @@ members: 14
 TABLE source_file, type FROM #community/Community_20
 SORT file.name ASC
 ```
-
-## Connections to other communities
-- 3 edges to [[_COMMUNITY_Community 1]]
-- 2 edges to [[_COMMUNITY_Community 2]]
-
-## Top bridge nodes
-- [[GetKiosk()]] - degree 7, connects to 1 community
-- [[.handleSyncPush()]] - degree 5, connects to 1 community
-- [[.handleListNomorSuratConfig()]] - degree 4, connects to 1 community
-- [[.handleUpdateNomorSuratConfig()]] - degree 4, connects to 1 community

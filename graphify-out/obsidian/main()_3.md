@@ -1,12 +1,12 @@
 ---
 source_file: "server/cmd/server/main.go"
 type: "code"
-community: "Community 5"
+community: "JWT Authentication"
 location: "L22"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Community_5
+  - community/JWT_Authentication
 ---
 
 # main()
@@ -24,4 +24,4 @@ tags:
 - [[SeedServerData()]] - `calls` [INFERRED]
 - [[main.go_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Community_5
+#graphify/code #graphify/INFERRED #community/JWT_Authentication

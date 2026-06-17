@@ -1,12 +1,12 @@
 ---
 source_file: "server/api/nomor_surat_handler.go"
 type: "code"
-community: "Community 20"
+community: "Sync Handlers"
 location: "L24"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_20
+  - community/Sync_Handlers
 ---
 
 # ResponseWriter
@@ -16,4 +16,4 @@ tags:
 - [[.handleSyncPullNomorSurat()]] - `references` [EXTRACTED]
 - [[.handleUpdateNomorSuratConfig()]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_20
+#graphify/code #graphify/EXTRACTED #community/Sync_Handlers

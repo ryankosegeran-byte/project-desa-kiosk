@@ -1,15 +1,16 @@
 ---
 type: community
-members: 2
+cohesion: 1.00
+members: 1
 ---
 
 # Community 85
 
-**Members:** 2 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[Time]] - code - internal/models/desa.go
-- [[desa.go]] - code - internal/models/desa.go
+- [[check_fillable_fields.py]] - code - .agents/skills/pdf/scripts/check_fillable_fields.py
 
 ## Live Query (requires Dataview plugin)
 

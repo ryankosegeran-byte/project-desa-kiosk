@@ -1,15 +1,16 @@
 ---
 type: community
-members: 2
+cohesion: 1.00
+members: 1
 ---
 
 # Community 84
 
-**Members:** 2 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[SKILL_2]] - document - .agents/skills/graphify/SKILL.md
-- [[graphify]] - code
+- [[build.ps1]] - code - scripts/build.ps1
 
 ## Live Query (requires Dataview plugin)
 

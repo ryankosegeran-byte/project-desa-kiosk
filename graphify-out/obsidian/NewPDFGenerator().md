@@ -1,12 +1,12 @@
 ---
 source_file: "kiosk/print/pdf.go"
 type: "code"
-community: "Community 7"
+community: "Surat Request Handlers"
 location: "L21"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Community_7
+  - community/Surat_Request_Handlers
 ---
 
 # NewPDFGenerator()
@@ -18,4 +18,4 @@ tags:
 - [[pdf.go]] - `contains` [EXTRACTED]
 - [[setupTestServer()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Community_7
+#graphify/code #graphify/INFERRED #community/Surat_Request_Handlers

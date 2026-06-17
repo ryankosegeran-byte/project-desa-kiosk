@@ -1,12 +1,12 @@
 ---
 source_file: "server/db/user_repo.go"
 type: "code"
-community: "Community 11"
+community: "JWT Authentication"
 location: "L140"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_11
+  - community/JWT_Authentication
 ---
 
 # UserActivityLog
@@ -15,4 +15,4 @@ tags:
 - [[.ListActivityLogs()]] - `references` [EXTRACTED]
 - [[.LogActivity()]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_11
+#graphify/code #graphify/EXTRACTED #community/JWT_Authentication

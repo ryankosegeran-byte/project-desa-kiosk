@@ -1,12 +1,12 @@
 ---
 source_file: "web/kiosk-ui/src/pages/FormSuratPage.tsx"
 type: "code"
-community: "Community 3"
+community: "Kiosk UI Components"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_3
+  - community/Kiosk_UI_Components
 ---
 
 # FormSuratPage.tsx
@@ -18,8 +18,8 @@ tags:
 - [[JenisSurat_6]] - `imports` [EXTRACTED]
 - [[SuratForm()]] - `imports` [EXTRACTED]
 - [[SuratForm.tsx]] - `imports_from` [EXTRACTED]
-- [[Warga_5]] - `imports` [EXTRACTED]
+- [[Warga_6]] - `imports` [EXTRACTED]
 - [[useSurat.ts]] - `imports_from` [EXTRACTED]
 - [[useWarga.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_3
+#graphify/code #graphify/EXTRACTED #community/Kiosk_UI_Components

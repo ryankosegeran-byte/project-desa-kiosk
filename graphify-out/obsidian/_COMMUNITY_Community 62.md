@@ -1,16 +1,17 @@
 ---
 type: community
-members: 3
+cohesion: 2.00
+members: 2
 ---
 
 # Community 62
 
-**Members:** 3 nodes
+**Cohesion:** 2.00 - tightly connected
+**Members:** 2 nodes
 
 ## Members
-- [[admin_registrasi_warga_ocr_rfid]] - code
-- [[code.html_2]] - image - referensi_tema/admin_registrasi_warga_ocr_rfid/code.html
-- [[screen.png_2]] - image - referensi_tema/admin_registrasi_warga_ocr_rfid/screen.png
+- [[Desa]] - code - internal/models/desa.go
+- [[Time]] - code - internal/models/desa.go
 
 ## Live Query (requires Dataview plugin)
 

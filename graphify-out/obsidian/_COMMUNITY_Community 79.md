@@ -1,15 +1,16 @@
 ---
 type: community
-members: 2
+cohesion: 1.00
+members: 1
 ---
 
 # Community 79
 
-**Members:** 2 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[deploy.sh]] - code - deployments/serv00/deploy.sh
-- [[deploy.sh script]] - code - deployments/serv00/deploy.sh
+- [[element_discovery.py]] - code - .agents/skills/webapp-testing/examples/element_discovery.py
 
 ## Live Query (requires Dataview plugin)
 

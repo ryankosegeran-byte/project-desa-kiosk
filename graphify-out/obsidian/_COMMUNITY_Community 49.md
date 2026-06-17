@@ -1,18 +1,19 @@
 ---
 type: community
-members: 5
+cohesion: 0.50
+members: 4
 ---
 
 # Community 49
 
-**Members:** 5 nodes
+**Cohesion:** 0.50 - moderately connected
+**Members:** 4 nodes
 
 ## Members
-- [[LICENSE.txt_1]] - document - .agents/skills/pdf/LICENSE.txt
-- [[SKILL_5]] - document - .agents/skills/pdf/SKILL.md
-- [[forms]] - document - .agents/skills/pdf/forms.md
-- [[pdf]] - code
-- [[reference]] - document - .agents/skills/pdf/reference.md
+- [[..assetsastro.svg]] - code - web/dashboard/src/assets/astro.svg
+- [[..assetsbackground.svg]] - code - web/dashboard/src/assets/background.svg
+- [[Welcome.astro]] - code - web/dashboard/src/components/Welcome.astro
+- [[screen()]] - code - web/dashboard/src/components/Welcome.astro
 
 ## Live Query (requires Dataview plugin)
 

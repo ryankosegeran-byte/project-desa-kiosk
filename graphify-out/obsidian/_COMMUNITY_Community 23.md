@@ -1,27 +1,28 @@
 ---
 type: community
-members: 14
+cohesion: 0.28
+members: 13
 ---
 
 # Community 23
 
-**Members:** 14 nodes
+**Cohesion:** 0.28 - loosely connected
+**Members:** 13 nodes
 
 ## Members
-- [[PdfReader]] - code - .agents/skills/pdf/scripts/extract_form_field_info.py
-- [[extract_form_field_info.py]] - code - .agents/skills/pdf/scripts/extract_form_field_info.py
-- [[fill_fillable_fields.py]] - code - .agents/skills/pdf/scripts/fill_fillable_fields.py
-- [[fill_pdf_fields()]] - code - .agents/skills/pdf/scripts/fill_fillable_fields.py
-- [[fill_pdf_form()]] - code - .agents/skills/pdf/scripts/fill_pdf_form_with_annotations.py
-- [[fill_pdf_form_with_annotations.py]] - code - .agents/skills/pdf/scripts/fill_pdf_form_with_annotations.py
-- [[get_field_info()]] - code - .agents/skills/pdf/scripts/extract_form_field_info.py
-- [[get_full_annotation_field_id()]] - code - .agents/skills/pdf/scripts/extract_form_field_info.py
-- [[make_field_dict()]] - code - .agents/skills/pdf/scripts/extract_form_field_info.py
-- [[monkeypatch_pydpf_method()]] - code - .agents/skills/pdf/scripts/fill_fillable_fields.py
-- [[transform_from_image_coords()]] - code - .agents/skills/pdf/scripts/fill_pdf_form_with_annotations.py
-- [[transform_from_pdf_coords()]] - code - .agents/skills/pdf/scripts/fill_pdf_form_with_annotations.py
-- [[validation_error_for_field_value()]] - code - .agents/skills/pdf/scripts/fill_fillable_fields.py
-- [[write_field_info()]] - code - .agents/skills/pdf/scripts/extract_form_field_info.py
+- [[.GetTemplate()_1]] - code - server/db/template_repo.go
+- [[.ListTemplatesForDesa()]] - code - server/db/template_repo.go
+- [[.UpsertTemplate()_1]] - code - server/db/template_repo.go
+- [[.scanRow()_5]] - code - server/db/template_repo.go
+- [[.scanRows()_5]] - code - server/db/template_repo.go
+- [[Context_16]] - code - server/db/template_repo.go
+- [[DB_15]] - code - server/db/template_repo.go
+- [[NewTemplateRepository()]] - code - server/db/template_repo.go
+- [[Row_5]] - code - server/db/template_repo.go
+- [[Rows_5]] - code - server/db/template_repo.go
+- [[SuratTemplate_3]] - code - server/db/template_repo.go
+- [[TemplateRepository_1]] - code - server/db/template_repo.go
+- [[template_repo.go]] - code - server/db/template_repo.go
 
 ## Live Query (requires Dataview plugin)
 
@@ -29,3 +30,9 @@ members: 14
 TABLE source_file, type FROM #community/Community_23
 SORT file.name ASC
 ```
+
+## Connections to other communities
+- 1 edge to [[_COMMUNITY_JWT Authentication]]
+
+## Top bridge nodes
+- [[NewTemplateRepository()]] - degree 4, connects to 1 community

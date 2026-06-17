@@ -1,66 +1,66 @@
-# Graph Report - D:\PROJECT\MYPROJECT\project-desa-kiosk  (2026-06-12)
+# Graph Report - .  (2026-06-17)
 
 ## Corpus Check
-- 310 files · ~214,040 words
+- 280 files · ~211,234 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1048 nodes · 1465 edges · 146 communities (108 shown, 38 thin omitted)
-- Extraction: 94% EXTRACTED · 6% INFERRED · 0% AMBIGUOUS · INFERRED: 92 edges (avg confidence: 0.8)
+- 858 nodes · 1334 edges · 89 communities (80 shown, 9 thin omitted)
+- Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 92 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
-- [[_COMMUNITY_Authentication & Authorization|Authentication & Authorization]]
-- [[_COMMUNITY_Kiosk Backend Services|Kiosk Backend Services]]
-- [[_COMMUNITY_Kiosk Backend Services|Kiosk Backend Services]]
-- [[_COMMUNITY_Kiosk Backend Services|Kiosk Backend Services]]
-- [[_COMMUNITY_Surat & Document Generation|Surat & Document Generation]]
-- [[_COMMUNITY_Authentication & Authorization|Authentication & Authorization]]
-- [[_COMMUNITY_StatusBar & Online Hooks|StatusBar & Online Hooks]]
-- [[_COMMUNITY_Surat & Document Generation|Surat & Document Generation]]
-- [[_COMMUNITY_Kiosk Backend Services|Kiosk Backend Services]]
-- [[_COMMUNITY_Authentication & Authorization|Authentication & Authorization]]
-- [[_COMMUNITY_Community 10|Community 10]]
-- [[_COMMUNITY_Community 11|Community 11]]
-- [[_COMMUNITY_Community 12|Community 12]]
-- [[_COMMUNITY_Community 13|Community 13]]
-- [[_COMMUNITY_Surat & Document Generation|Surat & Document Generation]]
-- [[_COMMUNITY_Surat & Document Generation|Surat & Document Generation]]
-- [[_COMMUNITY_StatusBar & Online Hooks|StatusBar & Online Hooks]]
-- [[_COMMUNITY_Kiosk Backend Services|Kiosk Backend Services]]
-- [[_COMMUNITY_Community 18|Community 18]]
-- [[_COMMUNITY_Community 19|Community 19]]
-- [[_COMMUNITY_Kiosk Backend Services|Kiosk Backend Services]]
-- [[_COMMUNITY_Surat & Document Generation|Surat & Document Generation]]
-- [[_COMMUNITY_Warga Registry & RFID Data|Warga Registry & RFID Data]]
+- [[_COMMUNITY_API Helpers & Utilities|API Helpers & Utilities]]
+- [[_COMMUNITY_Kiosk UI Components|Kiosk UI Components]]
+- [[_COMMUNITY_Kiosk API Tests|Kiosk API Tests]]
+- [[_COMMUNITY_Sync Handlers|Sync Handlers]]
+- [[_COMMUNITY_JWT Authentication|JWT Authentication]]
+- [[_COMMUNITY_Server Router & Middleware|Server Router & Middleware]]
+- [[_COMMUNITY_Kiosk UI Dependencies|Kiosk UI Dependencies]]
+- [[_COMMUNITY_Surat Request Handlers|Surat Request Handlers]]
+- [[_COMMUNITY_Desa Repository|Desa Repository]]
+- [[_COMMUNITY_Warga Repository|Warga Repository]]
+- [[_COMMUNITY_Dashboard Dependencies|Dashboard Dependencies]]
+- [[_COMMUNITY_Dashboard TSConfig|Dashboard TSConfig]]
+- [[_COMMUNITY_Node TSConfig|Node TSConfig]]
+- [[_COMMUNITY_JenisSurat Repository|JenisSurat Repository]]
+- [[_COMMUNITY_Surat Repository|Surat Repository]]
+- [[_COMMUNITY_OCR Provider Interface|OCR Provider Interface]]
+- [[_COMMUNITY_Internal Models|Internal Models]]
+- [[_COMMUNITY_OCR Google Gemini|OCR: Google Gemini]]
+- [[_COMMUNITY_OCR Groq|OCR: Groq]]
+- [[_COMMUNITY_OCR Mistral AI|OCR: Mistral AI]]
+- [[_COMMUNITY_Community 20|Community 20]]
+- [[_COMMUNITY_Community 21|Community 21]]
+- [[_COMMUNITY_Community 22|Community 22]]
 - [[_COMMUNITY_Community 23|Community 23]]
-- [[_COMMUNITY_Surat & Document Generation|Surat & Document Generation]]
-- [[_COMMUNITY_Warga Registry & RFID Data|Warga Registry & RFID Data]]
-- [[_COMMUNITY_Surat & Document Generation|Surat & Document Generation]]
-- [[_COMMUNITY_Surat & Document Generation|Surat & Document Generation]]
-- [[_COMMUNITY_Surat & Document Generation|Surat & Document Generation]]
+- [[_COMMUNITY_Community 24|Community 24]]
+- [[_COMMUNITY_Community 25|Community 25]]
+- [[_COMMUNITY_Community 26|Community 26]]
+- [[_COMMUNITY_Community 27|Community 27]]
+- [[_COMMUNITY_Community 28|Community 28]]
 - [[_COMMUNITY_Community 29|Community 29]]
-- [[_COMMUNITY_Local-Server Sync Engine|Local-Server Sync Engine]]
-- [[_COMMUNITY_Surat & Document Generation|Surat & Document Generation]]
-- [[_COMMUNITY_Surat & Document Generation|Surat & Document Generation]]
-- [[_COMMUNITY_StatusBar & Online Hooks|StatusBar & Online Hooks]]
-- [[_COMMUNITY_Surat & Document Generation|Surat & Document Generation]]
+- [[_COMMUNITY_Community 30|Community 30]]
+- [[_COMMUNITY_Community 31|Community 31]]
+- [[_COMMUNITY_Community 32|Community 32]]
+- [[_COMMUNITY_Community 33|Community 33]]
+- [[_COMMUNITY_Community 34|Community 34]]
 - [[_COMMUNITY_Community 35|Community 35]]
 - [[_COMMUNITY_Community 36|Community 36]]
-- [[_COMMUNITY_Surat & Document Generation|Surat & Document Generation]]
+- [[_COMMUNITY_Community 37|Community 37]]
 - [[_COMMUNITY_Community 38|Community 38]]
-- [[_COMMUNITY_Warga Registry & RFID Data|Warga Registry & RFID Data]]
-- [[_COMMUNITY_Surat & Document Generation|Surat & Document Generation]]
-- [[_COMMUNITY_Kiosk Backend Services|Kiosk Backend Services]]
+- [[_COMMUNITY_Community 39|Community 39]]
+- [[_COMMUNITY_Community 40|Community 40]]
+- [[_COMMUNITY_Community 41|Community 41]]
 - [[_COMMUNITY_Community 42|Community 42]]
-- [[_COMMUNITY_Warga Registry & RFID Data|Warga Registry & RFID Data]]
+- [[_COMMUNITY_Community 43|Community 43]]
 - [[_COMMUNITY_Community 44|Community 44]]
 - [[_COMMUNITY_Community 45|Community 45]]
-- [[_COMMUNITY_Warga Registry & RFID Data|Warga Registry & RFID Data]]
+- [[_COMMUNITY_Community 46|Community 46]]
 - [[_COMMUNITY_Community 47|Community 47]]
-- [[_COMMUNITY_Surat & Document Generation|Surat & Document Generation]]
+- [[_COMMUNITY_Community 48|Community 48]]
 - [[_COMMUNITY_Community 49|Community 49]]
-- [[_COMMUNITY_StatusBar & Online Hooks|StatusBar & Online Hooks]]
+- [[_COMMUNITY_Community 50|Community 50]]
 - [[_COMMUNITY_Community 51|Community 51]]
 - [[_COMMUNITY_Community 52|Community 52]]
 - [[_COMMUNITY_Community 53|Community 53]]
@@ -71,33 +71,7 @@
 - [[_COMMUNITY_Community 58|Community 58]]
 - [[_COMMUNITY_Community 59|Community 59]]
 - [[_COMMUNITY_Community 60|Community 60]]
-- [[_COMMUNITY_Surat & Document Generation|Surat & Document Generation]]
-- [[_COMMUNITY_Warga Registry & RFID Data|Warga Registry & RFID Data]]
-- [[_COMMUNITY_Surat & Document Generation|Surat & Document Generation]]
-- [[_COMMUNITY_Community 64|Community 64]]
-- [[_COMMUNITY_Community 65|Community 65]]
-- [[_COMMUNITY_Warga Registry & RFID Data|Warga Registry & RFID Data]]
-- [[_COMMUNITY_Kiosk Backend Services|Kiosk Backend Services]]
-- [[_COMMUNITY_Kiosk Backend Services|Kiosk Backend Services]]
-- [[_COMMUNITY_Kiosk Backend Services|Kiosk Backend Services]]
-- [[_COMMUNITY_Kiosk Backend Services|Kiosk Backend Services]]
-- [[_COMMUNITY_Kiosk Backend Services|Kiosk Backend Services]]
-- [[_COMMUNITY_Community 72|Community 72]]
-- [[_COMMUNITY_OCR Document Parsing|OCR Document Parsing]]
-- [[_COMMUNITY_Community 74|Community 74]]
-- [[_COMMUNITY_Kiosk Backend Services|Kiosk Backend Services]]
-- [[_COMMUNITY_Surat & Document Generation|Surat & Document Generation]]
-- [[_COMMUNITY_Community 77|Community 77]]
-- [[_COMMUNITY_Community 78|Community 78]]
-- [[_COMMUNITY_Community 79|Community 79]]
-- [[_COMMUNITY_Community 80|Community 80]]
-- [[_COMMUNITY_Community 81|Community 81]]
-- [[_COMMUNITY_Kiosk Backend Services|Kiosk Backend Services]]
-- [[_COMMUNITY_Community 84|Community 84]]
-- [[_COMMUNITY_Community 85|Community 85]]
-- [[_COMMUNITY_Community 86|Community 86]]
-- [[_COMMUNITY_Community 87|Community 87]]
-- [[_COMMUNITY_Kiosk Backend Services|Kiosk Backend Services]]
+- [[_COMMUNITY_Community 62|Community 62]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `GetClaims()` - 22 edges
@@ -112,155 +86,159 @@
 10. `request()` - 14 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `RoleMiddleware()` --calls--> `HasRole()`  [INFERRED]
-  server/middleware/auth.go → internal/auth/jwt.go
-- `main()` --calls--> `Duration`  [INFERRED]
-  server/cmd/server/main.go → internal/auth/jwt.go
-- `main()` --calls--> `NewJWTManager()`  [INFERRED]
-  server/cmd/server/main.go → internal/auth/jwt.go
 - `AuthMiddleware()` --calls--> `HandlerFunc`  [INFERRED]
   server/middleware/auth.go → kiosk/rfid/listener.go
 - `KioskKeyMiddleware()` --calls--> `HandlerFunc`  [INFERRED]
   server/middleware/auth.go → kiosk/rfid/listener.go
+- `RoleMiddleware()` --calls--> `HandlerFunc`  [INFERRED]
+  server/middleware/auth.go → kiosk/rfid/listener.go
+- `LoggerMiddleware()` --calls--> `HandlerFunc`  [INFERRED]
+  server/api/router.go → kiosk/rfid/listener.go
+- `main()` --calls--> `Duration`  [INFERRED]
+  server/cmd/server/main.go → internal/auth/jwt.go
 
 ## Import Cycles
 - None detected.
 
-## Communities (146 total, 38 thin omitted)
+## Communities (89 total, 9 thin omitted)
 
-### Community 1 - "Kiosk Backend Services"
-Cohesion: 0.06
-Nodes (34): parseJSON(), sendError(), sendJSON(), Claims, GetClaims(), Server, Request, ResponseWriter (+26 more)
+### Community 0 - "API Helpers & Utilities"
+Cohesion: 0.07
+Nodes (31): parseJSON(), sendError(), sendJSON(), Claims, GetClaims(), Server, Request, ResponseWriter (+23 more)
 
-### Community 2 - "Kiosk Backend Services"
-Cohesion: 0.06
-Nodes (49): CORS(), sendError(), sendJSON(), setupStaticFileServer(), HandlerFunc, LoggerMiddleware(), NewServer(), Server (+41 more)
-
-### Community 3 - "Kiosk Backend Services"
+### Community 1 - "Kiosk UI Components"
 Cohesion: 0.07
 Nodes (34): AddressPickerModal(), AddressPickerModalProps, FullKeyboard(), FullKeyboardProps, NIKInput(), NIKInputProps, RFIDStatus(), SelectOrInputModal() (+26 more)
 
-### Community 4 - "Surat & Document Generation"
+### Community 2 - "Kiosk API Tests"
 Cohesion: 0.07
-Nodes (29): setupTestServer(), TestHandleCreateAndListSurat(), TestHandleGetWargaByNIK(), TestHandleGetWargaByRFID(), TestHandleListJenisSurat(), TestHandleRFIDEventsAndMock(), TestHandleStatus(), NewConfigRepository() (+21 more)
+Nodes (32): setupTestServer(), TestHandleCreateAndListSurat(), TestHandleGetWargaByNIK(), TestHandleGetWargaByRFID(), TestHandleListJenisSurat(), TestHandleRFIDEventsAndMock(), TestHandleStatus(), NewConfigRepository() (+24 more)
 
-### Community 5 - "Authentication & Authorization"
-Cohesion: 0.07
-Nodes (25): Claims, HasRole(), NewJWTManager(), JWTManager, SeedServerData(), Detector, Duration, Config (+17 more)
+### Community 3 - "Sync Handlers"
+Cohesion: 0.09
+Nodes (31): HasRole(), AuthMiddleware(), GetKiosk(), KioskKeyMiddleware(), RoleMiddleware(), contextKey, Server, Request (+23 more)
 
-### Community 6 - "StatusBar & Online Hooks"
+### Community 4 - "JWT Authentication"
+Cohesion: 0.10
+Nodes (16): Claims, NewJWTManager(), JWTManager, SeedServerData(), NewUserRepository(), UserRepository, Duration, RegisteredClaims (+8 more)
+
+### Community 5 - "Server Router & Middleware"
+Cohesion: 0.11
+Nodes (27): CORS(), sendError(), sendJSON(), setupStaticFileServer(), HandlerFunc, LoggerMiddleware(), NewServer(), Server (+19 more)
+
+### Community 6 - "Kiosk UI Dependencies"
 Cohesion: 0.07
 Nodes (29): dependencies, leaflet, lucide-react, react, react-dom, react-router-dom, @types/leaflet, devDependencies (+21 more)
 
-### Community 7 - "Surat & Document Generation"
+### Community 7 - "Surat Request Handlers"
 Cohesion: 0.15
 Nodes (13): Server, Request, ResponseWriter, Context, Time, Warga, T, FormatIndonesianDate() (+5 more)
 
-### Community 8 - "Kiosk Backend Services"
+### Community 8 - "Desa Repository"
 Cohesion: 0.20
 Nodes (8): NewDesaRepository(), DesaRepository, Desa, Context, DB, Kiosk, Row, Rows
 
-### Community 9 - "Authentication & Authorization"
+### Community 9 - "Warga Repository"
 Cohesion: 0.22
 Nodes (8): Context, DB, NewWargaRepository(), WargaRepository, Row, Rows, Time, Warga
 
-### Community 10 - "Community 10"
+### Community 10 - "Dashboard Dependencies"
 Cohesion: 0.10
 Nodes (19): dependencies, astro, @astrojs/node, @astrojs/react, lucide-react, react, react-dom, @types/react (+11 more)
 
-### Community 11 - "Community 11"
-Cohesion: 0.21
-Nodes (8): NewUserRepository(), UserRepository, Context, DB, Row, Rows, User, UserActivityLog
-
-### Community 12 - "Community 12"
+### Community 11 - "Dashboard TSConfig"
 Cohesion: 0.11
 Nodes (18): compilerOptions, allowImportingTsExtensions, erasableSyntaxOnly, jsx, lib, module, moduleDetection, moduleResolution (+10 more)
 
-### Community 13 - "Community 13"
+### Community 12 - "Node TSConfig"
 Cohesion: 0.11
 Nodes (17): compilerOptions, allowImportingTsExtensions, erasableSyntaxOnly, lib, module, moduleDetection, moduleResolution, noEmit (+9 more)
 
-### Community 14 - "Surat & Document Generation"
+### Community 13 - "JenisSurat Repository"
 Cohesion: 0.26
 Nodes (7): Context, DB, NewJenisSuratRepository(), JenisSuratRepository, JenisSurat, Row, Rows
 
-### Community 15 - "Surat & Document Generation"
+### Community 14 - "Surat Repository"
 Cohesion: 0.24
 Nodes (7): Context, DB, NewSuratRepository(), SuratRepository, Row, Rows, Surat
 
-### Community 16 - "StatusBar & Online Hooks"
+### Community 15 - "OCR Provider Interface"
 Cohesion: 0.24
-Nodes (7): MockProvider, ProviderStatus, NewService(), OCRProvider, Context, KTPData, RWMutex
+Nodes (8): MockProvider, ProviderStatus, Service, NewService(), OCRProvider, Context, KTPData, RWMutex
 
-### Community 17 - "Kiosk Backend Services"
+### Community 16 - "Internal Models"
 Cohesion: 0.17
 Nodes (15): JenisSurat, RawMessage, SuratTemplate, Time, Warga, Kiosk, KioskStatus, OCRProvider (+7 more)
 
-### Community 18 - "Community 18"
+### Community 17 - "OCR: Google Gemini"
+Cohesion: 0.18
+Nodes (10): NewGeminiProvider(), geminiContent, geminiGenerationConfig, geminiInlineData, geminiPart, GeminiProvider, geminiRequestPayload, geminiResponsePayload (+2 more)
+
+### Community 18 - "OCR: Groq"
 Cohesion: 0.18
 Nodes (10): NewGroqProvider(), groqContentItem, groqImageURL, groqMessage, GroqProvider, groqRequestPayload, groqResponseFormat, groqResponsePayload (+2 more)
 
-### Community 19 - "Community 19"
+### Community 19 - "OCR: Mistral AI"
 Cohesion: 0.18
 Nodes (10): NewMistralProvider(), mistralContentItem, mistralImageURL, mistralMessage, MistralProvider, mistralRequestPayload, mistralResponseFormat, mistralResponsePayload (+2 more)
 
-### Community 20 - "Kiosk Backend Services"
-Cohesion: 0.25
-Nodes (8): GetKiosk(), Server, Request, ResponseWriter, Server, Request, ResponseWriter, Kiosk
-
-### Community 21 - "Surat & Document Generation"
+### Community 20 - "Community 20"
 Cohesion: 0.27
 Nodes (7): Context, DB, NewSuratRepository(), SuratRepository, Row, Rows, Surat
 
-### Community 22 - "Warga Registry & RFID Data"
+### Community 21 - "Community 21"
 Cohesion: 0.29
 Nodes (7): Context, DB, NewWargaRepository(), WargaRepository, Row, Rows, Warga
 
-### Community 23 - "Community 23"
+### Community 22 - "Community 22"
 Cohesion: 0.23
 Nodes (10): PdfReader, get_field_info(), get_full_annotation_field_id(), make_field_dict(), write_field_info(), fill_pdf_fields(), validation_error_for_field_value(), fill_pdf_form() (+2 more)
 
-### Community 24 - "Surat & Document Generation"
+### Community 23 - "Community 23"
 Cohesion: 0.28
 Nodes (7): NewTemplateRepository(), TemplateRepository, Context, DB, Row, Rows, SuratTemplate
 
-### Community 25 - "Warga Registry & RFID Data"
+### Community 24 - "Community 24"
 Cohesion: 0.17
-Nodes (6): ../../../components/ActivityLogList, ../components/DashboardOverview, ../../../components/DesaManager, ../components/LoginForm, ../../components/WargaDraftComplete, ../styles/global.css
+Nodes (7): ../../../components/ActivityLogList, ../components/DashboardOverview, ../../../components/DesaManager, ../components/LoginForm, ../../components/WargaDraftComplete, ../styles/global.css, ../../layouts/DashboardLayout.astro
 
-### Community 26 - "Surat & Document Generation"
+### Community 25 - "Community 25"
 Cohesion: 0.21
 Nodes (4): Surat, WargaFormData, ../../components/SuratTable, request()
 
-### Community 27 - "Surat & Document Generation"
+### Community 26 - "Community 26"
 Cohesion: 0.30
 Nodes (6): Context, DB, NewJenisSuratRepository(), JenisSuratRepository, JenisSurat, SuratTemplate
 
-### Community 28 - "Surat & Document Generation"
+### Community 27 - "Community 27"
 Cohesion: 0.29
-Nodes (8): Client, Config, ConfigRepository, Context, JenisSuratRepository, NomorSuratRepository, WargaRepository, NewPuller()
+Nodes (9): Client, Config, ConfigRepository, Context, JenisSuratRepository, NomorSuratRepository, WargaRepository, Puller (+1 more)
 
-### Community 29 - "Community 29"
+### Community 28 - "Community 28"
 Cohesion: 0.24
 Nodes (8): ActivityLog, ActivityLogList(), Desa, DashboardOverview(), Stats, Desa, DesaManager(), getUser()
 
-### Community 30 - "Local-Server Sync Engine"
+### Community 29 - "Community 29"
 Cohesion: 0.33
 Nodes (5): NewSyncRepository(), SyncRepository, Context, DB, SyncQueueItem
 
-### Community 31 - "Surat & Document Generation"
+### Community 30 - "Community 30"
+Cohesion: 0.42
+Nodes (7): Detector, Config, Context, Puller, Pusher, Engine, NewEngine()
+
+### Community 31 - "Community 31"
 Cohesion: 0.25
 Nodes (8): FieldDef, RawMessage, Time, DesaJenisSurat, FieldDef, FieldsSchema, JenisSurat, SuratTemplate
 
-### Community 32 - "Surat & Document Generation"
+### Community 32 - "Community 32"
 Cohesion: 0.36
-Nodes (7): Client, Config, ConfigRepository, Context, SuratRepository, NewPusher(), SyncRepository
+Nodes (8): Client, Config, ConfigRepository, Context, SuratRepository, Pusher, NewPusher(), SyncRepository
 
-### Community 33 - "StatusBar & Online Hooks"
+### Community 33 - "Community 33"
 Cohesion: 0.25
 Nodes (5): OCRStatus, PROVIDER_LABELS, ProviderInfo, TestResult, ../../components/OCRProviderConfig
 
-### Community 34 - "Surat & Document Generation"
+### Community 34 - "Community 34"
 Cohesion: 0.29
 Nodes (5): Desa, JenisSurat, Template, TemplatesList(), ../../components/TemplatesList
 
@@ -272,63 +250,71 @@ Nodes (6): compilerOptions, jsx, jsxImportSource, exclude, extends, include
 Cohesion: 0.43
 Nodes (4): isDuplicateColumnErr(), Open(), Context, DB
 
-### Community 37 - "Surat & Document Generation"
+### Community 37 - "Community 37"
 Cohesion: 0.57
 Nodes (6): setupTestDB(), TestJenisSuratRepository(), TestSuratRepository(), TestWargaRepository(), DB, T
 
-### Community 39 - "Warga Registry & RFID Data"
+### Community 38 - "Community 38"
 Cohesion: 0.60
 Nodes (3): Server, Request, ResponseWriter
 
-### Community 40 - "Surat & Document Generation"
+### Community 39 - "Community 39"
 Cohesion: 0.33
 Nodes (4): Desa, JenisSurat, JenisSuratManager(), ../../../components/JenisSuratManager
 
-### Community 41 - "Kiosk Backend Services"
+### Community 40 - "Community 40"
 Cohesion: 0.33
 Nodes (4): Desa, Kiosk, KioskStatus(), ../../components/KioskStatus
 
-### Community 42 - "Community 42"
+### Community 41 - "Community 41"
 Cohesion: 0.33
 Nodes (3): Desa, User, ../../../components/UserManager
 
-### Community 43 - "Warga Registry & RFID Data"
+### Community 42 - "Community 42"
 Cohesion: 0.33
 Nodes (4): Desa, KTPData, WargaRegister(), ../../components/WargaRegister
 
-### Community 45 - "Community 45"
+### Community 43 - "Community 43"
 Cohesion: 0.47
-Nodes (5): Time, CreateUserRequest, LoginRequest, LoginResponse, UserActivityLog
+Nodes (6): Time, CreateUserRequest, LoginRequest, LoginResponse, User, UserActivityLog
+
+### Community 44 - "Community 44"
+Cohesion: 0.60
+Nodes (3): Server, Request, ResponseWriter
+
+### Community 46 - "Community 46"
+Cohesion: 0.80
+Nodes (5): getEnvBool(), Config, getEnv(), getEnvInt(), Load()
 
 ### Community 47 - "Community 47"
-Cohesion: 0.80
-Nodes (4): getEnvBool(), getEnv(), getEnvInt(), Load()
-
-### Community 48 - "Surat & Document Generation"
 Cohesion: 0.70
-Nodes (4): RawMessage, Time, CreateSuratRequest, NomorSuratBatch
+Nodes (5): RawMessage, Time, CreateSuratRequest, NomorSuratBatch, Surat
 
-### Community 50 - "StatusBar & Online Hooks"
+### Community 48 - "Community 48"
 Cohesion: 0.50
 Nodes (3): Server, Request, ResponseWriter
 
-### Community 53 - "Community 53"
+### Community 50 - "Community 50"
 Cohesion: 0.83
 Nodes (3): hitl-loop.template.sh script, capture(), step()
 
-### Community 55 - "Community 55"
+### Community 52 - "Community 52"
 Cohesion: 1.00
-Nodes (3): getEnv(), getEnvInt(), Load()
+Nodes (4): Config, getEnv(), getEnvInt(), Load()
 
-### Community 58 - "Community 58"
+### Community 53 - "Community 53"
 Cohesion: 0.67
 Nodes (3): extract_form_structure(), main(), Extract form structure from a non-fillable PDF.  This script analyzes the PDF
 
-### Community 59 - "Community 59"
+### Community 54 - "Community 54"
 Cohesion: 0.67
 Nodes (3): is_server_ready(), main(), Wait for server to be ready by polling the port.
+
+### Community 56 - "Community 56"
+Cohesion: 1.00
+Nodes (3): Time, KTPData, Warga
 
 ## Knowledge Gaps
 - **191 isolated node(s):** `deploy.sh script`, `RegisteredClaims`, `Time`, `RawMessage`, `FieldDef` (+186 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **38 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.

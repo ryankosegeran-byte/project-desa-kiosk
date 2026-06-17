@@ -1,12 +1,12 @@
 ---
 source_file: "web/dashboard/src/components/Welcome.astro"
 type: "code"
-community: "Community 52"
+community: "Community 49"
 location: "L180"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_52
+  - community/Community_49
 ---
 
 # screen()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Welcome.astro]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_52
+#graphify/code #graphify/EXTRACTED #community/Community_49

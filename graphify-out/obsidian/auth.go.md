@@ -1,12 +1,12 @@
 ---
 source_file: "server/middleware/auth.go"
 type: "code"
-community: "Community 2"
+community: "Sync Handlers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_2
+  - community/Sync_Handlers
 ---
 
 # auth.go
@@ -19,4 +19,4 @@ tags:
 - [[RoleMiddleware()]] - `contains` [EXTRACTED]
 - [[contextKey]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_2
+#graphify/code #graphify/EXTRACTED #community/Sync_Handlers

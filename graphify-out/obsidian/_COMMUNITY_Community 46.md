@@ -1,18 +1,20 @@
 ---
 type: community
+cohesion: 0.80
 members: 5
 ---
 
 # Community 46
 
+**Cohesion:** 0.80 - tightly connected
 **Members:** 5 nodes
 
 ## Members
-- [[....componentsWargaList]] - code - web/dashboard/src/components/WargaList
-- [[Warga_4]] - code - web/dashboard/src/components/WargaList.tsx
-- [[WargaList()]] - code - web/dashboard/src/components/WargaList.tsx
-- [[WargaList.tsx]] - code - web/dashboard/src/components/WargaList.tsx
-- [[index.astro_8]] - code - web/dashboard/src/pages/warga/index.astro
+- [[Config_6]] - code - server/config/config.go
+- [[Load()_1]] - code - server/config/config.go
+- [[getEnv()_1]] - code - server/config/config.go
+- [[getEnvBool()]] - code - server/config/config.go
+- [[getEnvInt()_1]] - code - server/config/config.go
 
 ## Live Query (requires Dataview plugin)
 
@@ -20,11 +22,3 @@ members: 5
 TABLE source_file, type FROM #community/Community_46
 SORT file.name ASC
 ```
-
-## Connections to other communities
-- 2 edges to [[_COMMUNITY_Community 26]]
-- 1 edge to [[_COMMUNITY_Community 25]]
-
-## Top bridge nodes
-- [[WargaList.tsx]] - degree 5, connects to 1 community
-- [[index.astro_8]] - degree 3, connects to 1 community

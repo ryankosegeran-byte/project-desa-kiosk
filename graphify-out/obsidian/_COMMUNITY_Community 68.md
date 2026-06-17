@@ -1,16 +1,16 @@
 ---
 type: community
-members: 3
+cohesion: 1.00
+members: 1
 ---
 
 # Community 68
 
-**Members:** 3 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[code.html_3]] - image - referensi_tema/kiosk_form_surat_dinamis/code.html
-- [[kiosk_form_surat_dinamis]] - code
-- [[screen.png_3]] - image - referensi_tema/kiosk_form_surat_dinamis/screen.png
+- [[jenis_surat_handler.go]] - code - server/api/jenis_surat_handler.go
 
 ## Live Query (requires Dataview plugin)
 

@@ -13,7 +13,7 @@ tags:
 
 ## Connections
 - [[....componentsOCRProviderConfig]] - `imports_from` [EXTRACTED]
-- [[DashboardLayout.astro]] - `imports_from` [EXTRACTED]
+- [[....layoutsDashboardLayout.astro]] - `imports_from` [EXTRACTED]
 - [[OCRProviderConfig.tsx]] - `imports_from` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Community_33

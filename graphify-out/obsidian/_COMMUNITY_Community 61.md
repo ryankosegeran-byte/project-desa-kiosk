@@ -1,16 +1,17 @@
 ---
 type: community
-members: 3
+cohesion: 1.00
+members: 2
 ---
 
 # Community 61
 
-**Members:** 3 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 2 nodes
 
 ## Members
-- [[admin_pengaturan_template_surat]] - code
-- [[code.html_1]] - image - referensi_tema/admin_pengaturan_template_surat/code.html
-- [[screen.png_1]] - image - referensi_tema/admin_pengaturan_template_surat/screen.png
+- [[console_logging.py]] - code - .agents/skills/webapp-testing/examples/console_logging.py
+- [[handle_console_message()]] - code - .agents/skills/webapp-testing/examples/console_logging.py
 
 ## Live Query (requires Dataview plugin)
 

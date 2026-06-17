@@ -1,18 +1,18 @@
 ---
 source_file: "server/api/router.go"
 type: "code"
-community: "Community 2"
+community: "Sync Handlers"
 location: "L34"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_2
+  - community/Sync_Handlers
 ---
 
 # NewServer()
 
 ## Connections
-- [[Config_4]] - `references` [EXTRACTED]
+- [[Config_5]] - `references` [EXTRACTED]
 - [[DB_9]] - `references` [EXTRACTED]
 - [[DesaRepository]] - `references` [EXTRACTED]
 - [[JWTManager_1]] - `references` [EXTRACTED]
@@ -25,4 +25,4 @@ tags:
 - [[WargaRepository_3]] - `references` [EXTRACTED]
 - [[router.go_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_2
+#graphify/code #graphify/EXTRACTED #community/Sync_Handlers

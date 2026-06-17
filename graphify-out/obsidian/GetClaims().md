@@ -1,12 +1,12 @@
 ---
 source_file: "server/middleware/auth.go"
 type: "code"
-community: "Community 1"
+community: "API Helpers & Utilities"
 location: "L99"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Community_1
+  - community/API_Helpers__Utilities
 ---
 
 # GetClaims()
@@ -35,4 +35,4 @@ tags:
 - [[Context_19]] - `references` [EXTRACTED]
 - [[auth.go]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Community_1
+#graphify/code #graphify/INFERRED #community/API_Helpers__Utilities

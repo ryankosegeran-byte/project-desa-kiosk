@@ -1,12 +1,12 @@
 ---
 source_file: "kiosk/db/surat_repo.go"
 type: "code"
-community: "Community 15"
+community: "Surat Repository"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_15
+  - community/Surat_Repository
 ---
 
 # surat_repo.go
@@ -15,4 +15,4 @@ tags:
 - [[NewSuratRepository()]] - `contains` [EXTRACTED]
 - [[SuratRepository_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_15
+#graphify/code #graphify/EXTRACTED #community/Surat_Repository

@@ -1,17 +1,18 @@
 ---
 type: community
-members: 4
+cohesion: 0.67
+members: 3
 ---
 
 # Community 57
 
-**Members:** 4 nodes
+**Cohesion:** 0.67 - moderately connected
+**Members:** 3 nodes
 
 ## Members
-- [[favicon.svg]] - image - web/dashboard/public/favicon.svg
-- [[icons.svg]] - image - web/kiosk-ui/public/icons.svg
-- [[public]] - code
-- [[public_1]] - code
+- [[files]] - code - web/kiosk-ui/tsconfig.json
+- [[references]] - code - web/kiosk-ui/tsconfig.json
+- [[tsconfig.json_1]] - code - web/kiosk-ui/tsconfig.json
 
 ## Live Query (requires Dataview plugin)
 

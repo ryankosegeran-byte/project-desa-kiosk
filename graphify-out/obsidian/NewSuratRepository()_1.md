@@ -1,12 +1,12 @@
 ---
 source_file: "server/db/surat_repo.go"
 type: "code"
-community: "Community 21"
+community: "Community 20"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_21
+  - community/Community_20
 ---
 
 # NewSuratRepository()
@@ -16,4 +16,4 @@ tags:
 - [[SuratRepository_4]] - `references` [EXTRACTED]
 - [[surat_repo.go_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_21
+#graphify/code #graphify/EXTRACTED #community/Community_20

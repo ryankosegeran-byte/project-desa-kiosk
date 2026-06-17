@@ -1,12 +1,12 @@
 ---
 source_file: ".agents/skills/pdf/scripts/extract_form_structure.py"
 type: "rationale"
-community: "Community 58"
+community: "Community 53"
 location: "L1"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Community_58
+  - community/Community_53
 ---
 
 # Extract form structure from a non-fillable PDF.  This script analyzes the PDF
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[extract_form_structure.py]] - `rationale_for` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Community_58
+#graphify/rationale #graphify/EXTRACTED #community/Community_53

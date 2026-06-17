@@ -1,19 +1,19 @@
 ---
 source_file: "kiosk/rfid/broker.go"
 type: "code"
-community: "Community 4"
+community: "Kiosk API Tests"
 location: "L20"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Community_4
+  - community/Kiosk_API_Tests
 ---
 
 # NewBroker()
 
 ## Connections
-- [[broker.go]] - `references` [EXTRACTED]
+- [[Broker_1]] - `references` [EXTRACTED]
 - [[main()_2]] - `calls` [INFERRED]
 - [[setupTestServer()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Community_4
+#graphify/code #graphify/INFERRED #community/Kiosk_API_Tests

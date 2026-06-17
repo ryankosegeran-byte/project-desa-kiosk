@@ -1,17 +1,17 @@
 ---
-source_file: "web/kiosk-ui/src/hooks/useSurat.ts"
+source_file: "web/dashboard/src/components/SuratTable.tsx"
 type: "code"
-community: "Community 3"
-location: "L25"
+community: "Community 25"
+location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_3
+  - community/Community_25
 ---
 
 # Surat
 
 ## Connections
-- [[useSurat.ts]] - `contains` [EXTRACTED]
+- [[SuratTable.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_3
+#graphify/code #graphify/EXTRACTED #community/Community_25

@@ -1,12 +1,12 @@
 ---
 source_file: "internal/auth/jwt.go"
 type: "code"
-community: "Community 5"
+community: "JWT Authentication"
 location: "L26"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_5
+  - community/JWT_Authentication
 ---
 
 # JWTManager
@@ -19,4 +19,4 @@ tags:
 - [[NewJWTManager()]] - `references` [EXTRACTED]
 - [[jwt.go]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_5
+#graphify/code #graphify/EXTRACTED #community/JWT_Authentication

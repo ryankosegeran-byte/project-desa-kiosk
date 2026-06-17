@@ -1,12 +1,12 @@
 ---
 source_file: "server/api/helpers.go"
 type: "code"
-community: "Community 1"
+community: "API Helpers & Utilities"
 location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_1
+  - community/API_Helpers__Utilities
 ---
 
 # Request
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[parseJSON()]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_1
+#graphify/code #graphify/EXTRACTED #community/API_Helpers__Utilities

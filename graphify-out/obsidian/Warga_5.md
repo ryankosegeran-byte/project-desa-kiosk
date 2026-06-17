@@ -1,26 +1,17 @@
 ---
-source_file: "web/kiosk-ui/src/hooks/useWarga.ts"
+source_file: "web/dashboard/src/components/WargaList.tsx"
 type: "code"
-community: "Community 3"
-location: "L3"
+community: "Community 45"
+location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_3
+  - community/Community_45
 ---
 
 # Warga
 
 ## Connections
-- [[App.tsx]] - `imports` [EXTRACTED]
-- [[FormSuratPage.tsx]] - `imports` [EXTRACTED]
-- [[FormSuratPageProps]] - `references` [EXTRACTED]
-- [[HomePage.tsx]] - `imports` [EXTRACTED]
-- [[HomePageProps]] - `references` [EXTRACTED]
-- [[PreviewPage.tsx]] - `imports` [EXTRACTED]
-- [[PreviewPageProps]] - `references` [EXTRACTED]
-- [[SelectSuratPage.tsx]] - `imports` [EXTRACTED]
-- [[SelectSuratPageProps]] - `references` [EXTRACTED]
-- [[useWarga.ts]] - `contains` [EXTRACTED]
+- [[WargaList.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_3
+#graphify/code #graphify/EXTRACTED #community/Community_45

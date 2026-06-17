@@ -1,15 +1,16 @@
 ---
 type: community
-members: 2
+cohesion: 1.00
+members: 1
 ---
 
 # Community 86
 
-**Members:** 2 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[SKILL_8]] - document - .agents/skills/web-design-guidelines/SKILL.md
-- [[web-design-guidelines]] - code
+- [[mock-rfid.ps1]] - code - scripts/mock-rfid.ps1
 
 ## Live Query (requires Dataview plugin)
 

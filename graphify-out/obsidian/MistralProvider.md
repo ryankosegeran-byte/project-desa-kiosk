@@ -1,12 +1,12 @@
 ---
 source_file: "server/ocr/mistral.go"
 type: "code"
-community: "Community 19"
+community: "OCR: Mistral AI"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_19
+  - community/OCR_Mistral_AI
 ---
 
 # MistralProvider
@@ -19,4 +19,4 @@ tags:
 - [[NewMistralProvider()]] - `references` [EXTRACTED]
 - [[mistral.go]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_19
+#graphify/code #graphify/EXTRACTED #community/OCR_Mistral_AI

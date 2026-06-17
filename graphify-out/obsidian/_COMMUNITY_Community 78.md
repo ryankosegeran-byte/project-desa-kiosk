@@ -1,16 +1,16 @@
 ---
 type: community
-members: 3
+cohesion: 1.00
+members: 1
 ---
 
 # Community 78
 
-**Members:** 3 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[RectAndField]] - code - .agents/skills/pdf/scripts/check_bounding_boxes.py
-- [[check_bounding_boxes.py]] - code - .agents/skills/pdf/scripts/check_bounding_boxes.py
-- [[get_bounding_box_messages()]] - code - .agents/skills/pdf/scripts/check_bounding_boxes.py
+- [[astro.config.mjs]] - code - web/dashboard/astro.config.mjs
 
 ## Live Query (requires Dataview plugin)
 

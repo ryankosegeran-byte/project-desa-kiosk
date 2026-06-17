@@ -1,12 +1,12 @@
 ---
 source_file: "server/api/router.go"
 type: "code"
-community: "Community 2"
+community: "Sync Handlers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_2
+  - community/Sync_Handlers
 ---
 
 # router.go
@@ -16,4 +16,4 @@ tags:
 - [[NewServer()_1]] - `contains` [EXTRACTED]
 - [[Server_11]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_2
+#graphify/code #graphify/EXTRACTED #community/Sync_Handlers

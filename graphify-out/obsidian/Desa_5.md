@@ -1,17 +1,17 @@
 ---
-source_file: "web/dashboard/src/components/TemplatesList.tsx"
+source_file: "web/dashboard/src/components/KioskStatus.tsx"
 type: "code"
-community: "Community 34"
-location: "L19"
+community: "Community 40"
+location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_34
+  - community/Community_40
 ---
 
 # Desa
 
 ## Connections
-- [[TemplatesList.tsx]] - `contains` [EXTRACTED]
+- [[KioskStatus.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_34
+#graphify/code #graphify/EXTRACTED #community/Community_40

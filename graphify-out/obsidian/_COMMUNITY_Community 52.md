@@ -1,17 +1,19 @@
 ---
 type: community
+cohesion: 1.00
 members: 4
 ---
 
 # Community 52
 
+**Cohesion:** 1.00 - tightly connected
 **Members:** 4 nodes
 
 ## Members
-- [[..assetsastro.svg]] - code - web/dashboard/src/assets/astro.svg
-- [[..assetsbackground.svg]] - code - web/dashboard/src/assets/background.svg
-- [[Welcome.astro]] - code - web/dashboard/src/components/Welcome.astro
-- [[screen()]] - code - web/dashboard/src/components/Welcome.astro
+- [[Config_1]] - code - kiosk/config/config.go
+- [[Load()]] - code - kiosk/config/config.go
+- [[getEnv()]] - code - kiosk/config/config.go
+- [[getEnvInt()]] - code - kiosk/config/config.go
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,24 +1,24 @@
 ---
 type: community
-members: 11
+cohesion: 0.33
+members: 9
 ---
 
 # Community 29
 
-**Members:** 11 nodes
+**Cohesion:** 0.33 - loosely connected
+**Members:** 9 nodes
 
 ## Members
-- [[ActivityLog]] - code - web/dashboard/src/components/ActivityLogList.tsx
-- [[ActivityLogList()]] - code - web/dashboard/src/components/ActivityLogList.tsx
-- [[ActivityLogList.tsx]] - code - web/dashboard/src/components/ActivityLogList.tsx
-- [[DashboardOverview()]] - code - web/dashboard/src/components/DashboardOverview.tsx
-- [[DashboardOverview.tsx]] - code - web/dashboard/src/components/DashboardOverview.tsx
-- [[Desa_1]] - code - web/dashboard/src/components/ActivityLogList.tsx
-- [[Desa_2]] - code - web/dashboard/src/components/DesaManager.tsx
-- [[DesaManager()]] - code - web/dashboard/src/components/DesaManager.tsx
-- [[DesaManager.tsx]] - code - web/dashboard/src/components/DesaManager.tsx
-- [[Stats]] - code - web/dashboard/src/components/DashboardOverview.tsx
-- [[getUser()]] - code - web/dashboard/src/lib/api.ts
+- [[.IncrementAttempts()]] - code - kiosk/db/sync_repo.go
+- [[.ListPendingSync()]] - code - kiosk/db/sync_repo.go
+- [[.MarkProcessed()]] - code - kiosk/db/sync_repo.go
+- [[Context_5]] - code - kiosk/db/sync_repo.go
+- [[DB_7]] - code - kiosk/db/sync_repo.go
+- [[NewSyncRepository()]] - code - kiosk/db/sync_repo.go
+- [[SyncQueueItem_1]] - code - kiosk/db/sync_repo.go
+- [[SyncRepository]] - code - kiosk/db/sync_repo.go
+- [[sync_repo.go]] - code - kiosk/db/sync_repo.go
 
 ## Live Query (requires Dataview plugin)
 
@@ -28,15 +28,7 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 7 edges to [[_COMMUNITY_Community 26]]
-- 3 edges to [[_COMMUNITY_Community 25]]
-- 2 edges to [[_COMMUNITY_Community 40]]
-- 2 edges to [[_COMMUNITY_Community 41]]
-- 2 edges to [[_COMMUNITY_Community 34]]
-- 2 edges to [[_COMMUNITY_Community 43]]
+- 1 edge to [[_COMMUNITY_Kiosk API Tests]]
 
 ## Top bridge nodes
-- [[getUser()]] - degree 15, connects to 5 communities
-- [[ActivityLogList.tsx]] - degree 7, connects to 2 communities
-- [[DashboardOverview.tsx]] - degree 6, connects to 2 communities
-- [[DesaManager.tsx]] - degree 6, connects to 2 communities
+- [[NewSyncRepository()]] - degree 4, connects to 1 community

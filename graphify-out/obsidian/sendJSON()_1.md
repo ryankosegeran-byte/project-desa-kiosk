@@ -1,12 +1,12 @@
 ---
 source_file: "server/api/helpers.go"
 type: "code"
-community: "Community 1"
+community: "API Helpers & Utilities"
 location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_1
+  - community/API_Helpers__Utilities
 ---
 
 # sendJSON()
@@ -16,4 +16,4 @@ tags:
 - [[helpers.go]] - `contains` [EXTRACTED]
 - [[sendError()_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_1
+#graphify/code #graphify/EXTRACTED #community/API_Helpers__Utilities

@@ -1,12 +1,12 @@
 ---
 source_file: "web/kiosk-ui/package.json"
 type: "code"
-community: "Community 6"
+community: "Kiosk UI Dependencies"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_6
+  - community/Kiosk_UI_Dependencies
 ---
 
 # type
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[package.json_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_6
+#graphify/code #graphify/EXTRACTED #community/Kiosk_UI_Dependencies

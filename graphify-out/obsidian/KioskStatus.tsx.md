@@ -1,18 +1,18 @@
 ---
 source_file: "web/dashboard/src/components/KioskStatus.tsx"
 type: "code"
-community: "Community 41"
+community: "Community 40"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_41
+  - community/Community_40
 ---
 
 # KioskStatus.tsx
 
 ## Connections
-- [[Desa_4]] - `contains` [EXTRACTED]
+- [[Desa_5]] - `contains` [EXTRACTED]
 - [[Kiosk_3]] - `contains` [EXTRACTED]
 - [[KioskStatus()]] - `contains` [EXTRACTED]
 - [[api.ts]] - `imports_from` [EXTRACTED]
@@ -20,4 +20,4 @@ tags:
 - [[index.astro_5]] - `imports_from` [EXTRACTED]
 - [[request()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_41
+#graphify/code #graphify/EXTRACTED #community/Community_40

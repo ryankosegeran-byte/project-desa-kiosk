@@ -1,12 +1,12 @@
 ---
 source_file: "server/db/jenis_surat_repo.go"
 type: "code"
-community: "Community 14"
+community: "JenisSurat Repository"
 location: "L22"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_14
+  - community/JenisSurat_Repository
 ---
 
 # Context
@@ -20,4 +20,4 @@ tags:
 - [[.ToggleForDesa()]] - `references` [EXTRACTED]
 - [[.Update()]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_14
+#graphify/code #graphify/EXTRACTED #community/JenisSurat_Repository

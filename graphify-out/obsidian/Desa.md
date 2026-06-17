@@ -1,22 +1,18 @@
 ---
-source_file: "server/db/desa_repo.go"
+source_file: "internal/models/desa.go"
 type: "code"
-community: "Community 8"
-location: "L21"
+community: "Community 62"
+location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_8
+  - community/Community_62
 ---
 
 # Desa
 
 ## Connections
-- [[.Create()_1]] - `references` [EXTRACTED]
-- [[.FindByID()_2]] - `references` [EXTRACTED]
-- [[.FindByKode()]] - `references` [EXTRACTED]
-- [[.List()]] - `references` [EXTRACTED]
-- [[.scanRow()_2]] - `references` [EXTRACTED]
-- [[.scanRows()_2]] - `references` [EXTRACTED]
+- [[Desa]] - `contains` [EXTRACTED]
+- [[Time]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_8
+#graphify/code #graphify/EXTRACTED #community/Community_62

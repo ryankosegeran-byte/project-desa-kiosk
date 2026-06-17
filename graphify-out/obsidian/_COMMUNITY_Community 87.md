@@ -1,15 +1,16 @@
 ---
 type: community
-members: 2
+cohesion: 1.00
+members: 1
 ---
 
 # Community 87
 
-**Members:** 2 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[sku.html]] - image - kiosk/templates/sku.html
-- [[templates]] - code
+- [[read_docx.ps1]] - code - scripts/read_docx.ps1
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,16 +1,16 @@
 ---
 type: community
-members: 3
+cohesion: 1.00
+members: 1
 ---
 
 # Community 75
 
-**Members:** 3 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[code.html_7]] - image - referensi_tema/pic_manajemen_unit_kiosk/code.html
-- [[pic_manajemen_unit_kiosk]] - code
-- [[screen.png_7]] - image - referensi_tema/pic_manajemen_unit_kiosk/screen.png
+- [[user_handler.go]] - code - server/api/user_handler.go
 
 ## Live Query (requires Dataview plugin)
 

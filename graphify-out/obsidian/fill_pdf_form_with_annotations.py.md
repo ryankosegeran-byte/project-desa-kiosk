@@ -1,12 +1,12 @@
 ---
 source_file: ".agents/skills/pdf/scripts/fill_pdf_form_with_annotations.py"
 type: "code"
-community: "Community 23"
+community: "Community 22"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_23
+  - community/Community_22
 ---
 
 # fill_pdf_form_with_annotations.py
@@ -16,4 +16,4 @@ tags:
 - [[transform_from_image_coords()]] - `contains` [EXTRACTED]
 - [[transform_from_pdf_coords()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_23
+#graphify/code #graphify/EXTRACTED #community/Community_22

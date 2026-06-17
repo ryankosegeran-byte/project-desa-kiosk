@@ -1,21 +1,14 @@
 ---
-source_file: "internal/models/surat.go"
+source_file: "kiosk/api/surat.go"
 type: "code"
-community: "Community 48"
+community: "Community 71"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_48
+  - community/Community_71
 ---
 
 # surat.go
 
-## Connections
-- [[CreateSuratRequest]] - `contains` [EXTRACTED]
-- [[NomorSuratBatch]] - `contains` [EXTRACTED]
-- [[RawMessage_1]] - `references` [EXTRACTED]
-- [[Time_2]] - `references` [EXTRACTED]
-- [[surat.go]] - `contains` [EXTRACTED]
-
-#graphify/code #graphify/EXTRACTED #community/Community_48
+#graphify/code #graphify/EXTRACTED #community/Community_71

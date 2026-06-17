@@ -1,12 +1,12 @@
 ---
 source_file: "kiosk/rfid/listener.go"
 type: "code"
-community: "Community 2"
+community: "Server Router & Middleware"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_2
+  - community/Server_Router__Middleware
 ---
 
 # listener.go
@@ -16,4 +16,4 @@ tags:
 - [[MockScanRequest]] - `contains` [EXTRACTED]
 - [[ServeEvents()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_2
+#graphify/code #graphify/EXTRACTED #community/Server_Router__Middleware

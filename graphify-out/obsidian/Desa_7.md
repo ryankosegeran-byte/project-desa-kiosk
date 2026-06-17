@@ -1,17 +1,17 @@
 ---
-source_file: "web/dashboard/src/components/WargaRegister.tsx"
+source_file: "web/dashboard/src/components/UserManager.tsx"
 type: "code"
-community: "Community 43"
-location: "L22"
+community: "Community 41"
+location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_43
+  - community/Community_41
 ---
 
 # Desa
 
 ## Connections
-- [[WargaRegister.tsx]] - `contains` [EXTRACTED]
+- [[UserManager.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_43
+#graphify/code #graphify/EXTRACTED #community/Community_41

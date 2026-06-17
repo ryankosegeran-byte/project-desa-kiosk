@@ -1,18 +1,18 @@
 ---
-source_file: "kiosk/sync/pusher.go"
+source_file: "kiosk/sync/puller.go"
 type: "code"
-community: "Community 32"
-location: "L21"
+community: "Community 27"
+location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_32
+  - community/Community_27
 ---
 
 # Config
 
 ## Connections
-- [[NewPusher()]] - `references` [EXTRACTED]
-- [[pusher.go]] - `references` [EXTRACTED]
+- [[NewPuller()]] - `references` [EXTRACTED]
+- [[Puller_1]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_32
+#graphify/code #graphify/EXTRACTED #community/Community_27

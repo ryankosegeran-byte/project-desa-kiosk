@@ -1,14 +1,14 @@
 ---
 source_file: "web/kiosk-ui/vite.config.ts"
 type: "code"
-community: "Community 138"
+community: "Community 82"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_138
+  - community/Community_82
 ---
 
 # vite.config.ts
 
-#graphify/code #graphify/EXTRACTED #community/Community_138
+#graphify/code #graphify/EXTRACTED #community/Community_82

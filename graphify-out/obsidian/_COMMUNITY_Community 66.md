@@ -1,16 +1,16 @@
 ---
 type: community
-members: 3
+cohesion: 1.00
+members: 1
 ---
 
 # Community 66
 
-**Members:** 3 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[KTPData]] - code - internal/models/warga.go
-- [[Time_5]] - code - internal/models/warga.go
-- [[warga.go]] - code - internal/models/warga.go
+- [[dashboard_handler.go]] - code - server/api/dashboard_handler.go
 
 ## Live Query (requires Dataview plugin)
 

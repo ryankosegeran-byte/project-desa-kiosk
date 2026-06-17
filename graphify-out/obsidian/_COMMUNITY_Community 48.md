@@ -1,18 +1,19 @@
 ---
 type: community
-members: 5
+cohesion: 0.50
+members: 4
 ---
 
 # Community 48
 
-**Members:** 5 nodes
+**Cohesion:** 0.50 - moderately connected
+**Members:** 4 nodes
 
 ## Members
-- [[CreateSuratRequest]] - code - internal/models/surat.go
-- [[NomorSuratBatch]] - code - internal/models/surat.go
-- [[RawMessage_1]] - code - internal/models/surat.go
-- [[Time_2]] - code - internal/models/surat.go
-- [[surat.go]] - code - internal/models/surat.go
+- [[.handleOCRStatus()]] - code - server/api/ocr_status_handler.go
+- [[Request_10]] - code - server/api/ocr_status_handler.go
+- [[ResponseWriter_10]] - code - server/api/ocr_status_handler.go
+- [[Server_10]] - code - server/api/ocr_status_handler.go
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,19 +1,21 @@
 ---
 type: community
+cohesion: 0.33
 members: 6
 ---
 
 # Community 39
 
+**Cohesion:** 0.33 - loosely connected
 **Members:** 6 nodes
 
 ## Members
-- [[.handleGetWargaByNIK()]] - code - kiosk/api/warga.go
-- [[.handleGetWargaByRFID()]] - code - kiosk/api/warga.go
-- [[.handleSearchWarga()]] - code - kiosk/api/warga.go
-- [[Request_2]] - code - kiosk/api/warga.go
-- [[ResponseWriter_2]] - code - kiosk/api/warga.go
-- [[Server_3]] - code - kiosk/api/warga.go
+- [[......componentsJenisSuratManager]] - code - web/dashboard/src/components/JenisSuratManager
+- [[Desa_4]] - code - web/dashboard/src/components/JenisSuratManager.tsx
+- [[JenisSurat_4]] - code - web/dashboard/src/components/JenisSuratManager.tsx
+- [[JenisSuratManager()]] - code - web/dashboard/src/components/JenisSuratManager.tsx
+- [[JenisSuratManager.tsx]] - code - web/dashboard/src/components/JenisSuratManager.tsx
+- [[index.astro_2]] - code - web/dashboard/src/pages/admin/jenis-surat/index.astro
 
 ## Live Query (requires Dataview plugin)
 
@@ -21,3 +23,13 @@ members: 6
 TABLE source_file, type FROM #community/Community_39
 SORT file.name ASC
 ```
+
+## Connections to other communities
+- 2 edges to [[_COMMUNITY_Community 25]]
+- 2 edges to [[_COMMUNITY_Community 28]]
+- 1 edge to [[_COMMUNITY_Community 24]]
+
+## Top bridge nodes
+- [[JenisSuratManager.tsx]] - degree 7, connects to 2 communities
+- [[index.astro_2]] - degree 3, connects to 1 community
+- [[JenisSuratManager()]] - degree 2, connects to 1 community

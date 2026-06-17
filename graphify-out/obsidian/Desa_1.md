@@ -1,17 +1,22 @@
 ---
-source_file: "web/dashboard/src/components/ActivityLogList.tsx"
+source_file: "server/db/desa_repo.go"
 type: "code"
-community: "Community 29"
-location: "L18"
+community: "Desa Repository"
+location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_29
+  - community/Desa_Repository
 ---
 
 # Desa
 
 ## Connections
-- [[ActivityLogList.tsx]] - `contains` [EXTRACTED]
+- [[.Create()_1]] - `references` [EXTRACTED]
+- [[.FindByID()_2]] - `references` [EXTRACTED]
+- [[.FindByKode()]] - `references` [EXTRACTED]
+- [[.List()]] - `references` [EXTRACTED]
+- [[.scanRow()_2]] - `references` [EXTRACTED]
+- [[.scanRows()_2]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_29
+#graphify/code #graphify/EXTRACTED #community/Desa_Repository

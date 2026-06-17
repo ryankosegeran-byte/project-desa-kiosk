@@ -1,22 +1,24 @@
 ---
 type: community
+cohesion: 0.42
 members: 9
 ---
 
 # Community 30
 
+**Cohesion:** 0.42 - moderately connected
 **Members:** 9 nodes
 
 ## Members
-- [[.IncrementAttempts()]] - code - kiosk/db/sync_repo.go
-- [[.ListPendingSync()]] - code - kiosk/db/sync_repo.go
-- [[.MarkProcessed()]] - code - kiosk/db/sync_repo.go
-- [[Context_5]] - code - kiosk/db/sync_repo.go
-- [[DB_7]] - code - kiosk/db/sync_repo.go
-- [[NewSyncRepository()]] - code - kiosk/db/sync_repo.go
-- [[SyncQueueItem_1]] - code - kiosk/db/sync_repo.go
-- [[SyncRepository]] - code - kiosk/db/sync_repo.go
-- [[sync_repo.go]] - code - kiosk/db/sync_repo.go
+- [[.Start()_1]] - code - kiosk/sync/engine.go
+- [[.runSync()]] - code - kiosk/sync/engine.go
+- [[Config_2]] - code - kiosk/sync/engine.go
+- [[Context_10]] - code - kiosk/sync/engine.go
+- [[Detector_1]] - code - kiosk/sync/engine.go
+- [[Engine]] - code - kiosk/sync/engine.go
+- [[NewEngine()]] - code - kiosk/sync/engine.go
+- [[Puller]] - code - kiosk/sync/engine.go
+- [[Pusher]] - code - kiosk/sync/engine.go
 
 ## Live Query (requires Dataview plugin)
 
@@ -26,7 +28,9 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 1 edge to [[_COMMUNITY_Community 4]]
+- 1 edge to [[_COMMUNITY_JWT Authentication]]
+- 1 edge to [[_COMMUNITY_Kiosk API Tests]]
 
 ## Top bridge nodes
-- [[NewSyncRepository()]] - degree 4, connects to 1 community
+- [[NewEngine()]] - degree 6, connects to 1 community
+- [[.Start()_1]] - degree 4, connects to 1 community

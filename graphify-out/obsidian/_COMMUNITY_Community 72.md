@@ -1,16 +1,16 @@
 ---
 type: community
-members: 3
+cohesion: 1.00
+members: 1
 ---
 
 # Community 72
 
-**Members:** 3 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[files]] - code - web/kiosk-ui/tsconfig.json
-- [[references]] - code - web/kiosk-ui/tsconfig.json
-- [[tsconfig.json_1]] - code - web/kiosk-ui/tsconfig.json
+- [[surat_handler.go]] - code - server/api/surat_handler.go
 
 ## Live Query (requires Dataview plugin)
 

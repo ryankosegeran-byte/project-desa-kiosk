@@ -1,16 +1,16 @@
 ---
 type: community
-members: 3
+cohesion: 1.00
+members: 1
 ---
 
 # Community 77
 
-**Members:** 3 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[LICENSE.txt_2]] - document - .agents/skills/webapp-testing/LICENSE.txt
-- [[SKILL_9]] - document - .agents/skills/webapp-testing/SKILL.md
-- [[webapp-testing]] - code
+- [[warga_handler.go]] - code - server/api/warga_handler.go
 
 ## Live Query (requires Dataview plugin)
 

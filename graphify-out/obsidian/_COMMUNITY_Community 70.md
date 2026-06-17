@@ -1,16 +1,16 @@
 ---
 type: community
-members: 3
+cohesion: 1.00
+members: 1
 ---
 
 # Community 70
 
-**Members:** 3 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[code.html_5]] - image - referensi_tema/kiosk_pilih_jenis_surat/code.html
-- [[kiosk_pilih_jenis_surat]] - code
-- [[screen.png_5]] - image - referensi_tema/kiosk_pilih_jenis_surat/screen.png
+- [[ocr_status_handler.go]] - code - server/api/ocr_status_handler.go
 
 ## Live Query (requires Dataview plugin)
 

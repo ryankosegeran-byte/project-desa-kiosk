@@ -1,12 +1,12 @@
 ---
 source_file: "web/dashboard/src/lib/api.ts"
 type: "code"
-community: "Community 26"
+community: "Community 25"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_26
+  - community/Community_25
 ---
 
 # api.ts
@@ -28,4 +28,4 @@ tags:
 - [[getUser()]] - `contains` [EXTRACTED]
 - [[request()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_26
+#graphify/code #graphify/EXTRACTED #community/Community_25

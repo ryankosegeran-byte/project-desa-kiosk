@@ -1,12 +1,12 @@
 ---
 source_file: "server/middleware/auth.go"
 type: "code"
-community: "Community 2"
+community: "Sync Handlers"
 location: "L70"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_2
+  - community/Sync_Handlers
 ---
 
 # KioskKeyMiddleware()
@@ -19,4 +19,4 @@ tags:
 - [[HandlerFunc]] - `calls` [INFERRED]
 - [[auth.go]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_2
+#graphify/code #graphify/EXTRACTED #community/Sync_Handlers

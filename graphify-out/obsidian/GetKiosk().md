@@ -1,12 +1,12 @@
 ---
 source_file: "server/middleware/auth.go"
 type: "code"
-community: "Community 20"
+community: "Sync Handlers"
 location: "L105"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Community_20
+  - community/Sync_Handlers
 ---
 
 # GetKiosk()
@@ -20,4 +20,4 @@ tags:
 - [[Kiosk_2]] - `references` [EXTRACTED]
 - [[auth.go]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Community_20
+#graphify/code #graphify/INFERRED #community/Sync_Handlers

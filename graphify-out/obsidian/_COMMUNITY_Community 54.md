@@ -1,17 +1,19 @@
 ---
 type: community
+cohesion: 0.67
 members: 4
 ---
 
 # Community 54
 
+**Cohesion:** 0.67 - moderately connected
 **Members:** 4 nodes
 
 ## Members
-- [[.runMigrations()_1]] - code - server/db/postgres.go
-- [[DB_12]] - code - server/db/postgres.go
-- [[Open()_1]] - code - server/db/postgres.go
-- [[postgres.go]] - code - server/db/postgres.go
+- [[Wait for server to be ready by polling the port.]] - rationale - .agents/skills/webapp-testing/scripts/with_server.py
+- [[is_server_ready()]] - code - .agents/skills/webapp-testing/scripts/with_server.py
+- [[main()_1]] - code - .agents/skills/webapp-testing/scripts/with_server.py
+- [[with_server.py]] - code - .agents/skills/webapp-testing/scripts/with_server.py
 
 ## Live Query (requires Dataview plugin)
 

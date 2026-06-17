@@ -1,17 +1,22 @@
 ---
-source_file: "web/dashboard/src/components/SuratTable.tsx"
+source_file: "server/db/surat_repo.go"
 type: "code"
-community: "Community 26"
-location: "L4"
+community: "Community 20"
+location: "L22"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_26
+  - community/Community_20
 ---
 
 # Surat
 
 ## Connections
-- [[SuratTable.tsx]] - `contains` [EXTRACTED]
+- [[.Create()_3]] - `references` [EXTRACTED]
+- [[.FindByID()_4]] - `references` [EXTRACTED]
+- [[.List()_2]] - `references` [EXTRACTED]
+- [[.Upsert()_2]] - `references` [EXTRACTED]
+- [[.scanRow()_4]] - `references` [EXTRACTED]
+- [[.scanRows()_4]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_26
+#graphify/code #graphify/EXTRACTED #community/Community_20

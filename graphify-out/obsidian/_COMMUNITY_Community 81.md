@@ -1,15 +1,16 @@
 ---
 type: community
-members: 2
+cohesion: 1.00
+members: 1
 ---
 
 # Community 81
 
-**Members:** 2 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[SKILL]] - document - .agents/skills/diagnose/SKILL.md
-- [[diagnose]] - code
+- [[eslint.config.js]] - code - web/kiosk-ui/eslint.config.js
 
 ## Live Query (requires Dataview plugin)
 

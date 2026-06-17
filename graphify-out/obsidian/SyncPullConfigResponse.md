@@ -1,12 +1,12 @@
 ---
 source_file: "internal/models/sync.go"
 type: "code"
-community: "Community 17"
+community: "Internal Models"
 location: "L38"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_17
+  - community/Internal_Models
 ---
 
 # SyncPullConfigResponse
@@ -17,4 +17,4 @@ tags:
 - [[Time_3]] - `references` [EXTRACTED]
 - [[sync.go]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_17
+#graphify/code #graphify/EXTRACTED #community/Internal_Models

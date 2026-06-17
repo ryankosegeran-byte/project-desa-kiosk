@@ -1,16 +1,16 @@
 ---
 type: community
-members: 3
+cohesion: 1.00
+members: 1
 ---
 
 # Community 65
 
-**Members:** 3 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[LICENSE.txt]] - document - .agents/skills/frontend-design/LICENSE.txt
-- [[SKILL_1]] - document - .agents/skills/frontend-design/SKILL.md
-- [[frontend-design]] - code
+- [[auth_handler.go]] - code - server/api/auth_handler.go
 
 ## Live Query (requires Dataview plugin)
 

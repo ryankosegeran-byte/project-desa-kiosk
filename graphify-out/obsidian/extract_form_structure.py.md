@@ -1,12 +1,12 @@
 ---
 source_file: ".agents/skills/pdf/scripts/extract_form_structure.py"
 type: "code"
-community: "Community 58"
+community: "Community 53"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_58
+  - community/Community_53
 ---
 
 # extract_form_structure.py
@@ -16,4 +16,4 @@ tags:
 - [[extract_form_structure()]] - `contains` [EXTRACTED]
 - [[main()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_58
+#graphify/code #graphify/EXTRACTED #community/Community_53

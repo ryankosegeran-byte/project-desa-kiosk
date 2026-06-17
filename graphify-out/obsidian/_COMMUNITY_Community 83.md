@@ -1,15 +1,16 @@
 ---
 type: community
-members: 2
+cohesion: 1.00
+members: 1
 ---
 
 # Community 83
 
-**Members:** 2 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[console_logging.py]] - code - .agents/skills/webapp-testing/examples/console_logging.py
-- [[handle_console_message()]] - code - .agents/skills/webapp-testing/examples/console_logging.py
+- [[Layout.astro]] - code - web/dashboard/src/layouts/Layout.astro
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,12 +1,12 @@
 ---
 source_file: "kiosk/api/api_test.go"
 type: "code"
-community: "Community 4"
+community: "Kiosk API Tests"
 location: "L250"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_4
+  - community/Kiosk_API_Tests
 ---
 
 # TestHandleRFIDEventsAndMock()
@@ -16,4 +16,4 @@ tags:
 - [[api_test.go]] - `contains` [EXTRACTED]
 - [[setupTestServer()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_4
+#graphify/code #graphify/EXTRACTED #community/Kiosk_API_Tests

@@ -1,12 +1,12 @@
 ---
 source_file: "web/kiosk-ui/src/App.tsx"
 type: "code"
-community: "Community 3"
+community: "Kiosk UI Components"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_3
+  - community/Kiosk_UI_Components
 ---
 
 # App.tsx
@@ -27,11 +27,11 @@ tags:
 - [[StatusBar.tsx]] - `imports_from` [EXTRACTED]
 - [[SuccessPage()]] - `imports` [EXTRACTED]
 - [[SuccessPage.tsx]] - `imports_from` [EXTRACTED]
-- [[Warga_5]] - `imports` [EXTRACTED]
+- [[Warga_6]] - `imports` [EXTRACTED]
 - [[main.tsx]] - `imports_from` [EXTRACTED]
 - [[useOnlineStatus()]] - `imports` [EXTRACTED]
 - [[useOnlineStatus.ts]] - `imports_from` [EXTRACTED]
 - [[useSurat.ts]] - `imports_from` [EXTRACTED]
 - [[useWarga.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_3
+#graphify/code #graphify/EXTRACTED #community/Kiosk_UI_Components

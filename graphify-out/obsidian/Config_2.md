@@ -1,18 +1,18 @@
 ---
-source_file: "kiosk/sync/puller.go"
+source_file: "kiosk/sync/engine.go"
 type: "code"
-community: "Community 28"
-location: "L19"
+community: "Community 30"
+location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_28
+  - community/Community_30
 ---
 
 # Config
 
 ## Connections
-- [[NewPuller()]] - `references` [EXTRACTED]
-- [[puller.go]] - `references` [EXTRACTED]
+- [[Engine]] - `references` [EXTRACTED]
+- [[NewEngine()]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_28
+#graphify/code #graphify/EXTRACTED #community/Community_30

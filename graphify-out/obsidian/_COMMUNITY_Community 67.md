@@ -1,16 +1,16 @@
 ---
 type: community
-members: 3
+cohesion: 1.00
+members: 1
 ---
 
 # Community 67
 
-**Members:** 3 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 1 nodes
 
 ## Members
-- [[SKILL_4]] - document - .agents/skills/kiosk-developer/SKILL.md
-- [[kiosk-developer]] - code
-- [[kiosk-developer_1]] - code
+- [[desa_handler.go]] - code - server/api/desa_handler.go
 
 ## Live Query (requires Dataview plugin)
 
