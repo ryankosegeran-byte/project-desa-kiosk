@@ -1,0 +1,242 @@
+{
+  "jenis_surat_id": "sku-29a43f9f",
+  "jenis_surat_kode": "SKU",
+  "jenis_surat_nama": "Surat Keterangan Usaha",
+  "fields_schema": {
+    "fields": [
+      {
+        "key": "Nama",
+        "label": "Nama Lengkap",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan Nama Lengkap"
+      },
+      {
+        "key": "NIK",
+        "label": "NIK",
+        "type": "text",
+        "required": true,
+        "validation": "nik",
+        "placeholder": "Masukkan NIK"
+      },
+      {
+        "key": "TempatTanggalLahir",
+        "label": "Tempat/Tanggal Lahir",
+        "type": "date",
+        "required": true,
+        "placeholder": "Masukkan Tempat/Tanggal Lahir"
+      },
+      {
+        "key": "JenisKelamin",
+        "label": "Jenis Kelamin",
+        "type": "select",
+        "required": true,
+        "placeholder": "Masukkan Jenis Kelamin",
+        "options": [
+          "Laki-laki",
+          "Perempuan"
+        ]
+      },
+      {
+        "key": "Kewarganegaraan",
+        "label": "Kewarganegaraan",
+        "type": "select",
+        "required": true,
+        "placeholder": "Masukkan Kewarganegaraan",
+        "options": [
+          "WNI",
+          "WNA"
+        ]
+      },
+      {
+        "key": "Agama",
+        "label": "Agama",
+        "type": "select",
+        "required": true,
+        "placeholder": "Masukkan Agama",
+        "options": [
+          "Islam",
+          "Kristen",
+          "Katolik",
+          "Hindu",
+          "Buddha",
+          "Konghucu",
+          "Lainnya"
+        ]
+      },
+      {
+        "key": "StatusKawin",
+        "label": "Status Perkawinan",
+        "type": "select",
+        "required": true,
+        "placeholder": "Masukkan Status Perkawinan",
+        "options": [
+          "Belum Kawin",
+          "Kawin",
+          "Cerai Hidup",
+          "Cerai Mati"
+        ]
+      },
+      {
+        "key": "Pekerjaan",
+        "label": "Pekerjaan",
+        "type": "select",
+        "required": true,
+        "placeholder": "Masukkan Pekerjaan",
+        "options": [
+          "Pegawai Negeri",
+          "TNI/Polri",
+          "Guru",
+          "Dokter",
+          "Perawat",
+          "Wiraswasta",
+          "Pedagang",
+          "Petani",
+          "Nelayan",
+          "Pelajar/Mahasiswa",
+          "Ibu Rumah Tangga",
+          "Lainnya"
+        ]
+      },
+      {
+        "key": "Alamat",
+        "label": "Alamat",
+        "type": "textarea",
+        "required": true,
+        "placeholder": "Masukkan Alamat"
+      },
+      {
+        "key": "RTRW",
+        "label": "RT/RW",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan RT/RW"
+      },
+      {
+        "key": "Kelurahan",
+        "label": "Kelurahan",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan Kelurahan"
+      },
+      {
+        "key": "Kecamatan",
+        "label": "Kecamatan",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan Kecamatan"
+      },
+      {
+        "key": "Kabupaten",
+        "label": "Kabupaten",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan Kabupaten"
+      },
+      {
+        "key": "Nama",
+        "label": "Nama Lengkap",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan Nama Lengkap"
+      },
+      {
+        "type": "separator",
+        "label": "--- Data Surat ---"
+      },
+      {
+        "key": "jenis_usaha",
+        "label": "Jenis Usaha",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan Jenis Usaha"
+      },
+      {
+        "key": "merk_usaha",
+        "label": "Merk/Nama Usaha",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan Merk/Nama Usaha"
+      },
+      {
+        "key": "alamat_usaha",
+        "label": "Alamat Usaha",
+        "type": "textarea",
+        "required": true,
+        "placeholder": "Masukkan Alamat Usaha"
+      },
+      {
+        "key": "sifat_tempat_usaha",
+        "label": "Sifat Tempat Usaha",
+        "type": "select",
+        "required": true,
+        "placeholder": "Masukkan Sifat Tempat Usaha",
+        "options": [
+          "Milik Sendiri",
+          "Sewaan",
+          "Pinjam",
+          "Warisan"
+        ]
+      },
+      {
+        "key": "tahun_mulai_usaha",
+        "label": "Tahun Mulai Usaha",
+        "type": "number",
+        "required": true,
+        "validation": "year",
+        "placeholder": "Masukkan Tahun Mulai Usaha"
+      },
+      {
+        "key": "batas_utara",
+        "label": "Batas Utara",
+        "type": "textarea",
+        "required": true,
+        "placeholder": "Masukkan Batas Utara"
+      },
+      {
+        "key": "batas_selatan",
+        "label": "Batas Selatan",
+        "type": "textarea",
+        "required": true,
+        "placeholder": "Masukkan Batas Selatan"
+      },
+      {
+        "key": "batas_timur",
+        "label": "Batas Timur",
+        "type": "textarea",
+        "required": true,
+        "placeholder": "Masukkan Batas Timur"
+      },
+      {
+        "key": "batas_barat",
+        "label": "Batas Barat",
+        "type": "textarea",
+        "required": true,
+        "placeholder": "Masukkan Batas Barat"
+      },
+      {
+        "key": "DateToday",
+        "label": "Tanggal",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan Tanggal"
+      },
+      {
+        "key": "DateToday",
+        "label": "Tanggal",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan Tanggal"
+      },
+      {
+        "key": "KepalaDesa",
+        "label": "Nama Kepala Desa",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan Nama Kepala Desa"
+      }
+    ]
+  },
+  "aktif": true,
+  "urutan": 0
+}

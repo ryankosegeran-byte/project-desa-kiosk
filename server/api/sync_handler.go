@@ -113,6 +113,7 @@ func (s *Server) handleSyncPullWarga(w http.ResponseWriter, r *http.Request) {
 }
 
 // handleSyncPullConfig pulls available letters and templates config for this desa.
+// Returns both per-desa templates and general templates.
 func (s *Server) handleSyncPullConfig(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	kiosk := middleware.GetKiosk(ctx)
@@ -128,8 +129,10 @@ func (s *Server) handleSyncPullConfig(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Fetch custom template configurations for this village
-	templatesList, err := s.templateRepo.ListTemplatesForDesa(ctx, kiosk.DesaID)
+	// Fetch ALL templates for this village including general templates, WITH the
+	// DOCX bytes + placeholder mapping so the kiosk can render offline (Strategi B).
+	// The kiosk handles fallback logic (per-desa > general).
+	templatesList, err := s.templateRepo.ListTemplatesForDesaFull(ctx, kiosk.DesaID)
 	if err != nil {
 		sendError(w, http.StatusInternalServerError, "Gagal mengambil templates sync: "+err.Error())
 		return

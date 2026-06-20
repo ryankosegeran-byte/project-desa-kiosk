@@ -19,9 +19,14 @@ export const PreviewPage: React.FC<PreviewPageProps> = ({
   onSuratPrinted,
 }) => {
   const navigate = useNavigate();
-  const { createSurat, printSurat, fetchTemplateHTML, loading, error, setError } = useSurat();
+  const { createSurat, printSurat, fetchTemplate, previewSuratPDF, loading, error, setError } = useSurat();
+
+  const [mode, setMode] = useState<'loading' | 'docx' | 'html'>('loading');
+  const [pdfUrl, setPdfUrl] = useState<string>('');
+  const [rendering, setRendering] = useState<boolean>(false);
   const [templateHTML, setTemplateHTML] = useState<string>('');
   const [parsedHTML, setParsedHTML] = useState<string>('');
+  const [selectedFormat, setSelectedFormat] = useState<string>('A4');
 
   useEffect(() => {
     if (!warga) {
@@ -32,31 +37,56 @@ export const PreviewPage: React.FC<PreviewPageProps> = ({
       navigate('/select-surat');
       return;
     }
+  }, [warga, jenisSurat, navigate]);
 
-    // Load template HTML
-    const loadTemplate = async () => {
-      const html = await fetchTemplateHTML(jenisSurat.id);
-      setTemplateHTML(html);
-    };
-
-    loadTemplate();
-  }, [warga, jenisSurat, fetchTemplateHTML, navigate]);
-
-  // Parse HTML templates client-side (replicate Go HTML templates)
+  // Load template and decide DOCX (server-rendered PDF) vs HTML (client preview).
   useEffect(() => {
-    if (!templateHTML || !warga) return;
+    if (!warga || !jenisSurat) return;
+    let active = true;
+    let createdUrl = '';
+    (async () => {
+      const tpl = await fetchTemplate(jenisSurat.id);
+      if (!active) return;
+      if (tpl) setSelectedFormat(tpl.format_kertas || 'A4');
+
+      if (tpl && tpl.placeholders && tpl.placeholders.length > 0) {
+        // DOCX (Strategi B): rendered to PDF by the kiosk (Word) — 100% sesuai cetak.
+        setMode('docx');
+        setRendering(true);
+        const url = await previewSuratPDF({
+          jenis_surat_id: jenisSurat.id,
+          nik: warga.nik,
+          data_surat: formData,
+        });
+        if (!active) return;
+        if (url) {
+          createdUrl = url;
+          setPdfUrl(url);
+        }
+        setRendering(false);
+      } else {
+        setTemplateHTML(tpl?.template_html || '');
+        setMode('html');
+      }
+    })();
+    return () => {
+      active = false;
+      if (createdUrl) URL.revokeObjectURL(createdUrl);
+    };
+  }, [warga, jenisSurat, formData, fetchTemplate, previewSuratPDF]);
+
+  // Client-side HTML preview (only for legacy HTML templates).
+  useEffect(() => {
+    if (mode !== 'html' || !templateHTML || !warga) return;
 
     let parsed = templateHTML;
-
-    // 1. Format today's date in Indonesian format
     const months = [
       'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-      'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+      'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember',
     ];
     const today = new Date();
     const formattedDate = `${today.getDate()} ${months[today.getMonth()]} ${today.getFullYear()}`;
 
-    // 2. Replacements
     parsed = parsed.replace(/\{\{\.DateToday\}\}/g, formattedDate);
     parsed = parsed.replace(/\{\{\.Warga\.Nama\}\}/g, warga.nama);
     parsed = parsed.replace(/\{\{\.Warga\.NIK\}\}/g, warga.nik);
@@ -70,81 +100,25 @@ export const PreviewPage: React.FC<PreviewPageProps> = ({
     parsed = parsed.replace(/\{\{\.Warga\.Kelurahan\}\}/g, warga.kelurahan || '');
     parsed = parsed.replace(/\{\{\.Warga\.Kecamatan\}\}/g, warga.kecamatan || '');
 
-    // 3. Handle data_surat details table loop: {{range $key, $value := .DataSurat}}...{{end}}
-    // Since our seeder has a standard loop structure:
-    // <table ...> {{range $key, $value := .DataSurat}} <tr> ... </tr> {{end}} </table>
-    // We can replace the entire loop block with generated HTML table rows.
-    const loopRegex = /\{\{range\s+\$key,\s+\$value\s+:=\s+\.DataSurat\}\}([\s\S]*?)\{\{end\}\}/g;
-    
-    if (loopRegex.test(parsed)) {
-      parsed = parsed.replace(loopRegex, (_, rowTemplate) => {
-        let rowsHtml = '';
-        
-        // Find human readable label for each key from schema
-        const getLabel = (key: string) => {
-          const field = jenisSurat?.fields_schema.fields.find(f => f.key === key);
-          return field ? field.label : key;
-        };
-
-        // Render each field value
-        Object.entries(formData).forEach(([key, val]) => {
-          if (val === undefined || val === null || val === '') return;
-          
-          let row = rowTemplate;
-
-          // Handle repeater field custom display
-          if (Array.isArray(val)) {
-            let listHtml = '<ol style="padding-left: 16px;">';
-            val.forEach((item: any) => {
-              const itemDetails = Object.entries(item)
-                .map(([, subVal]) => `${subVal}`)
-                .join(' - ');
-              listHtml += `<li>${itemDetails}</li>`;
-            });
-            listHtml += '</ol>';
-            
-            row = row.replace(/\{\{\$key\}\}/g, getLabel(key));
-            row = row.replace(/\{\{\$value\}\}/g, listHtml);
-          } else {
-            row = row.replace(/\{\{\$key\}\}/g, getLabel(key));
-            row = row.replace(/\{\{\$value\}\}/g, String(val));
-          }
-
-          rowsHtml += row;
-        });
-
-        return rowsHtml;
-      });
-    }
-
     setParsedHTML(parsed);
-  }, [templateHTML, warga, formData, jenisSurat]);
+  }, [mode, templateHTML, warga, formData]);
 
   const handlePrint = async () => {
     if (!warga || !jenisSurat) return;
-
     setError(null);
     try {
-      // 1. Create Surat Draft in backend
       const surat = await createSurat({
         jenis_surat_id: jenisSurat.id,
         warga_id: warga.id,
         nik_pemohon: warga.nik,
         nama_pemohon: warga.nama,
-        data_surat: formData
+        data_surat: formData,
       });
+      if (!surat) throw new Error("Gagal menyimpan draf surat ke kiosk lokal.");
 
-      if (!surat) {
-        throw new Error("Gagal menyimpan draf surat ke kiosk lokal.");
-      }
-
-      // 2. Call print endpoint
       const printed = await printSurat(surat.id);
-      if (!printed) {
-        throw new Error("Gagal mengirim perintah cetak ke printer.");
-      }
+      if (!printed) throw new Error("Gagal mengirim perintah cetak ke printer.");
 
-      // 3. Trigger print success callback
       onSuratPrinted();
       navigate('/success');
     } catch (err: any) {
@@ -152,18 +126,18 @@ export const PreviewPage: React.FC<PreviewPageProps> = ({
     }
   };
 
-  const handleBack = () => {
-    navigate('/form-surat');
-  };
+  const handleBack = () => navigate('/form-surat');
 
   if (!warga || !jenisSurat) return null;
+
+  const canPrint = mode === 'docx' ? (!rendering && !!pdfUrl) : !!parsedHTML;
 
   return (
     <div className="page-container" style={{ height: '100%' }}>
       <div style={{ marginBottom: '20px' }}>
         <h2 style={{ fontSize: '24px', fontWeight: 800 }}>Pratinjau Surat</h2>
         <p style={{ color: 'var(--text-muted)', fontSize: '15px' }}>
-          Periksa kembali format dan keselarasan isi surat sebelum dicetak.
+          Periksa kembali isi surat sebelum dicetak. Tampilan ini sama persis dengan hasil cetak.
         </p>
       </div>
 
@@ -173,7 +147,6 @@ export const PreviewPage: React.FC<PreviewPageProps> = ({
         </div>
       )}
 
-      {/* Embedded Document Preview container */}
       <div className="glass-card" style={{
         flex: 1,
         background: '#ffffff',
@@ -182,49 +155,45 @@ export const PreviewPage: React.FC<PreviewPageProps> = ({
         display: 'flex',
         flexDirection: 'column',
         marginBottom: '20px',
-        boxShadow: 'inset 0 0 10px rgba(0,0,0,0.1)'
+        boxShadow: 'inset 0 0 10px rgba(0,0,0,0.1)',
       }}>
-        {/* Document Content viewport */}
-        <div style={{
-          flex: 1,
-          overflowY: 'auto',
-          padding: '40px',
-          display: 'flex',
-          justifyContent: 'center'
-        }}>
-          {parsedHTML ? (
-            <div 
-              style={{
-                width: '100%',
-                maxWidth: '700px',
-                color: '#000000',
-                background: '#ffffff'
-              }}
-              dangerouslySetInnerHTML={{ __html: parsedHTML }}
-            />
-          ) : (
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dark)' }}>
-              Memuat pratinjau...
+        {mode === 'docx' ? (
+          rendering ? (
+            <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dark)', gap: '10px' }}>
+              <RefreshCw size={20} className="spinner" /> Merender dokumen...
             </div>
-          )}
-        </div>
+          ) : pdfUrl ? (
+            <iframe title="Pratinjau Surat" src={pdfUrl} style={{ flex: 1, width: '100%', border: 'none' }} />
+          ) : (
+            <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dark)' }}>
+              Gagal memuat pratinjau.
+            </div>
+          )
+        ) : mode === 'html' ? (
+          <div style={{ flex: 1, overflowY: 'auto', padding: '40px', display: 'flex', justifyContent: 'center' }}>
+            {parsedHTML ? (
+              <div
+                style={{ width: '100%', maxWidth: selectedFormat === 'F4' ? '720px' : '700px', color: '#000', background: '#fff' }}
+                dangerouslySetInnerHTML={{ __html: parsedHTML }}
+              />
+            ) : (
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dark)' }}>Memuat pratinjau...</div>
+            )}
+          </div>
+        ) : (
+          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dark)' }}>Memuat pratinjau...</div>
+        )}
       </div>
 
-      {/* Action footer */}
-      <div style={{
-        display: 'flex',
-        gap: '16px',
-        paddingTop: '16px',
-        borderTop: '1px solid var(--border-color)'
-      }}>
+      <div style={{ display: 'flex', gap: '16px', paddingTop: '16px', borderTop: '1px solid var(--border-color)' }}>
         <button type="button" disabled={loading} className="btn btn-secondary" onClick={handleBack} style={{ flex: 1 }}>
           <ArrowLeft size={18} />
           Kembali Edit
         </button>
         <button
           type="button"
-          disabled={loading || !parsedHTML}
-          className={`btn btn-primary ${(loading || !parsedHTML) ? 'btn-disabled' : ''}`}
+          disabled={loading || !canPrint}
+          className={`btn btn-primary ${(loading || !canPrint) ? 'btn-disabled' : ''}`}
           onClick={handlePrint}
           style={{ flex: 2 }}
         >
@@ -236,7 +205,7 @@ export const PreviewPage: React.FC<PreviewPageProps> = ({
           ) : (
             <>
               <Printer size={20} />
-              Cetak Surat Sekarang (A4)
+              Cetak Surat
             </>
           )}
         </button>

@@ -92,6 +92,8 @@ func main() {
 	// 7. Initialize PDF Generator & Printer Services
 	pdfGen := print.NewPDFGenerator("data/printed")
 	printer := print.NewPrinter(cfg.PrintCommand)
+	docxRenderer := print.NewDocxRenderer("data/printed")
+	defer docxRenderer.Close()
 
 	// 8. Initialize Sync Engine
 	syncRepo := db.NewSyncRepository(database)
@@ -102,7 +104,7 @@ func main() {
 	syncEngine.Start(ctx)
 
 	// 9. Initialize API server
-	apiServer := api.NewServer(cfg, wargaRepo, suratRepo, jenisSuratRepo, configRepo, nomorSuratRepo, rfidBroker, pdfGen, printer)
+	apiServer := api.NewServer(cfg, wargaRepo, suratRepo, jenisSuratRepo, configRepo, nomorSuratRepo, rfidBroker, pdfGen, printer, docxRenderer)
 
 	srv := &http.Server{
 		Addr:         cfg.ListenAddr,

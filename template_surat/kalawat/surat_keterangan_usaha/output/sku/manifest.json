@@ -1,0 +1,363 @@
+{
+  "template_id": "7dca0d22",
+  "jenis_surat_kode": "SKU",
+  "jenis_surat_nama": "Surat Keterangan Usaha",
+  "format_kertas": "F4",
+  "variables": [
+    {
+      "name": "DataSurat.xxx",
+      "original_text": "XXX",
+      "cleaned_text": "XXX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xx",
+      "original_text": "XX",
+      "cleaned_text": "XX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xx",
+      "original_text": "XX",
+      "cleaned_text": "XX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xxxxx",
+      "original_text": "XXXXX",
+      "cleaned_text": "XXXXX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xxx",
+      "original_text": "XXX",
+      "cleaned_text": "XXX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xx",
+      "original_text": "XX",
+      "cleaned_text": "XX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xxxxx",
+      "original_text": "XXXXX",
+      "cleaned_text": "XXXXX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xxx",
+      "original_text": "XXX",
+      "cleaned_text": "XXX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xx",
+      "original_text": "XX",
+      "cleaned_text": "XX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xxxxx",
+      "original_text": "XXXXX",
+      "cleaned_text": "XXXXX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xxx",
+      "original_text": "XXX",
+      "cleaned_text": "XXX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xx",
+      "original_text": "XX",
+      "cleaned_text": "XX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xxxxx",
+      "original_text": "XXXXX",
+      "cleaned_text": "XXXXX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xxx",
+      "original_text": "XXX",
+      "cleaned_text": "XXX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xx",
+      "original_text": "XX",
+      "cleaned_text": "XX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xxxxx",
+      "original_text": "XXXXX",
+      "cleaned_text": "XXXXX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xxx",
+      "original_text": "XXX",
+      "cleaned_text": "XXX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xx",
+      "original_text": "XX",
+      "cleaned_text": "XX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xxxxx",
+      "original_text": "XXXXX",
+      "cleaned_text": "XXXXX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xxx",
+      "original_text": "XXX",
+      "cleaned_text": "XXX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xx",
+      "original_text": "XX",
+      "cleaned_text": "XX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xx",
+      "original_text": "XX",
+      "cleaned_text": "XX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.x",
+      "original_text": "X",
+      "cleaned_text": "X",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xx",
+      "original_text": "XX",
+      "cleaned_text": "XX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.x",
+      "original_text": "X",
+      "cleaned_text": "X",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.x",
+      "original_text": "X",
+      "cleaned_text": "X",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xx",
+      "original_text": "XX",
+      "cleaned_text": "XX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.x",
+      "original_text": "X",
+      "cleaned_text": "X",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xx",
+      "original_text": "XX",
+      "cleaned_text": "XX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xxxxx",
+      "original_text": "XXXXX",
+      "cleaned_text": "XXXXX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xxx",
+      "original_text": "XXX",
+      "cleaned_text": "XXX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xx",
+      "original_text": "XX",
+      "cleaned_text": "XX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xxxxx",
+      "original_text": "XXXXX",
+      "cleaned_text": "XXXXX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xxx",
+      "original_text": "XXX",
+      "cleaned_text": "XXX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xx",
+      "original_text": "XX",
+      "cleaned_text": "XX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xxxxx",
+      "original_text": "XXXXX",
+      "cleaned_text": "XXXXX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xxx",
+      "original_text": "XXX",
+      "cleaned_text": "XXX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xx",
+      "original_text": "XX",
+      "cleaned_text": "XX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.xx",
+      "original_text": "XX",
+      "cleaned_text": "XX",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    }
+  ],
+  "images": [],
+  "source_file": "sku.docx",
+  "created_at": "2026-06-17T16:24:32.774430Z",
+  "version": "1.0.0"
+}

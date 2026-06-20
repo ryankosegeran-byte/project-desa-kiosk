@@ -39,7 +39,7 @@ func TestPDFGenerator(t *testing.T) {
 
 	// Test template error
 	warga := &models.Warga{Nama: "Budi"}
-	_, err := g.GeneratePDF(context.Background(), "invalid {{ template", warga, nil, "6 Juni 2026", "123/SKU/2026", "ALFRIDA", "19690206")
+	_, err := g.GeneratePDF(context.Background(), "invalid {{ template", warga, nil, "6 Juni 2026", "123/SKU/2026", "ALFRIDA", "19690206", "A4")
 	if err == nil {
 		t.Error("expected error parsing invalid template, got nil")
 	}

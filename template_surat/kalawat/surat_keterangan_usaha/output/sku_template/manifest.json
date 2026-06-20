@@ -1,0 +1,246 @@
+{
+  "template_id": "29a43f9f",
+  "jenis_surat_kode": "SKU",
+  "jenis_surat_nama": "Surat Keterangan Usaha",
+  "format_kertas": "F4",
+  "variables": [
+    {
+      "name": "Warga.Nama",
+      "original_text": "Nama Lengkap",
+      "cleaned_text": "Nama Lengkap",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "Warga.NIK",
+      "original_text": "NIK",
+      "cleaned_text": "NIK",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": "nik"
+    },
+    {
+      "name": "Warga.TempatTanggalLahir",
+      "original_text": "Tempat/Tanggal Lahir",
+      "cleaned_text": "Tempat/Tanggal Lahir",
+      "highlight_color": "YELLOW",
+      "type": "date",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "Warga.JenisKelamin",
+      "original_text": "Jenis Kelamin",
+      "cleaned_text": "Jenis Kelamin",
+      "highlight_color": "YELLOW",
+      "type": "select",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "Warga.Kewarganegaraan",
+      "original_text": "Kewarganegaraan",
+      "cleaned_text": "Kewarganegaraan",
+      "highlight_color": "YELLOW",
+      "type": "select",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "Warga.Agama",
+      "original_text": "Agama",
+      "cleaned_text": "Agama",
+      "highlight_color": "YELLOW",
+      "type": "select",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "Warga.StatusKawin",
+      "original_text": "Status Perkawinan",
+      "cleaned_text": "Status Perkawinan",
+      "highlight_color": "YELLOW",
+      "type": "select",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "Warga.Pekerjaan",
+      "original_text": "Pekerjaan",
+      "cleaned_text": "Pekerjaan",
+      "highlight_color": "YELLOW",
+      "type": "select",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "Warga.Alamat",
+      "original_text": "Alamat",
+      "cleaned_text": "Alamat",
+      "highlight_color": "YELLOW",
+      "type": "textarea",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "Warga.RTRW",
+      "original_text": "RT/RW",
+      "cleaned_text": "RT/RW",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "Warga.Kelurahan",
+      "original_text": "Kelurahan",
+      "cleaned_text": "Kelurahan",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "Warga.Kecamatan",
+      "original_text": "Kecamatan",
+      "cleaned_text": "Kecamatan",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "Warga.Kabupaten",
+      "original_text": "Kabupaten",
+      "cleaned_text": "Kabupaten",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.jenis_usaha",
+      "original_text": "Jenis Usaha",
+      "cleaned_text": "Jenis Usaha",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.merk_usaha",
+      "original_text": "Merk/Nama Usaha",
+      "cleaned_text": "Merk/Nama Usaha",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.alamat_usaha",
+      "original_text": "Alamat Usaha",
+      "cleaned_text": "Alamat Usaha",
+      "highlight_color": "YELLOW",
+      "type": "textarea",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.sifat_tempat_usaha",
+      "original_text": "Sifat Tempat Usaha",
+      "cleaned_text": "Sifat Tempat Usaha",
+      "highlight_color": "YELLOW",
+      "type": "select",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.tahun_mulai_usaha",
+      "original_text": "Tahun Mulai Usaha",
+      "cleaned_text": "Tahun Mulai Usaha",
+      "highlight_color": "YELLOW",
+      "type": "number",
+      "required": true,
+      "validation": "year"
+    },
+    {
+      "name": "DataSurat.batas_utara",
+      "original_text": "Batas Utara",
+      "cleaned_text": "Batas Utara",
+      "highlight_color": "YELLOW",
+      "type": "textarea",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.batas_selatan",
+      "original_text": "Batas Selatan",
+      "cleaned_text": "Batas Selatan",
+      "highlight_color": "YELLOW",
+      "type": "textarea",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.batas_timur",
+      "original_text": "Batas Timur",
+      "cleaned_text": "Batas Timur",
+      "highlight_color": "YELLOW",
+      "type": "textarea",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DataSurat.batas_barat",
+      "original_text": "Batas Barat",
+      "cleaned_text": "Batas Barat",
+      "highlight_color": "YELLOW",
+      "type": "textarea",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DateToday",
+      "original_text": "Tanggal",
+      "cleaned_text": "Tanggal",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "Warga.Nama",
+      "original_text": "Nama Lengkap",
+      "cleaned_text": "Nama Lengkap",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "DateToday",
+      "original_text": "Tanggal",
+      "cleaned_text": "Tanggal",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    },
+    {
+      "name": "Desa.KepalaDesa",
+      "original_text": "Nama Kepala Desa",
+      "cleaned_text": "Nama Kepala Desa",
+      "highlight_color": "YELLOW",
+      "type": "text",
+      "required": true,
+      "validation": null
+    }
+  ],
+  "images": [],
+  "source_file": "sku_template.docx",
+  "created_at": "2026-06-17T16:38:32.976850Z",
+  "version": "1.0.0"
+}

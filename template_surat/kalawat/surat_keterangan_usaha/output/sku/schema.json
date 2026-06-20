@@ -1,0 +1,288 @@
+{
+  "jenis_surat_id": "sku-7dca0d22",
+  "jenis_surat_kode": "SKU",
+  "jenis_surat_nama": "Surat Keterangan Usaha",
+  "fields_schema": {
+    "fields": [
+      {
+        "type": "separator",
+        "label": "--- Data Surat ---"
+      },
+      {
+        "key": "xxx",
+        "label": "XXX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XXX"
+      },
+      {
+        "key": "xx",
+        "label": "XX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XX"
+      },
+      {
+        "key": "xx",
+        "label": "XX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XX"
+      },
+      {
+        "key": "xxxxx",
+        "label": "XXXXX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XXXXX"
+      },
+      {
+        "key": "xxx",
+        "label": "XXX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XXX"
+      },
+      {
+        "key": "xx",
+        "label": "XX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XX"
+      },
+      {
+        "key": "xxxxx",
+        "label": "XXXXX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XXXXX"
+      },
+      {
+        "key": "xxx",
+        "label": "XXX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XXX"
+      },
+      {
+        "key": "xx",
+        "label": "XX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XX"
+      },
+      {
+        "key": "xxxxx",
+        "label": "XXXXX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XXXXX"
+      },
+      {
+        "key": "xxx",
+        "label": "XXX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XXX"
+      },
+      {
+        "key": "xx",
+        "label": "XX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XX"
+      },
+      {
+        "key": "xxxxx",
+        "label": "XXXXX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XXXXX"
+      },
+      {
+        "key": "xxx",
+        "label": "XXX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XXX"
+      },
+      {
+        "key": "xx",
+        "label": "XX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XX"
+      },
+      {
+        "key": "xxxxx",
+        "label": "XXXXX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XXXXX"
+      },
+      {
+        "key": "xxx",
+        "label": "XXX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XXX"
+      },
+      {
+        "key": "xx",
+        "label": "XX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XX"
+      },
+      {
+        "key": "xxxxx",
+        "label": "XXXXX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XXXXX"
+      },
+      {
+        "key": "xxx",
+        "label": "XXX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XXX"
+      },
+      {
+        "key": "xx",
+        "label": "XX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XX"
+      },
+      {
+        "key": "xx",
+        "label": "XX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XX"
+      },
+      {
+        "key": "x",
+        "label": "X",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan X"
+      },
+      {
+        "key": "xx",
+        "label": "XX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XX"
+      },
+      {
+        "key": "x",
+        "label": "X",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan X"
+      },
+      {
+        "key": "x",
+        "label": "X",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan X"
+      },
+      {
+        "key": "xx",
+        "label": "XX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XX"
+      },
+      {
+        "key": "x",
+        "label": "X",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan X"
+      },
+      {
+        "key": "xx",
+        "label": "XX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XX"
+      },
+      {
+        "key": "xxxxx",
+        "label": "XXXXX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XXXXX"
+      },
+      {
+        "key": "xxx",
+        "label": "XXX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XXX"
+      },
+      {
+        "key": "xx",
+        "label": "XX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XX"
+      },
+      {
+        "key": "xxxxx",
+        "label": "XXXXX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XXXXX"
+      },
+      {
+        "key": "xxx",
+        "label": "XXX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XXX"
+      },
+      {
+        "key": "xx",
+        "label": "XX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XX"
+      },
+      {
+        "key": "xxxxx",
+        "label": "XXXXX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XXXXX"
+      },
+      {
+        "key": "xxx",
+        "label": "XXX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XXX"
+      },
+      {
+        "key": "xx",
+        "label": "XX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XX"
+      },
+      {
+        "key": "xx",
+        "label": "XX",
+        "type": "text",
+        "required": true,
+        "placeholder": "Masukkan XX"
+      }
+    ]
+  },
+  "aktif": true,
+  "urutan": 0
+}

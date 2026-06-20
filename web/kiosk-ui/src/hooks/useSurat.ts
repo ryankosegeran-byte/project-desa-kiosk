@@ -10,6 +10,33 @@ export interface FieldDef {
   sub_fields?: FieldDef[];
 }
 
+// Mirrors models.PlaceholderDef (Go) — token mapping for DOCX templates (Strategi B).
+export interface PlaceholderDef {
+  key: string;
+  label: string;
+  source: 'warga' | 'manual' | 'sistem';
+  warga_field?: string;
+  sistem_field?: string;
+  type?: string;
+  options?: string[];
+  required?: boolean;
+  urutan?: number;
+}
+
+// placeholdersToFields converts the manual placeholders into form fields for SuratForm.
+export function placeholdersToFields(placeholders: PlaceholderDef[]): FieldDef[] {
+  return (placeholders || [])
+    .filter((p) => p.source === 'manual')
+    .sort((a, b) => (a.urutan || 0) - (b.urutan || 0))
+    .map((p) => ({
+      key: p.key,
+      label: p.label || p.key,
+      type: p.type || 'text',
+      required: !!p.required,
+      options: p.options,
+    }));
+}
+
 export interface JenisSurat {
   id: string;
   kode: string;
@@ -119,17 +146,58 @@ export function useSurat() {
     }
   }, [apiBase]);
 
-  const fetchTemplateHTML = useCallback(async (jenisSuratID: string): Promise<string> => {
+  const fetchTemplateHTML = useCallback(async (jenisSuratID: string): Promise<{template_html: string; format_kertas: string} | string> => {
     try {
       const res = await fetch(`${apiBase}/api/template/${jenisSuratID}`);
       if (!res.ok) {
         throw new Error("Gagal mengambil template cetak");
       }
       const data = await res.json();
-      return data.template_html || "";
+      // Return both template_html and format_kertas
+      return {
+        template_html: data.template_html || "",
+        format_kertas: data.format_kertas || "A4"
+      };
     } catch (err) {
       console.error(err);
       return "";
+    }
+  }, [apiBase]);
+
+  // fetchTemplate returns the full template incl. placeholders (Strategi B).
+  const fetchTemplate = useCallback(async (jenisSuratID: string): Promise<{ template_html: string; format_kertas: string; placeholders: PlaceholderDef[] } | null> => {
+    try {
+      const res = await fetch(`${apiBase}/api/template/${jenisSuratID}`);
+      if (!res.ok) throw new Error("Gagal mengambil template cetak");
+      const data = await res.json();
+      return {
+        template_html: data.template_html || "",
+        format_kertas: data.format_kertas || "A4",
+        placeholders: data.placeholders || [],
+      };
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  }, [apiBase]);
+
+  // previewSuratPDF renders a live preview PDF (DOCX templates) and returns a blob URL.
+  const previewSuratPDF = useCallback(async (payload: { jenis_surat_id: string; nik: string; data_surat: any }): Promise<string | null> => {
+    try {
+      const res = await fetch(`${apiBase}/api/surat/preview`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || "Gagal membuat pratinjau PDF");
+      }
+      const blob = await res.blob();
+      return URL.createObjectURL(blob);
+    } catch (err: any) {
+      setError(err.message);
+      return null;
     }
   }, [apiBase]);
 
@@ -142,6 +210,8 @@ export function useSurat() {
     createSurat,
     printSurat,
     fetchTemplateHTML,
+    fetchTemplate,
+    previewSuratPDF,
     setCurrentSurat,
     setError
   };

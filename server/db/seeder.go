@@ -2,7 +2,10 @@ package db
 
 import (
 	"context"
+	"encoding/json"
+
 	"golang.org/x/crypto/bcrypt"
+
 	"github.com/google/uuid"
 	"github.com/rs/zerolog/log"
 
@@ -103,6 +106,45 @@ func SeedServerData(db *DB) error {
 		}
 		if err := desaRepo.RegisterKiosk(ctx, k); err != nil {
 			return err
+		}
+	}
+
+	// 4. Check if JenisSurat is empty
+	var jenisCount int
+	err = db.QueryRowContext(ctx, "SELECT COUNT(*) FROM jenis_surat").Scan(&jenisCount)
+	if err != nil {
+		return err
+	}
+
+	if jenisCount == 0 {
+		log.Info().Msg("Seeding default jenis surat...")
+		jsRepo := NewJenisSuratRepository(db)
+		defaults := []struct{ Kode, Nama string }{
+			{"SK_USAHA", "Surat Keterangan Usaha"},
+			{"SKTM", "Surat Keterangan Tidak Mampu"},
+			{"SK_DOMISILI", "Surat Keterangan Domisili"},
+			{"SK_KELAHIRAN", "Surat Keterangan Kelahiran"},
+			{"SK_KEMATIAN", "Surat Keterangan Kematian"},
+			{"SK_BELUM_MENIKAH", "Surat Keterangan Belum Menikah"},
+			{"SK_AHLI_WARIS", "Surat Keterangan Ahli Waris"},
+			{"SK_SKCK", "Surat Pengantar SKCK"},
+		}
+		for i, d := range defaults {
+			js := &models.JenisSurat{
+				ID:           uuid.New().String(),
+				Kode:         d.Kode,
+				Nama:         d.Nama,
+				FieldsSchema: json.RawMessage(`{"fields":[]}`),
+				Aktif:        true,
+				Urutan:       i,
+			}
+			if err := jsRepo.Create(ctx, js); err != nil {
+				return err
+			}
+			// Activate for the default seeded desa so the kiosk can sync them.
+			if err := jsRepo.ToggleForDesa(ctx, desaID, js.ID, true, i); err != nil {
+				return err
+			}
 		}
 	}
 

@@ -113,10 +113,13 @@ func (s *Server) Handler() http.Handler {
 			r.Get("/{id}", s.handleGetSurat)
 		})
 
-		// Custom HTML templates
+		// Custom templates (HTML lama + DOCX Strategi B)
 		r.Route("/api/templates", func(r chi.Router) {
 			r.Get("/", s.handleListTemplates)
 			r.Post("/", s.handleUpsertTemplate)
+			r.Post("/upload-docx", s.handleUploadDocxTemplate)
+			r.Put("/{id}/placeholders", s.handleUpdateTemplatePlaceholders)
+			r.Get("/{id}/preview", s.handlePreviewTemplate)
 		})
 
 		// Kiosks monitoring and stats
@@ -161,6 +164,12 @@ func (s *Server) Handler() http.Handler {
 			r.Get("/api/activity-log", s.handleListActivityLogs)
 		})
 	})
+
+	// Serve the built admin dashboard (SPA) with client-side routing fallback.
+	// Enabled only when STATIC_DIR is configured (e.g. on serv00 alongside the binary).
+	if s.cfg.StaticDir != "" {
+		r.NotFound(spaHandler(s.cfg.StaticDir))
+	}
 
 	return r
 }

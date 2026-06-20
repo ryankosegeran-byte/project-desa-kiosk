@@ -25,6 +25,10 @@ type Config struct {
 	// File storage
 	UploadDir string // Directory for uploaded files (KTP photos, logos)
 
+	// Static SPA (admin dashboard built by Vite). When set, the server serves
+	// the built dashboard from this directory with SPA fallback to index.html.
+	StaticDir string // Directory of dashboard build output (e.g. web/dashboard/dist)
+
 	// OCR AI Providers
 	GeminiAPIKey   string // Google Gemini API key
 	GeminiModel    string // Gemini model name (default: gemini-1.5-flash)
@@ -46,6 +50,7 @@ func Load() (*Config, error) {
 		RefreshTokenExpiry: getEnvInt("JWT_REFRESH_EXPIRY_HR", 168),
 		AllowedOrigins:     getEnv("CORS_ORIGINS", "http://localhost:4321"),
 		UploadDir:          getEnv("UPLOAD_DIR", "uploads"),
+		StaticDir:          getEnv("STATIC_DIR", ""),
 		GeminiAPIKey:       getEnv("GEMINI_API_KEY", ""),
 		GeminiModel:        getEnv("GEMINI_MODEL", "gemini-1.5-flash"),
 		MistralAPIKey:      getEnv("MISTRAL_API_KEY", ""),

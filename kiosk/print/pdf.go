@@ -14,6 +14,23 @@ import (
 	"github.com/project-desa-kiosk/internal/models"
 )
 
+// Paper format dimensions in inches
+const (
+	// A4: 210mm x 297mm = 8.27" x 11.69"
+	A4Width  = 8.27
+	A4Height = 11.69
+
+	// F4 / Folio: 215mm x 330mm = 8.46" x 12.99"
+	F4Width  = 8.46
+	F4Height = 12.99
+)
+
+// FormatKertas constants
+const (
+	FormatKertasA4 = "A4"
+	FormatKertasF4 = "F4"
+)
+
 type PDFGenerator struct {
 	OutputDir string
 }
@@ -45,8 +62,22 @@ func FormatIndonesianDate(t time.Time) string {
 	return fmt.Sprintf("%d %s %d", t.Day(), months[t.Month()], t.Year())
 }
 
+// getPaperDimensions returns width and height in inches based on format
+func getPaperDimensions(formatKertas string) (width, height float64) {
+	switch formatKertas {
+	case FormatKertasF4:
+		return F4Width, F4Height
+	default: // A4 or default
+		return A4Width, A4Height
+	}
+}
+
 // GeneratePDF generates a PDF file from HTML template and data using chromedp
-func (g *PDFGenerator) GeneratePDF(ctx context.Context, templateHTML string, warga *models.Warga, dataSurat map[string]interface{}, dateToday string, nomorSurat string, desaKepalaDesa string, desaNIP string) (string, error) {
+// Supports both A4 and F4 paper formats based on formatKertas parameter
+func (g *PDFGenerator) GeneratePDF(ctx context.Context, templateHTML string, warga *models.Warga, dataSurat map[string]interface{}, dateToday string, nomorSurat string, desaKepalaDesa string, desaNIP string, formatKertas string) (string, error) {
+	// Get paper dimensions
+	paperWidth, paperHeight := getPaperDimensions(formatKertas)
+
 	// 1. Parse and execute template
 	tmpl, err := template.New("surat").Parse(templateHTML)
 	if err != nil {
@@ -97,14 +128,14 @@ func (g *PDFGenerator) GeneratePDF(ctx context.Context, templateHTML string, war
 	chromeCtx, cancel := chromedp.NewContext(allocCtx)
 	defer cancel()
 
-	// 4. Generate PDF using printToPDF
+	// 4. Generate PDF using printToPDF with dynamic paper size
 	var pdfBuffer []byte
 	err = chromedp.Run(chromeCtx,
 		chromedp.Navigate(url),
 		chromedp.ActionFunc(func(ctx context.Context) error {
 			buf, _, err := page.PrintToPDF().
-				WithPaperWidth(8.27).   // A4 Width in inches
-				WithPaperHeight(11.69).  // A4 Height in inches
+				WithPaperWidth(paperWidth).
+				WithPaperHeight(paperHeight).
 				WithMarginTop(0.4).
 				WithMarginBottom(0.4).
 				WithMarginLeft(0.4).

@@ -28,6 +28,7 @@ type Server struct {
 	rfidBroker     *rfid.Broker
 	pdfGen         *print.PDFGenerator
 	printer        *print.Printer
+	docxRenderer   *print.DocxRenderer
 }
 
 // NewServer creates a new API server instance.
@@ -41,6 +42,7 @@ func NewServer(
 	rfidBroker *rfid.Broker,
 	pdfGen *print.PDFGenerator,
 	printer *print.Printer,
+	docxRenderer *print.DocxRenderer,
 ) *Server {
 	return &Server{
 		cfg:            cfg,
@@ -52,6 +54,7 @@ func NewServer(
 		rfidBroker:     rfidBroker,
 		pdfGen:         pdfGen,
 		printer:        printer,
+		docxRenderer:   docxRenderer,
 	}
 }
 
@@ -94,6 +97,7 @@ func (s *Server) Handler() http.Handler {
 			r.Get("/", s.handleListTodaySurat)
 			r.Get("/{id}", s.handleGetSurat)
 			r.Post("/{id}/print", s.handlePrintSurat)
+			r.Post("/preview", s.handlePreviewSurat)
 		})
 
 		// Template Routes

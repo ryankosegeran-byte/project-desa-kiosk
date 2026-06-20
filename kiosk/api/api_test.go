@@ -9,11 +9,11 @@ import (
 	"testing"
 	"time"
 
+	"github.com/project-desa-kiosk/internal/models"
 	"github.com/project-desa-kiosk/kiosk/config"
 	"github.com/project-desa-kiosk/kiosk/db"
 	"github.com/project-desa-kiosk/kiosk/print"
 	"github.com/project-desa-kiosk/kiosk/rfid"
-	"github.com/project-desa-kiosk/internal/models"
 )
 
 func setupTestServer(t *testing.T) (*Server, func()) {
@@ -46,8 +46,9 @@ func setupTestServer(t *testing.T) (*Server, func()) {
 	rfidBroker := rfid.NewBroker()
 	pdfGen := print.NewPDFGenerator("data/printed_test")
 	printer := print.NewPrinter("")
+	docxRenderer := print.NewDocxRenderer("data/printed_test")
 
-	server := NewServer(cfg, wargaRepo, suratRepo, jenisSuratRepo, configRepo, nomorSuratRepo, rfidBroker, pdfGen, printer)
+	server := NewServer(cfg, wargaRepo, suratRepo, jenisSuratRepo, configRepo, nomorSuratRepo, rfidBroker, pdfGen, printer, docxRenderer)
 
 	cleanup := func() {
 		database.Close()
@@ -210,7 +211,7 @@ func TestHandleCreateAndListSurat(t *testing.T) {
 	bodyBytes, _ := json.Marshal(createReq)
 	reqCreate, _ := http.NewRequest("POST", "/api/surat", bytes.NewBuffer(bodyBytes))
 	reqCreate.Header.Set("Content-Type", "application/json")
-	
+
 	rrCreate := httptest.NewRecorder()
 	server.Handler().ServeHTTP(rrCreate, reqCreate)
 

@@ -1,4 +1,10 @@
-const BASE_URL = "http://localhost:3000";
+// Same-origin in production (SPA served by the Go server on serv00).
+// In dev, Vite proxies /api -> http://localhost:3000 (see vite.config.ts).
+// Override with VITE_API_URL if the API lives on a different host.
+const BASE_URL = import.meta.env.VITE_API_URL ?? "";
+
+// Exposed for callers that need a raw fetch (e.g. binary/PDF responses).
+export const API_BASE = BASE_URL;
 
 export async function request(path: string, options: RequestInit = {}) {
   if (typeof window === "undefined") {
