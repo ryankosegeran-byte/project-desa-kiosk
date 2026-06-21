@@ -12,6 +12,9 @@ import (
 var (
 	reParaBlock = regexp.MustCompile(`(?s)<w:p[ >][\s\S]*?</w:p>`)
 	reRunText   = regexp.MustCompile(`(?s)(<w:t(?:\s[^>]*)?>)([\s\S]*?)(</w:t>)`)
+	// Elemen inline yang menentukan posisi (tab/line-break). Teks TIDAK boleh
+	// digabung melewati elemen ini, kalau tidak perataan kolom (titik dua) rusak.
+	reBarrier = regexp.MustCompile(`<w:(?:tab|cr|br)(?:\s[^>]*)?/>`)
 )
 
 // FillDocx fills {{token}} placeholders in a DOCX and returns new DOCX bytes.
@@ -72,12 +75,32 @@ func applyTokens(data []byte, values map[string]string) []byte {
 	})
 }
 
-// fillParagraph concatenates text from all <w:t> runs in a paragraph,
-// replaces tokens, then writes the full result into the first run and
-// clears the rest. Paragraphs without tokens are returned unchanged.
+// fillParagraph memecah paragraf pada barrier inline (tab/br/cr) lalu mengisi
+// token di tiap segmen secara terpisah. Token tidak pernah memuat tab, sehingga
+// penggabungan run per-segmen aman dan perataan kolom (titik dua) terjaga.
+// Barrier dibiarkan apa adanya di posisinya.
 func fillParagraph(para []byte, values map[string]string) []byte {
+	locs := reBarrier.FindAllIndex(para, -1)
+	if locs == nil {
+		return fillSegment(para, values)
+	}
+	var out bytes.Buffer
+	last := 0
+	for _, loc := range locs {
+		out.Write(fillSegment(para[last:loc[0]], values))
+		out.Write(para[loc[0]:loc[1]]) // barrier tak diubah
+		last = loc[1]
+	}
+	out.Write(fillSegment(para[last:], values))
+	return out.Bytes()
+}
+
+// fillSegment menggabung teks dari run <w:t> yang berdampingan dalam satu segmen,
+// mengganti token, lalu menulis hasil ke run pertama dan mengosongkan sisanya.
+// Segmen tanpa token dikembalikan apa adanya.
+func fillSegment(seg []byte, values map[string]string) []byte {
 	var flat strings.Builder
-	reRunText.ReplaceAllFunc(para, func(m []byte) []byte {
+	reRunText.ReplaceAllFunc(seg, func(m []byte) []byte {
 		parts := reRunText.FindSubmatch(m)
 		if parts != nil {
 			flat.Write(parts[2])
@@ -87,7 +110,7 @@ func fillParagraph(para []byte, values map[string]string) []byte {
 	combined := flat.String()
 
 	if !strings.Contains(combined, "{{") {
-		return para
+		return seg
 	}
 
 	filled := combined
@@ -95,11 +118,11 @@ func fillParagraph(para []byte, values map[string]string) []byte {
 		filled = strings.ReplaceAll(filled, "{{"+k+"}}", v)
 	}
 	if filled == combined {
-		return para
+		return seg
 	}
 
 	n := 0
-	return reRunText.ReplaceAllFunc(para, func(m []byte) []byte {
+	return reRunText.ReplaceAllFunc(seg, func(m []byte) []byte {
 		parts := reRunText.FindSubmatch(m)
 		if parts == nil {
 			return m

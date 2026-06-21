@@ -3,6 +3,8 @@ import { request, getUser, API_BASE } from "../lib/api";
 import { DOCXImportWizard } from "./DOCXImportWizard";
 import { DocxTemplateWizard } from "./DocxTemplateWizard";
 import { VersionHistory } from "./VersionHistory";
+import { FormVariabelEditor } from "./FormVariabelEditor";
+import { NomorSuratConfig } from "./NomorSuratConfig";
 
 // Import Quill dynamically for WYSIWYG editor
 let Quill: any = null;
@@ -37,11 +39,24 @@ interface JenisSurat {
   deskripsi?: string;
 }
 
+interface PlaceholderDef {
+  key: string;
+  label: string;
+  source: "warga" | "manual" | "sistem";
+  warga_field?: string;
+  sistem_field?: string;
+  type?: string;
+  options?: string[];
+  required?: boolean;
+  urutan?: number;
+}
+
 interface Template {
   id: string;
   jenis_surat_id: string;
   desa_id: string;
   template_html: string;
+  placeholders?: PlaceholderDef[];
   is_general: boolean;
   format_kertas: string;
   version: number;
@@ -202,6 +217,13 @@ export default function TemplatesList() {
   const [showImportWizard, setShowImportWizard] = useState(false);
   const [showVersionHistory, setShowVersionHistory] = useState(false);
   const [docxWizardJS, setDocxWizardJS] = useState<JenisSurat | null>(null);
+
+  // Form & Variabel editor modal state
+  const [formVarJS, setFormVarJS] = useState<JenisSurat | null>(null);
+  const [formVarTemplate, setFormVarTemplate] = useState<Template | null>(null);
+
+  // Nomor Surat config modal
+  const [showNomorSurat, setShowNomorSurat] = useState(false);
 
   // Preview Print modal state
   const [previewJenisSurat, setPreviewJenisSurat] = useState<JenisSurat | null>(null);
@@ -461,29 +483,26 @@ export default function TemplatesList() {
     setPreviewPdfUrl(null);
     setDocxPreviewError("");
 
-    // If this is a DOCX-only template (has id but no template_html), fetch filled preview from server.
-    // Server returns PDF (LibreOffice) when available, otherwise DOCX (docx-preview fallback).
+    // Template DOCX (Strategi B): tampilkan PDF tampilan yang DI-UPLOAD admin.
+    // Server di serv00 tidak merender docx; preview = PDF draft. 404 = belum diunggah.
     if (tpl && !tpl.template_html && tpl.id) {
       setDocxPreviewLoading(true);
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch(`${API_BASE}/api/templates/${tpl.id}/preview`, {
+        const res = await fetch(`${API_BASE}/api/templates/${tpl.id}/preview-pdf`, {
           headers: token ? { Authorization: `Bearer ${token}` } : {},
         });
-        if (!res.ok) {
-          const errData = await res.json().catch(() => ({ error: "Gagal memuat preview" }));
-          throw new Error(errData.error || "Gagal memuat preview");
-        }
-        const contentType = res.headers.get("content-type") || "";
-        if (contentType.includes("application/pdf")) {
+        if (res.status === 404) {
+          setDocxPreviewError("Belum ada PDF tampilan untuk template ini. Unggah PDF (export dari Word) lewat wizard 📄 DOCX.");
+        } else if (!res.ok) {
+          const errData = await res.json().catch(() => ({ error: "Gagal memuat tampilan" }));
+          throw new Error(errData.error || "Gagal memuat tampilan");
+        } else {
           const blob = await res.blob();
           setPreviewPdfUrl(URL.createObjectURL(blob));
-        } else {
-          const buf = await res.arrayBuffer();
-          setDocxBuffer(buf);
         }
       } catch (err: any) {
-        setDocxPreviewError(err.message || "Gagal memuat preview");
+        setDocxPreviewError(err.message || "Gagal memuat tampilan");
       } finally {
         setDocxPreviewLoading(false);
       }
@@ -513,21 +532,31 @@ export default function TemplatesList() {
           </p>
         </div>
 
-        {user?.role === "superadmin" && desas.length > 0 && (
-          <div className="form-group" style={{ marginBottom: 0, minWidth: "200px" }}>
-            <select
-              className="form-control"
-              value={selectedDesaId}
-              onChange={(e) => setSelectedDesaId(e.target.value)}
-            >
-              {desas.map((d) => (
-                <option key={d.id} value={d.id}>
-                  {d.nama}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
+        <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+          {user?.role === "superadmin" && desas.length > 0 && (
+            <div className="form-group" style={{ marginBottom: 0, minWidth: "200px" }}>
+              <select
+                className="form-control"
+                value={selectedDesaId}
+                onChange={(e) => setSelectedDesaId(e.target.value)}
+              >
+                {desas.map((d) => (
+                  <option key={d.id} value={d.id}>
+                    {d.nama}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+          <button
+            className="btn btn-secondary"
+            onClick={() => setShowNomorSurat(true)}
+            disabled={!selectedDesaId || jenisSurat.length === 0}
+            title="Atur penomoran surat per jenis surat untuk desa ini"
+          >
+            🔢 Nomor Surat
+          </button>
+        </div>
       </div>
 
       {error && (
@@ -568,13 +597,27 @@ export default function TemplatesList() {
 
               <div style={{ marginTop: "auto", display: "flex", flexDirection: "column", gap: "8px" }}>
                 <div style={{ display: "flex", gap: "8px" }}>
-                  <button
-                    className="btn btn-secondary"
-                    style={{ flex: 1, fontSize: "13px", padding: "8px" }}
-                    onClick={() => handleEditClick(js)}
-                  >
-                    📝 HTML
-                  </button>
+                  {/* DOCX template → Form & Variabel editor; HTML template → WYSIWYG editor */}
+                  {perDesaTemplate && !perDesaTemplate.template_html ? (
+                    <button
+                      className="btn btn-secondary"
+                      style={{ flex: 1, fontSize: "13px", padding: "8px" }}
+                      onClick={() => {
+                        setFormVarJS(js);
+                        setFormVarTemplate(perDesaTemplate);
+                      }}
+                    >
+                      ⚙️ Form & Variabel
+                    </button>
+                  ) : (
+                    <button
+                      className="btn btn-secondary"
+                      style={{ flex: 1, fontSize: "13px", padding: "8px" }}
+                      onClick={() => handleEditClick(js)}
+                    >
+                      📝 HTML
+                    </button>
+                  )}
                   <button
                     className="btn btn-primary"
                     style={{ flex: 1, fontSize: "13px", padding: "8px" }}
@@ -874,11 +917,41 @@ export default function TemplatesList() {
         </div>
       )}
 
+      {/* Pengaturan Nomor Surat (per desa per jenis surat) */}
+      {showNomorSurat && (
+        <NomorSuratConfig
+          jenisSurat={jenisSurat}
+          desaId={selectedDesaId}
+          desaNama={desas.find((d) => d.id === selectedDesaId)?.nama}
+          onClose={() => setShowNomorSurat(false)}
+        />
+      )}
+
       {/* DOCX Import Wizard (HTML, lama) */}
       {showImportWizard && (
         <DOCXImportWizard
           onImport={handleDOCXImport}
           onClose={() => setShowImportWizard(false)}
+        />
+      )}
+
+      {/* Form & Variabel Editor (untuk template DOCX) */}
+      {formVarJS && formVarTemplate && (
+        <FormVariabelEditor
+          templateId={formVarTemplate.id}
+          placeholders={formVarTemplate.placeholders || []}
+          jenisSuratNama={formVarJS.nama}
+          onClose={() => {
+            setFormVarJS(null);
+            setFormVarTemplate(null);
+          }}
+          onSaved={(updated) => {
+            setTemplates((prev) =>
+              prev.map((t) =>
+                t.id === formVarTemplate.id ? { ...t, placeholders: updated } : t
+              )
+            );
+          }}
         />
       )}
 
@@ -993,7 +1066,10 @@ export default function TemplatesList() {
                     Preview Cetak: {previewJenisSurat.nama}
                   </h3>
                   <p style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "2px" }}>
-                    Data contoh (dummy) • Format: {previewTemplateData?.format_kertas || "A4"}
+                    {previewTemplateData && !previewTemplateData.template_html && previewTemplateData.id
+                      ? "PDF tampilan (draft yang diunggah)"
+                      : "Data contoh (dummy)"}
+                    {" • Format: "}{previewTemplateData?.format_kertas || "A4"}
                     {previewTemplateData && ` • v${previewTemplateData.version}`}
                   </p>
                 </div>
@@ -1004,7 +1080,7 @@ export default function TemplatesList() {
                   className="badge badge-warning"
                   style={{ fontSize: "11px", padding: "5px 10px" }}
                 >
-                  CONTOH
+                  {previewTemplateData && !previewTemplateData.template_html && previewTemplateData.id ? "DRAFT" : "CONTOH"}
                 </span>
                 <button
                   className="btn"
@@ -1130,15 +1206,11 @@ export default function TemplatesList() {
                     );
                   }
 
-                  // docx-preview fallback (no LibreOffice on server)
+                  // Tidak ada PDF & tidak ada error spesifik (jarang) — pesan netral.
                   return (
-                    <div
-                      ref={docxContainerRef}
-                      style={{
-                        width: "100%",
-                        animation: "slideUpPreview 0.35s ease",
-                      }}
-                    />
+                    <div style={{ color: "var(--text-muted)", padding: "60px 40px", textAlign: "center", animation: "slideUpPreview 0.35s ease" }}>
+                      Belum ada tampilan untuk template ini.
+                    </div>
                   );
                 }
 
@@ -1181,7 +1253,9 @@ export default function TemplatesList() {
               }}
             >
               <span style={{ fontSize: "12px", color: "var(--text-muted)" }}>
-                ⚠️ Ini adalah preview dengan <strong>data contoh</strong>. Isi sebenarnya akan berbeda saat surat dicetak dari kiosk.
+                {previewTemplateData && !previewTemplateData.template_html && previewTemplateData.id
+                  ? <>🖼️ Ini <strong>PDF tampilan (draft)</strong> yang kamu unggah — hanya untuk melihat layout. Surat asli dicetak dari kiosk dengan data warga.</>
+                  : <>⚠️ Ini preview dengan <strong>data contoh</strong>. Isi sebenarnya akan berbeda saat surat dicetak dari kiosk.</>}
               </span>
             </div>
           </div>

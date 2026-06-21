@@ -119,7 +119,9 @@ func (s *Server) Handler() http.Handler {
 			r.Post("/", s.handleUpsertTemplate)
 			r.Post("/upload-docx", s.handleUploadDocxTemplate)
 			r.Put("/{id}/placeholders", s.handleUpdateTemplatePlaceholders)
-			r.Get("/{id}/preview", s.handlePreviewTemplate)
+			r.Post("/{id}/preview", s.handlePreviewTemplatePost)
+			r.Get("/{id}/preview-pdf", s.handleGetTemplatePDF)
+			r.Post("/{id}/preview-pdf", s.handleUploadTemplatePDF)
 		})
 
 		// Kiosks monitoring and stats

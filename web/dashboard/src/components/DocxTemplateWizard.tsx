@@ -81,18 +81,43 @@ export const DocxTemplateWizard: React.FC<Props> = ({ jenisSurat, desaId, onClos
   const [placeholders, setPlaceholders] = useState<PlaceholderDef[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFile = async (file: File) => {
+  // Dua file dipilih di langkah 1, diunggah bersamaan.
+  const [docxFile, setDocxFile] = useState<File | null>(null);
+  const [pdfFile, setPdfFile] = useState<File | null>(null);
+  const pdfInputRef = useRef<HTMLInputElement>(null);
+
+  const pickDocx = (file: File) => {
     if (!file.name.toLowerCase().endsWith(".docx")) {
-      setError("Hanya file .docx yang didukung");
+      setError("File master harus .docx");
+      return;
+    }
+    setError("");
+    setDocxFile(file);
+    setFileName(file.name);
+  };
+
+  const pickPdf = (file: File) => {
+    if (!file.name.toLowerCase().endsWith(".pdf")) {
+      setError("Tampilan harus berupa file .pdf");
+      return;
+    }
+    setError("");
+    setPdfFile(file);
+  };
+
+  // Unggah docx (+ pdf opsional) sekaligus, lalu lanjut ke pemetaan.
+  const handleUpload = async () => {
+    if (!docxFile) {
+      setError("Pilih file .docx dulu");
       return;
     }
     setError("");
     setWarn("");
     setUploading(true);
-    setFileName(file.name);
     try {
       const fd = new FormData();
-      fd.append("docx", file);
+      fd.append("docx", docxFile);
+      if (pdfFile) fd.append("pdf", pdfFile);
       fd.append("jenis_surat_id", jenisSurat.id);
       if (desaId) fd.append("desa_id", desaId);
 
@@ -104,20 +129,16 @@ export const DocxTemplateWizard: React.FC<Props> = ({ jenisSurat, desaId, onClos
       }
       setStep("mapping");
     } catch (e: any) {
-      setError(e.message || "Gagal mengunggah docx");
+      setError(e.message || "Gagal mengunggah file");
     } finally {
       setUploading(false);
     }
   };
 
-  const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const f = e.target.files?.[0];
-    if (f) handleFile(f);
-  };
   const onDrop = (e: React.DragEvent) => {
     e.preventDefault();
     const f = e.dataTransfer.files?.[0];
-    if (f) handleFile(f);
+    if (f) pickDocx(f);
   };
 
   const patch = (i: number, p: Partial<PlaceholderDef>) =>
@@ -179,11 +200,33 @@ export const DocxTemplateWizard: React.FC<Props> = ({ jenisSurat, desaId, onClos
                 </div>
               </div>
 
+              {/* 1. DOCX master (wajib) */}
               <div style={dropzone} onDrop={onDrop} onDragOver={(e) => e.preventDefault()} onClick={() => fileInputRef.current?.click()}>
-                <Upload size={44} style={{ margin: "0 auto 14px", color: "var(--primary)" }} />
-                <h3 style={{ marginBottom: "6px" }}>{uploading ? "Mengunggah..." : "Drag & drop file .docx, atau klik"}</h3>
-                <p style={{ color: "var(--text-muted)", fontSize: "13px" }}>File Word yang sudah ditandai {"{{...}}"}</p>
-                <input ref={fileInputRef} type="file" accept=".docx" style={{ display: "none" }} onChange={onFileChange} />
+                <Upload size={40} style={{ margin: "0 auto 12px", color: docxFile ? "#22c55e" : "var(--primary)" }} />
+                <h3 style={{ marginBottom: "6px" }}>
+                  {docxFile ? `✓ ${fileName}` : "1. File Word (.docx) — master surat"}
+                </h3>
+                <p style={{ color: "var(--text-muted)", fontSize: "13px" }}>
+                  {docxFile ? "Klik untuk ganti file" : "Wajib · drag & drop atau klik · sudah ditandai {{...}}"}
+                </p>
+                <input ref={fileInputRef} type="file" accept=".docx" style={{ display: "none" }}
+                  onChange={(e) => { const f = e.target.files?.[0]; if (f) pickDocx(f); }} />
+              </div>
+
+              {/* 2. PDF tampilan (opsional) */}
+              <div style={pdfDrop} onClick={() => pdfInputRef.current?.click()}>
+                <FileText size={22} style={{ color: pdfFile ? "#22c55e" : "#a78bfa", flexShrink: 0 }} />
+                <div style={{ flex: 1 }}>
+                  <strong style={{ fontSize: 13 }}>2. PDF tampilan — opsional</strong>
+                  <p style={{ color: "var(--text-muted)", fontSize: 12, marginTop: 3, lineHeight: 1.5 }}>
+                    Export dari Word (<strong>File → Save As → PDF</strong>). Hanya untuk preview tampilan di dashboard — tidak dipakai mencetak.
+                  </p>
+                </div>
+                <span className="btn btn-secondary" style={{ fontSize: 13, whiteSpace: "nowrap" }}>
+                  {pdfFile ? `✓ ${pdfFile.name}` : "Pilih PDF"}
+                </span>
+                <input ref={pdfInputRef} type="file" accept=".pdf" style={{ display: "none" }}
+                  onChange={(e) => { const f = e.target.files?.[0]; if (f) pickPdf(f); }} />
               </div>
             </>
           ) : (
@@ -202,7 +245,8 @@ export const DocxTemplateWizard: React.FC<Props> = ({ jenisSurat, desaId, onClos
               </div>
 
               <div style={{ display: "flex", alignItems: "center", gap: "8px", margin: "4px 0 16px", color: "var(--text-muted)", fontSize: "13px" }}>
-                <Check size={16} color="#22c55e" /> <strong style={{ color: "var(--text-main)" }}>{fileName}</strong> — {placeholders.length} penanda terdeteksi
+                <Check size={16} color="#22c55e" /> <strong style={{ color: "var(--text-main)" }}>{fileName}</strong>
+                {pdfFile && <> · <span style={{ color: "#a78bfa" }}>PDF tampilan ✓</span></>} — {placeholders.length} penanda terdeteksi
               </div>
 
               {placeholders.length === 0 && <p style={{ color: "var(--text-muted)" }}>Tidak ada penanda untuk dipetakan.</p>}
@@ -294,6 +338,11 @@ export const DocxTemplateWizard: React.FC<Props> = ({ jenisSurat, desaId, onClos
           <button className="btn btn-secondary" onClick={step === "mapping" ? () => setStep("upload") : onClose}>
             {step === "mapping" ? "← Ganti file" : "Batal"}
           </button>
+          {step === "upload" && (
+            <button className="btn btn-primary" onClick={handleUpload} disabled={!docxFile || uploading}>
+              {uploading ? "Mengunggah..." : "Lanjut →"}
+            </button>
+          )}
           {step === "mapping" && (
             <button className="btn btn-primary" onClick={handleSave} disabled={saving}>
               <Check size={18} /> {saving ? "Menyimpan..." : "Simpan Pemetaan"}
@@ -320,6 +369,10 @@ const card: React.CSSProperties = {
 const tokenCode: React.CSSProperties = { color: "var(--primary)", fontSize: "14px", fontWeight: 700 };
 const lbl: React.CSSProperties = { fontSize: "13px", color: "var(--text-muted)" };
 const inp: React.CSSProperties = { width: "100%", padding: "8px 10px", fontSize: "13px" };
+const pdfDrop: React.CSSProperties = {
+  display: "flex", gap: "12px", alignItems: "center", padding: "14px 16px", marginTop: "14px",
+  background: "rgba(124,58,237,0.08)", border: "1px dashed rgba(124,58,237,0.4)", borderRadius: "12px", cursor: "pointer",
+};
 const infoBox: React.CSSProperties = {
   display: "flex", gap: "10px", padding: "14px 16px", marginBottom: "20px",
   background: "rgba(59,130,246,0.08)", border: "1px solid rgba(59,130,246,0.3)",

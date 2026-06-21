@@ -1,46 +1,33 @@
-# Astro Starter Kit: Basics
+# Dashboard Admin — Desa Kiosk
 
-```sh
-npm create astro@latest -- --template basics
-```
+Panel admin (SPA) untuk mengelola data warga, template surat, penomoran surat,
+dan memantau kiosk. Dibangun dengan **React 19 + Vite + TypeScript** (React Router).
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Menjalankan
 
-## 🚀 Project Structure
+Semua perintah dijalankan dari folder `web/dashboard`:
 
-Inside of your Astro project, you'll see the following folders and files:
+| Perintah | Aksi |
+| :--- | :--- |
+| `npm install` | Pasang dependensi |
+| `npm run dev` | Dev server di `localhost:4321` (proxy `/api` → Go server `:3000`) |
+| `npm run build` | Build produksi ke `./dist/` |
+| `npm run preview` | Pratinjau hasil build secara lokal |
+
+## Struktur
 
 ```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+src/
+├── components/   # Komponen halaman & modal (Templates, Warga, FormVariabel, NomorSurat, …)
+├── layouts/      # Kerangka dashboard
+├── lib/          # Helper API (auth, request)
+├── styles/       # CSS global
+├── App.tsx       # Definisi route
+└── main.tsx      # Entry point
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Catatan
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Backend Go melayani build statis (`dist/`) di serv00, sehingga `/api` same-origin di produksi.
+- Preview surat di dashboard memakai **PDF pendamping** yang diunggah admin (serv00 tidak merender DOCX);
+  surat asli dicetak di kiosk via Microsoft Word.

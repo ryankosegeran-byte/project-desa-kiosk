@@ -169,6 +169,34 @@ func (r *TemplateRepository) UpdatePlaceholders(ctx context.Context, templateID 
 	return nil
 }
 
+// SetTemplatePDF menyimpan PDF pendamping (tampilan) untuk satu template.
+// Kolom terpisah agar tidak membebani sync kiosk / list yang memakai detailColumns.
+func (r *TemplateRepository) SetTemplatePDF(ctx context.Context, templateID string, pdf []byte) error {
+	res, err := r.db.ExecContext(ctx,
+		`UPDATE surat_template SET template_pdf = $1, updated_at = now() WHERE id = $2`,
+		pdf, templateID,
+	)
+	if err != nil {
+		return fmt.Errorf("gagal simpan PDF template: %w", err)
+	}
+	if n, _ := res.RowsAffected(); n == 0 {
+		return sql.ErrNoRows
+	}
+	return nil
+}
+
+// GetTemplatePDF mengambil PDF pendamping; mengembalikan nil bila belum ada.
+func (r *TemplateRepository) GetTemplatePDF(ctx context.Context, templateID string) ([]byte, error) {
+	var pdf []byte
+	err := r.db.QueryRowContext(ctx,
+		`SELECT template_pdf FROM surat_template WHERE id = $1`, templateID,
+	).Scan(&pdf)
+	if err != nil {
+		return nil, err
+	}
+	return pdf, nil
+}
+
 // ListTemplatesForDesa lists all templates for a specific desa (including general ones)
 func (r *TemplateRepository) ListTemplatesForDesa(ctx context.Context, desaID string) ([]models.SuratTemplate, error) {
 	query := `

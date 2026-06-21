@@ -6,8 +6,18 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/project-desa-kiosk/internal/models"
 	"github.com/project-desa-kiosk/server/middleware"
 )
+
+// resolveDesaID memilih desa yang dikelola: PIC selalu desanya sendiri;
+// superadmin boleh menargetkan desa lain lewat parameter (fallback ke desa sendiri).
+func resolveDesaID(role, claimDesa, requested string) string {
+	if role == models.RoleSuperAdmin && requested != "" {
+		return requested
+	}
+	return claimDesa
+}
 
 type NomorSuratConfig struct {
 	ID             string    `json:"id"`
@@ -29,10 +39,16 @@ func (s *Server) handleListNomorSuratConfig(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
+	desaID := resolveDesaID(claims.Role, claims.DesaID, r.URL.Query().Get("desa_id"))
+	if desaID == "" {
+		sendError(w, http.StatusBadRequest, "desa_id diperlukan")
+		return
+	}
+
 	query := `SELECT id, desa_id, jenis_surat_id, nomor_mulai, batas_atas, nomor_terakhir, COALESCE(format_nomor, ''), updated_at
 		FROM nomor_surat_config WHERE desa_id = $1 ORDER BY updated_at DESC`
 
-	rows, err := s.db.QueryContext(ctx, query, claims.DesaID)
+	rows, err := s.db.QueryContext(ctx, query, desaID)
 	if err != nil {
 		sendError(w, http.StatusInternalServerError, "Gagal query: "+err.Error())
 		return
@@ -66,6 +82,7 @@ func (s *Server) handleUpdateNomorSuratConfig(w http.ResponseWriter, r *http.Req
 	jenisSuratID := chi.URLParam(r, "jenis_surat_id")
 
 	var req struct {
+		DesaID      string `json:"desa_id"`
 		NomorMulai  int    `json:"nomor_mulai"`
 		BatasAtas   int    `json:"batas_atas"`
 		FormatNomor string `json:"format_nomor"`
@@ -75,21 +92,29 @@ func (s *Server) handleUpdateNomorSuratConfig(w http.ResponseWriter, r *http.Req
 		return
 	}
 
+	desaID := resolveDesaID(claims.Role, claims.DesaID, req.DesaID)
+	if desaID == "" {
+		sendError(w, http.StatusBadRequest, "desa_id diperlukan")
+		return
+	}
+
 	if req.BatasAtas < req.NomorMulai {
 		sendError(w, http.StatusBadRequest, "Batas atas harus >= nomor mulai")
 		return
 	}
 
+	// nomor_terakhir di-set ke (nomor_mulai - 1) saat config baru agar surat pertama
+	// memakai nomor_mulai. Untuk update, biarkan nomor_terakhir apa adanya.
 	query := `
-		INSERT INTO nomor_surat_config (desa_id, jenis_surat_id, nomor_mulai, batas_atas, format_nomor, updated_at)
-		VALUES ($1, $2, $3, $4, $5, NOW())
+		INSERT INTO nomor_surat_config (desa_id, jenis_surat_id, nomor_mulai, batas_atas, nomor_terakhir, format_nomor, updated_at)
+		VALUES ($1, $2, $3, $4, GREATEST($3 - 1, 0), $5, NOW())
 		ON CONFLICT(desa_id, jenis_surat_id) DO UPDATE SET
 		nomor_mulai = EXCLUDED.nomor_mulai,
 		batas_atas = EXCLUDED.batas_atas,
 		format_nomor = EXCLUDED.format_nomor,
 		updated_at = NOW()
 	`
-	_, err := s.db.ExecContext(ctx, query, claims.DesaID, jenisSuratID, req.NomorMulai, req.BatasAtas, req.FormatNomor)
+	_, err := s.db.ExecContext(ctx, query, desaID, jenisSuratID, req.NomorMulai, req.BatasAtas, req.FormatNomor)
 	if err != nil {
 		sendError(w, http.StatusInternalServerError, "Gagal update: "+err.Error())
 		return

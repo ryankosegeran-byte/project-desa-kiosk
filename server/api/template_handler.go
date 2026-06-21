@@ -1,6 +1,7 @@
 package api
 
 import (
+	"bytes"
 	"database/sql"
 	"errors"
 	"fmt"
@@ -296,6 +297,21 @@ func (s *Server) handleUploadDocxTemplate(w http.ResponseWriter, r *http.Request
 		return
 	}
 
+	// PDF pendamping (opsional) — hanya untuk preview tampilan di dashboard.
+	if pdfFile, _, perr := r.FormFile("pdf"); perr == nil {
+		defer pdfFile.Close()
+		if pdfBytes, rerr := io.ReadAll(pdfFile); rerr == nil && len(pdfBytes) > 0 {
+			if !bytes.HasPrefix(pdfBytes, []byte("%PDF")) {
+				sendError(w, http.StatusBadRequest, "File tampilan harus berformat PDF")
+				return
+			}
+			if err := s.templateRepo.SetTemplatePDF(ctx, tpl.ID, pdfBytes); err != nil {
+				sendError(w, http.StatusInternalServerError, "Gagal menyimpan PDF tampilan: "+err.Error())
+				return
+			}
+		}
+	}
+
 	_ = s.userRepo.LogActivity(ctx, &models.UserActivityLog{
 		UserID:     claims.UserID,
 		DesaID:     claims.DesaID,
@@ -438,10 +454,10 @@ func labelize(key string) string {
 	return strings.Join(parts, " ")
 }
 
-// handlePreviewTemplate fills DOCX template tokens with dummy data and returns
-// the filled DOCX bytes. The browser renders it client-side via docx-preview.
-// Pure Go — no Word or LibreOffice needed on the server.
-func (s *Server) handlePreviewTemplate(w http.ResponseWriter, r *http.Request) {
+// handlePreviewTemplatePost fills a DOCX template with caller-supplied dummy
+// values (merged on top of auto-generated defaults) and returns the filled DOCX
+// as an attachment so the browser triggers a download → Word opens automatically.
+func (s *Server) handlePreviewTemplatePost(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	claims := middleware.GetClaims(ctx)
 	if claims == nil {
@@ -455,6 +471,11 @@ func (s *Server) handlePreviewTemplate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	var req struct {
+		DummyValues map[string]string `json:"dummy_values"`
+	}
+	_ = parseJSON(r, &req) // ignore error — custom values are optional
+
 	tpl, err := s.templateRepo.GetTemplateByID(ctx, templateID)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
@@ -465,54 +486,112 @@ func (s *Server) handlePreviewTemplate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// HTML-only template — return JSON for legacy client rendering.
-	if len(tpl.TemplateDocx) == 0 && tpl.TemplateHTML != "" {
-		sendJSON(w, http.StatusOK, map[string]interface{}{
-			"html":   tpl.TemplateHTML,
-			"format": tpl.FormatKertas,
-			"source": "html",
-		})
-		return
-	}
-
 	if len(tpl.TemplateDocx) == 0 {
-		sendError(w, http.StatusBadRequest, "Template tidak memiliki konten DOCX maupun HTML")
+		sendError(w, http.StatusBadRequest, "Template ini tidak memiliki konten DOCX")
 		return
 	}
 
+	// Start from auto-generated defaults then override with caller-supplied values.
 	values := buildDummyValues(tpl.Placeholders)
-
-	// Priority 1: Word COM (Windows) — fills tokens + renders PDF in one step via Find/Replace.
-	// This preserves images, formatting, and all DOCX structure perfectly.
-	if pdf, err := docx.RenderToPDF(tpl.TemplateDocx, values); err == nil {
-		w.Header().Set("Content-Type", "application/pdf")
-		w.Header().Set("Content-Disposition", `inline; filename="preview.pdf"`)
-		w.WriteHeader(http.StatusOK)
-		w.Write(pdf)
-		return
+	for k, v := range req.DummyValues {
+		values[k] = v
 	}
 
-	// Priority 2: LibreOffice (FreeBSD/Linux) — FillDocx fills tokens, LibreOffice renders PDF.
-	if filled, err := docx.FillDocx(tpl.TemplateDocx, values); err == nil {
-		if pdf, err := docx.ConvertDocxToPDF(filled); err == nil {
-			w.Header().Set("Content-Type", "application/pdf")
-			w.Header().Set("Content-Disposition", `inline; filename="preview.pdf"`)
-			w.WriteHeader(http.StatusOK)
-			w.Write(pdf)
-			return
-		}
-	}
-
-	// Priority 3: No server tools — return filled DOCX for client-side docx-preview.
 	filled, err := docx.FillDocx(tpl.TemplateDocx, values)
 	if err != nil {
-		sendError(w, http.StatusInternalServerError, "Gagal mengisi token template: "+err.Error())
+		sendError(w, http.StatusInternalServerError, "Gagal mengisi template: "+err.Error())
 		return
 	}
+
 	w.Header().Set("Content-Type", "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
-	w.Header().Set("Content-Disposition", `inline; filename="preview.docx"`)
+	w.Header().Set("Content-Disposition", `attachment; filename="preview_surat.docx"`)
 	w.WriteHeader(http.StatusOK)
-	w.Write(filled)
+	_, _ = w.Write(filled)
+}
+
+// handleGetTemplatePDF menyajikan PDF pendamping (tampilan) sebuah template.
+// 404 bila belum ada — frontend menampilkan "belum ada tampilan".
+func (s *Server) handleGetTemplatePDF(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	if middleware.GetClaims(ctx) == nil {
+		sendError(w, http.StatusUnauthorized, "Token otorisasi diperlukan")
+		return
+	}
+	templateID := chi.URLParam(r, "id")
+	if templateID == "" {
+		sendError(w, http.StatusBadRequest, "id template diperlukan")
+		return
+	}
+	pdf, err := s.templateRepo.GetTemplatePDF(ctx, templateID)
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			sendError(w, http.StatusNotFound, "Template tidak ditemukan")
+			return
+		}
+		sendError(w, http.StatusInternalServerError, "Gagal mengambil PDF: "+err.Error())
+		return
+	}
+	if len(pdf) == 0 {
+		sendError(w, http.StatusNotFound, "Belum ada tampilan PDF untuk template ini")
+		return
+	}
+	w.Header().Set("Content-Type", "application/pdf")
+	w.Header().Set("Content-Disposition", `inline; filename="tampilan.pdf"`)
+	w.WriteHeader(http.StatusOK)
+	_, _ = w.Write(pdf)
+}
+
+// handleUploadTemplatePDF mengunggah/mengganti PDF pendamping untuk template yang sudah ada.
+func (s *Server) handleUploadTemplatePDF(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	claims := middleware.GetClaims(ctx)
+	if claims == nil {
+		sendError(w, http.StatusUnauthorized, "Token otorisasi diperlukan")
+		return
+	}
+	templateID := chi.URLParam(r, "id")
+	if templateID == "" {
+		sendError(w, http.StatusBadRequest, "id template diperlukan")
+		return
+	}
+	if err := r.ParseMultipartForm(10 << 20); err != nil {
+		sendError(w, http.StatusBadRequest, "Ukuran file terlalu besar (maksimal 10MB)")
+		return
+	}
+	file, _, err := r.FormFile("pdf")
+	if err != nil {
+		sendError(w, http.StatusBadRequest, "File PDF diperlukan")
+		return
+	}
+	defer file.Close()
+	pdfBytes, err := io.ReadAll(file)
+	if err != nil {
+		sendError(w, http.StatusInternalServerError, "Gagal membaca file: "+err.Error())
+		return
+	}
+	if !bytes.HasPrefix(pdfBytes, []byte("%PDF")) {
+		sendError(w, http.StatusBadRequest, "File tampilan harus berformat PDF")
+		return
+	}
+	if err := s.templateRepo.SetTemplatePDF(ctx, templateID, pdfBytes); err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			sendError(w, http.StatusNotFound, "Template tidak ditemukan")
+			return
+		}
+		sendError(w, http.StatusInternalServerError, "Gagal menyimpan PDF tampilan: "+err.Error())
+		return
+	}
+
+	_ = s.userRepo.LogActivity(ctx, &models.UserActivityLog{
+		UserID:     claims.UserID,
+		DesaID:     claims.DesaID,
+		Action:     "UPLOAD_TEMPLATE_PDF",
+		EntityType: "template_desa",
+		EntityID:   templateID,
+		IPAddress:  r.RemoteAddr,
+	})
+
+	sendJSON(w, http.StatusOK, map[string]string{"status": "ok"})
 }
 
 // buildDummyValues generates sample values for each placeholder in the template,
