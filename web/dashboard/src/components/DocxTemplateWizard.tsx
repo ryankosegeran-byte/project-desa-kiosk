@@ -174,8 +174,8 @@ export const DocxTemplateWizard: React.FC<Props> = ({ jenisSurat, desaId, onClos
             </h2>
             <p style={{ color: "var(--text-muted)", fontSize: "13px", marginTop: "4px" }}>
               {step === "upload"
-                ? "Langkah 1 dari 2 — Unggah dokumen Word yang sudah kamu tandai."
-                : "Langkah 2 dari 2 — Tentukan arti setiap penanda."}
+                ? "Langkah 1 dari 2 — Unggah file Word (.docx) yang sudah kamu beri penanda {{...}}."
+                : "Langkah 2 dari 2 — Tentukan sumber data untuk tiap penanda."}
             </p>
           </div>
           <button className="btn btn-secondary" onClick={onClose}><X size={18} /></button>
@@ -191,11 +191,33 @@ export const DocxTemplateWizard: React.FC<Props> = ({ jenisSurat, desaId, onClos
               {/* Penjelasan singkat */}
               <div style={infoBox}>
                 <Info size={18} style={{ flexShrink: 0, marginTop: 2 }} />
-                <div>
+                <div style={{ lineHeight: 1.6 }}>
                   <strong>Cara kerja:</strong> di Word, ketik penanda <code style={code}>{"{{...}}"}</code> di tempat yang akan diisi
                   (mis. <code style={code}>{"Nama: {{nama}}"}</code>). Kop & layout dokumen <strong>dijaga 100%</strong> — kita hanya mengisi penanda, bukan mengubah tata letak.
-                  <div style={{ marginTop: 8, color: "var(--text-muted)" }}>
-                    Token umum: <code style={code}>{"{{nama}}"}</code> <code style={code}>{"{{nik}}"}</code> <code style={code}>{"{{alamat}}"}</code> <code style={code}>{"{{jenis_usaha}}"}</code> <code style={code}>{"{{nomor_surat}}"}</code> <code style={code}>{"{{tanggal}}"}</code> <code style={code}>{"{{kepala_desa}}"}</code>
+
+                  <div style={{ marginTop: 10, display: "flex", flexDirection: "column", gap: 6 }}>
+                    <div>
+                      <span style={{ color: "var(--text-muted)" }}>Token data warga (otomatis dari KTP): </span>
+                      <code style={code}>{"{{nama}}"}</code> <code style={code}>{"{{nik}}"}</code> <code style={code}>{"{{alamat}}"}</code> <code style={code}>{"{{tempat_lahir}}"}</code> <code style={code}>{"{{tanggal_lahir}}"}</code>
+                    </div>
+                    <div>
+                      <span style={{ color: "var(--text-muted)" }}>Token sistem (otomatis): </span>
+                      <code style={code}>{"{{tanggal}}"}</code> <code style={code}>{"{{kepala_desa}}"}</code>
+                    </div>
+                    <div>
+                      <span style={{ color: "var(--text-muted)" }}>Token isian warga di kiosk: </span>
+                      <code style={code}>{"{{jenis_usaha}}"}</code> <code style={code}>{"{{keperluan}}"}</code> <span style={{ color: "var(--text-muted)" }}>(atau token lain buatanmu)</span>
+                    </div>
+                  </div>
+
+                  {/* Sorotan khusus nomor surat */}
+                  <div style={{ marginTop: 12, padding: "10px 12px", background: "rgba(124,58,237,0.10)", border: "1px solid rgba(124,58,237,0.35)", borderRadius: 8 }}>
+                    <strong style={{ color: "#c4b5fd" }}>Penomoran surat:</strong> tulis <code style={code}>{"{{nomor_surat}}"}</code> di lokasi nomor surat.
+                    Token ini <strong>otomatis terdeteksi</strong> dan nilainya diisi dari pengaturan penomoran —
+                    yang bisa kamu atur lewat tombol <strong>⚙️ Form &amp; Variabel → tab “Penomoran Surat”</strong> setelah template tersimpan.
+                    <div style={{ marginTop: 4, color: "var(--text-muted)", fontSize: 12 }}>
+                      Contoh penulisan di Word: <code style={code}>{"Nomor : {{nomor_surat}}"}</code> → tercetak <code style={code}>12/SK_USAHA/08.10/VI/2026</code>.
+                    </div>
                   </div>
                 </div>
               </div>
@@ -207,7 +229,7 @@ export const DocxTemplateWizard: React.FC<Props> = ({ jenisSurat, desaId, onClos
                   {docxFile ? `✓ ${fileName}` : "1. File Word (.docx) — master surat"}
                 </h3>
                 <p style={{ color: "var(--text-muted)", fontSize: "13px" }}>
-                  {docxFile ? "Klik untuk ganti file" : "Wajib · drag & drop atau klik · sudah ditandai {{...}}"}
+                  {docxFile ? "Klik untuk ganti file" : "Wajib · tarik ke sini atau klik untuk pilih · pastikan sudah ada penanda {{...}}"}
                 </p>
                 <input ref={fileInputRef} type="file" accept=".docx" style={{ display: "none" }}
                   onChange={(e) => { const f = e.target.files?.[0]; if (f) pickDocx(f); }} />
@@ -219,7 +241,7 @@ export const DocxTemplateWizard: React.FC<Props> = ({ jenisSurat, desaId, onClos
                 <div style={{ flex: 1 }}>
                   <strong style={{ fontSize: 13 }}>2. PDF tampilan — opsional</strong>
                   <p style={{ color: "var(--text-muted)", fontSize: 12, marginTop: 3, lineHeight: 1.5 }}>
-                    Export dari Word (<strong>File → Save As → PDF</strong>). Hanya untuk preview tampilan di dashboard — tidak dipakai mencetak.
+                    Export dari Word (<strong>File → Save As → PDF</strong>). Hanya untuk pratinjau tampilan di dashboard — file inti yang dipakai mencetak tetap dokumen Word di atas.
                   </p>
                 </div>
                 <span className="btn btn-secondary" style={{ fontSize: 13, whiteSpace: "nowrap" }}>

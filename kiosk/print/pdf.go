@@ -62,6 +62,30 @@ func FormatIndonesianDate(t time.Time) string {
 	return fmt.Sprintf("%d %s %d", t.Day(), months[t.Month()], t.Year())
 }
 
+// RenderHTML executes the HTML template with the same data shape used for
+// printing and returns the final HTML string. The kiosk UI uses this for an
+// accurate, server-rendered preview (identical to the printed output) instead
+// of doing fragile client-side token replacement.
+func RenderHTML(templateHTML string, warga *models.Warga, dataSurat map[string]interface{}, dateToday string, nomorSurat string, desaKepalaDesa string, desaNIP string) (string, error) {
+	tmpl, err := template.New("surat").Parse(templateHTML)
+	if err != nil {
+		return "", fmt.Errorf("failed to parse template: %w", err)
+	}
+
+	var buf bytes.Buffer
+	tmplData := map[string]interface{}{
+		"Warga":          warga,
+		"DataSurat":      dataSurat,
+		"DateToday":      dateToday,
+		"NomorSurat":     nomorSurat,
+		"DesaKepalaDesa": desaKepalaDesa,
+		"DesaNIP":        desaNIP,
+	}
+	if err := tmpl.Execute(&buf, tmplData); err != nil {
+		return "", fmt.Errorf("failed to execute template: %w", err)
+	}
+	return buf.String(), nil
+}
 // getPaperDimensions returns width and height in inches based on format
 func getPaperDimensions(formatKertas string) (width, height float64) {
 	switch formatKertas {

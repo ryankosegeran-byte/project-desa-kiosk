@@ -424,14 +424,17 @@ func buildPlaceholders(tokens []string, existing []models.PlaceholderDef) []mode
 }
 
 // suggestPlaceholder picks a default source for a token from its name.
+// Token names with dashes ({{jenis-kelamin}}) dinormalkan ke underscore untuk
+// pencocokan, supaya tetap dapat saran sumber yang benar.
 func suggestPlaceholder(key string, urutan int) models.PlaceholderDef {
 	p := models.PlaceholderDef{Key: key, Label: labelize(key), Urutan: urutan}
-	if wf, ok := wargaKeyMap[key]; ok {
+	norm := strings.ReplaceAll(key, "-", "_")
+	if wf, ok := wargaKeyMap[norm]; ok {
 		p.Source = models.PlaceholderSourceWarga
 		p.WargaField = wf
 		return p
 	}
-	if sf, ok := sistemKeyMap[key]; ok {
+	if sf, ok := sistemKeyMap[norm]; ok {
 		p.Source = models.PlaceholderSourceSistem
 		p.SistemField = sf
 		return p
@@ -442,9 +445,9 @@ func suggestPlaceholder(key string, urutan int) models.PlaceholderDef {
 	return p
 }
 
-// labelize turns "jenis_usaha" into "Jenis Usaha".
+// labelize turns "jenis_usaha" / "jenis-usaha" into "Jenis Usaha".
 func labelize(key string) string {
-	parts := strings.Split(key, "_")
+	parts := strings.FieldsFunc(key, func(r rune) bool { return r == '_' || r == '-' })
 	for i, wd := range parts {
 		if wd == "" {
 			continue
@@ -507,6 +510,41 @@ func (s *Server) handlePreviewTemplatePost(w http.ResponseWriter, r *http.Reques
 	w.Header().Set("Content-Disposition", `attachment; filename="preview_surat.docx"`)
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write(filled)
+}
+
+// handleGetTemplate mengambil satu template lengkap (termasuk placeholders) by id.
+// Untuk template DOCX, token di dokumen di-deteksi ulang lalu digabung dengan
+// pemetaan tersimpan — sehingga SEMUA variabel di dokumen muncul di modal editor,
+// termasuk yang belum dipetakan (dengan saran sumber default agar tinggal diubah).
+func (s *Server) handleGetTemplate(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	if middleware.GetClaims(ctx) == nil {
+		sendError(w, http.StatusUnauthorized, "Token otorisasi diperlukan")
+		return
+	}
+	templateID := chi.URLParam(r, "id")
+	if templateID == "" {
+		sendError(w, http.StatusBadRequest, "id template diperlukan")
+		return
+	}
+	tpl, err := s.templateRepo.GetTemplateByID(ctx, templateID)
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			sendError(w, http.StatusNotFound, "Template tidak ditemukan")
+			return
+		}
+		sendError(w, http.StatusInternalServerError, "Gagal mengambil template: "+err.Error())
+		return
+	}
+
+	if len(tpl.TemplateDocx) > 0 {
+		if tokens, derr := docx.DetectTokens(tpl.TemplateDocx); derr == nil {
+			tpl.Placeholders = buildPlaceholders(tokens, tpl.Placeholders)
+		}
+	}
+	tpl.TemplateDocx = nil // jangan kirim blob berat ke klien
+
+	sendJSON(w, http.StatusOK, tpl)
 }
 
 // handleGetTemplatePDF menyajikan PDF pendamping (tampilan) sebuah template.

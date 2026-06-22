@@ -10,7 +10,7 @@ export interface FieldDef {
   sub_fields?: FieldDef[];
 }
 
-// Mirrors models.PlaceholderDef (Go) — token mapping for DOCX templates (Strategi B).
+// Mirrors models.PlaceholderDef (Go) â€” token mapping for DOCX templates (Strategi B).
 export interface PlaceholderDef {
   key: string;
   label: string;
@@ -181,8 +181,15 @@ export function useSurat() {
     }
   }, [apiBase]);
 
-  // previewSuratPDF renders a live preview PDF (DOCX templates) and returns a blob URL.
-  const previewSuratPDF = useCallback(async (payload: { jenis_surat_id: string; nik: string; data_surat: any }): Promise<string | null> => {
+  // PreviewResult is what the kiosk preview endpoint returns: either a server
+  // rendered HTML string (html templates) or a PDF blob URL (DOCX templates).
+  // Both are rendered by the same engine used for printing, so the preview is
+  // identical to the printed output.
+  // (type declared in the return value below)
+
+  // previewSurat asks the kiosk to render a live preview. The kiosk decides the
+  // mode based on the template: DOCX -> PDF (blob URL), HTML -> rendered HTML.
+  const previewSurat = useCallback(async (payload: { jenis_surat_id: string; nik: string; data_surat: any }): Promise<{ mode: 'pdf'; url: string } | { mode: 'html'; html: string; format_kertas: string } | null> => {
     try {
       const res = await fetch(`${apiBase}/api/surat/preview`, {
         method: 'POST',
@@ -191,10 +198,15 @@ export function useSurat() {
       });
       if (!res.ok) {
         const errData = await res.json().catch(() => ({}));
-        throw new Error(errData.error || "Gagal membuat pratinjau PDF");
+        throw new Error(errData.error || "Gagal membuat pratinjau");
+      }
+      const contentType = res.headers.get('Content-Type') || '';
+      if (contentType.includes('application/json')) {
+        const data = await res.json();
+        return { mode: 'html', html: data.html || '', format_kertas: data.format_kertas || 'A4' };
       }
       const blob = await res.blob();
-      return URL.createObjectURL(blob);
+      return { mode: 'pdf', url: URL.createObjectURL(blob) };
     } catch (err: any) {
       setError(err.message);
       return null;
@@ -211,7 +223,7 @@ export function useSurat() {
     printSurat,
     fetchTemplateHTML,
     fetchTemplate,
-    previewSuratPDF,
+    previewSurat,
     setCurrentSurat,
     setError
   };

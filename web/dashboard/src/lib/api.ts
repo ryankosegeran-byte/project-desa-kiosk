@@ -39,6 +39,24 @@ export async function request(path: string, options: RequestInit = {}) {
   return data;
 }
 
+// authFetch is a raw fetch (returns the Response) for binary responses like PDF
+// or DOCX download, but applies the same auth + 401 handling as request():
+// on an expired/invalid token it logs out and redirects to login.
+export async function authFetch(path: string, options: RequestInit = {}): Promise<Response> {
+  const token = localStorage.getItem("token");
+  const headers = new Headers(options.headers);
+  if (token) {
+    headers.set("Authorization", `Bearer ${token}`);
+  }
+  const response = await fetch(`${BASE_URL}${path}`, { ...options, headers });
+  if (response.status === 401) {
+    localStorage.clear();
+    window.location.href = "/";
+    throw new Error("Sesi telah berakhir, silakan login kembali");
+  }
+  return response;
+}
+
 export function getUser() {
   if (typeof window === "undefined") {
     return null;

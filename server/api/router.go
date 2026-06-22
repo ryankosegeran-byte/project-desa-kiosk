@@ -118,6 +118,7 @@ func (s *Server) Handler() http.Handler {
 			r.Get("/", s.handleListTemplates)
 			r.Post("/", s.handleUpsertTemplate)
 			r.Post("/upload-docx", s.handleUploadDocxTemplate)
+			r.Get("/{id}", s.handleGetTemplate)
 			r.Put("/{id}/placeholders", s.handleUpdateTemplatePlaceholders)
 			r.Post("/{id}/preview", s.handlePreviewTemplatePost)
 			r.Get("/{id}/preview-pdf", s.handleGetTemplatePDF)

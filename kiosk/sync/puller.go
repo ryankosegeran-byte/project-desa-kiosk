@@ -128,9 +128,15 @@ func (p *Puller) PullConfig(ctx context.Context) error {
 	}
 
 	// 2. Sync template documents
+	// The server only returns templates relevant to this kiosk (per-desa or
+	// general). Align the desa_id to the kiosk's own desa_id so that
+	// GetTemplate (per-desa lookup) always finds the server template. This
+	// also ensures an older locally-seeded HTML template sharing the same
+	// (jenis_surat_id, desa_id) pair is replaced by the server DOCX version.
 	if len(response.Templates) > 0 {
 		log.Info().Int("count", len(response.Templates)).Msg("Sinkronisasi template cetak dokumen...")
 		for _, t := range response.Templates {
+			t.DesaID = p.cfg.DesaID
 			if err := p.jenisSuratRepo.UpsertTemplate(ctx, &t); err != nil {
 				log.Error().Err(err).Str("template_id", t.ID).Msg("Gagal upsert template secara lokal")
 			}

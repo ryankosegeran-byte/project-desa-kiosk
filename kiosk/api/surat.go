@@ -249,7 +249,7 @@ func (s *Server) handlePrintSurat(w http.ResponseWriter, r *http.Request) {
 	desaKepalaDesa, _ := s.configRepo.Get(ctx, "desa_kepala_desa")
 	desaNIP, _ := s.configRepo.Get(ctx, "desa_nip")
 
-	// 7. Generate PDF — DOCX (Strategi B via Word) jika template punya docx,
+	// 7. Generate PDF â€” DOCX (Strategi B via Word) jika template punya docx,
 	//    selain itu fallback ke template HTML lama (chromedp).
 	var pdfPath string
 	if len(tplObj.TemplateDocx) > 0 {
@@ -322,11 +322,6 @@ func (s *Server) handlePreviewSurat(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if len(tplObj.TemplateDocx) == 0 {
-		sendError(w, http.StatusBadRequest, "Preview hanya tersedia untuk template DOCX")
-		return
-	}
-
 	// Warga opsional: preview bisa jalan sebelum NIK diisi.
 	var warga *models.Warga
 	if req.NIK != "" {
@@ -336,12 +331,35 @@ func (s *Server) handlePreviewSurat(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
+	if warga == nil {
+		warga = &models.Warga{NIK: req.NIK}
+	}
 
 	desaKepalaDesa, _ := s.configRepo.Get(ctx, "desa_kepala_desa")
 	desaNIP, _ := s.configRepo.Get(ctx, "desa_nip")
+	dateToday := print.FormatIndonesianDate(time.Now())
+	const nomorPreview = "(nomor otomatis saat cetak)"
+
+	// Template HTML: render lewat engine yang sama dengan cetak (html/template),
+	// lalu kembalikan HTML final agar preview UI 100% sama dengan hasil cetak.
+	if len(tplObj.TemplateDocx) == 0 {
+		html, herr := print.RenderHTML(tplObj.TemplateHTML, warga, req.DataSurat, dateToday, nomorPreview, desaKepalaDesa, desaNIP)
+		if herr != nil {
+			sendError(w, http.StatusInternalServerError, "Gagal render preview HTML: "+herr.Error())
+			return
+		}
+		sendJSON(w, http.StatusOK, map[string]string{
+			"mode":          "html",
+			"html":          html,
+			"format_kertas": tplObj.FormatKertas,
+		})
+		return
+	}
+
+	// Template DOCX (Strategi B): render ke PDF via Word.
 	sys := print.SistemValues{
-		NomorSurat:     "(nomor otomatis saat cetak)",
-		DateToday:      print.FormatIndonesianDate(time.Now()),
+		NomorSurat:     nomorPreview,
+		DateToday:      dateToday,
 		DesaKepalaDesa: desaKepalaDesa,
 		DesaNIP:        desaNIP,
 	}

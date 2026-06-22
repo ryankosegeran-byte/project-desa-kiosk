@@ -86,13 +86,56 @@ func (r *JenisSuratRepository) FindByID(ctx context.Context, id string) (*models
 }
 
 // Upsert inserts or updates a jenis_surat (synced from online backend).
+//
+// The server hub is the source of truth for the row id. A jenis_surat is
+// identified by its business key `kode`, so when a row with the same `kode`
+// already exists locally with a different `id`, the local `id` is realigned to
+// the server id. Child rows that reference the old id (surat_template, surat,
+// nomor_surat_batch) are repointed to the new id inside the same transaction so
+// foreign keys stay valid.
 func (r *JenisSuratRepository) Upsert(ctx context.Context, js *models.JenisSurat) error {
+	schemaBytes, err := json.Marshal(js.FieldsSchema)
+	if err != nil {
+		return fmt.Errorf("gagal marshal fields_schema: %w", err)
+	}
+
+	tx, err := r.db.BeginTx(ctx, nil)
+	if err != nil {
+		return fmt.Errorf("gagal memulai transaksi upsert jenis_surat: %w", err)
+	}
+	defer func() { _ = tx.Rollback() }()
+
+	// Defer foreign key checks until commit so we can realign the parent id and
+	// repoint child rows within the same transaction regardless of statement
+	// order. Checks still run at COMMIT, so a genuinely broken graph is rejected.
+	if _, err := tx.ExecContext(ctx, `PRAGMA defer_foreign_keys = ON`); err != nil {
+		return fmt.Errorf("gagal mengaktifkan defer_foreign_keys: %w", err)
+	}
+
+	// Look up the existing local id for this kode (business key).
+	var existingID string
+	err = tx.QueryRowContext(ctx, `SELECT id FROM jenis_surat WHERE kode = ?`, js.Kode).Scan(&existingID)
+	switch {
+	case errors.Is(err, sql.ErrNoRows):
+		existingID = ""
+	case err != nil:
+		return fmt.Errorf("gagal cek jenis_surat berdasarkan kode: %w", err)
+	}
+
+	// If the kode exists with a different id, realign children before changing
+	// the parent id so foreign key references remain valid.
+	if existingID != "" && existingID != js.ID {
+		if err := repointJenisSuratChildren(ctx, tx, existingID, js.ID); err != nil {
+			return err
+		}
+	}
+
 	query := `
 		INSERT INTO jenis_surat (
 			id, kode, nama, deskripsi, fields_schema, aktif, urutan, updated_at
 		) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-		ON CONFLICT(id) DO UPDATE SET
-			kode = excluded.kode,
+		ON CONFLICT(kode) DO UPDATE SET
+			id = excluded.id,
 			nama = excluded.nama,
 			deskripsi = excluded.deskripsi,
 			fields_schema = excluded.fields_schema,
@@ -100,18 +143,34 @@ func (r *JenisSuratRepository) Upsert(ctx context.Context, js *models.JenisSurat
 			urutan = excluded.urutan,
 			updated_at = excluded.updated_at
 	`
-	schemaBytes, err := json.Marshal(js.FieldsSchema)
-	if err != nil {
-		return fmt.Errorf("gagal marshal fields_schema: %w", err)
-	}
-
-	_, err = r.db.ExecContext(ctx, query,
+	if _, err := tx.ExecContext(ctx, query,
 		js.ID, js.Kode, js.Nama, js.Deskripsi, string(schemaBytes), js.Aktif, js.Urutan, js.UpdatedAt,
-	)
-	if err != nil {
+	); err != nil {
 		return fmt.Errorf("gagal upsert jenis_surat: %w", err)
 	}
 
+	if err := tx.Commit(); err != nil {
+		return fmt.Errorf("gagal commit upsert jenis_surat: %w", err)
+	}
+	return nil
+}
+
+// repointJenisSuratChildren updates child tables that reference jenis_surat(id)
+// from oldID to newID. Run inside a transaction before changing the parent id.
+func repointJenisSuratChildren(ctx context.Context, tx *sql.Tx, oldID, newID string) error {
+	stmts := []struct {
+		table string
+		query string
+	}{
+		{"surat_template", `UPDATE surat_template SET jenis_surat_id = ? WHERE jenis_surat_id = ?`},
+		{"surat", `UPDATE surat SET jenis_surat_id = ? WHERE jenis_surat_id = ?`},
+		{"nomor_surat_batch", `UPDATE nomor_surat_batch SET jenis_surat_id = ? WHERE jenis_surat_id = ?`},
+	}
+	for _, s := range stmts {
+		if _, err := tx.ExecContext(ctx, s.query, newID, oldID); err != nil {
+			return fmt.Errorf("gagal repoint %s ke id jenis_surat baru: %w", s.table, err)
+		}
+	}
 	return nil
 }
 
@@ -183,17 +242,18 @@ func scanTemplateRow(row *sql.Row) (*models.SuratTemplate, error) {
 
 // UpsertTemplate inserts or updates a template (synced from online backend).
 // Supports both per-desa and general templates.
+//
+// The sync puller normalises desa_id to the kiosk's own desa before calling
+// this method, so the incoming template may carry a different desa_id than
+// the row already stored locally (which was saved with the server's original
+// desa_id). To avoid a PRIMARY KEY clash we first DELETE any stale row that
+// has the same id but a different (jenis_surat_id, desa_id) pair, then use
+// INSERT … ON CONFLICT to handle the normal upsert path.
 func (r *JenisSuratRepository) UpsertTemplate(ctx context.Context, t *models.SuratTemplate) error {
-	// Build query based on whether it's a general template
-	var query string
-	var args []interface{}
-
-	// Set default format_kertas
 	if t.FormatKertas == "" {
 		t.FormatKertas = "A4"
 	}
 
-	// DOCX bytes (BLOB) and placeholder mapping (JSON TEXT); NULL when absent.
 	var docxArg interface{}
 	if len(t.TemplateDocx) > 0 {
 		docxArg = t.TemplateDocx
@@ -207,43 +267,39 @@ func (r *JenisSuratRepository) UpsertTemplate(ctx context.Context, t *models.Sur
 		placeholdersArg = string(b)
 	}
 
-	if t.IsGeneral {
-		// General template: unique by jenis_surat_id where is_general = 1
-		query = `
-			INSERT INTO surat_template (
-				id, jenis_surat_id, desa_id, template_html, template_docx, placeholders, is_general, format_kertas, version, updated_at
-			) VALUES (?, ?, ?, ?, ?, ?, 1, ?, ?, ?)
-			ON CONFLICT(jenis_surat_id, desa_id) WHERE is_general = 1 DO UPDATE SET
-				id = excluded.id,
-				template_html = excluded.template_html,
-				template_docx = excluded.template_docx,
-				placeholders = excluded.placeholders,
-				is_general = 1,
-				format_kertas = excluded.format_kertas,
-				version = excluded.version,
-				updated_at = excluded.updated_at
-		`
-		args = []interface{}{t.ID, t.JenisSuratID, t.DesaID, t.TemplateHTML, docxArg, placeholdersArg, t.FormatKertas, t.Version, t.UpdatedAt}
-	} else {
-		// Per-desa template: unique by (jenis_surat_id, desa_id)
-		query = `
-			INSERT INTO surat_template (
-				id, jenis_surat_id, desa_id, template_html, template_docx, placeholders, is_general, format_kertas, version, updated_at
-			) VALUES (?, ?, ?, ?, ?, ?, 0, ?, ?, ?)
-			ON CONFLICT(jenis_surat_id, desa_id) DO UPDATE SET
-				id = excluded.id,
-				template_html = excluded.template_html,
-				template_docx = excluded.template_docx,
-				placeholders = excluded.placeholders,
-				is_general = 0,
-				format_kertas = excluded.format_kertas,
-				version = excluded.version,
-				updated_at = excluded.updated_at
-		`
-		args = []interface{}{t.ID, t.JenisSuratID, t.DesaID, t.TemplateHTML, docxArg, placeholdersArg, t.FormatKertas, t.Version, t.UpdatedAt}
+	// Remove any stale row that already has this id but with a different
+	// (jenis_surat_id, desa_id) combination. This prevents a PK collision
+	// when the puller re-maps desa_id to the kiosk's own desa.
+	_, err := r.db.ExecContext(ctx,
+		`DELETE FROM surat_template WHERE id = ? AND NOT (jenis_surat_id = ? AND desa_id = ?)`,
+		t.ID, t.JenisSuratID, t.DesaID,
+	)
+	if err != nil {
+		return fmt.Errorf("gagal hapus template stale: %w", err)
 	}
 
-	_, err := r.db.ExecContext(ctx, query, args...)
+	isGeneral := 0
+	if t.IsGeneral {
+		isGeneral = 1
+	}
+
+	query := `
+		INSERT INTO surat_template (
+			id, jenis_surat_id, desa_id, template_html, template_docx, placeholders, is_general, format_kertas, version, updated_at
+		) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+		ON CONFLICT(jenis_surat_id, desa_id) DO UPDATE SET
+			id = excluded.id,
+			template_html = excluded.template_html,
+			template_docx = excluded.template_docx,
+			placeholders = excluded.placeholders,
+			is_general = excluded.is_general,
+			format_kertas = excluded.format_kertas,
+			version = excluded.version,
+			updated_at = excluded.updated_at
+	`
+	args := []interface{}{t.ID, t.JenisSuratID, t.DesaID, t.TemplateHTML, docxArg, placeholdersArg, isGeneral, t.FormatKertas, t.Version, t.UpdatedAt}
+
+	_, err = r.db.ExecContext(ctx, query, args...)
 	if err != nil {
 		return fmt.Errorf("gagal upsert template: %w", err)
 	}

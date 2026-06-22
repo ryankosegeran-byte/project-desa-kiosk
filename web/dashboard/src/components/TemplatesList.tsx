@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
-import { request, getUser, API_BASE } from "../lib/api";
+import { request, getUser, authFetch } from "../lib/api";
 import { DOCXImportWizard } from "./DOCXImportWizard";
 import { DocxTemplateWizard } from "./DocxTemplateWizard";
 import { VersionHistory } from "./VersionHistory";
 import { FormVariabelEditor } from "./FormVariabelEditor";
-import { NomorSuratConfig } from "./NomorSuratConfig";
 
 // Import Quill dynamically for WYSIWYG editor
 let Quill: any = null;
@@ -222,8 +221,6 @@ export default function TemplatesList() {
   const [formVarJS, setFormVarJS] = useState<JenisSurat | null>(null);
   const [formVarTemplate, setFormVarTemplate] = useState<Template | null>(null);
 
-  // Nomor Surat config modal
-  const [showNomorSurat, setShowNomorSurat] = useState(false);
 
   // Preview Print modal state
   const [previewJenisSurat, setPreviewJenisSurat] = useState<JenisSurat | null>(null);
@@ -488,10 +485,7 @@ export default function TemplatesList() {
     if (tpl && !tpl.template_html && tpl.id) {
       setDocxPreviewLoading(true);
       try {
-        const token = localStorage.getItem("token");
-        const res = await fetch(`${API_BASE}/api/templates/${tpl.id}/preview-pdf`, {
-          headers: token ? { Authorization: `Bearer ${token}` } : {},
-        });
+        const res = await authFetch(`/api/templates/${tpl.id}/preview-pdf`);
         if (res.status === 404) {
           setDocxPreviewError("Belum ada PDF tampilan untuk template ini. Unggah PDF (export dari Word) lewat wizard 📄 DOCX.");
         } else if (!res.ok) {
@@ -548,14 +542,6 @@ export default function TemplatesList() {
               </select>
             </div>
           )}
-          <button
-            className="btn btn-secondary"
-            onClick={() => setShowNomorSurat(true)}
-            disabled={!selectedDesaId || jenisSurat.length === 0}
-            title="Atur penomoran surat per jenis surat untuk desa ini"
-          >
-            🔢 Nomor Surat
-          </button>
         </div>
       </div>
 
@@ -596,36 +582,50 @@ export default function TemplatesList() {
               </div>
 
               <div style={{ marginTop: "auto", display: "flex", flexDirection: "column", gap: "8px" }}>
-                <div style={{ display: "flex", gap: "8px" }}>
-                  {/* DOCX template → Form & Variabel editor; HTML template → WYSIWYG editor */}
-                  {perDesaTemplate && !perDesaTemplate.template_html ? (
-                    <button
-                      className="btn btn-secondary"
-                      style={{ flex: 1, fontSize: "13px", padding: "8px" }}
-                      onClick={() => {
-                        setFormVarJS(js);
-                        setFormVarTemplate(perDesaTemplate);
-                      }}
-                    >
-                      ⚙️ Form & Variabel
-                    </button>
-                  ) : (
-                    <button
-                      className="btn btn-secondary"
-                      style={{ flex: 1, fontSize: "13px", padding: "8px" }}
-                      onClick={() => handleEditClick(js)}
-                    >
-                      📝 HTML
-                    </button>
-                  )}
-                  <button
-                    className="btn btn-primary"
-                    style={{ flex: 1, fontSize: "13px", padding: "8px" }}
-                    onClick={() => setDocxWizardJS(js)}
-                  >
-                    📄 DOCX
-                  </button>
-                </div>
+                {(() => {
+                  // Template DOCX per-desa sudah ada → buka editor Form & Variabel (seperti SKU).
+                  const hasDocxTemplate = perDesaTemplate && !perDesaTemplate.template_html;
+                  return (
+                    <div style={{ display: "flex", gap: "8px" }}>
+                      <button
+                        className="btn btn-secondary"
+                        style={{ flex: 1, fontSize: "13px", padding: "8px" }}
+                        title={
+                          hasDocxTemplate
+                            ? "Edit isian & variabel surat"
+                            : "Buat template DOCX dulu untuk mengatur Form & Variabel"
+                        }
+                        onClick={() => {
+                          if (hasDocxTemplate) {
+                            setFormVarJS(js);
+                            setFormVarTemplate(perDesaTemplate!);
+                          } else {
+                            // Belum ada template DOCX → arahkan buat dulu lewat wizard.
+                            setDocxWizardJS(js);
+                          }
+                        }}
+                      >
+                        ⚙️ Form & Variabel
+                      </button>
+                      <button
+                        className="btn btn-primary"
+                        style={{ flex: 1, fontSize: "13px", padding: "8px" }}
+                        title="Unggah / atur template DOCX"
+                        onClick={() => setDocxWizardJS(js)}
+                      >
+                        📄 DOCX
+                      </button>
+                    </div>
+                  );
+                })()}
+                <button
+                  className="btn btn-secondary"
+                  style={{ width: "100%", fontSize: "12px", padding: "6px", opacity: 0.85 }}
+                  title="Edit template HTML lama (lanjutan)"
+                  onClick={() => handleEditClick(js)}
+                >
+                  📝 Edit HTML (lanjutan)
+                </button>
                 <button
                   className="btn"
                   style={{
@@ -917,16 +917,6 @@ export default function TemplatesList() {
         </div>
       )}
 
-      {/* Pengaturan Nomor Surat (per desa per jenis surat) */}
-      {showNomorSurat && (
-        <NomorSuratConfig
-          jenisSurat={jenisSurat}
-          desaId={selectedDesaId}
-          desaNama={desas.find((d) => d.id === selectedDesaId)?.nama}
-          onClose={() => setShowNomorSurat(false)}
-        />
-      )}
-
       {/* DOCX Import Wizard (HTML, lama) */}
       {showImportWizard && (
         <DOCXImportWizard
@@ -941,6 +931,9 @@ export default function TemplatesList() {
           templateId={formVarTemplate.id}
           placeholders={formVarTemplate.placeholders || []}
           jenisSuratNama={formVarJS.nama}
+          jenisSuratId={formVarJS.id}
+          jenisSuratKode={formVarJS.kode}
+          desaId={selectedDesaId}
           onClose={() => {
             setFormVarJS(null);
             setFormVarTemplate(null);

@@ -17,8 +17,8 @@ import (
 var (
 	// reText captures the text inside each <w:t> ... </w:t> run.
 	reText = regexp.MustCompile(`(?s)<w:t[^>]*>(.*?)</w:t>`)
-	// reToken matches a {{snake_case}} placeholder and captures its key.
-	reToken = regexp.MustCompile(`\{\{([a-z0-9_]+)\}\}`)
+	// reToken matches a {{snake_case}} or {{with-dashes}} placeholder and captures its key.
+	reToken = regexp.MustCompile(`\{\{([a-z0-9_-]+)\}\}`)
 )
 
 // DetectTokens scans a DOCX and returns the distinct {{snake_case}} placeholder

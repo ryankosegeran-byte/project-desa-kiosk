@@ -184,6 +184,74 @@ func TestJenisSuratRepository(t *testing.T) {
 	}
 }
 
+// TestJenisSuratUpsertKodeIDRealign covers the offline-first sync scenario where
+// the server hub re-issues a new id for an existing kode. The local row id must
+// be realigned to the server id, and child rows referencing the old id must be
+// repointed so foreign keys remain valid.
+func TestJenisSuratUpsertKodeIDRealign(t *testing.T) {
+	db, cleanup := setupTestDB(t)
+	defer cleanup()
+
+	repo := NewJenisSuratRepository(db)
+	ctx := context.Background()
+
+	// Initial sync: kode SK_USAHA with old id.
+	js := &models.JenisSurat{
+		ID:           "old-id",
+		Kode:         "SK_USAHA",
+		Nama:         "Surat Keterangan Usaha",
+		FieldsSchema: json.RawMessage(`{"fields":[]}`),
+		Aktif:        true,
+		Urutan:       1,
+		UpdatedAt:    time.Now(),
+	}
+	if err := repo.Upsert(ctx, js); err != nil {
+		t.Fatalf("gagal upsert awal: %v", err)
+	}
+
+	// Child template referencing the old id.
+	tpl := &models.SuratTemplate{
+		ID:           "tpl-usaha",
+		JenisSuratID: "old-id",
+		DesaID:       "desa-1",
+		TemplateHTML: "<html></html>",
+		Version:      1,
+		UpdatedAt:    time.Now(),
+	}
+	if err := repo.UpsertTemplate(ctx, tpl); err != nil {
+		t.Fatalf("gagal upsert template anak: %v", err)
+	}
+
+	// Re-sync: same kode, new id from server hub.
+	js.ID = "new-id"
+	js.Nama = "Surat Keterangan Usaha (Updated)"
+	js.UpdatedAt = time.Now()
+	if err := repo.Upsert(ctx, js); err != nil {
+		t.Fatalf("gagal upsert dengan id baru: %v", err)
+	}
+
+	// Row should now have exactly one entry with the new id.
+	found, err := repo.FindByID(ctx, "new-id")
+	if err != nil {
+		t.Fatalf("gagal find by new id: %v", err)
+	}
+	if found.Kode != "SK_USAHA" || found.Nama != "Surat Keterangan Usaha (Updated)" {
+		t.Errorf("data tidak terupdate: %+v", found)
+	}
+	if _, err := repo.FindByID(ctx, "old-id"); err == nil {
+		t.Errorf("baris dengan id lama seharusnya sudah tidak ada")
+	}
+
+	// Child template must now reference the new id (no FK violation, retrievable).
+	gotTpl, err := repo.GetTemplate(ctx, "new-id", "desa-1")
+	if err != nil {
+		t.Fatalf("gagal get template setelah realign id: %v", err)
+	}
+	if gotTpl.JenisSuratID != "new-id" {
+		t.Errorf("expected template jenis_surat_id new-id, got %s", gotTpl.JenisSuratID)
+	}
+}
+
 func TestSuratRepository(t *testing.T) {
 	db, cleanup := setupTestDB(t)
 	defer cleanup()
@@ -209,13 +277,13 @@ func TestSuratRepository(t *testing.T) {
 	}
 
 	w := &models.Warga{
-		ID:              "warga-1",
-		NIK:             "1234567890123456",
-		Nama:            "Ahmad",
-		JenisKelamin:    "L",
-		DesaID:          desaID,
-		CreatedAt:       time.Now(),
-		UpdatedAt:       time.Now(),
+		ID:           "warga-1",
+		NIK:          "1234567890123456",
+		Nama:         "Ahmad",
+		JenisKelamin: "L",
+		DesaID:       desaID,
+		CreatedAt:    time.Now(),
+		UpdatedAt:    time.Now(),
 	}
 	if err := wargaRepo.Upsert(ctx, w); err != nil {
 		t.Fatalf("gagal upsert prerequisite warga: %v", err)

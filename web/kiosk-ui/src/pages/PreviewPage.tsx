@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSurat } from '../hooks/useSurat';
 import type { JenisSurat } from '../hooks/useSurat';
 import type { Warga } from '../hooks/useWarga';
-import { Printer, ArrowLeft, RefreshCw } from 'lucide-react';
+import { Printer, ArrowLeft, RefreshCw, ZoomIn, ZoomOut, Maximize2, X } from 'lucide-react';
 
 interface PreviewPageProps {
   warga: Warga | null;
@@ -12,6 +12,11 @@ interface PreviewPageProps {
   onSuratPrinted: () => void;
 }
 
+const ZOOM_MIN = 0.5;
+const ZOOM_MAX = 3.0;
+const ZOOM_STEP = 0.25;
+const ZOOM_DEFAULT = 1.0;
+
 export const PreviewPage: React.FC<PreviewPageProps> = ({
   warga,
   jenisSurat,
@@ -19,14 +24,14 @@ export const PreviewPage: React.FC<PreviewPageProps> = ({
   onSuratPrinted,
 }) => {
   const navigate = useNavigate();
-  const { createSurat, printSurat, fetchTemplate, previewSuratPDF, loading, error, setError } = useSurat();
+  const { createSurat, printSurat, previewSurat, loading, error, setError } = useSurat();
 
-  const [mode, setMode] = useState<'loading' | 'docx' | 'html'>('loading');
+  const [mode, setMode] = useState<'loading' | 'pdf' | 'html' | 'error'>('loading');
   const [pdfUrl, setPdfUrl] = useState<string>('');
-  const [rendering, setRendering] = useState<boolean>(false);
-  const [templateHTML, setTemplateHTML] = useState<string>('');
-  const [parsedHTML, setParsedHTML] = useState<string>('');
+  const [previewHTML, setPreviewHTML] = useState<string>('');
   const [selectedFormat, setSelectedFormat] = useState<string>('A4');
+  const [zoom, setZoom] = useState<number>(ZOOM_DEFAULT);
+  const [expanded, setExpanded] = useState<boolean>(false);
 
   useEffect(() => {
     if (!warga) {
@@ -39,69 +44,60 @@ export const PreviewPage: React.FC<PreviewPageProps> = ({
     }
   }, [warga, jenisSurat, navigate]);
 
-  // Load template and decide DOCX (server-rendered PDF) vs HTML (client preview).
+  // Ask the kiosk to render a live preview. The kiosk uses the SAME engine as
+  // printing (html/template or Word), so the preview equals the printed output.
   useEffect(() => {
     if (!warga || !jenisSurat) return;
     let active = true;
     let createdUrl = '';
-    (async () => {
-      const tpl = await fetchTemplate(jenisSurat.id);
-      if (!active) return;
-      if (tpl) setSelectedFormat(tpl.format_kertas || 'A4');
 
-      if (tpl && tpl.placeholders && tpl.placeholders.length > 0) {
-        // DOCX (Strategi B): rendered to PDF by the kiosk (Word) — 100% sesuai cetak.
-        setMode('docx');
-        setRendering(true);
-        const url = await previewSuratPDF({
-          jenis_surat_id: jenisSurat.id,
-          nik: warga.nik,
-          data_surat: formData,
-        });
-        if (!active) return;
-        if (url) {
-          createdUrl = url;
-          setPdfUrl(url);
-        }
-        setRendering(false);
+    setMode('loading');
+    setZoom(ZOOM_DEFAULT);
+    setError(null);
+
+    (async () => {
+      const result = await previewSurat({
+        jenis_surat_id: jenisSurat.id,
+        nik: warga.nik,
+        data_surat: formData,
+      });
+      if (!active) {
+        if (result && result.mode === 'pdf') URL.revokeObjectURL(result.url);
+        return;
+      }
+      if (!result) {
+        setMode('error');
+        return;
+      }
+      if (result.mode === 'pdf') {
+        createdUrl = result.url;
+        setPdfUrl(result.url);
+        setMode('pdf');
       } else {
-        setTemplateHTML(tpl?.template_html || '');
+        setPreviewHTML(result.html);
+        setSelectedFormat(result.format_kertas || 'A4');
         setMode('html');
       }
     })();
+
     return () => {
       active = false;
       if (createdUrl) URL.revokeObjectURL(createdUrl);
     };
-  }, [warga, jenisSurat, formData, fetchTemplate, previewSuratPDF]);
+  }, [warga, jenisSurat, formData, previewSurat, setError]);
 
-  // Client-side HTML preview (only for legacy HTML templates).
+  // Close the expanded modal on Escape, and lock background scroll while open.
   useEffect(() => {
-    if (mode !== 'html' || !templateHTML || !warga) return;
-
-    let parsed = templateHTML;
-    const months = [
-      'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-      'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember',
-    ];
-    const today = new Date();
-    const formattedDate = `${today.getDate()} ${months[today.getMonth()]} ${today.getFullYear()}`;
-
-    parsed = parsed.replace(/\{\{\.DateToday\}\}/g, formattedDate);
-    parsed = parsed.replace(/\{\{\.Warga\.Nama\}\}/g, warga.nama);
-    parsed = parsed.replace(/\{\{\.Warga\.NIK\}\}/g, warga.nik);
-    parsed = parsed.replace(/\{\{\.Warga\.TempatLahir\}\}/g, warga.tempat_lahir || '');
-    parsed = parsed.replace(/\{\{\.Warga\.TanggalLahir\}\}/g, warga.tanggal_lahir || '');
-    parsed = parsed.replace(/\{\{\.Warga\.JenisKelamin\}\}/g, warga.jenis_kelamin === 'L' ? 'Laki-laki' : 'Perempuan');
-    parsed = parsed.replace(/\{\{\.Warga\.Pekerjaan\}\}/g, warga.pekerjaan || '');
-    parsed = parsed.replace(/\{\{\.Warga\.Alamat\}\}/g, warga.alamat || '');
-    parsed = parsed.replace(/\{\{\.Warga\.RT\}\}/g, warga.rt || '');
-    parsed = parsed.replace(/\{\{\.Warga\.RW\}\}/g, warga.rw || '');
-    parsed = parsed.replace(/\{\{\.Warga\.Kelurahan\}\}/g, warga.kelurahan || '');
-    parsed = parsed.replace(/\{\{\.Warga\.Kecamatan\}\}/g, warga.kecamatan || '');
-
-    setParsedHTML(parsed);
-  }, [mode, templateHTML, warga, formData]);
+    if (!expanded) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setExpanded(false); };
+    document.addEventListener('keydown', onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [expanded]);
 
   const handlePrint = async () => {
     if (!warga || !jenisSurat) return;
@@ -128,17 +124,94 @@ export const PreviewPage: React.FC<PreviewPageProps> = ({
 
   const handleBack = () => navigate('/form-surat');
 
+  const zoomIn = () => setZoom((z) => Math.min(ZOOM_MAX, Math.round((z + ZOOM_STEP) * 100) / 100));
+  const zoomOut = () => setZoom((z) => Math.max(ZOOM_MIN, Math.round((z - ZOOM_STEP) * 100) / 100));
+  const zoomReset = () => setZoom(ZOOM_DEFAULT);
+
+  // For the embedded PDF, drive Chrome's PDF viewer zoom via the URL fragment.
+  // Inline preview keeps Chrome's toolbar; the expanded modal hides it
+  // (#toolbar=0) so only our themed controls remain.
+  const pdfSrc = useMemo(() => {
+    if (!pdfUrl) return '';
+    const pct = Math.round(zoom * 100);
+    const toolbar = expanded ? 0 : 1;
+    return `${pdfUrl}#toolbar=${toolbar}&navpanes=0&zoom=${pct}`;
+  }, [pdfUrl, zoom, expanded]);
+
   if (!warga || !jenisSurat) return null;
 
-  const canPrint = mode === 'docx' ? (!rendering && !!pdfUrl) : !!parsedHTML;
+  const canPrint = (mode === 'pdf' && !!pdfUrl) || (mode === 'html' && !!previewHTML);
+  const showZoom = mode === 'pdf' || mode === 'html';
+
+  const zoomControls = (dark: boolean) => (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      <button type="button" className="btn btn-secondary" onClick={zoomOut} disabled={zoom <= ZOOM_MIN} title="Perkecil" style={{ padding: '10px 14px' }}>
+        <ZoomOut size={20} />
+      </button>
+      <button type="button" className="btn btn-secondary" onClick={zoomReset} title="Reset ukuran" style={{ padding: '10px 14px', minWidth: '78px', fontWeight: 700 }}>
+        {Math.round(zoom * 100)}%
+      </button>
+      <button type="button" className="btn btn-secondary" onClick={zoomIn} disabled={zoom >= ZOOM_MAX} title="Perbesar" style={{ padding: '10px 14px' }}>
+        <ZoomIn size={20} />
+      </button>
+      {dark ? (
+        <button type="button" className="btn btn-primary" onClick={() => setExpanded(false)} title="Tutup" style={{ padding: '10px 16px' }}>
+          <X size={20} /> Tutup
+        </button>
+      ) : (
+        <button type="button" className="btn btn-primary" onClick={() => setExpanded(true)} title="Buka layar penuh" style={{ padding: '10px 14px' }}>
+          <Maximize2 size={20} />
+        </button>
+      )}
+    </div>
+  );
+
+  const renderPreviewSurface = (fullHeight: boolean) => {
+    if (mode === 'pdf' && pdfUrl) {
+      return <iframe key={pdfSrc} title="Pratinjau Surat" src={pdfSrc} style={{ flex: 1, width: '100%', height: fullHeight ? '100%' : undefined, border: 'none' }} />;
+    }
+    if (mode === 'html' && previewHTML) {
+      return (
+        <div style={{ flex: 1, overflow: 'auto', padding: '40px', display: 'flex', justifyContent: 'center' }}>
+          <div
+            style={{
+              width: '100%',
+              maxWidth: selectedFormat === 'F4' ? '720px' : '700px',
+              color: '#000',
+              background: '#fff',
+              transform: `scale(${zoom})`,
+              transformOrigin: 'top center',
+              transition: 'transform 0.12s ease-out',
+            }}
+            dangerouslySetInnerHTML={{ __html: previewHTML }}
+          />
+        </div>
+      );
+    }
+    if (mode === 'error') {
+      return (
+        <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--danger)' }}>
+          Gagal memuat pratinjau. Periksa koneksi ke backend kiosk lalu coba lagi.
+        </div>
+      );
+    }
+    return (
+      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dark)', gap: '10px' }}>
+        <RefreshCw size={20} className="spinner" /> Merender dokumen...
+      </div>
+    );
+  };
 
   return (
     <div className="page-container" style={{ height: '100%' }}>
-      <div style={{ marginBottom: '20px' }}>
-        <h2 style={{ fontSize: '24px', fontWeight: 800 }}>Pratinjau Surat</h2>
-        <p style={{ color: 'var(--text-muted)', fontSize: '15px' }}>
-          Periksa kembali isi surat sebelum dicetak. Tampilan ini sama persis dengan hasil cetak.
-        </p>
+      <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '16px', flexWrap: 'wrap' }}>
+        <div>
+          <h2 style={{ fontSize: '24px', fontWeight: 800 }}>Pratinjau Surat</h2>
+          <p style={{ color: 'var(--text-muted)', fontSize: '15px' }}>
+            Periksa kembali isi surat sebelum dicetak. Tampilan ini sama persis dengan hasil cetak.
+          </p>
+        </div>
+        {showZoom && zoomControls(false)}
       </div>
 
       {error && (
@@ -157,32 +230,7 @@ export const PreviewPage: React.FC<PreviewPageProps> = ({
         marginBottom: '20px',
         boxShadow: 'inset 0 0 10px rgba(0,0,0,0.1)',
       }}>
-        {mode === 'docx' ? (
-          rendering ? (
-            <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dark)', gap: '10px' }}>
-              <RefreshCw size={20} className="spinner" /> Merender dokumen...
-            </div>
-          ) : pdfUrl ? (
-            <iframe title="Pratinjau Surat" src={pdfUrl} style={{ flex: 1, width: '100%', border: 'none' }} />
-          ) : (
-            <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dark)' }}>
-              Gagal memuat pratinjau.
-            </div>
-          )
-        ) : mode === 'html' ? (
-          <div style={{ flex: 1, overflowY: 'auto', padding: '40px', display: 'flex', justifyContent: 'center' }}>
-            {parsedHTML ? (
-              <div
-                style={{ width: '100%', maxWidth: selectedFormat === 'F4' ? '720px' : '700px', color: '#000', background: '#fff' }}
-                dangerouslySetInnerHTML={{ __html: parsedHTML }}
-              />
-            ) : (
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dark)' }}>Memuat pratinjau...</div>
-            )}
-          </div>
-        ) : (
-          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dark)' }}>Memuat pratinjau...</div>
-        )}
+        {renderPreviewSurface(false)}
       </div>
 
       <div style={{ display: 'flex', gap: '16px', paddingTop: '16px', borderTop: '1px solid var(--border-color)' }}>
@@ -210,6 +258,47 @@ export const PreviewPage: React.FC<PreviewPageProps> = ({
           )}
         </button>
       </div>
+
+      {/* Fullscreen themed modal */}
+      {expanded && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          onClick={(e) => { if (e.target === e.currentTarget) setExpanded(false); }}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 1000,
+            background: 'rgba(8, 12, 24, 0.82)',
+            backdropFilter: 'blur(6px)',
+            display: 'flex',
+            flexDirection: 'column',
+            padding: '24px',
+            gap: '16px',
+          }}
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
+            <h2 style={{ fontSize: '22px', fontWeight: 800, color: 'var(--text-light, #fff)' }}>Pratinjau Surat — Layar Penuh</h2>
+            {zoomControls(true)}
+          </div>
+
+          <div
+            className="glass-card"
+            style={{
+              flex: 1,
+              minHeight: 0,
+              background: '#ffffff',
+              borderRadius: 'var(--radius-md)',
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column',
+              boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
+            }}
+          >
+            {renderPreviewSurface(true)}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -173,7 +173,18 @@ func (d *DocxRenderer) runJob(ensureWord func() (*ole.IDispatch, error), job doc
 	tmp.Close()
 	defer os.Remove(tmpPath)
 
+	// Word COM resolves relative paths against its own working directory
+	// (typically C:\Windows\System32), so always hand it absolute paths.
+	tmpAbs, err := filepath.Abs(tmpPath)
+	if err != nil {
+		return "", fmt.Errorf("gagal resolve path docx: %w", err)
+	}
+	tmpPath = tmpAbs
+
 	outPath := filepath.Join(d.outputDir, fmt.Sprintf("surat-%d.pdf", time.Now().UnixNano()))
+	if outAbs, aerr := filepath.Abs(outPath); aerr == nil {
+		outPath = outAbs
+	}
 
 	documents := oleutil.MustGetProperty(word, "Documents").ToIDispatch()
 	defer documents.Release()
