@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+import { Sun, Moon } from "lucide-react";
 import { request } from "../lib/api";
+import { useTheme } from "../lib/theme";
 
 export default function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,7 +34,16 @@ export default function LoginForm() {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", padding: "20px" }}>
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", padding: "20px", position: "relative" }}>
+      <button
+        className="theme-toggle"
+        onClick={toggleTheme}
+        title={theme === "dark" ? "Mode Terang" : "Mode Gelap"}
+        style={{ position: "absolute", top: "20px", right: "20px" }}
+      >
+        {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+      </button>
+
       <div className="glass-card" style={{ maxWidth: "400px", width: "100%", padding: "40px" }}>
         <div style={{ textAlign: "center", marginBottom: "32px" }}>
           <div className="brand-logo" style={{ margin: "0 auto 16px auto", width: "60px", height: "60px", fontSize: "30px" }}>KD</div>

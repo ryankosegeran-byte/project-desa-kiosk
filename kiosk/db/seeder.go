@@ -109,7 +109,7 @@ func SeedLocalData(db *DB, desaID string) error {
 			},
 			{
 				Kode:      "SKTM",
-				Nama:      "Surat Keterangan Kurang Mampu",
+				Nama:      "Surat Keterangan Tidak Mampu",
 				Deskripsi: "Surat keterangan untuk warga kurang mampu ekonomi",
 				Schema:    `{"fields":[{"key":"tujuan","label":"Tujuan Surat","type":"text","required":true},{"key":"keperluan","label":"Keperluan / Alasan","type":"textarea","required":true}]}`,
 			},
@@ -126,14 +126,14 @@ func SeedLocalData(db *DB, desaID string) error {
 				Schema:    `{"fields":[{"key":"nama_bayi","label":"Nama Bayi","type":"text","required":true},{"key":"tanggal_lahir_bayi","label":"Tanggal Lahir Bayi","type":"date","required":true},{"key":"tempat_lahir_bayi","label":"Tempat Lahir Bayi","type":"text","required":true},{"key":"nama_ibu","label":"Nama Lengkap Ibu","type":"text","required":true},{"key":"nama_ayah","label":"Nama Lengkap Ayah","type":"text","required":true}]}`,
 			},
 			{
-				Kode:      "SK_MENINGGAL",
-				Nama:      "Surat Keterangan Meninggal Dunia",
+				Kode:      "SK_KEMATIAN",
+				Nama:      "Surat Keterangan Kematian",
 				Deskripsi: "Surat keterangan kematian warga",
 				Schema:    `{"fields":[{"key":"tanggal_meninggal","label":"Tanggal Meninggal","type":"date","required":true},{"key":"tempat_meninggal","label":"Tempat Meninggal","type":"text","required":true},{"key":"penyebab","label":"Penyebab Kematian","type":"text","required":true},{"key":"nama_pelapor","label":"Nama Pelapor","type":"text","required":true},{"key":"hubungan_pelapor","label":"Hubungan Pelapor dengan Almarhum/ah","type":"select","required":true,"options":["Suami","Istri","Anak","Orang Tua","Saudara","Lainnya"]}]}`,
 			},
 			{
 				Kode:      "SK_BELUM_MENIKAH",
-				Nama:      "Surat Keterangan Belum Pernah Menikah",
+				Nama:      "Surat Keterangan Belum Menikah",
 				Deskripsi: "Surat keterangan status belum pernah menikah",
 				Schema:    `{"fields":[{"key":"tujuan","label":"Tujuan Surat","type":"text","required":true}]}`,
 			},

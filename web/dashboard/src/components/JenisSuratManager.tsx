@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { request, getUser } from "../lib/api";
+import TemplatesList from "./TemplatesList";
 
 interface JenisSurat {
   id: string;
@@ -16,7 +17,7 @@ interface Desa {
   nama: string;
 }
 
-export default function JenisSuratManager() {
+function SkemaTab() {
   const [jenisSuratList, setJenisSuratList] = useState<JenisSurat[]>([]);
   const [desas, setDesas] = useState<Desa[]>([]);
   const [selectedDesaId, setSelectedDesaId] = useState("");
@@ -245,9 +246,11 @@ export default function JenisSuratManager() {
             Konfigurasi parameter field input dan aktivasi layanan surat untuk masing-masing desa.
           </p>
         </div>
-        <button className="btn btn-primary" onClick={() => setShowAddModal(true)}>
-          ➕ Buat Jenis Surat Baru
-        </button>
+        {user?.role === "superadmin" && (
+          <button className="btn btn-primary" onClick={() => setShowAddModal(true)}>
+            ? Buat Jenis Surat Baru
+          </button>
+        )}
       </div>
 
       {error && (
@@ -336,7 +339,7 @@ export default function JenisSuratManager() {
 
       {/* Add/Edit Modals (fields schema code editor) */}
       {(showAddModal || showEditModal) && (
-        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.7)", backdropFilter: "blur(4px)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1000 }}>
+        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "var(--overlay)", backdropFilter: "blur(4px)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1000 }}>
           <div className="glass-card" style={{ maxWidth: "600px", width: "95%", maxHeight: "90vh", overflowY: "auto", padding: "30px" }}>
             <h3 style={{ fontSize: "20px", fontWeight: "700", marginBottom: "20px" }}>
               {showAddModal ? "Buat Jenis Surat Baru" : "Edit Skema Jenis Surat"}
@@ -410,6 +413,62 @@ export default function JenisSuratManager() {
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+
+type TabKey = "skema" | "template";
+
+export default function JenisSuratManager() {
+  const [activeTab, setActiveTab] = useState<TabKey>("skema");
+
+  const tabs: { key: TabKey; label: string }[] = [
+    { key: "skema", label: "Skema & Aktivasi" },
+    { key: "template", label: "Template Cetak" },
+  ];
+
+  return (
+    <div>
+      <div
+        style={{
+          position: "sticky",
+          top: "-40px",
+          zIndex: 20,
+          display: "flex",
+          gap: "8px",
+          margin: "-40px -40px 24px -40px",
+          padding: "0 40px",
+          background: "var(--bg-main)",
+          borderBottom: "1px solid var(--border-color)",
+        }}
+      >
+        {tabs.map((tab) => (
+          <button
+            key={tab.key}
+            onClick={() => setActiveTab(tab.key)}
+            style={{
+              padding: "16px 18px 14px 18px",
+              background: "transparent",
+              border: "none",
+              borderBottom:
+                activeTab === tab.key
+                  ? "2px solid var(--primary)"
+                  : "2px solid transparent",
+              marginBottom: "-1px",
+              color: activeTab === tab.key ? "var(--text-main)" : "var(--text-muted)",
+              fontWeight: activeTab === tab.key ? 700 : 500,
+              cursor: "pointer",
+              fontSize: "15px",
+              transition: "color 0.18s ease, border-color 0.18s ease",
+            }}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      {activeTab === "skema" ? <SkemaTab /> : <TemplatesList />}
     </div>
   );
 }

@@ -197,7 +197,7 @@ export default function DesaManager() {
 
       {/* Register Village Modal */}
       {showModal && (
-        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.7)", backdropFilter: "blur(4px)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1000 }}>
+        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "var(--overlay)", backdropFilter: "blur(4px)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1000 }}>
           <div className="glass-card" style={{ maxWidth: "600px", width: "95%", maxHeight: "90vh", overflowY: "auto", padding: "30px" }}>
             <h3 style={{ fontSize: "20px", fontWeight: "700", marginBottom: "20px" }}>Daftarkan Desa Baru</h3>
 

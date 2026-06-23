@@ -299,7 +299,7 @@ export default function WargaDraftComplete() {
             + Tautkan Kartu RFID
           </button>
         ) : (
-          <div style={{ width: "100%", maxWidth: "360px", padding: "32px 20px", background: "hsla(222,47%,7%,0.6)", border: "2px dashed var(--border-color)", borderRadius: "var(--radius-md)", textAlign: "center" }}>
+          <div style={{ width: "100%", maxWidth: "360px", padding: "32px 20px", background: "var(--bg-inset)", border: "2px dashed var(--border-color)", borderRadius: "var(--radius-md)", textAlign: "center" }}>
             {rfidUID ? (
               <div>
                 <span className="badge badge-success" style={{ marginBottom: "8px" }}>Kartu Terdeteksi</span>

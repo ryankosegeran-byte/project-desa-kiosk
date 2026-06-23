@@ -127,6 +127,17 @@ func (p *Puller) PullConfig(ctx context.Context) error {
 		}
 	}
 
+	// 1b. Deactivate local types that the server no longer considers active for
+	// this desa. The server only returns active types, so anything not in the
+	// list should be hidden on the kiosk.
+	activeKodes := make([]string, 0, len(response.JenisSurat))
+	for _, js := range response.JenisSurat {
+		activeKodes = append(activeKodes, js.Kode)
+	}
+	if err := p.jenisSuratRepo.DeactivateExcept(ctx, activeKodes); err != nil {
+		log.Error().Err(err).Msg("Gagal deaktivasi jenis_surat lokal yang tidak aktif di server")
+	}
+
 	// 2. Sync template documents
 	// The server only returns templates relevant to this kiosk (per-desa or
 	// general). Align the desa_id to the kiosk's own desa_id so that

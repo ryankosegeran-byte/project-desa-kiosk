@@ -265,7 +265,7 @@ export default function WargaRegister() {
             left: 0,
             right: 0,
             bottom: 0,
-            background: "rgba(0,0,0,0.7)",
+            background: "var(--overlay)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -418,7 +418,7 @@ export default function WargaRegister() {
       {/* STEP 1: UPLOAD AND OCR */}
       {step === 1 && (
         <div className="glass-card" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "24px", padding: "40px" }}>
-          <div style={{ width: "100%", maxWidth: "400px", height: "240px", border: "2px dashed var(--border-color)", borderRadius: "var(--radius-md)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", cursor: "pointer", position: "relative", overflow: "hidden", background: "hsla(222,47%,7%,0.4)" }}>
+          <div style={{ width: "100%", maxWidth: "400px", height: "240px", border: "2px dashed var(--border-color)", borderRadius: "var(--radius-md)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", cursor: "pointer", position: "relative", overflow: "hidden", background: "var(--bg-inset)" }}>
             {previewURL ? (
               <img src={previewURL} alt="Preview KTP" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
             ) : (
@@ -604,7 +604,7 @@ export default function WargaRegister() {
             </p>
           </div>
 
-          <div style={{ width: "100%", maxWidth: "400px", padding: "40px 20px", background: "hsla(222,47%,7%,0.6)", border: "2px dashed var(--border-color)", borderRadius: "var(--radius-md)", textAlign: "center" }}>
+          <div style={{ width: "100%", maxWidth: "400px", padding: "40px 20px", background: "var(--bg-inset)", border: "2px dashed var(--border-color)", borderRadius: "var(--radius-md)", textAlign: "center" }}>
             {rfidUID ? (
               <div>
                 <span className="badge badge-success" style={{ marginBottom: "8px" }}>Kartu Terdeteksi</span>

@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/project-desa-kiosk/internal/models"
@@ -151,6 +152,38 @@ func (r *JenisSuratRepository) Upsert(ctx context.Context, js *models.JenisSurat
 
 	if err := tx.Commit(); err != nil {
 		return fmt.Errorf("gagal commit upsert jenis_surat: %w", err)
+	}
+	return nil
+}
+
+// DeactivateExcept sets aktif = 0 for all jenis_surat whose kode is NOT in the
+// provided list. This is called after upserting the server's active list so that
+// types removed or deactivated on the server are also hidden on the kiosk.
+func (r *JenisSuratRepository) DeactivateExcept(ctx context.Context, activeKodes []string) error {
+	if len(activeKodes) == 0 {
+		// No active types from server — deactivate everything.
+		_, err := r.db.ExecContext(ctx, `UPDATE jenis_surat SET aktif = 0 WHERE aktif = 1`)
+		if err != nil {
+			return fmt.Errorf("gagal deaktivasi semua jenis_surat: %w", err)
+		}
+		return nil
+	}
+
+	// Build a parameterised IN clause: WHERE kode NOT IN (?, ?, ...)
+	placeholders := make([]string, len(activeKodes))
+	args := make([]interface{}, len(activeKodes))
+	for i, k := range activeKodes {
+		placeholders[i] = "?"
+		args[i] = k
+	}
+
+	query := fmt.Sprintf(
+		`UPDATE jenis_surat SET aktif = 0 WHERE aktif = 1 AND kode NOT IN (%s)`,
+		strings.Join(placeholders, ","),
+	)
+	_, err := r.db.ExecContext(ctx, query, args...)
+	if err != nil {
+		return fmt.Errorf("gagal deaktivasi jenis_surat yang tidak aktif di server: %w", err)
 	}
 	return nil
 }

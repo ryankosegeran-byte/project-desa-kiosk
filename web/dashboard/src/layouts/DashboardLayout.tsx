@@ -1,6 +1,8 @@
 import { useEffect, type ReactNode } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Sun, Moon } from "lucide-react";
 import { getUser } from "../lib/api";
+import { useTheme } from "../lib/theme";
 
 interface NavItem {
   to: string;
@@ -14,11 +16,10 @@ const NAV_ITEMS: NavItem[] = [
   { to: "/warga", icon: "👥", label: "Data Warga" },
   { to: "/warga/register", icon: "➕", label: "Registrasi Warga" },
   { to: "/surat", icon: "📄", label: "Arsip Surat" },
-  { to: "/templates", icon: "📋", label: "Template Cetak" },
+  { to: "/admin/jenis-surat", icon: "📋", label: "Kelola Surat" },
   { to: "/kiosk-status", icon: "📡", label: "Status Kiosk" },
   { to: "/admin/desa", icon: "🏘️", label: "Kelola Desa", admin: true },
   { to: "/admin/users", icon: "👤", label: "Kelola User", admin: true },
-  { to: "/admin/jenis-surat", icon: "📝", label: "Jenis Surat", admin: true },
   { to: "/admin/activity", icon: "📊", label: "Monitoring PIC", admin: true },
   { to: "/settings/ocr", icon: "⚙️", label: "Pengaturan OCR", admin: true },
 ];
@@ -37,6 +38,7 @@ export default function DashboardLayout({ title, children }: Props) {
   const location = useLocation();
   const navigate = useNavigate();
   const user = getUser();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     document.title = `${title} - Dashboard Kiosk Desa`;
@@ -80,13 +82,14 @@ export default function DashboardLayout({ title, children }: Props) {
             <div>
               <div
                 style={{
-                  padding: "16px 16px 4px 16px",
+                  padding: "10px 16px 4px 16px",
                   fontSize: "11px",
                   fontWeight: "bold",
+                  letterSpacing: "0.5px",
                   textTransform: "uppercase",
                   color: "var(--text-muted)",
                   borderTop: "1px solid var(--border-color)",
-                  marginTop: "8px",
+                  marginTop: "6px",
                 }}
               >
                 Admin Panel
@@ -123,7 +126,19 @@ export default function DashboardLayout({ title, children }: Props) {
         </div>
       </aside>
 
-      <main className="main-content">{children}</main>
+      <main className="main-content">
+        <div className="top-bar">
+          <h2>{title}</h2>
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            title={theme === "dark" ? "Mode Terang" : "Mode Gelap"}
+          >
+            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+        </div>
+        {children}
+      </main>
     </div>
   );
 }

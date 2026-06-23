@@ -655,7 +655,7 @@ export default function TemplatesList() {
           left: 0,
           right: 0,
           bottom: 0,
-          background: "rgba(0,0,0,0.8)",
+          background: "var(--overlay)",
           backdropFilter: "blur(4px)",
           display: "flex",
           justifyContent: "center",
@@ -1006,7 +1006,7 @@ export default function TemplatesList() {
             style={{
               position: "fixed",
               inset: 0,
-              background: "rgba(0,0,0,0.88)",
+              background: "var(--overlay)",
               backdropFilter: "blur(6px)",
               display: "flex",
               flexDirection: "column",
@@ -1034,8 +1034,8 @@ export default function TemplatesList() {
                 justifyContent: "space-between",
                 alignItems: "center",
                 padding: "14px 24px",
-                borderBottom: "1px solid hsla(220,30%,25%,0.6)",
-                background: "hsla(223,47%,11%,0.95)",
+                borderBottom: "1px solid var(--border-color)",
+                background: "var(--bg-sidebar)",
                 backdropFilter: "blur(12px)",
                 flexShrink: 0,
               }}
@@ -1114,7 +1114,7 @@ export default function TemplatesList() {
                 display: "flex",
                 justifyContent: "center",
                 padding: "32px 20px 60px",
-                background: "linear-gradient(180deg, hsla(222,47%,12%,1) 0%, hsla(222,47%,8%,1) 100%)",
+                background: "var(--bg-surface)",
               }}
             >
               {/* Determine content */}
@@ -1219,7 +1219,7 @@ export default function TemplatesList() {
                       minHeight: paperMinHeight,
                       background: "#fff",
                       color: "#000",
-                      boxShadow: "0 8px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05)",
+                      boxShadow: "0 8px 40px var(--overlay), 0 0 0 1px var(--border-color)",
                       borderRadius: "4px",
                       overflow: "hidden",
                       animation: "slideUpPreview 0.35s ease",
@@ -1236,8 +1236,8 @@ export default function TemplatesList() {
               className="preview-modal-chrome"
               style={{
                 padding: "10px 24px",
-                borderTop: "1px solid hsla(220,30%,25%,0.6)",
-                background: "hsla(223,47%,11%,0.95)",
+                borderTop: "1px solid var(--border-color)",
+                background: "var(--bg-sidebar)",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",

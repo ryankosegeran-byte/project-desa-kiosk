@@ -1,6 +1,54 @@
 {
   "version": 1,
   "skills": {
+    "9router": {
+      "source": "decolua/9router",
+      "sourceType": "github",
+      "skillPath": "skills/9router/SKILL.md",
+      "computedHash": "5093d0080c388fd654d2b5aa89e52ed253008da95f0f707255de87678b01deda"
+    },
+    "9router-chat": {
+      "source": "decolua/9router",
+      "sourceType": "github",
+      "skillPath": "skills/9router-chat/SKILL.md",
+      "computedHash": "1c9db8504ffdf760922655084f2e94d053bff3ca2a32554b6aadf2384f31a338"
+    },
+    "9router-embeddings": {
+      "source": "decolua/9router",
+      "sourceType": "github",
+      "skillPath": "skills/9router-embeddings/SKILL.md",
+      "computedHash": "95aff0e0b473847d551dcfc34823eac18930c9cd003e3918ec331551e29af9f5"
+    },
+    "9router-image": {
+      "source": "decolua/9router",
+      "sourceType": "github",
+      "skillPath": "skills/9router-image/SKILL.md",
+      "computedHash": "5660e477888718bdba385a5432b38f967f05ed4f61dacc6f705ae08ac90bf791"
+    },
+    "9router-stt": {
+      "source": "decolua/9router",
+      "sourceType": "github",
+      "skillPath": "skills/9router-stt/SKILL.md",
+      "computedHash": "78ffb7a8857f895df970f4e34530edf1cfa737634f964b08173a51be4c4736d3"
+    },
+    "9router-tts": {
+      "source": "decolua/9router",
+      "sourceType": "github",
+      "skillPath": "skills/9router-tts/SKILL.md",
+      "computedHash": "8f7b6ad7f846e8947ce50dd172157dd45ea6a61ed621e0c080fd9e6aa2af5db5"
+    },
+    "9router-web-fetch": {
+      "source": "decolua/9router",
+      "sourceType": "github",
+      "skillPath": "skills/9router-web-fetch/SKILL.md",
+      "computedHash": "ae4ae3879b883b527ec88635a5ac32eec5bfd8dc0918e6b804155d947af0a2a0"
+    },
+    "9router-web-search": {
+      "source": "decolua/9router",
+      "sourceType": "github",
+      "skillPath": "skills/9router-web-search/SKILL.md",
+      "computedHash": "6ee43b583b6cb66847ddc9a57d8fd91d94256e98b2ad8d59243ded33b0d9f1d1"
+    },
     "diagnose": {
       "source": "mattpocock/skills",
       "sourceType": "github",
@@ -37,17 +85,17 @@
       "skillPath": "skills/react-best-practices/SKILL.md",
       "computedHash": "ca7b0c0c6e5f2750043f7f0cd72d16ac4e2abc48f9b5500d047a4b77a2506212"
     },
-    "web-design-guidelines": {
-      "source": "vercel-labs/agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/web-design-guidelines/SKILL.md",
-      "computedHash": "f3bc47f890f42a44db1007ab390709ec368e4b8c089baee6b0007182236ac474"
-    },
     "webapp-testing": {
       "source": "anthropics/skills",
       "sourceType": "github",
       "skillPath": "skills/webapp-testing/SKILL.md",
       "computedHash": "3f14af7f5690695209c22fbf8c8d133769a86d64892602c09bb13f135e14e857"
+    },
+    "web-design-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/web-design-guidelines/SKILL.md",
+      "computedHash": "f3bc47f890f42a44db1007ab390709ec368e4b8c089baee6b0007182236ac474"
     }
   }
 }

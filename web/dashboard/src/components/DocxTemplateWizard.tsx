@@ -377,7 +377,7 @@ export const DocxTemplateWizard: React.FC<Props> = ({ jenisSurat, desaId, onClos
 };
 
 const overlay: React.CSSProperties = {
-  position: "fixed", inset: 0, background: "rgba(0,0,0,0.85)",
+  position: "fixed", inset: 0, background: "var(--overlay)",
   display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1200, padding: "20px",
 };
 const dropzone: React.CSSProperties = {

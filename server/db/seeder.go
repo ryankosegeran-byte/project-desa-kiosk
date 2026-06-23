@@ -120,14 +120,18 @@ func SeedServerData(db *DB) error {
 		log.Info().Msg("Seeding default jenis surat...")
 		jsRepo := NewJenisSuratRepository(db)
 		defaults := []struct{ Kode, Nama string }{
-			{"SK_USAHA", "Surat Keterangan Usaha"},
-			{"SKTM", "Surat Keterangan Tidak Mampu"},
 			{"SK_DOMISILI", "Surat Keterangan Domisili"},
+			{"SKTM", "Surat Keterangan Tidak Mampu"},
+			{"SK_USAHA", "Surat Keterangan Usaha"},
 			{"SK_KELAHIRAN", "Surat Keterangan Kelahiran"},
 			{"SK_KEMATIAN", "Surat Keterangan Kematian"},
 			{"SK_BELUM_MENIKAH", "Surat Keterangan Belum Menikah"},
 			{"SK_AHLI_WARIS", "Surat Keterangan Ahli Waris"},
-			{"SK_SKCK", "Surat Pengantar SKCK"},
+			{"SK_ORANG_SAMA", "Surat Keterangan Orang Yang Sama"},
+			{"PENGAKUAN_KAWIN_ADAT", "Surat Pengakuan Bersama (Kawin Adat)"},
+			{"IJIN_ORANG_TUA", "Surat Ijin Orang Tua"},
+			{"IJIN_KERAMAIAN", "Surat Permohonan Ijin Keramaian"},
+			{"PENGANTAR_SKCK", "Surat Pengantar Pembuatan SKCK"},
 		}
 		for i, d := range defaults {
 			js := &models.JenisSurat{

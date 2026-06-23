@@ -685,7 +685,7 @@ const CSS = `
 `;
 
 const S: Record<string, React.CSSProperties> = {
-  overlay: { position: "fixed", inset: 0, background: "rgba(0,0,0,0.85)", backdropFilter: "blur(4px)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1200, padding: 20 },
+  overlay: { position: "fixed", inset: 0, background: "var(--overlay)", backdropFilter: "blur(4px)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1200, padding: 20 },
   modal: { position: "relative", maxWidth: 1180, width: "100%", height: "94vh", display: "flex", flexDirection: "column", overflow: "hidden", padding: 0, animation: "fveSlideIn 0.22s ease" },
   header: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "18px 24px", borderBottom: "1px solid var(--border-color)", flexShrink: 0 },
   headerIcon: { width: 40, height: 40, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", background: "linear-gradient(135deg, hsla(220,90%,55%,0.9), hsla(260,80%,55%,0.9))", color: "#fff", flexShrink: 0 },
@@ -716,8 +716,8 @@ const S: Record<string, React.CSSProperties> = {
   reminderClose: { position: "absolute", top: 6, right: 6, width: 18, height: 18, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 5, border: "none", background: "rgba(255,255,255,0.18)", color: "#fff", cursor: "pointer", padding: 0 },
   reminderArrow: { position: "absolute", top: -6, right: 18, width: 12, height: 12, background: "rgba(124,58,237,0.97)", transform: "rotate(45deg)", borderLeft: "1px solid rgba(255,255,255,0.15)", borderTop: "1px solid rgba(255,255,255,0.15)" },
   // Help panel
-  helpOverlay: { position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", backdropFilter: "blur(2px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 50, padding: 24 },
-  helpPanel: { width: "100%", maxWidth: 640, maxHeight: "90%", display: "flex", flexDirection: "column", background: "var(--bg-card, #0f172a)", border: "1px solid var(--border-color)", borderRadius: 16, overflow: "hidden", boxShadow: "0 24px 70px rgba(0,0,0,0.6)" },
+  helpOverlay: { position: "absolute", inset: 0, background: "var(--overlay)", backdropFilter: "blur(2px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 50, padding: 24 },
+  helpPanel: { width: "100%", maxWidth: 640, maxHeight: "90%", display: "flex", flexDirection: "column", background: "var(--bg-surface)", border: "1px solid var(--border-color)", borderRadius: 16, overflow: "hidden", boxShadow: "0 24px 70px var(--overlay)" },
   helpHeader: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px 20px", borderBottom: "1px solid var(--border-color)", flexShrink: 0 },
   helpHeaderIcon: { width: 36, height: 36, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", background: "linear-gradient(135deg, hsla(280,80%,55%,0.95), hsla(220,90%,55%,0.95))", color: "#fff", flexShrink: 0 },
   helpBody: { padding: "18px 20px", overflowY: "auto", display: "flex", flexDirection: "column", gap: 16 },

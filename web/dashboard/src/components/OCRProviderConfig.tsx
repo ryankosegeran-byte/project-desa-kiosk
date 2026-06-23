@@ -182,7 +182,7 @@ export default function OCRProviderConfig() {
           </div>
 
           {/* File drop zone */}
-          <div style={{ width: "100%", height: "180px", border: "2px dashed var(--border-color)", borderRadius: "var(--radius-sm)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", cursor: "pointer", position: "relative", overflow: "hidden", background: "hsla(222,47%,7%,0.4)" }}>
+          <div style={{ width: "100%", height: "180px", border: "2px dashed var(--border-color)", borderRadius: "var(--radius-sm)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", cursor: "pointer", position: "relative", overflow: "hidden", background: "var(--bg-inset)" }}>
             {previewURL ? (
               <img src={previewURL} alt="Tes Preview" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
             ) : (
@@ -205,7 +205,7 @@ export default function OCRProviderConfig() {
           )}
 
           {result && (
-            <div style={{ background: "hsla(222,47%,7%,0.8)", border: "1px solid var(--border-color)", borderRadius: "var(--radius-sm)", padding: "16px", maxHeight: "280px", overflowY: "auto" }}>
+            <div style={{ background: "var(--bg-inset)", border: "1px solid var(--border-color)", borderRadius: "var(--radius-sm)", padding: "16px", maxHeight: "280px", overflowY: "auto" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
                 <span style={{ fontSize: "11px", fontWeight: "600", color: "var(--text-muted)" }}>HASIL EKSTRAKSI AI</span>
                 <span className={`badge ${result.error ? "badge-danger" : "badge-success"}`}>

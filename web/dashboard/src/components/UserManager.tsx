@@ -268,7 +268,7 @@ export default function UserManager() {
 
       {/* Add User Modal */}
       {showAddModal && (
-        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.7)", backdropFilter: "blur(4px)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1000 }}>
+        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "var(--overlay)", backdropFilter: "blur(4px)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1000 }}>
           <div className="glass-card" style={{ maxWidth: "500px", width: "95%", padding: "30px" }}>
             <h3 style={{ fontSize: "20px", fontWeight: "700", marginBottom: "20px" }}>Daftarkan User Baru</h3>
 
@@ -378,7 +378,7 @@ export default function UserManager() {
 
       {/* Edit User Modal */}
       {showEditModal && (
-        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.7)", backdropFilter: "blur(4px)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1000 }}>
+        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "var(--overlay)", backdropFilter: "blur(4px)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1000 }}>
           <div className="glass-card" style={{ maxWidth: "500px", width: "95%", padding: "30px" }}>
             <h3 style={{ fontSize: "20px", fontWeight: "700", marginBottom: "20px" }}>Edit User</h3>
 
@@ -486,7 +486,7 @@ export default function UserManager() {
 
       {/* Password Reset Modal */}
       {showPwdModal && (
-        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.7)", backdropFilter: "blur(4px)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1000 }}>
+        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "var(--overlay)", backdropFilter: "blur(4px)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1000 }}>
           <div className="glass-card" style={{ maxWidth: "400px", width: "95%", padding: "30px" }}>
             <h3 style={{ fontSize: "20px", fontWeight: "700", marginBottom: "16px" }}>Reset Password User</h3>
             <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "20px" }}>

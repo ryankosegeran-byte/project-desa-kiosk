@@ -10,7 +10,6 @@ import WargaList from "./components/WargaList";
 import WargaRegister from "./components/WargaRegister";
 import WargaDraftComplete from "./components/WargaDraftComplete";
 import SuratTable from "./components/SuratTable";
-import TemplatesList from "./components/TemplatesList";
 import KioskStatus from "./components/KioskStatus";
 import DesaManager from "./components/DesaManager";
 import UserManager from "./components/UserManager";
@@ -39,12 +38,12 @@ export default function App() {
       <Route path="/warga/draft" element={<Page title="Lengkapi Data Warga"><WargaDraftComplete /></Page>} />
 
       <Route path="/surat" element={<Page title="Arsip Cetak Surat"><SuratTable /></Page>} />
-      <Route path="/templates" element={<Page title="Kelola Template Cetak"><TemplatesList /></Page>} />
+      <Route path="/templates" element={<Navigate to="/admin/jenis-surat" replace />} />
       <Route path="/kiosk-status" element={<Page title="Status Terminal Kiosk"><KioskStatus /></Page>} />
 
       <Route path="/admin/desa" element={<Page title="Kelola Desa"><DesaManager /></Page>} />
       <Route path="/admin/users" element={<Page title="Kelola User PIC"><UserManager /></Page>} />
-      <Route path="/admin/jenis-surat" element={<Page title="Kelola Jenis Surat"><JenisSuratManager /></Page>} />
+      <Route path="/admin/jenis-surat" element={<Page title="Kelola Surat & Template"><JenisSuratManager /></Page>} />
       <Route path="/admin/activity" element={<Page title="Log Aktivitas Audit"><ActivityLogList /></Page>} />
 
       <Route path="/settings/ocr" element={<Page title="Pengaturan AI OCR"><OCRProviderConfig /></Page>} />

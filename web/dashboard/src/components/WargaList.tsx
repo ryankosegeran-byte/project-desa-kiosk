@@ -204,7 +204,7 @@ export default function WargaList() {
 
       {/* RFID Link Modal */}
       {linkingWarga && (
-        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.7)", backdropFilter: "blur(4px)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1000 }}>
+        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "var(--overlay)", backdropFilter: "blur(4px)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1000 }}>
           <div className="glass-card" style={{ maxWidth: "450px", width: "100%", padding: "30px" }}>
             <h3 style={{ fontSize: "20px", fontWeight: "700", marginBottom: "8px" }}>Tautkan Kartu KTP (RFID)</h3>
             <p style={{ color: "var(--text-muted)", fontSize: "14px", marginBottom: "20px" }}>
@@ -217,7 +217,7 @@ export default function WargaList() {
               </div>
             )}
 
-            <div style={{ textAlign: "center", padding: "30px 20px", background: "hsla(222,47%,7%,0.8)", border: "1px dashed var(--border-color)", borderRadius: "var(--radius-sm)", marginBottom: "20px" }}>
+            <div style={{ textAlign: "center", padding: "30px 20px", background: "var(--bg-inset)", border: "1px dashed var(--border-color)", borderRadius: "var(--radius-sm)", marginBottom: "20px" }}>
               {rfidUID ? (
                 <div>
                   <span style={{ fontSize: "12px", color: "var(--success)", fontWeight: "600", textTransform: "uppercase" }}>Kartu Terbaca</span>

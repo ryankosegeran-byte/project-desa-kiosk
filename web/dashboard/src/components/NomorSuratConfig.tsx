@@ -245,7 +245,7 @@ const CSS = `
 `;
 
 const S: Record<string, React.CSSProperties> = {
-  overlay: { position: "fixed", inset: 0, background: "rgba(0,0,0,0.85)", backdropFilter: "blur(4px)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1200, padding: 20 },
+  overlay: { position: "fixed", inset: 0, background: "var(--overlay)", backdropFilter: "blur(4px)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1200, padding: 20 },
   modal: { maxWidth: 920, width: "100%", maxHeight: "92vh", display: "flex", flexDirection: "column", overflow: "hidden", padding: 0, animation: "nscIn 0.22s ease" },
   header: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "18px 24px", borderBottom: "1px solid var(--border-color)", flexShrink: 0 },
   headerIcon: { width: 40, height: 40, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", background: "linear-gradient(135deg, hsla(280,80%,55%,0.9), hsla(220,90%,55%,0.9))", color: "#fff", flexShrink: 0 },
