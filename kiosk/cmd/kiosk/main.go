@@ -58,14 +58,14 @@ func main() {
 	configRepo := db.NewConfigRepository(database)
 	nomorSuratRepo := db.NewNomorSuratRepository(database)
 
-	// 2.5 Deteksi perubahan desa_id — auto-cleanup data lokal
+	// 2.5 Deteksi perubahan desa_id â€” auto-cleanup data lokal
 	ctxSeed := context.Background()
 	prevDesaID, _ := configRepo.Get(ctxSeed, "desa_id")
 	if prevDesaID != "" && prevDesaID != cfg.DesaID {
 		log.Warn().
 			Str("desa_lama", prevDesaID).
 			Str("desa_baru", cfg.DesaID).
-			Msg("Terdeteksi perubahan desa_id — menghapus semua data lokal...")
+			Msg("Terdeteksi perubahan desa_id â€” menghapus semua data lokal...")
 
 		if err := database.ResetLocalData(ctxSeed); err != nil {
 			log.Fatal().Err(err).Msg("Gagal mereset data lokal")
@@ -89,6 +89,28 @@ func main() {
 	rfidBroker := rfid.NewBroker()
 	rfidBroker.Start(ctx)
 
+	// 5.1 Start physical PC/SC reader (e.g. ACR122U). Publishes scanned UIDs to
+	// the same SSE pipeline as mock scans / keyboard-wedge readers. No-op when
+	// disabled via KIOSK_RFID_PCSC_ENABLED=false or on unsupported platforms.
+	rfid.StartReader(ctx, rfidBroker, rfid.ReaderConfig{
+		Enabled:          cfg.RFIDPCSCEnabled,
+		ReaderNameFilter: cfg.RFIDReaderFilter,
+		UIDFormat:        cfg.RFIDUIDFormat,
+	})
+
+	// 5.2 Forward scanned UIDs to the online server so admin panel can receive
+	// them in real time (best-effort, no-op when server URL not configured).
+	rfid.StartForwarder(ctx, rfidBroker, rfid.ForwarderConfig{
+		ServerURL: cfg.ServerURL,
+		APIKey:    cfg.APIKey,
+	})
+
+	// 5.3 Watch registration-session state from the online server. When an
+	// operator opens the "link card" step in the admin panel, the kiosk switches
+	// into registration-scan mode.
+	sessionWatcher := rfid.NewSessionWatcher(cfg.ServerURL, cfg.APIKey)
+	sessionWatcher.Start(ctx)
+
 	// 7. Initialize PDF Generator & Printer Services
 	pdfGen := print.NewPDFGenerator("data/printed")
 	printer := print.NewPrinter(cfg.PrintCommand)
@@ -103,8 +125,14 @@ func main() {
 	syncEngine := sync.NewEngine(cfg, detector, pusher, puller)
 	syncEngine.Start(ctx)
 
+	// 8.1 Real-time sync listener (SSE). Triggers an immediate incremental pull
+	// whenever the server signals a resident-data change. The polling engine
+	// above remains as a fallback when the stream is unavailable.
+	syncListener := sync.NewListener(cfg, puller)
+	syncListener.Start(ctx)
+
 	// 9. Initialize API server
-	apiServer := api.NewServer(cfg, wargaRepo, suratRepo, jenisSuratRepo, configRepo, nomorSuratRepo, rfidBroker, pdfGen, printer, docxRenderer)
+	apiServer := api.NewServer(cfg, wargaRepo, suratRepo, jenisSuratRepo, configRepo, nomorSuratRepo, rfidBroker, sessionWatcher, pdfGen, printer, docxRenderer)
 
 	srv := &http.Server{
 		Addr:         cfg.ListenAddr,

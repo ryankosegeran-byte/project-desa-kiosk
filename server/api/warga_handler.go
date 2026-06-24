@@ -27,7 +27,15 @@ func (s *Server) handleListWarga(w http.ResponseWriter, r *http.Request) {
 		desaID = claims.DesaID
 	}
 
-	wargaList, err := s.wargaRepo.List(ctx, desaID)
+	deleted := r.URL.Query().Get("deleted") == "true"
+
+	var wargaList []models.Warga
+	var err error
+	if deleted {
+		wargaList, err = s.wargaRepo.ListDeleted(ctx, desaID)
+	} else {
+		wargaList, err = s.wargaRepo.List(ctx, desaID)
+	}
 	if err != nil {
 		sendError(w, http.StatusInternalServerError, "Gagal mengambil data warga: "+err.Error())
 		return
@@ -95,6 +103,9 @@ func (s *Server) handleCreateWarga(w http.ResponseWriter, r *http.Request) {
 		EntityID:   req.ID,
 		IPAddress:  r.RemoteAddr,
 	})
+
+	// Notify kiosks of the change so they sync immediately.
+	s.rfidRelay.NotifySync(req.DesaID, "warga")
 
 	sendJSON(w, http.StatusCreated, req)
 }
@@ -164,6 +175,8 @@ func (s *Server) handleUpdateWarga(w http.ResponseWriter, r *http.Request) {
 		sendError(w, http.StatusInternalServerError, "Gagal memperbarui data warga: "+err.Error())
 		return
 	}
+
+	s.rfidRelay.NotifySync(warga.DesaID, "warga")
 
 	sendJSON(w, http.StatusOK, warga)
 }
@@ -237,6 +250,7 @@ func (s *Server) handleLinkRFID(w http.ResponseWriter, r *http.Request) {
 	})
 
 	warga.RFIDUID = req.RFIDUID
+	s.rfidRelay.NotifySync(warga.DesaID, "warga")
 	sendJSON(w, http.StatusOK, warga)
 }
 
@@ -424,5 +438,110 @@ func (s *Server) handleCompleteDraft(w http.ResponseWriter, r *http.Request) {
 
 	draft.Status = "complete"
 	draft.DraftToken = ""
+	s.rfidRelay.NotifySync(draft.DesaID, "warga")
 	sendJSON(w, http.StatusOK, draft)
+}
+
+// handleDeleteWarga deletes a warga record by ID.
+func (s *Server) handleDeleteWarga(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	claims := middleware.GetClaims(ctx)
+	if claims == nil {
+		sendError(w, http.StatusUnauthorized, "Token otorisasi diperlukan")
+		return
+	}
+
+	id := chi.URLParam(r, "id")
+	if id == "" {
+		sendError(w, http.StatusBadRequest, "ID warga tidak boleh kosong")
+		return
+	}
+
+	// Check warga exists and enforce PIC isolation
+	warga, err := s.wargaRepo.FindByID(ctx, id)
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			sendError(w, http.StatusNotFound, "Warga tidak ditemukan")
+			return
+		}
+		sendError(w, http.StatusInternalServerError, "Gagal memproses data: "+err.Error())
+		return
+	}
+
+	if claims.Role == models.RolePICDesa && warga.DesaID != claims.DesaID {
+		sendError(w, http.StatusForbidden, "Akses ditolak: desa tidak sesuai")
+		return
+	}
+
+	if err := s.wargaRepo.Delete(ctx, id); err != nil {
+		sendError(w, http.StatusInternalServerError, "Gagal menghapus warga: "+err.Error())
+		return
+	}
+
+	// Audit
+	_ = s.userRepo.LogActivity(ctx, &models.UserActivityLog{
+		UserID:     claims.UserID,
+		DesaID:     claims.DesaID,
+		Action:     "DELETE_WARGA",
+		EntityType: "warga",
+		EntityID:   id,
+		IPAddress:  r.RemoteAddr,
+	})
+
+	// Soft-delete propagates to kiosks (record carries deleted_at on the next
+	// pull). Notify so they remove the local row immediately.
+	s.rfidRelay.NotifySync(warga.DesaID, "warga")
+
+	sendJSON(w, http.StatusOK, map[string]string{"status": "deleted", "id": id})
+}
+
+// handleHardDeleteWarga permanently removes a soft-deleted warga record.
+func (s *Server) handleHardDeleteWarga(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	claims := middleware.GetClaims(ctx)
+	if claims == nil {
+		sendError(w, http.StatusUnauthorized, "Token otorisasi diperlukan")
+		return
+	}
+
+	id := chi.URLParam(r, "id")
+	if id == "" {
+		sendError(w, http.StatusBadRequest, "ID warga tidak boleh kosong")
+		return
+	}
+
+	// Enforce PIC isolation via lookup of the (possibly soft-deleted) record.
+	warga, err := s.wargaRepo.FindByID(ctx, id)
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			sendError(w, http.StatusNotFound, "Warga tidak ditemukan")
+			return
+		}
+		sendError(w, http.StatusInternalServerError, "Gagal memproses data: "+err.Error())
+		return
+	}
+	if claims.Role == models.RolePICDesa && warga.DesaID != claims.DesaID {
+		sendError(w, http.StatusForbidden, "Akses ditolak: desa tidak sesuai")
+		return
+	}
+
+	if err := s.wargaRepo.HardDelete(ctx, id); err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			sendError(w, http.StatusBadRequest, "Hanya data yang sudah dihapus yang bisa dihapus permanen")
+			return
+		}
+		sendError(w, http.StatusInternalServerError, "Gagal menghapus permanen: "+err.Error())
+		return
+	}
+
+	_ = s.userRepo.LogActivity(ctx, &models.UserActivityLog{
+		UserID:     claims.UserID,
+		DesaID:     claims.DesaID,
+		Action:     "HARD_DELETE_WARGA",
+		EntityType: "warga",
+		EntityID:   id,
+		IPAddress:  r.RemoteAddr,
+	})
+
+	sendJSON(w, http.StatusOK, map[string]string{"status": "permanently_deleted", "id": id})
 }

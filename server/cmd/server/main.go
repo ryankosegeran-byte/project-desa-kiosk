@@ -17,6 +17,7 @@ import (
 	"github.com/project-desa-kiosk/server/config"
 	"github.com/project-desa-kiosk/server/db"
 	"github.com/project-desa-kiosk/server/ocr"
+	"github.com/project-desa-kiosk/server/rfid"
 )
 
 func main() {
@@ -61,7 +62,7 @@ func main() {
 	refreshExpiry := time.Duration(cfg.RefreshTokenExpiry) * time.Hour
 	jwtManager := auth.NewJWTManager(cfg.JWTSecret, accessExpiry, refreshExpiry)
 
-	// 5. Initialize AI OCR Service — all providers are always registered;
+	// 5. Initialize AI OCR Service â€” all providers are always registered;
 	//    unconfigured providers (empty API key) are skipped during failover.
 	ocrProviders := []ocr.OCRProvider{
 		ocr.NewGeminiProvider(cfg.GeminiAPIKey, cfg.GeminiModel),
@@ -73,7 +74,10 @@ func main() {
 	}
 	ocrService := ocr.NewService(ocrProviders, cfg.OCRStrategy)
 
-	// 6. Initialize API server
+	// 6. Initialize RFID Relay (real-time kiosk->admin bridge)
+	rfidRelay := rfid.NewRelay()
+
+	// 7. Initialize API server
 	apiServer := api.NewServer(
 		cfg,
 		database,
@@ -85,13 +89,14 @@ func main() {
 		desaRepo,
 		jwtManager,
 		ocrService,
+		rfidRelay,
 	)
 
 	srv := &http.Server{
 		Addr:         cfg.ListenAddr,
 		Handler:      apiServer.Handler(),
 		ReadTimeout:  15 * time.Second,
-		WriteTimeout: 15 * time.Second,
+		WriteTimeout: 0, // 0 = no timeout (needed for SSE streams)
 		IdleTimeout:  60 * time.Second,
 	}
 

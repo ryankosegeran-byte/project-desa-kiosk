@@ -29,7 +29,8 @@ type Warga struct {
 	DraftToken      string     `json:"draft_token,omitempty"` // UUID untuk link draft
 	CreatedAt       time.Time  `json:"created_at"`
 	UpdatedAt       time.Time  `json:"updated_at"`
-	SyncedAt        *time.Time `json:"synced_at,omitempty"` // nullable: kiosk local field
+	SyncedAt        *time.Time `json:"synced_at,omitempty"`  // nullable: kiosk local field
+	DeletedAt       *time.Time `json:"deleted_at,omitempty"` // soft-delete timestamp
 }
 
 // KTPData represents OCR-extracted data from a KTP photo.

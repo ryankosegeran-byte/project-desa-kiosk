@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"os"
+	"strings"
 )
 
 // Config holds the kiosk local configuration.
@@ -27,6 +28,11 @@ type Config struct {
 
 	// Sync
 	SyncInterval int // Sync interval in seconds (default: 30)
+
+	// RFID physical reader (PC/SC, e.g. ACR122U)
+	RFIDPCSCEnabled  bool   // Enable the physical PC/SC reader polling loop
+	RFIDReaderFilter string // Optional substring to select a specific reader
+	RFIDUIDFormat    string // UID output format: hex (default), hex-colon, decimal
 }
 
 // Load reads configuration from environment variables.
@@ -41,6 +47,10 @@ func Load() (*Config, error) {
 		PrintCommand: getEnv("KIOSK_PRINT_CMD", "SumatraPDF.exe"),
 		StaticDir:    getEnv("KIOSK_STATIC_DIR", "web/kiosk-ui/dist"),
 		SyncInterval: getEnvInt("KIOSK_SYNC_INTERVAL", 30),
+
+		RFIDPCSCEnabled:  getEnvBool("KIOSK_RFID_PCSC_ENABLED", true),
+		RFIDReaderFilter: getEnv("KIOSK_RFID_READER", ""),
+		RFIDUIDFormat:    getEnv("KIOSK_RFID_UID_FORMAT", "hex"),
 	}
 
 	if cfg.DesaID == "" {
@@ -68,4 +78,19 @@ func getEnvInt(key string, fallback int) int {
 		return fallback
 	}
 	return result
+}
+
+func getEnvBool(key string, fallback bool) bool {
+	val := os.Getenv(key)
+	if val == "" {
+		return fallback
+	}
+	switch strings.ToLower(strings.TrimSpace(val)) {
+	case "1", "true", "yes", "y", "on":
+		return true
+	case "0", "false", "no", "n", "off":
+		return false
+	default:
+		return fallback
+	}
 }

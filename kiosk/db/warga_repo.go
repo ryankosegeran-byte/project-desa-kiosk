@@ -129,6 +129,17 @@ func (r *WargaRepository) Upsert(ctx context.Context, w *models.Warga) error {
 		draftToken = w.DraftToken
 	}
 
+	// Reconcile natural-key (NIK) collisions. The server may hold the same
+	// resident under a different UUID than the local kiosk copy (e.g. registered
+	// separately on each side). Since nik is UNIQUE, an INSERT with a new id
+	// would violate the constraint and the row would never update. Remove any
+	// stale row sharing this NIK but a different id before upserting by id.
+	if w.NIK != "" {
+		if _, derr := r.db.ExecContext(ctx, `DELETE FROM warga WHERE nik = ? AND id <> ?`, w.NIK, w.ID); derr != nil {
+			return fmt.Errorf("gagal membersihkan duplikat NIK warga: %w", derr)
+		}
+	}
+
 	_, err := r.db.ExecContext(ctx, query,
 		w.ID, w.NIK, rfid, w.Nama, w.TempatLahir, w.TanggalLahir, w.JenisKelamin,
 		w.Alamat, w.RT, w.RW, w.Kelurahan, w.Kecamatan, w.Kabupaten, w.Provinsi,
@@ -239,4 +250,13 @@ func (r *WargaRepository) scanRows(rows *sql.Rows) (*models.Warga, error) {
 	}
 
 	return &w, nil
+}
+
+// Delete removes a warga record from the local kiosk database (hard delete).
+func (r *WargaRepository) Delete(ctx context.Context, id string) error {
+	_, err := r.db.ExecContext(ctx, `DELETE FROM warga WHERE id = ?`, id)
+	if err != nil {
+		return fmt.Errorf("gagal menghapus warga lokal: %w", err)
+	}
+	return nil
 }

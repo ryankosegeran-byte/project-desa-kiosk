@@ -12,6 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-table": "^8.21.3",
     "diff": "^7.0.0",
     "docx-preview": "^0.3.7",
     "lucide-react": "^1.17.0",

@@ -78,8 +78,17 @@ func (p *Puller) PullWarga(ctx context.Context) error {
 
 	log.Info().Int("count", len(response.Warga)).Msg("Mengunduh data warga baru dari server hub...")
 
-	// 2. Upsert each warga locally
+	// 2. Upsert or delete each warga locally
 	for _, w := range response.Warga {
+		if w.DeletedAt != nil {
+			// Server soft-deleted this record; remove from local kiosk DB.
+			if err := p.wargaRepo.Delete(ctx, w.ID); err != nil {
+				log.Debug().Err(err).Str("id", w.ID).Msg("Gagal menghapus warga lokal (mungkin sudah tidak ada)")
+			} else {
+				log.Info().Str("id", w.ID).Str("nama", w.Nama).Msg("Warga dihapus lokal (sync dari server)")
+			}
+			continue
+		}
 		if err := p.wargaRepo.Upsert(ctx, &w); err != nil {
 			log.Error().Err(err).Str("nik", w.NIK).Msg("Gagal menyimpan warga secara lokal")
 		}

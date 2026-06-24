@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useOnlineStatus } from './hooks/useOnlineStatus';
 import { StatusBar } from './components/StatusBar';
+import { reportKioskBusy } from './hooks/useRegistrationSession';
 
 // Pages
 import { HomePage } from './pages/HomePage';
@@ -26,6 +27,14 @@ export const AppContent: React.FC = () => {
     setJenisSurat(null);
     setFormData({});
   }, []);
+  // Report kiosk-busy to the server whenever a resident is mid-flow, so an
+  // operator''s registration request shows as "pending" instead of interrupting.
+  useEffect(() => {
+    reportKioskBusy(!!warga);
+    return () => {
+      if (warga) reportKioskBusy(false);
+    };
+  }, [warga]);
 
   // Idle timer auto-reset: Reset and send to home screen if idle for 60 seconds
   useEffect(() => {

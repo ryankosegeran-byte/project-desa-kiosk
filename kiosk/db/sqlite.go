@@ -101,7 +101,15 @@ func isDuplicateColumnErr(err error) bool {
 // ResetLocalData menghapus seluruh data lokal dan mereset timestamp sync.
 // Dipanggil ketika desa_id berubah agar kiosk mulai dari nol untuk desa baru.
 func (db *DB) ResetLocalData(ctx context.Context) error {
-	tables := []string{"warga", "jenis_surat", "surat_template", "surat", "sync_queue", "activity_log"}
+	// Matikan penegakan FOREIGN KEY selama reset agar urutan penghapusan tidak
+	// memicu pelanggaran constraint (mis. surat -> warga/jenis_surat,
+	// nomor_surat_batch -> jenis_surat). Dipulihkan kembali setelah selesai.
+	if _, err := db.ExecContext(ctx, "PRAGMA foreign_keys = OFF"); err != nil {
+		return fmt.Errorf("gagal menonaktifkan foreign_keys: %w", err)
+	}
+	defer func() { _, _ = db.ExecContext(ctx, "PRAGMA foreign_keys = ON") }()
+
+	tables := []string{"surat", "sync_queue", "activity_log", "nomor_surat_batch", "surat_template", "warga", "jenis_surat"}
 	for _, t := range tables {
 		if _, err := db.ExecContext(ctx, "DELETE FROM "+t); err != nil {
 			return fmt.Errorf("gagal hapus tabel %s: %w", t, err)
