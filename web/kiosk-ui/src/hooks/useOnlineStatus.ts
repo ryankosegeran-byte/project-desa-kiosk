@@ -5,6 +5,7 @@ interface KioskStatus {
   lastSyncTime: string;
   desaID: string;
   kioskName: string;
+  theme: string;
 }
 
 export function useOnlineStatus() {
@@ -13,7 +14,8 @@ export function useOnlineStatus() {
     isBackendConnected: false,
     lastSyncTime: 'Never',
     desaID: '',
-    kioskName: 'Kiosk Desa'
+    kioskName: 'Kiosk Desa',
+    theme: 'merah-putih'
   });
 
   const apiBase = import.meta.env.DEV ? 'http://localhost:8080' : '';
@@ -39,7 +41,8 @@ export function useOnlineStatus() {
             isBackendConnected: true,
             lastSyncTime: data.last_sync || 'Never',
             desaID: data.desa_id || '',
-            kioskName: data.kiosk_name || 'Kiosk Desa'
+            kioskName: data.kiosk_name || 'Kiosk Desa',
+            theme: data.theme || 'merah-putih'
           });
         } else {
           throw new Error("Backend returned error status");

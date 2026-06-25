@@ -38,6 +38,7 @@ type SyncPullWargaResponse struct {
 type SyncPullConfigResponse struct {
 	JenisSurat []JenisSurat    `json:"jenis_surat"`
 	Templates  []SuratTemplate `json:"templates"`
+	Theme      string          `json:"theme"`
 	SyncedAt   time.Time       `json:"synced_at"`
 }
 

@@ -163,7 +163,14 @@ func (p *Puller) PullConfig(ctx context.Context) error {
 		}
 	}
 
-	// 3. Save last sync time for config
+	// 3. Save kiosk theme pushed from the server (default merah-putih).
+	theme := response.Theme
+	if theme == "" {
+		theme = "merah-putih"
+	}
+	_ = p.configRepo.Set(ctx, "theme", theme)
+
+	// 4. Save last sync time for config
 	syncedAtStr := time.Now().Format(time.RFC3339)
 	_ = p.configRepo.Set(ctx, "last_sync_at_config", syncedAtStr)
 

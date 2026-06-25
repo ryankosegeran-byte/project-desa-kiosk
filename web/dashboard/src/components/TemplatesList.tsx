@@ -199,7 +199,7 @@ const getDefaultTemplate = (jenisSurat: JenisSurat) => `<!DOCTYPE html>
 </body>
 </html>`;
 
-export default function TemplatesList() {
+export default function TemplatesList({ tabsNode }: { tabsNode?: React.ReactNode }) {
   const [jenisSurat, setJenisSurat] = useState<JenisSurat[]>([]);
   const [templates, setTemplates] = useState<Template[]>([]);
   const [desas, setDesas] = useState<Desa[]>([]);
@@ -518,32 +518,33 @@ export default function TemplatesList() {
 
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "32px" }}>
-        <div>
-          <h1 style={{ fontSize: "28px", fontWeight: "700" }}>Kelola Template Cetak</h1>
-          <p style={{ color: "var(--text-muted)", marginTop: "4px" }}>
-            Edit template surat dengan WYSIWYG editor, preview real-time, dan pilih format kertas.
-          </p>
-        </div>
-
-        <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-          {user?.role === "superadmin" && desas.length > 0 && (
-            <div className="form-group" style={{ marginBottom: 0, minWidth: "200px" }}>
-              <select
-                className="form-control"
-                value={selectedDesaId}
-                onChange={(e) => setSelectedDesaId(e.target.value)}
-              >
-                {desas.map((d) => (
-                  <option key={d.id} value={d.id}>
-                    {d.nama}
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
-        </div>
+      <div style={{ marginBottom: "8px" }}>
+        <h1 style={{ fontSize: "28px", fontWeight: "700" }}>Kelola Template Cetak</h1>
+        <p style={{ color: "var(--text-muted)", marginTop: "4px" }}>
+          Edit template surat dengan WYSIWYG editor, preview real-time, dan pilih format kertas.
+        </p>
       </div>
+
+      {tabsNode}
+
+      {user?.role === "superadmin" && desas.length > 0 && (
+        <div className="form-group" style={{ marginBottom: "28px", maxWidth: "320px" }}>
+          <label className="form-label" style={{ fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--text-muted)", marginBottom: "6px" }}>
+            Template Untuk Desa
+          </label>
+          <select
+            className="form-control"
+            value={selectedDesaId}
+            onChange={(e) => setSelectedDesaId(e.target.value)}
+          >
+            {desas.map((d) => (
+              <option key={d.id} value={d.id}>
+                {d.nama}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
 
       {error && (
         <div className="glass-card" style={{ borderLeft: "4px solid var(--danger)", color: "var(--danger)", marginBottom: "24px" }}>

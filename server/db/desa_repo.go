@@ -20,7 +20,7 @@ func NewDesaRepository(db *DB) *DesaRepository {
 
 func (r *DesaRepository) FindByID(ctx context.Context, id string) (*models.Desa, error) {
 	query := `
-		SELECT id, nama, kode_desa, kecamatan, kabupaten, provinsi, kepala_desa, nip_kepala_desa, alamat_kantor, logo_path, created_at, updated_at
+		SELECT id, nama, kode_desa, kecamatan, kabupaten, provinsi, kepala_desa, nip_kepala_desa, alamat_kantor, logo_path, theme, created_at, updated_at
 		FROM desa
 		WHERE id = $1
 	`
@@ -30,7 +30,7 @@ func (r *DesaRepository) FindByID(ctx context.Context, id string) (*models.Desa,
 
 func (r *DesaRepository) FindByKode(ctx context.Context, kode string) (*models.Desa, error) {
 	query := `
-		SELECT id, nama, kode_desa, kecamatan, kabupaten, provinsi, kepala_desa, nip_kepala_desa, alamat_kantor, logo_path, created_at, updated_at
+		SELECT id, nama, kode_desa, kecamatan, kabupaten, provinsi, kepala_desa, nip_kepala_desa, alamat_kantor, logo_path, theme, created_at, updated_at
 		FROM desa
 		WHERE kode_desa = $1
 	`
@@ -41,15 +41,15 @@ func (r *DesaRepository) FindByKode(ctx context.Context, kode string) (*models.D
 func (r *DesaRepository) Create(ctx context.Context, d *models.Desa) error {
 	query := `
 		INSERT INTO desa (
-			id, nama, kode_desa, kecamatan, kabupaten, provinsi, kepala_desa, nip_kepala_desa, alamat_kantor, logo_path, created_at, updated_at
-		) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+			id, nama, kode_desa, kecamatan, kabupaten, provinsi, kepala_desa, nip_kepala_desa, alamat_kantor, logo_path, theme, created_at, updated_at
+		) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
 	`
 	now := time.Now()
 	d.CreatedAt = now
 	d.UpdatedAt = now
 
 	_, err := r.db.ExecContext(ctx, query,
-		d.ID, d.Nama, d.KodeDesa, d.Kecamatan, d.Kabupaten, d.Provinsi, d.KepalaDesa, d.NIPKepalaDesa, d.AlamatKantor, d.LogoPath, d.CreatedAt, d.UpdatedAt,
+		d.ID, d.Nama, d.KodeDesa, d.Kecamatan, d.Kabupaten, d.Provinsi, d.KepalaDesa, d.NIPKepalaDesa, d.AlamatKantor, d.LogoPath, normalizeTheme(d.Theme), d.CreatedAt, d.UpdatedAt,
 	)
 	if err != nil {
 		return fmt.Errorf("gagal create desa: %w", err)
@@ -59,7 +59,7 @@ func (r *DesaRepository) Create(ctx context.Context, d *models.Desa) error {
 
 func (r *DesaRepository) List(ctx context.Context) ([]models.Desa, error) {
 	query := `
-		SELECT id, nama, kode_desa, kecamatan, kabupaten, provinsi, kepala_desa, nip_kepala_desa, alamat_kantor, logo_path, created_at, updated_at
+		SELECT id, nama, kode_desa, kecamatan, kabupaten, provinsi, kepala_desa, nip_kepala_desa, alamat_kantor, logo_path, theme, created_at, updated_at
 		FROM desa
 		ORDER BY nama ASC
 	`
@@ -78,6 +78,30 @@ func (r *DesaRepository) List(ctx context.Context) ([]models.Desa, error) {
 		result = append(result, *d)
 	}
 	return result, nil
+}
+
+// AllowedThemes lists the valid kiosk theme identifiers.
+var AllowedThemes = map[string]bool{
+	"merah-putih": true,
+	"dark-blue":   true,
+}
+
+// normalizeTheme returns a safe theme, defaulting to merah-putih.
+func normalizeTheme(t string) string {
+	if AllowedThemes[t] {
+		return t
+	}
+	return "merah-putih"
+}
+
+// UpdateTheme updates the kiosk theme for a village.
+func (r *DesaRepository) UpdateTheme(ctx context.Context, id, theme string) error {
+	query := `UPDATE desa SET theme = $1, updated_at = $2 WHERE id = $3`
+	_, err := r.db.ExecContext(ctx, query, normalizeTheme(theme), time.Now(), id)
+	if err != nil {
+		return fmt.Errorf("gagal update tema desa: %w", err)
+	}
+	return nil
 }
 
 // ==========================================
@@ -186,10 +210,10 @@ func (r *DesaRepository) UpdateKioskStatus(ctx context.Context, kioskID string, 
 
 func (r *DesaRepository) scanRow(row *sql.Row) (*models.Desa, error) {
 	var d models.Desa
-	var logo sql.NullString
+	var logo, theme sql.NullString
 
 	err := row.Scan(
-		&d.ID, &d.Nama, &d.KodeDesa, &d.Kecamatan, &d.Kabupaten, &d.Provinsi, &d.KepalaDesa, &d.NIPKepalaDesa, &d.AlamatKantor, &logo, &d.CreatedAt, &d.UpdatedAt,
+		&d.ID, &d.Nama, &d.KodeDesa, &d.Kecamatan, &d.Kabupaten, &d.Provinsi, &d.KepalaDesa, &d.NIPKepalaDesa, &d.AlamatKantor, &logo, &theme, &d.CreatedAt, &d.UpdatedAt,
 	)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
@@ -198,20 +222,22 @@ func (r *DesaRepository) scanRow(row *sql.Row) (*models.Desa, error) {
 		return nil, fmt.Errorf("gagal scan desa row: %w", err)
 	}
 	d.LogoPath = logo.String
+	d.Theme = theme.String
 	return &d, nil
 }
 
 func (r *DesaRepository) scanRows(rows *sql.Rows) (*models.Desa, error) {
 	var d models.Desa
-	var logo sql.NullString
+	var logo, theme sql.NullString
 
 	err := rows.Scan(
-		&d.ID, &d.Nama, &d.KodeDesa, &d.Kecamatan, &d.Kabupaten, &d.Provinsi, &d.KepalaDesa, &d.NIPKepalaDesa, &d.AlamatKantor, &logo, &d.CreatedAt, &d.UpdatedAt,
+		&d.ID, &d.Nama, &d.KodeDesa, &d.Kecamatan, &d.Kabupaten, &d.Provinsi, &d.KepalaDesa, &d.NIPKepalaDesa, &d.AlamatKantor, &logo, &theme, &d.CreatedAt, &d.UpdatedAt,
 	)
 	if err != nil {
 		return nil, fmt.Errorf("gagal scan desa rows: %w", err)
 	}
 	d.LogoPath = logo.String
+	d.Theme = theme.String
 	return &d, nil
 }
 

@@ -19,7 +19,7 @@ export const AppContent: React.FC = () => {
   const [warga, setWarga] = useState<Warga | null>(null);
   const [jenisSurat, setJenisSurat] = useState<JenisSurat | null>(null);
   const [formData, setFormData] = useState<any>({});
-  const { kioskName } = useOnlineStatus();
+  const { kioskName, theme } = useOnlineStatus();
 
   // Reset all flow states
   const handleReset = useCallback(() => {
@@ -27,6 +27,11 @@ export const AppContent: React.FC = () => {
     setJenisSurat(null);
     setFormData({});
   }, []);
+
+  // Apply the village-selected theme (synced from the server) to the document.
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme || 'merah-putih');
+  }, [theme]);
   // Report kiosk-busy to the server whenever a resident is mid-flow, so an
   // operator''s registration request shows as "pending" instead of interrupting.
   useEffect(() => {

@@ -1,33 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
+/* === Shared structural tokens === */
 :root {
-  /* Theme Colors: Dark Slate Glass Mode */
-  --bg-main: hsl(222, 47%, 9%);
-  --bg-surface: hsla(223, 47%, 14%, 0.7);
-  --bg-surface-glow: hsla(223, 47%, 20%, 0.85);
-  
-  --border-color: hsla(220, 30%, 25%, 0.5);
-  --border-glow: hsla(210, 100%, 65%, 0.4);
-  
-  /* Primary accents */
-  --primary: hsl(210, 100%, 55%);
-  --primary-glow: hsla(210, 100%, 55%, 0.35);
-  --secondary: hsl(190, 100%, 45%);
-  --secondary-glow: hsla(190, 100%, 45%, 0.3);
-  
-  /* Status Colors */
-  --success: hsl(145, 80%, 45%);
-  --success-glow: hsla(145, 80%, 45%, 0.25);
-  --warning: hsl(35, 90%, 50%);
-  --danger: hsl(355, 85%, 55%);
-  --text-main: hsl(210, 40%, 98%);
-  --text-muted: hsl(215, 25%, 72%);
-  --text-dark: hsl(222, 47%, 11%);
-  
-  /* Font Family */
   --font-family: 'Outfit', sans-serif;
-  
-  /* Shadows & Glassmorphism */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 50px var(--primary-glow);
@@ -36,6 +11,62 @@
   --radius-md: 16px;
   --radius-lg: 24px;
 }
+
+/* === Theme: Merah Putih (default) === */
+:root,
+[data-theme="merah-putih"] {
+  --bg-main: hsl(220, 20%, 97%);
+  --bg-surface: hsl(0, 0%, 100%);
+  --bg-surface-glow: hsl(220, 20%, 94%);
+  --bg-grad1: hsla(355, 80%, 52%, 0.10);
+  --bg-grad2: hsla(355, 60%, 70%, 0.08);
+
+  --border-color: hsl(220, 15%, 86%);
+  --border-glow: hsla(355, 80%, 52%, 0.35);
+
+  --primary: hsl(355, 80%, 52%);
+  --primary-glow: hsla(355, 80%, 52%, 0.30);
+  --secondary: hsl(355, 65%, 62%);
+  --secondary-glow: hsla(355, 65%, 62%, 0.25);
+
+  --success: hsl(145, 65%, 38%);
+  --success-glow: hsla(145, 65%, 38%, 0.20);
+  --warning: hsl(35, 85%, 48%);
+  --danger: hsl(355, 75%, 50%);
+
+  --text-main: hsl(222, 47%, 13%);
+  --text-muted: hsl(220, 12%, 45%);
+  --text-dark: hsl(222, 47%, 11%);
+  --text-on-primary: hsl(0, 0%, 100%);
+}
+
+/* === Theme: Dark Blue === */
+[data-theme="dark-blue"] {
+  --bg-main: hsl(222, 47%, 9%);
+  --bg-surface: hsla(223, 47%, 14%, 0.7);
+  --bg-surface-glow: hsla(223, 47%, 20%, 0.85);
+  --bg-grad1: hsla(210, 100%, 50%, 0.10);
+  --bg-grad2: hsla(190, 100%, 40%, 0.10);
+
+  --border-color: hsla(220, 30%, 25%, 0.5);
+  --border-glow: hsla(210, 100%, 65%, 0.4);
+
+  --primary: hsl(210, 100%, 55%);
+  --primary-glow: hsla(210, 100%, 55%, 0.35);
+  --secondary: hsl(190, 100%, 45%);
+  --secondary-glow: hsla(190, 100%, 45%, 0.3);
+
+  --success: hsl(145, 80%, 45%);
+  --success-glow: hsla(145, 80%, 45%, 0.25);
+  --warning: hsl(35, 90%, 50%);
+  --danger: hsl(355, 85%, 55%);
+
+  --text-main: hsl(210, 40%, 98%);
+  --text-muted: hsl(215, 25%, 72%);
+  --text-dark: hsl(222, 47%, 11%);
+  --text-on-primary: hsl(222, 47%, 11%);
+}
+
 
 * {
   box-sizing: border-box;
@@ -49,8 +80,8 @@ body {
   font-family: var(--font-family);
   background-color: var(--bg-main);
   background-image: 
-    radial-gradient(at 0% 0%, hsla(210, 100%, 50%, 0.1) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, hsla(190, 100%, 40%, 0.1) 0px, transparent 50%);
+    radial-gradient(at 0% 0%, var(--bg-grad1) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, var(--bg-grad2) 0px, transparent 50%);
   background-attachment: fixed;
   color: var(--text-main);
   min-height: 100vh;
@@ -165,7 +196,7 @@ body {
 
 .btn-primary {
   background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: var(--text-dark);
+  color: var(--text-on-primary);
   box-shadow: 0 4px 15px var(--primary-glow);
 }
 

@@ -167,6 +167,7 @@ func (s *Server) Handler() http.Handler {
 			r.Route("/api/desa", func(r chi.Router) {
 				r.Get("/", s.handleListDesa)
 				r.Post("/", s.handleCreateDesa)
+				r.Put("/{id}/theme", s.handleUpdateDesaTheme)
 				r.Put("/{id}/jenis-surat", s.handleToggleDesaJenisSurat)
 			})
 

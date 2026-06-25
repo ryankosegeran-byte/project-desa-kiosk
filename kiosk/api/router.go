@@ -204,10 +204,16 @@ func (s *Server) handleStatus(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	theme, terr := s.configRepo.Get(ctx, "theme")
+	if terr != nil || theme == "" {
+		theme = "merah-putih"
+	}
+
 	sendJSON(w, http.StatusOK, map[string]interface{}{
 		"status":     "online", // Kiosk backend is running. Online status to server is computed in UI
 		"desa_id":    s.cfg.DesaID,
 		"kiosk_name": s.cfg.KioskName,
+		"theme":      theme,
 		"last_sync":  lastSync,
 		"version":    "0.1.0",
 		"time":       time.Now().Format(time.RFC3339),

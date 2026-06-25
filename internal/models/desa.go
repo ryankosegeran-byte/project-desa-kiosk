@@ -14,6 +14,7 @@ type Desa struct {
 	NIPKepalaDesa string    `json:"nip_kepala_desa,omitempty"`
 	AlamatKantor  string    `json:"alamat_kantor,omitempty"`
 	LogoPath      string    `json:"logo_path,omitempty"`
+	Theme         string    `json:"theme,omitempty"`
 	CreatedAt     time.Time `json:"created_at"`
 	UpdatedAt     time.Time `json:"updated_at"`
 }

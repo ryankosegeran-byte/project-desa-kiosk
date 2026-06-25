@@ -11,7 +11,13 @@ interface Desa {
   kepala_desa?: string;
   nip_kepala_desa?: string;
   alamat_kantor?: string;
+  theme?: string;
 }
+
+const THEME_OPTIONS = [
+  { value: "merah-putih", label: "Merah Putih" },
+  { value: "dark-blue", label: "Dark Blue" },
+];
 
 export default function DesaManager() {
   const user = getUser();
@@ -30,7 +36,9 @@ export default function DesaManager() {
     kepala_desa: "",
     nip_kepala_desa: "",
     alamat_kantor: "",
+    theme: "merah-putih",
   });
+  const [themeSavingId, setThemeSavingId] = useState<string | null>(null);
   const [saveLoading, setSaveLoading] = useState(false);
   const [saveError, setSaveError] = useState("");
   const [copiedId, setCopiedId] = useState<string | null>(null);
@@ -90,11 +98,27 @@ export default function DesaManager() {
         kepala_desa: "",
         nip_kepala_desa: "",
         alamat_kantor: "",
+        theme: "merah-putih",
       });
     } catch (err: any) {
       setSaveError(err.message || "Gagal membuat profil desa.");
     } finally {
       setSaveLoading(false);
+    }
+  };
+
+  const handleThemeChange = async (id: string, theme: string) => {
+    setThemeSavingId(id);
+    setDesas((prev) => prev.map((d) => (d.id === id ? { ...d, theme } : d)));
+    try {
+      await request(`/api/desa/${id}/theme`, {
+        method: "PUT",
+        body: JSON.stringify({ theme }),
+      });
+    } catch (err: any) {
+      setError(err.message || "Gagal memperbarui tema kiosk.");
+    } finally {
+      setThemeSavingId(null);
     }
   };
 
@@ -138,6 +162,7 @@ export default function DesaManager() {
               <th>Kabupaten</th>
               <th>Kepala Desa</th>
               <th>NIP Kepala Desa</th>
+              <th>Tema Kiosk</th>
             </tr>
           </thead>
           <tbody>
@@ -182,11 +207,26 @@ export default function DesaManager() {
                 <td>{d.kabupaten || "-"}</td>
                 <td>{d.kepala_desa || "-"}</td>
                 <td>{d.nip_kepala_desa || "-"}</td>
+                <td>
+                  <select
+                    className="form-control"
+                    style={{ minWidth: "140px", padding: "6px 10px" }}
+                    value={d.theme || "merah-putih"}
+                    disabled={themeSavingId === d.id}
+                    onChange={(e) => handleThemeChange(d.id, e.target.value)}
+                  >
+                    {THEME_OPTIONS.map((t) => (
+                      <option key={t.value} value={t.value}>
+                        {t.label}
+                      </option>
+                    ))}
+                  </select>
+                </td>
               </tr>
             ))}
             {desas.length === 0 && (
               <tr>
-                <td colSpan={user?.role === "superadmin" ? 7 : 6} style={{ textAlign: "center", color: "var(--text-muted)", padding: "24px" }}>
+                <td colSpan={user?.role === "superadmin" ? 8 : 7} style={{ textAlign: "center", color: "var(--text-muted)", padding: "24px" }}>
                   Belum ada profil desa terdaftar
                 </td>
               </tr>
@@ -288,6 +328,22 @@ export default function DesaManager() {
                     onChange={(e) => setFormData({ ...formData, nip_kepala_desa: e.target.value })}
                     disabled={saveLoading}
                   />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Tema Kiosk</label>
+                  <select
+                    className="form-control"
+                    value={formData.theme}
+                    onChange={(e) => setFormData({ ...formData, theme: e.target.value })}
+                    disabled={saveLoading}
+                  >
+                    {THEME_OPTIONS.map((t) => (
+                      <option key={t.value} value={t.value}>
+                        {t.label}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
 

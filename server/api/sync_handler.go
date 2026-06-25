@@ -138,12 +138,19 @@ func (s *Server) handleSyncPullConfig(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Resolve the kiosk theme from the village profile.
+	theme := "merah-putih"
+	if desa, derr := s.desaRepo.FindByID(ctx, kiosk.DesaID); derr == nil && desa != nil && desa.Theme != "" {
+		theme = desa.Theme
+	}
+
 	// Update Kiosk heartbeat status
 	_ = s.desaRepo.UpdateKioskStatus(ctx, kiosk.ID, r.RemoteAddr)
 
 	sendJSON(w, http.StatusOK, models.SyncPullConfigResponse{
 		JenisSurat: jenisSuratList,
 		Templates:  templatesList,
+		Theme:      theme,
 		SyncedAt:   time.Now(),
 	})
 }

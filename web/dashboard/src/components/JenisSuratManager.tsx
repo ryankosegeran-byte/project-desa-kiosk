@@ -17,7 +17,7 @@ interface Desa {
   nama: string;
 }
 
-function SkemaTab() {
+function SkemaTab({ tabsNode }: { tabsNode?: React.ReactNode }) {
   const [jenisSuratList, setJenisSuratList] = useState<JenisSurat[]>([]);
   const [desas, setDesas] = useState<Desa[]>([]);
   const [selectedDesaId, setSelectedDesaId] = useState("");
@@ -248,10 +248,12 @@ function SkemaTab() {
         </div>
         {user?.role === "superadmin" && (
           <button className="btn btn-primary" onClick={() => setShowAddModal(true)}>
-            ? Buat Jenis Surat Baru
+            ➕ Buat Jenis Surat Baru
           </button>
         )}
       </div>
+
+      {tabsNode}
 
       {error && (
         <div className="glass-card" style={{ borderLeft: "4px solid var(--danger)", color: "var(--danger)", marginBottom: "24px" }}>
@@ -417,8 +419,53 @@ function SkemaTab() {
   );
 }
 
-
 type TabKey = "skema" | "template";
+
+function PageTabs({
+  tabs,
+  activeTab,
+  onChange,
+}: {
+  tabs: { key: TabKey; label: string }[];
+  activeTab: TabKey;
+  onChange: (key: TabKey) => void;
+}) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        gap: "8px",
+        marginBottom: "28px",
+        borderBottom: "1px solid var(--border-color)",
+      }}
+    >
+      {tabs.map((tab) => (
+        <button
+          key={tab.key}
+          type="button"
+          onClick={() => onChange(tab.key)}
+          style={{
+            padding: "10px 18px",
+            background: "transparent",
+            border: "none",
+            borderBottom:
+              activeTab === tab.key
+                ? "2px solid var(--primary)"
+                : "2px solid transparent",
+            marginBottom: "-1px",
+            color: activeTab === tab.key ? "var(--primary)" : "var(--text-muted)",
+            fontWeight: activeTab === tab.key ? 700 : 600,
+            cursor: "pointer",
+            fontSize: "14px",
+            transition: "color 0.18s ease, border-color 0.18s ease",
+          }}
+        >
+          {tab.label}
+        </button>
+      ))}
+    </div>
+  );
+}
 
 export default function JenisSuratManager() {
   const [activeTab, setActiveTab] = useState<TabKey>("skema");
@@ -428,47 +475,17 @@ export default function JenisSuratManager() {
     { key: "template", label: "Template Cetak" },
   ];
 
+  const tabsNode = (
+    <PageTabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
+  );
+
   return (
     <div>
-      <div
-        style={{
-          position: "sticky",
-          top: "-40px",
-          zIndex: 20,
-          display: "flex",
-          gap: "8px",
-          margin: "-40px -40px 24px -40px",
-          padding: "0 40px",
-          background: "var(--bg-main)",
-          borderBottom: "1px solid var(--border-color)",
-        }}
-      >
-        {tabs.map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
-            style={{
-              padding: "16px 18px 14px 18px",
-              background: "transparent",
-              border: "none",
-              borderBottom:
-                activeTab === tab.key
-                  ? "2px solid var(--primary)"
-                  : "2px solid transparent",
-              marginBottom: "-1px",
-              color: activeTab === tab.key ? "var(--text-main)" : "var(--text-muted)",
-              fontWeight: activeTab === tab.key ? 700 : 500,
-              cursor: "pointer",
-              fontSize: "15px",
-              transition: "color 0.18s ease, border-color 0.18s ease",
-            }}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
-
-      {activeTab === "skema" ? <SkemaTab /> : <TemplatesList />}
+      {activeTab === "skema" ? (
+        <SkemaTab tabsNode={tabsNode} />
+      ) : (
+        <TemplatesList tabsNode={tabsNode} />
+      )}
     </div>
   );
 }

@@ -5,9 +5,11 @@ import (
 	"errors"
 	"net/http"
 
+	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
 
 	"github.com/project-desa-kiosk/internal/models"
+	"github.com/project-desa-kiosk/server/db"
 	"github.com/project-desa-kiosk/server/middleware"
 )
 
@@ -53,6 +55,9 @@ func (s *Server) handleCreateDesa(w http.ResponseWriter, r *http.Request) {
 
 	if req.ID == "" {
 		req.ID = uuid.New().String()
+	}
+	if req.Theme == "" {
+		req.Theme = "merah-putih"
 	}
 
 	if err := s.desaRepo.Create(ctx, &req); err != nil {
@@ -151,4 +156,37 @@ func (s *Server) handleRegisterKiosk(w http.ResponseWriter, r *http.Request) {
 	})
 
 	sendJSON(w, http.StatusCreated, req)
+}
+
+// handleUpdateDesaTheme updates the kiosk theme for a village (Superadmin only).
+func (s *Server) handleUpdateDesaTheme(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	id := chi.URLParam(r, "id")
+	if id == "" {
+		sendError(w, http.StatusBadRequest, "ID desa harus diisi")
+		return
+	}
+
+	var req struct {
+		Theme string `json:"theme"`
+	}
+	if err := parseJSON(r, &req); err != nil {
+		sendError(w, http.StatusBadRequest, "Payload request tidak valid: "+err.Error())
+		return
+	}
+	if !db.AllowedThemes[req.Theme] {
+		sendError(w, http.StatusBadRequest, "Tema tidak dikenal")
+		return
+	}
+
+	if err := s.desaRepo.UpdateTheme(ctx, id, req.Theme); err != nil {
+		sendError(w, http.StatusInternalServerError, "Gagal memperbarui tema: "+err.Error())
+		return
+	}
+
+	// Push a real-time config-change signal so kiosks update their theme
+	// immediately instead of waiting for the next polling tick.
+	s.rfidRelay.NotifySync(id, "config")
+
+	sendJSON(w, http.StatusOK, map[string]string{"id": id, "theme": req.Theme})
 }

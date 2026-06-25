@@ -105,6 +105,15 @@ func (l *Listener) connect(ctx context.Context) {
 		}
 		lastPull = time.Now()
 
+		if kind == "config" {
+			if err := l.puller.PullConfig(ctx); err != nil {
+				log.Debug().Err(err).Msg("Sync Listener: pull config gagal (akan dicoba lagi via polling)")
+			} else {
+				log.Info().Str("kind", kind).Msg("Sync real-time: konfigurasi (tema/jenis surat) diperbarui dari server")
+			}
+			continue
+		}
+
 		if err := l.puller.PullWarga(ctx); err != nil {
 			log.Debug().Err(err).Msg("Sync Listener: pull warga gagal (akan dicoba lagi via polling)")
 		} else {
