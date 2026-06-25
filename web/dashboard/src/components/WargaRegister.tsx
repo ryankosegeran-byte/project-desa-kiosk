@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
-import { request, getUser } from "../lib/api";
+import React, { useState, useEffect } from "react";
+import { request, getUser, API_BASE } from "../lib/api";
+import { useRFIDScanner } from "../hooks/useRFIDScanner";
 
 interface KTPData {
   nik: string;
@@ -34,6 +35,7 @@ export default function WargaRegister() {
   const [previewURL, setPreviewURL] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [kioskBusyPending, setKioskBusyPending] = useState(false);
 
   // Desa selection modal state
   const [showDesaModal, setShowDesaModal] = useState(true);
@@ -67,8 +69,6 @@ export default function WargaRegister() {
 
   // RFID scan state
   const [rfidUID, setRfidUID] = useState("");
-  const keypressBuffer = useRef<string[]>([]);
-  const lastKeyTime = useRef<number>(0);
 
   // Fetch desa list on mount
   useEffect(() => {
@@ -93,30 +93,79 @@ export default function WargaRegister() {
     fetchDesa();
   }, []);
 
-  // Keyboard wedge listener for linking RFID card
+  // RFID input: keyboard-wedge (HID) + PC/SC bridge agent (ACR122U) via SSE.
+  const { kioskRelayStatus, bridgeStatus } = useRFIDScanner(step === 3, (uid) => setRfidUID(uid), selectedDesaId);
+
+  // Tell the server a registration session is active while the operator is on
+  // step 3, carrying the warga name so the kiosk can display it (not the UID).
+  // Also subscribe to session state to detect when the kiosk is busy (a resident
+  // is mid-flow creating a letter) so we can show a "pending" notice.
   useEffect(() => {
-    if (step !== 3) return;
+    if (step !== 3 || !selectedDesaId) return;
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-      const currentTime = new Date().getTime();
-      if (currentTime - lastKeyTime.current > 50) {
-        keypressBuffer.current = [];
-      }
-      lastKeyTime.current = currentTime;
+    const params = new URLSearchParams({ desa_id: selectedDesaId });
+    const nama = (wargaData.nama || "").trim();
+    if (nama) params.set("name", nama);
+    request(`/api/rfid/session/start?${params.toString()}`, { method: "POST" }).catch(() => {});
 
-      if (e.key === "Enter") {
-        if (keypressBuffer.current.length > 0) {
-          setRfidUID(keypressBuffer.current.join(""));
-          keypressBuffer.current = [];
-        }
-      } else if (e.key.length === 1) {
-        keypressBuffer.current.push(e.key);
-      }
+    // Subscribe to admin session-state stream (fetch-based SSE with auth header).
+    const token = localStorage.getItem("token");
+    const controller = new AbortController();
+    let retry: ReturnType<typeof setTimeout> | null = null;
+
+    const connect = () => {
+      fetch(`${API_BASE}/api/rfid/session/admin-stream?desa_id=${encodeURIComponent(selectedDesaId)}`, {
+        headers: { Authorization: `Bearer ${token}` },
+        signal: controller.signal,
+      })
+        .then(async (res) => {
+          if (!res.ok || !res.body) {
+            retry = setTimeout(connect, 8000);
+            return;
+          }
+          const reader = res.body.getReader();
+          const decoder = new TextDecoder();
+          let buffer = "";
+          // eslint-disable-next-line no-constant-condition
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split("\n");
+            buffer = lines.pop() ?? "";
+            for (const line of lines) {
+              if (line.startsWith("data: ")) {
+                try {
+                  const st = JSON.parse(line.slice(6).trim());
+                  setKioskBusyPending(Boolean(st.pending));
+                } catch { /* ignore */ }
+              }
+            }
+          }
+          retry = setTimeout(connect, 3000);
+        })
+        .catch(() => {
+          retry = setTimeout(connect, 8000);
+        });
     };
+    connect();
 
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [step]);
+    // Best-effort stop when the tab/window is closed (keepalive request).
+    const handleUnload = () => {
+      const url = `${API_BASE}/api/rfid/session/stop?desa_id=${encodeURIComponent(selectedDesaId)}`;
+      fetch(url, { method: "POST", headers: { Authorization: `Bearer ${token}` }, keepalive: true }).catch(() => {});
+    };
+    window.addEventListener("beforeunload", handleUnload);
+
+    const stopQ = `?desa_id=${encodeURIComponent(selectedDesaId)}`;
+    return () => {
+      controller.abort();
+      window.removeEventListener("beforeunload", handleUnload);
+      if (retry) clearTimeout(retry);
+      setKioskBusyPending(false);
+      request(`/api/rfid/session/stop${stopQ}`, { method: "POST" }).catch(() => {});
+    };
+  }, [step, selectedDesaId, wargaData.nama]);
 
   const handleDesaSelect = (desaId: string) => {
     const desa = desaList.find((d) => d.id === desaId);
@@ -212,6 +261,13 @@ export default function WargaRegister() {
           rfid_uid: rfidUID || undefined,
         }),
       });
+
+
+      // Stop the kiosk registration session before navigating away, so the
+      // kiosk returns to normal (surat) mode.
+      if (selectedDesaId) {
+        await request(`/api/rfid/session/stop?desa_id=${encodeURIComponent(selectedDesaId)}`, { method: "POST" }).catch(() => {});
+      }
 
       window.location.href = "/warga";
     } catch (err: any) {
@@ -600,9 +656,81 @@ export default function WargaRegister() {
           <div style={{ textAlign: "center" }}>
             <h3 style={{ fontSize: "20px", fontWeight: "700", marginBottom: "8px" }}>Tautkan Kartu KTP (NFC/RFID)</h3>
             <p style={{ color: "var(--text-muted)", fontSize: "14px" }}>
-              Scan kartu KTP pada alat pembaca RFID USB untuk menautkan UID chip fisik.
+              Scan kartu KTP pada alat pembaca RFID USB (plug-n-play) atau ACR122U untuk menautkan UID chip fisik.
             </p>
+            <div style={{ marginTop: "14px", display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "8px" }}>
+              <span
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  padding: "4px 10px",
+                  borderRadius: "999px",
+                  background:
+                    kioskRelayStatus === "online"
+                      ? "rgba(22, 163, 74, 0.12)"
+                      : kioskRelayStatus === "connecting"
+                        ? "rgba(217, 119, 6, 0.12)"
+                        : "var(--bg-inset)",
+                  color:
+                    kioskRelayStatus === "online"
+                      ? "#16a34a"
+                      : kioskRelayStatus === "connecting"
+                        ? "#d97706"
+                        : "var(--text-muted)",
+                }}
+              >
+                <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "currentColor" }} />
+                {kioskRelayStatus === "online"
+                  ? "Scan via Kiosk siap"
+                  : kioskRelayStatus === "connecting"
+                    ? "Menyambung ke kiosk..."
+                    : "Kiosk/Server offline"}
+              </span>
+
+              <span
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  padding: "4px 10px",
+                  borderRadius: "999px",
+                  background: bridgeStatus === "online" ? "rgba(22, 163, 74, 0.12)" : "var(--bg-inset)",
+                  color: bridgeStatus === "online" ? "#16a34a" : "var(--text-muted)",
+                }}
+              >
+                <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "currentColor" }} />
+                {bridgeStatus === "online" ? "Reader lokal terhubung" : "Reader lokal nonaktif"}
+              </span>
+
+              <span
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  padding: "4px 10px",
+                  borderRadius: "999px",
+                  background: "rgba(22, 163, 74, 0.12)",
+                  color: "#16a34a",
+                }}
+              >
+                <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "currentColor" }} />
+                Keyboard (plug-n-play) aktif
+              </span>
+            </div>
           </div>
+
+          {kioskBusyPending && (
+            <div style={{ width: "100%", maxWidth: "440px", padding: "14px 16px", background: "rgba(217, 119, 6, 0.1)", border: "1px solid rgba(217, 119, 6, 0.4)", borderRadius: "var(--radius-md)", color: "#d97706", fontSize: "13px", fontWeight: 600, textAlign: "center" }}>
+              Kiosk sedang dipakai warga (membuat surat). Scan pendaftaran tertunda otomatis sampai warga selesai.
+            </div>
+          )}
 
           <div style={{ width: "100%", maxWidth: "400px", padding: "40px 20px", background: "var(--bg-inset)", border: "2px dashed var(--border-color)", borderRadius: "var(--radius-md)", textAlign: "center" }}>
             {rfidUID ? (

@@ -14,6 +14,7 @@ import (
 	"github.com/project-desa-kiosk/server/db"
 	serverMiddleware "github.com/project-desa-kiosk/server/middleware"
 	"github.com/project-desa-kiosk/server/ocr"
+	"github.com/project-desa-kiosk/server/rfid"
 )
 
 // Server represents the online hub API server.
@@ -28,6 +29,7 @@ type Server struct {
 	desaRepo       *db.DesaRepository
 	jwtManager     *auth.JWTManager
 	ocrService     *ocr.Service
+	rfidRelay      *rfid.Relay
 }
 
 // NewServer creates a new Server instance.
@@ -42,6 +44,7 @@ func NewServer(
 	desaRepo *db.DesaRepository,
 	jwtManager *auth.JWTManager,
 	ocrService *ocr.Service,
+	rfidRelay *rfid.Relay,
 ) *Server {
 	return &Server{
 		cfg:            cfg,
@@ -54,6 +57,7 @@ func NewServer(
 		desaRepo:       desaRepo,
 		jwtManager:     jwtManager,
 		ocrService:     ocrService,
+		rfidRelay:      rfidRelay,
 	}
 }
 
@@ -83,17 +87,35 @@ func (s *Server) Handler() http.Handler {
 		r.Get("/api/sync/pull/warga", s.handleSyncPullWarga)
 		r.Get("/api/sync/pull/config", s.handleSyncPullConfig)
 		r.Get("/api/sync/pull/nomor-surat", s.handleSyncPullNomorSurat)
+
+		// Real-time data-change notifications (server -> kiosk via SSE). The
+		// kiosk runs an immediate incremental pull on each event; the periodic
+		// polling remains as a fallback when the stream is down.
+		r.Get("/api/sync/events", s.handleSyncEventsStream)
+
+		// RFID relay: kiosk pushes scanned UID
+		r.Post("/api/rfid/relay", s.handleRFIDRelay)
+		r.Get("/api/rfid/session/stream", s.handleRFIDSessionStream)
+		r.Post("/api/kiosk/busy", s.handleKioskBusy)
 	})
 
 	// Dashboard User endpoints (Authenticated via JWT)
 	r.Group(func(r chi.Router) {
 		r.Use(serverMiddleware.AuthMiddleware(s.jwtManager))
 
+		// RFID stream: admin panel subscribes to scanned UIDs (SSE)
+		r.Get("/api/rfid/stream", s.handleRFIDStream)
+		r.Post("/api/rfid/session/start", s.handleRFIDSessionStart)
+		r.Post("/api/rfid/session/stop", s.handleRFIDSessionStop)
+		r.Get("/api/rfid/session/admin-stream", s.handleRFIDSessionAdminStream)
+
 		// Warga actions
 		r.Route("/api/warga", func(r chi.Router) {
 			r.Get("/", s.handleListWarga)
 			r.Post("/", s.handleCreateWarga)
 			r.Put("/{id}", s.handleUpdateWarga)
+			r.Delete("/{id}", s.handleDeleteWarga)
+			r.Delete("/{id}/permanent", s.handleHardDeleteWarga)
 			r.Put("/{id}/rfid", s.handleLinkRFID)
 
 			// Draft endpoints

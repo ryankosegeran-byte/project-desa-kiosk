@@ -48,7 +48,7 @@ func setupTestServer(t *testing.T) (*Server, func()) {
 	printer := print.NewPrinter("")
 	docxRenderer := print.NewDocxRenderer("data/printed_test")
 
-	server := NewServer(cfg, wargaRepo, suratRepo, jenisSuratRepo, configRepo, nomorSuratRepo, rfidBroker, pdfGen, printer, docxRenderer)
+	server := NewServer(cfg, wargaRepo, suratRepo, jenisSuratRepo, configRepo, nomorSuratRepo, rfidBroker, rfid.NewSessionWatcher("", ""), pdfGen, printer, docxRenderer)
 
 	cleanup := func() {
 		database.Close()

@@ -26,6 +26,7 @@ type Server struct {
 	configRepo     *db.ConfigRepository
 	nomorSuratRepo *db.NomorSuratRepository // Add this
 	rfidBroker     *rfid.Broker
+	sessionWatcher *rfid.SessionWatcher
 	pdfGen         *print.PDFGenerator
 	printer        *print.Printer
 	docxRenderer   *print.DocxRenderer
@@ -40,6 +41,7 @@ func NewServer(
 	configRepo *db.ConfigRepository,
 	nomorSuratRepo *db.NomorSuratRepository, // Add this
 	rfidBroker *rfid.Broker,
+	sessionWatcher *rfid.SessionWatcher,
 	pdfGen *print.PDFGenerator,
 	printer *print.Printer,
 	docxRenderer *print.DocxRenderer,
@@ -52,6 +54,7 @@ func NewServer(
 		configRepo:     configRepo,
 		nomorSuratRepo: nomorSuratRepo, // Add this
 		rfidBroker:     rfidBroker,
+		sessionWatcher: sessionWatcher,
 		pdfGen:         pdfGen,
 		printer:        printer,
 		docxRenderer:   docxRenderer,
@@ -77,6 +80,8 @@ func (s *Server) Handler() http.Handler {
 		// RFID Routes
 		r.Get("/rfid/events", rfid.ServeEvents(s.rfidBroker))
 		r.Post("/rfid/mock", rfid.HandleMockScan(s.rfidBroker))
+		r.Get("/rfid/session", s.handleRFIDSession)
+		r.Post("/rfid/busy", s.handleKioskBusy)
 
 		// Warga Routes
 		r.Route("/warga", func(r chi.Router) {
@@ -187,10 +192,16 @@ func sendError(w http.ResponseWriter, status int, msg string) {
 func (s *Server) handleStatus(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
-	// Get last sync time from SQLite
-	lastSync, err := s.configRepo.Get(ctx, "last_sync_at")
-	if err != nil {
-		lastSync = "Never"
+	// Get last sync time from SQLite. The sync engine stores per-entity keys
+	// (last_sync_at_warga, last_sync_at_config); surface the warga one as the
+	// headline sync time, falling back to the legacy key for compatibility.
+	lastSync, err := s.configRepo.Get(ctx, "last_sync_at_warga")
+	if err != nil || lastSync == "" {
+		if legacy, lerr := s.configRepo.Get(ctx, "last_sync_at"); lerr == nil && legacy != "" {
+			lastSync = legacy
+		} else {
+			lastSync = "Never"
+		}
 	}
 
 	sendJSON(w, http.StatusOK, map[string]interface{}{
